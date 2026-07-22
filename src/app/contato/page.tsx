@@ -3,14 +3,13 @@ import { MainMenu } from "@/components/MainMenu";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
-import styles from "./page.module.css";
 
 export default function ContatoPage() {
   return (
-    <main className={styles.page}>
+    <main className="app-contato-page-page">
       <TopCf />
       <MainMenu active="contato" />
-      <header className={styles.heading}>
+      <header className="app-contato-page-heading">
         <div>
           <p>social</p>
           <h1>

@@ -1,5 +1,5 @@
 import { newsItems, type NewsItem } from "@/data/news";
-import styles from "./NewsGrid.module.css";
+import { ArrowUpRight } from "lucide-react";
 
 const arrowAsset =
   "https://www.figma.com/api/mcp/asset/e5b05588-9adf-425f-9894-1050cfad9599";
@@ -7,41 +7,41 @@ const arrowAsset =
 function NewsImage({ item }: { item: NewsItem }) {
   if (item.image.type === "layered") {
     return (
-      <div className={styles.layeredImage}>
-        <img className={styles.layeredBackground} src={item.image.background} alt="" />
-        <img className={styles.layeredPlayers} src={item.image.foreground} alt={item.image.alt} />
+      <div className="components-news-grid-layeredImage">
+        <img className="components-news-grid-layeredBackground" src={item.image.background} alt="" />
+        <img className="components-news-grid-layeredPlayers" src={item.image.foreground} alt={item.image.alt} />
       </div>
     );
   }
 
   if (item.image.type === "mascot") {
     return (
-      <div className={styles.mascotImage}>
+      <div className="components-news-grid-mascotImage">
         <img src={item.image.src} alt={item.image.alt} />
       </div>
     );
   }
 
-  return <img className={styles.cardImage} src={item.image.src} alt={item.image.alt} />;
+  return <img className="components-news-grid-cardImage" src={item.image.src} alt={item.image.alt} />;
 }
 
 export function NewsGrid() {
   return (
     <section
-      className={styles.section}
+      className="components-news-grid-section"
       data-node-id="1672:11167"
       data-name="noticias_home"
       aria-labelledby="news-grid-title"
     >
-      <h2 className={styles.title} id="news-grid-title">
+      <h2 className="components-news-grid-title" id="news-grid-title">
         notícias<span>.</span>
       </h2>
 
-      <div className={styles.grid}>
+      <div className="components-news-grid-grid">
         {newsItems.map((item) => (
-          <a className={styles.card} href={`/noticias/${item.slug}`} key={item.slug}>
+          <a className="components-news-grid-card" href={`/noticias/${item.slug}`} key={item.slug}>
             <NewsImage item={item} />
-            <div className={styles.copy}>
+            <div className="components-news-grid-copy">
               <h3>{item.title}</h3>
               <p>{item.description}</p>
             </div>
@@ -49,9 +49,9 @@ export function NewsGrid() {
         ))}
       </div>
 
-      <a className={styles.moreButton} href="/noticias">
+      <a className="components-news-grid-moreButton" href="/noticias">
         ver mais noticias
-        <img src={arrowAsset} alt="" />
+        <ArrowUpRight className="components-news-grid-moreButtonIcon" />
       </a>
     </section>
   );

@@ -1,4 +1,3 @@
-import styles from "./SponsorsStrip.module.css";
 
 const sponsorAssets = [
   "https://www.figma.com/api/mcp/asset/a6fac5d8-6588-4106-ae7d-2e289b4d26aa",
@@ -14,23 +13,33 @@ const sponsorAssets = [
 export function SponsorsStrip() {
   return (
     <section
-      className={styles.strip}
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "184px",
+        overflow: "hidden",
+        backgroundImage: "url('/backgrounds/background-sponsor.png')",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        color: "#ffffff",
+      }}
       data-node-id="1718:11201"
       data-name="patrocinio"
       aria-labelledby="sponsors-title"
     >
-      <div className={styles.decorText} aria-hidden="true">
+      <div className="components-sponsors-strip-decorText" aria-hidden="true">
         <span>a</span>
         <span>c</span>
         <span>f</span>
         <strong>acf sports</strong>
       </div>
 
-      <div className={styles.inner}>
+      <div className="components-sponsors-strip-inner">
         <h2 id="sponsors-title">patrocinadores</h2>
-        <div className={styles.track}>
+        <div className="components-sponsors-strip-track">
           {[...sponsorAssets, ...sponsorAssets].map((src, index) => (
-            <div className={styles.logoCard} key={`${src}-${index}`}>
+            <div className="components-sponsors-strip-logoCard" key={`${src}-${index}`}>
               <img src={src} alt={`Patrocinador ${(index % sponsorAssets.length) + 1}`} />
             </div>
           ))}

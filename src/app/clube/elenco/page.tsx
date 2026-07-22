@@ -4,7 +4,6 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
 import type { RosterCategory, RosterPosition } from "@/data/roster";
-import styles from "./page.module.css";
 
 type PageProps = {
   searchParams: Promise<{
@@ -22,10 +21,10 @@ export default async function ElencoPage({ searchParams }: PageProps) {
   const position = parsePosition(params.posicao);
 
   return (
-    <main className={styles.page}>
+    <main className="app-clube-elenco-page-page">
       <TopCf />
       <MainMenu active="clube" activeClub="elenco" />
-      <header className={styles.heading}>
+      <header className="app-clube-elenco-page-heading">
         <div>
           <p>clube</p>
           <h1>

@@ -1,5 +1,4 @@
 import { athletes, getRelatedAthletes, type Athlete } from "@/data/roster";
-import styles from "./PlayerDetailContent.module.css";
 
 type PlayerDetailContentProps = {
   athlete: Athlete;
@@ -28,31 +27,31 @@ export function PlayerDetailContent({ athlete }: PlayerDetailContentProps) {
   const lastName = lastNameParts.join(" ") || athlete.nickname;
 
   return (
-    <section className={styles.section} data-node-id="640:1971" data-name="elenco-perfil-jogador">
-      <div className={styles.inner}>
-        <article className={styles.profileCard}>
-          <img className={styles.frameAsset} src={profileFrameAsset} alt="" aria-hidden="true" />
-          <img className={styles.decoAsset} src={decoAsset} alt="" aria-hidden="true" />
-          <img className={styles.acfAsset} src={acfAsset} alt="" aria-hidden="true" />
-          <img className={styles.crestAsset} src={crestAsset} alt="" aria-hidden="true" />
+    <section className="components-roster-player-detail-content-section" data-node-id="640:1971" data-name="elenco-perfil-jogador">
+      <div className="components-roster-player-detail-content-inner">
+        <article className="components-roster-player-detail-content-profileCard">
+          <img className="components-roster-player-detail-content-frameAsset" src={profileFrameAsset} alt="" aria-hidden="true" />
+          <img className="components-roster-player-detail-content-decoAsset" src={decoAsset} alt="" aria-hidden="true" />
+          <img className="components-roster-player-detail-content-acfAsset" src={acfAsset} alt="" aria-hidden="true" />
+          <img className="components-roster-player-detail-content-crestAsset" src={crestAsset} alt="" aria-hidden="true" />
 
-          <div className={styles.identity}>
-            <p className={styles.firstName}>{firstName}</p>
+          <div className="components-roster-player-detail-content-identity">
+            <p className="components-roster-player-detail-content-firstName">{firstName}</p>
             <h2>{lastName}</h2>
 
-            <dl className={styles.profileList}>
+            <dl className="components-roster-player-detail-content-profileList">
               <InfoRow label="Apelido" value={athlete.nickname} />
               <InfoRow label="Data de Nascimento" value={athlete.birthDate} />
               <InfoRow label="Pé dominante" value={athlete.dominantFoot} />
             </dl>
           </div>
 
-          <blockquote className={styles.quote}>
+          <blockquote className="components-roster-player-detail-content-quote">
             “o tempo ruim vai passar é só uma fase, o sofrimento alimenta mais a sua coragem”
           </blockquote>
 
-          <section className={styles.related} aria-labelledby="related-players-title">
-            <div className={styles.relatedHeader}>
+          <section className="components-roster-player-detail-content-related" aria-labelledby="related-players-title">
+            <div className="components-roster-player-detail-content-relatedHeader">
               <div>
                 <h3 id="related-players-title">{positionGroupTitle(athlete.position)}</h3>
                 <span />
@@ -62,20 +61,20 @@ export function PlayerDetailContent({ athlete }: PlayerDetailContentProps) {
               </a>
             </div>
 
-            <div className={styles.relatedGrid}>
+            <div className="components-roster-player-detail-content-relatedGrid">
               {related.map((item) => (
                 <MiniPlayerCard athlete={item} key={item.id} />
               ))}
             </div>
           </section>
 
-          <div className={styles.playerFigure}>
+          <div className="components-roster-player-detail-content-playerFigure">
             <img src={athlete.image} alt={athlete.name} />
           </div>
 
-          <p className={styles.number}>#{String(athlete.number).padStart(2, "0")}</p>
+          <p className="components-roster-player-detail-content-number">#{String(athlete.number).padStart(2, "0")}</p>
 
-          <div className={styles.footerMarks} aria-hidden="true">
+          <div className="components-roster-player-detail-content-footerMarks" aria-hidden="true">
             <img src={signatureAsset} alt="" />
             <img src={socialsAsset} alt="" />
           </div>
@@ -96,7 +95,7 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 
 function MiniPlayerCard({ athlete }: { athlete: Athlete }) {
   return (
-    <a className={styles.miniCard} href={`/clube/elenco/${athlete.slug}`}>
+    <a className="components-roster-player-detail-content-miniCard" href={`/clube/elenco/${athlete.slug}`}>
       <img src={athlete.image} alt={athlete.name} />
     </a>
   );
