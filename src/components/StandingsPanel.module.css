@@ -1,0 +1,132 @@
+.panel {
+  width: 290px;
+  color: var(--tom-preto);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 48px;
+  margin-bottom: 16px;
+}
+
+.header h2 {
+  margin: 0;
+  color: #121212;
+  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48px;
+  text-transform: lowercase;
+}
+
+.header h2 span {
+  color: #f56345;
+}
+
+.header a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  color: var(--cinza-medio);
+  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.16px;
+  text-transform: lowercase;
+}
+
+.header a img {
+  width: 16px;
+  height: 16px;
+}
+
+.tableCard {
+  width: 290px;
+  height: 316px;
+  overflow: hidden;
+  border: 2px solid var(--cinza-claro);
+  border-radius: 8px;
+  background: #e7e7e7;
+}
+
+.selectButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 38px;
+  padding: 8px;
+  border-bottom: 2px solid var(--cinza-claro);
+  background: transparent;
+  color: #292929;
+  cursor: pointer;
+  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: left;
+}
+
+.selectButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #4e4e4e;
+  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.table th {
+  height: 40px;
+  color: #292929;
+  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.table td {
+  height: 40px;
+  text-align: center;
+}
+
+.table tr:not(:last-child) td {
+  border-bottom: 1px solid rgba(179, 179, 179, 0.6);
+}
+
+.clubColumn {
+  width: 118px;
+  padding-left: 8px;
+  text-align: left !important;
+  white-space: nowrap;
+}
+
+.clubColumn span {
+  display: inline-block;
+  margin-right: 4px;
+  color: #2165a3;
+  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-weight: 500;
+}
+
+.points {
+  color: var(--tom-preto);
+  font-weight: 500;
+}
+
+@media (max-width: 760px) {
+  .panel,
+  .tableCard {
+    width: 100%;
+  }
+}

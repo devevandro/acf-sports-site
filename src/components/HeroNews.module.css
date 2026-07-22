@@ -1,0 +1,250 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 872px;
+  overflow: hidden;
+  background: #050505;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 800px;
+  overflow: hidden;
+  box-shadow: 0 0 6px 3px rgba(55, 55, 55, 0.32);
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  width: 108.46%;
+  height: 100%;
+  left: -2.27%;
+  object-fit: cover;
+}
+
+.warmGlow {
+  position: absolute;
+  top: -440px;
+  left: 46%;
+  width: 730px;
+  height: 1270px;
+  border-radius: 155px;
+  background: rgba(240, 118, 61, 0.36);
+  filter: blur(100px);
+  transform: rotate(-139deg) scaleY(-1);
+}
+
+.leftGlow {
+  position: absolute;
+  top: 451px;
+  left: -978px;
+  width: 1421px;
+  height: 1406px;
+  object-fit: contain;
+  transform: rotate(-134deg) scaleY(-1);
+}
+
+.players {
+  position: absolute;
+  left: 8.06%;
+  bottom: 16px;
+  width: 84.13%;
+  height: 673px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.storyCard {
+  position: absolute;
+  right: 32px;
+  bottom: 16px;
+  left: 32px;
+  min-height: 224px;
+  padding: 32px 16px;
+  border-radius: 20px;
+  background: linear-gradient(
+    183deg,
+    rgba(255, 255, 255, 0) 14%,
+    rgba(166, 207, 245, 0.6) 89%
+  );
+  backdrop-filter: blur(6px);
+}
+
+.category {
+  width: min(883px, 100%);
+  margin: 0 0 8px;
+  color: var(--laranja-branco-medio);
+  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: 0.16px;
+  line-height: 32px;
+  text-transform: capitalize;
+}
+
+.title {
+  width: min(883px, 100%);
+  margin: 0 0 8px;
+  color: var(--tom-preto);
+  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+}
+
+.summary {
+  margin: 0;
+  color: var(--cinza-claro);
+  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.thumbnails {
+  position: absolute;
+  right: 220px;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.thumbnail {
+  position: relative;
+  width: 160px;
+  height: 120px;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: #121212;
+  box-shadow: 0 0 1px 0 rgba(55, 55, 55, 0.32);
+  cursor: pointer;
+}
+
+.thumbnailBackground,
+.thumbnailBackgroundColor,
+.thumbnailImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.thumbnailBackground {
+  object-fit: cover;
+}
+
+.thumbnailImage {
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.thumbnail:not(.thumbnailActive) .thumbnailImage,
+.thumbnail:not(.thumbnailActive) .thumbnailBackground {
+  opacity: 0.32;
+  mix-blend-mode: luminosity;
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 4px;
+  border-radius: 8px;
+  border: 4px solid #db4108;
+}
+
+.thumbnail::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 4px;
+  content: "";
+  background: #d9d9d9;
+}
+
+.progress {
+  z-index: 2;
+}
+
+@media (max-width: 960px) {
+  .hero {
+    height: 740px;
+  }
+
+  .stage {
+    height: 680px;
+  }
+
+  .players {
+    left: -18%;
+    width: 136%;
+    height: 570px;
+  }
+
+  .storyCard {
+    right: 20px;
+    left: 20px;
+    min-height: 190px;
+    padding: 24px;
+  }
+
+  .category,
+  .title {
+    font-size: 26px;
+    line-height: 34px;
+  }
+
+  .summary {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .thumbnails {
+    right: 20px;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero {
+    height: 680px;
+  }
+
+  .stage {
+    height: 620px;
+  }
+
+  .storyCard {
+    min-height: 210px;
+  }
+
+  .category,
+  .title {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  .summary {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .thumbnails {
+    left: 20px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .thumbnail {
+    width: 120px;
+    height: 90px;
+    flex: 0 0 auto;
+  }
+}

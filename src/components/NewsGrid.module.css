@@ -1,0 +1,183 @@
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 1026px;
+  margin: 0;
+  color: var(--tom-preto);
+}
+
+.title {
+  margin: 0 0 40px 140px;
+  color: var(--azul-preto);
+  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 72px;
+  text-transform: lowercase;
+}
+
+.title span {
+  color: #f56345;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 330px);
+  gap: 80px 40px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 330px;
+}
+
+.cardImage,
+.layeredImage,
+.mascotImage {
+  width: 330px;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 0 8px 1px rgba(55, 55, 55, 0.32);
+}
+
+.cardImage {
+  object-fit: cover;
+}
+
+.layeredImage {
+  position: relative;
+}
+
+.layeredBackground {
+  position: absolute;
+  inset: 0;
+  width: 108%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.layeredPlayers {
+  position: absolute;
+  top: 30px;
+  left: 42px;
+  width: 246px;
+  height: 210px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.mascotImage {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: #000000;
+}
+
+.mascotImage img {
+  width: 190px;
+  height: 240px;
+  object-fit: contain;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.copy h3 {
+  margin: 0;
+  color: #121212;
+  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.copy p {
+  margin: 0;
+  color: #777777;
+  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.moreButton {
+  position: absolute;
+  right: 200px;
+  bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 56px;
+  min-width: 298px;
+  padding: 16px 40px;
+  border-radius: 8px;
+  background: linear-gradient(168deg, #f56345 0%, #8f301d 99%);
+  color: #f5f5f5;
+  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+.moreButton img {
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 1120px) {
+  .section {
+    width: min(700px, 100%);
+    min-height: auto;
+    padding-bottom: 96px;
+  }
+
+  .title {
+    margin-left: 0;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 330px);
+  }
+
+  .moreButton {
+    right: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .section {
+    width: 100%;
+  }
+
+  .title {
+    font-size: 44px;
+    line-height: 52px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .card,
+  .cardImage,
+  .layeredImage,
+  .mascotImage {
+    width: 100%;
+  }
+
+  .moreButton {
+    right: auto;
+    left: 0;
+    width: 100%;
+    min-width: 0;
+  }
+}

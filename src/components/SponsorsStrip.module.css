@@ -1,0 +1,147 @@
+.strip {
+  position: relative;
+  width: 100%;
+  height: 184px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at center, #121212 0%, #050505 84%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  color: #ffffff;
+}
+
+.strip::before,
+.strip::after {
+  position: absolute;
+  width: 120%;
+  height: 2px;
+  content: "";
+  background: rgba(245, 99, 69, 0.24);
+  transform: rotate(-10deg);
+}
+
+.strip::before {
+  top: 42px;
+  left: -120px;
+}
+
+.strip::after {
+  right: -120px;
+  bottom: 34px;
+}
+
+.decorText {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.decorText span,
+.decorText strong {
+  position: absolute;
+  color: #ff3203;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 96px;
+  font-weight: 800;
+  line-height: 70px;
+  opacity: 0.15;
+  text-transform: uppercase;
+}
+
+.decorText span:nth-child(1) {
+  top: 0;
+  left: 10%;
+}
+
+.decorText span:nth-child(2) {
+  top: 52px;
+  left: 30%;
+}
+
+.decorText span:nth-child(3) {
+  top: 36px;
+  right: 21%;
+}
+
+.decorText strong {
+  right: 18%;
+  bottom: -16px;
+  color: #ffffff;
+  font-size: 112px;
+  opacity: 0.08;
+  white-space: nowrap;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(1568px, calc(100% - 32px));
+  margin: 0 auto;
+  padding-top: 16px;
+}
+
+.inner h2 {
+  margin: 0;
+  padding-left: 204px;
+  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+.track {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  height: 120px;
+  overflow-x: auto;
+  padding: 0 16px;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.logoCard {
+  position: relative;
+  flex: 0 0 auto;
+  width: 280px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.logoCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 760px) {
+  .inner {
+    width: calc(100% - 24px);
+  }
+
+  .inner h2 {
+    padding-left: 0;
+  }
+
+  .track {
+    gap: 16px;
+    padding-inline: 0;
+  }
+
+  .logoCard {
+    width: 220px;
+    height: 64px;
+  }
+
+  .decorText strong {
+    display: none;
+  }
+}

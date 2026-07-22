@@ -1,0 +1,118 @@
+.card {
+  --border-gap: 8px;
+  position: relative;
+  display: flex;
+  width: 256px;
+  height: 320px;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+  overflow: hidden;
+  border: 0;
+  padding: 8px;
+  background: #080a0c;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  clip-path: path(
+    "M 136 0 L 248 0 Q 256 0 256 8 L 256 288 Q 256 293 252 296 L 220 316 Q 214 320 207 320 L 8 320 Q 0 320 0 312 L 0 88 Q 0 83 4 80 L 128 4 Q 132 0 136 0 Z"
+  );
+}
+
+.linkCard {
+  color: inherit;
+}
+
+.card::before {
+  position: absolute;
+  z-index: 0;
+  inset: var(--border-gap);
+  background:
+    radial-gradient(circle at 88% 8%, rgba(82, 28, 22, 0.58), transparent 42%),
+    linear-gradient(145deg, #171719 0%, #1a1012 48%, #071012 100%);
+  clip-path: path(
+    "M 136 0 L 232 0 Q 240 0 240 8 L 240 280 Q 240 285 236 288 L 211 300 Q 207 304 201 304 L 8 304 Q 0 304 0 296 L 0 88 Q 0 83 4 80 L 128 4 Q 132 0 136 0 Z"
+  );
+  content: "";
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.image {
+  position: absolute;
+  z-index: 1;
+  inset: var(--border-gap);
+  width: calc(100% - (var(--border-gap) * 2));
+  height: calc(100% - (var(--border-gap) * 2));
+  object-fit: cover;
+  object-position: center;
+  clip-path: path(
+    "M 136 0 L 232 0 Q 240 0 240 8 L 240 280 Q 240 285 236 288 L 211 300 Q 207 304 201 304 L 8 304 Q 0 304 0 296 L 0 88 Q 0 83 4 80 L 128 4 Q 132 0 136 0 Z"
+  );
+  transition: transform 180ms ease;
+}
+
+.card:hover .image,
+.card:focus-visible .image {
+  transform: scale(1.04);
+}
+
+.info {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  min-width: 0;
+  padding: 0 2px 4px;
+}
+
+.label {
+  display: flex;
+  width: fit-content;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #dfe7f3;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.title {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: #f4f5f7;
+  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.15;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.text {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 2px 0 0;
+  color: #a9b3c1;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.staff .info {
+  padding-bottom: 8px;
+}
+
+.card:focus-visible {
+  outline: 3px solid #f56345;
+  outline-offset: 4px;
+}

@@ -1,0 +1,31 @@
+.topCf {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--azul-preto);
+}
+
+.rainLayer {
+  position: absolute;
+  top: -332px;
+  left: -183px;
+  width: 2103px;
+  height: 731px;
+  pointer-events: none;
+}
+
+.rainTile {
+  position: absolute;
+  object-fit: cover;
+  opacity: 0.04;
+}
+
+.centerDivider {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 219.5px);
+  width: 1px;
+  height: 132px;
+  transform: translate(-50%, -50%);
+}

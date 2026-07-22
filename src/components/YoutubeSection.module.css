@@ -1,0 +1,199 @@
+.section {
+  position: relative;
+  width: 100%;
+  height: 774px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom center;
+}
+
+.leftBull,
+.rightBull {
+  position: absolute;
+  top: 56px;
+  width: 316px;
+  height: 558px;
+  object-fit: contain;
+  opacity: 0.65;
+}
+
+.leftBull {
+  left: max(24px, calc(50% - 696px));
+}
+
+.rightBull {
+  right: max(24px, calc(50% - 696px));
+}
+
+.card {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  width: 760px;
+  height: 534px;
+  padding: 80px 40px 60px;
+  border-radius: 16px 16px 0 0;
+  background: rgba(51, 51, 51, 0.32);
+  box-shadow:
+    2px -2px 8px 2px rgba(107, 107, 107, 0.24),
+    -1px 1px 8px 2px rgba(107, 107, 107, 0.24);
+  transform: translateX(-50%);
+  backdrop-filter: blur(28px);
+}
+
+.intro {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mascot {
+  width: 200px;
+  height: 190px;
+  object-fit: contain;
+}
+
+.intro h2 {
+  width: 464px;
+  margin: 0 0 8px;
+  color: #f5f5f5;
+  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 40px;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+}
+
+.intro p,
+.ctaBlock p {
+  margin: 0;
+  color: #777777;
+  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+
+.ctaBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 457px;
+  margin-top: 80px;
+}
+
+.ctaBlock h3 {
+  margin: 0 0 8px;
+  color: #f5f5f5;
+  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 32px;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 457px;
+  height: 56px;
+  border-radius: 8px;
+  background: linear-gradient(162deg, #f56345 0%, #8f301d 99%);
+  color: #f5f5f5;
+  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+.button img,
+.button svg {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+}
+
+.network {
+  position: absolute;
+  right: 43px;
+  bottom: 60px;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.network img {
+  width: 48px;
+  height: 45px;
+}
+
+.network p {
+  margin: 0;
+  color: #e7e7e7;
+  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+}
+
+.network span {
+  display: block;
+  color: #959595;
+  text-transform: capitalize;
+}
+
+@media (max-width: 880px) {
+  .section {
+    height: 760px;
+  }
+
+  .leftBull,
+  .rightBull {
+    display: none;
+  }
+
+  .card {
+    top: 64px;
+    width: min(680px, calc(100% - 32px));
+    height: auto;
+    min-height: 560px;
+    padding: 48px 24px 40px;
+  }
+
+  .intro {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .intro h2 {
+    width: auto;
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .ctaBlock,
+  .button {
+    width: 100%;
+  }
+
+  .network {
+    position: static;
+    margin-top: 32px;
+  }
+}
