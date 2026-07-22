@@ -1,4 +1,3 @@
-import styles from "./GamesPanel.module.css";
 
 const londrinaLogo =
   "https://www.figma.com/api/mcp/asset/3bf7c2c8-e2b2-4c18-81fc-280303db0fa3";
@@ -30,15 +29,15 @@ type MatchCardProps = {
 
 function MatchCard({ date, home, away, score, upcoming = false }: MatchCardProps) {
   return (
-    <article className={`${styles.matchCard} ${upcoming ? styles.upcomingCard : ""}`}>
-      <div className={`${styles.matchDate} ${upcoming ? styles.upcomingDate : ""}`}>{date}</div>
-      <div className={styles.matchBody}>
-        <div className={styles.team}>
+    <article className={`components-games-panel-matchCard ${upcoming ? "components-games-panel-upcomingCard" : ""}`}>
+      <div className={`components-games-panel-matchDate ${upcoming ? "components-games-panel-upcomingDate" : ""}`}>{date}</div>
+      <div className="components-games-panel-matchBody">
+        <div className="components-games-panel-team">
           <img src={home.logo} alt="" />
           <span>{home.name}</span>
         </div>
-        <div className={styles.score}>{score ?? "x"}</div>
-        <div className={styles.team}>
+        <div className="components-games-panel-score">{score ?? "x"}</div>
+        <div className="components-games-panel-team">
           <img src={away.logo} alt="" />
           <span>{away.name}</span>
         </div>
@@ -49,9 +48,9 @@ function MatchCard({ date, home, away, score, upcoming = false }: MatchCardProps
 
 function DividerTitle({ children, accent = false }: { children: React.ReactNode; accent?: boolean }) {
   return (
-    <div className={styles.dividerTitle}>
+    <div className="components-games-panel-dividerTitle">
       <span />
-      <h3 className={accent ? styles.accentTitle : ""}>{children}</h3>
+      <h3 className={accent ? "components-games-panel-accentTitle" : ""}>{children}</h3>
       <span />
     </div>
   );
@@ -59,8 +58,8 @@ function DividerTitle({ children, accent = false }: { children: React.ReactNode;
 
 export function GamesPanel() {
   return (
-    <aside className={styles.panel} data-node-id="1888:10650" aria-labelledby="games-title">
-      <header className={styles.header}>
+    <aside className="components-games-panel-panel" data-node-id="1888:10650" aria-labelledby="games-title">
+      <header className="components-games-panel-header">
         <h2 id="games-title">
           jogos<span>.</span>
         </h2>
@@ -70,8 +69,8 @@ export function GamesPanel() {
         </a>
       </header>
 
-      <div className={styles.blocks}>
-        <section className={styles.block} aria-label="Partida finalizada">
+      <div className="components-games-panel-blocks">
+        <section className="components-games-panel-block" aria-label="Partida finalizada">
           <DividerTitle>partida finalizada</DividerTitle>
           <MatchCard
             date="04/02/2026 - segunda divisão / CP"
@@ -81,7 +80,7 @@ export function GamesPanel() {
           />
         </section>
 
-        <section className={styles.block} aria-label="Proxima partida">
+        <section className="components-games-panel-block" aria-label="Proxima partida">
           <DividerTitle accent>próxima partida</DividerTitle>
           <MatchCard
             date="11/02/2026 - copa Cornélio futsal"

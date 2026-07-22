@@ -1,5 +1,4 @@
 import type { Athlete, StaffMember } from "@/data/roster";
-import styles from "./AthleteCard.module.css";
 
 type AthleteCardProps = {
   person: Athlete | StaffMember;
@@ -10,12 +9,12 @@ export function AthleteCard({ person, variant = "athlete" }: AthleteCardProps) {
   const isAthlete = "position" in person;
   const content = (
     <>
-      <img className={styles.image} src="/jogador.png" alt={person.name} />
-      <div className={styles.info}>
-        {isAthlete ? <span className={styles.label}>{person.number}</span> : null}
+      <img className="components-roster-athlete-card-image" src="/jogador.png" alt={person.name} />
+      <div className="components-roster-athlete-card-info">
+        {isAthlete ? <span className="components-roster-athlete-card-label">{person.number}</span> : null}
         <div>
-          <h3 className={styles.title}>{person.name}</h3>
-          <p className={styles.text}>{isAthlete ? positionLabel(person.position) : person.role}</p>
+          <h3 className="components-roster-athlete-card-title">{person.name}</h3>
+          <p className="components-roster-athlete-card-text">{isAthlete ? positionLabel(person.position) : person.role}</p>
         </div>
       </div>
     </>
@@ -23,14 +22,14 @@ export function AthleteCard({ person, variant = "athlete" }: AthleteCardProps) {
 
   if (isAthlete) {
     return (
-      <a className={`${styles.card} ${styles.linkCard}`} href={`/clube/elenco/${person.slug}`}>
+      <a className={`components-roster-athlete-card-card components-roster-athlete-card-linkCard`} href={`/clube/elenco/${person.slug}`}>
         {content}
       </a>
     );
   }
 
   return (
-    <article className={`${styles.card} ${variant === "staff" ? styles.staff : ""}`}>
+    <article className={`components-roster-athlete-card-card ${variant === "staff" ? "components-roster-athlete-card-staff" : ""}`}>
       {content}
     </article>
   );

@@ -5,7 +5,6 @@ import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
 import { getNewsBySlug, newsItems } from "@/data/news";
 import { notFound } from "next/navigation";
-import styles from "./page.module.css";
 
 export function generateStaticParams() {
   return newsItems.map((item) => ({
@@ -22,10 +21,10 @@ export default async function NoticiaDetalhePage({ params }: { params: Promise<{
   }
 
   return (
-    <main className={styles.page}>
+    <main className="app-noticias-slug-page-page">
       <TopCf />
       <MainMenu active="noticias" />
-      <header className={styles.heading}>
+      <header className="app-noticias-slug-page-heading">
         <div>
           <p>atualidades</p>
           <h1>

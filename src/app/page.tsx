@@ -9,18 +9,17 @@ import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { StandingsPanel } from "@/components/StandingsPanel";
 import { TopCf } from "@/components/TopCf";
 import { YoutubeSection } from "@/components/YoutubeSection";
-import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <main className={styles.page}>
+    <main className="app-page-page">
       <TopCf />
       <MainMenu active="home" />
       <HeroNews />
-      <section className={styles.newsBand}>
-        <div className={styles.contentRow}>
+      <section className="app-page-newsBand">
+        <div className="app-page-contentRow">
           <NewsGrid />
-          <aside className={styles.sidebar}>
+          <aside className="app-page-sidebar">
             <GamesPanel />
             <StandingsPanel />
           </aside>

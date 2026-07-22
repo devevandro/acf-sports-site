@@ -1,4 +1,3 @@
-import styles from "./StandingsPanel.module.css";
 
 const arrowAsset =
   "https://www.figma.com/api/mcp/asset/6609ea1e-247d-4096-af35-3a2b2173c8b0";
@@ -17,8 +16,8 @@ const rows = [
 
 export function StandingsPanel() {
   return (
-    <aside className={styles.panel} data-node-id="1888:10656" aria-labelledby="standings-title">
-      <header className={styles.header}>
+    <aside className="components-standings-panel-panel" data-node-id="1888:10656" aria-labelledby="standings-title">
+      <header className="components-standings-panel-header">
         <h2 id="standings-title">
           tabelas<span>.</span>
         </h2>
@@ -28,16 +27,16 @@ export function StandingsPanel() {
         </a>
       </header>
 
-      <div className={styles.tableCard}>
-        <button className={styles.selectButton} type="button">
+      <div className="components-standings-panel-tableCard">
+        <button className="components-standings-panel-selectButton" type="button">
           Segunda Divisão
           <img src={chevronAsset} alt="" />
         </button>
 
-        <table className={styles.table}>
+        <table className="components-standings-panel-table">
           <thead>
             <tr>
-              <th className={styles.clubColumn}>Clubes</th>
+              <th className="components-standings-panel-clubColumn">Clubes</th>
               <th>Pts</th>
               <th>Jgs</th>
               <th>Sgs</th>
@@ -48,11 +47,11 @@ export function StandingsPanel() {
           <tbody>
             {rows.map(([position, club]) => (
               <tr key={position}>
-                <td className={styles.clubColumn}>
+                <td className="components-standings-panel-clubColumn">
                   <span>{position}</span>
                   {club}
                 </td>
-                <td className={styles.points}>00</td>
+                <td className="components-standings-panel-points">00</td>
                 <td>00</td>
                 <td>00</td>
                 <td>00</td>

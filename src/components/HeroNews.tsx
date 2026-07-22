@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./HeroNews.module.css";
 
 const slides = [
   {
@@ -33,37 +32,37 @@ export function HeroNews() {
 
   return (
     <section
-      className={styles.hero}
+      className="components-hero-news-hero"
       data-node-id="1234:7124"
       data-name="noticias"
       aria-label="Noticia em destaque"
     >
-      <div className={styles.stage}>
+      <div className="components-hero-news-stage">
         <img
-          className={styles.background}
+          className="components-hero-news-background"
           src={activeSlide.image}
           alt={activeSlide.alt}
         />
 
-        <a className={styles.storyCard} href="#noticias">
-          <p className={styles.category}>{activeSlide.label}</p>
-          <h1 className={styles.title}>{activeSlide.title}</h1>
-          <p className={styles.summary}>{activeSlide.summary}</p>
+        <a className="components-hero-news-storyCard" href="#noticias">
+          <p className="components-hero-news-category">{activeSlide.label}</p>
+          <h1 className="components-hero-news-title">{activeSlide.title}</h1>
+          <p className="components-hero-news-summary">{activeSlide.summary}</p>
         </a>
       </div>
 
-      <div className={styles.thumbnails} aria-label="Selecionar destaque">
+      <div className="components-hero-news-thumbnails" aria-label="Selecionar destaque">
         {slides.map((slide, index) => (
           <button
-            className={`${styles.thumbnail} ${index === activeSlideIndex ? styles.thumbnailActive : ""}`}
+            className={`components-hero-news-thumbnail ${index === activeSlideIndex ? "components-hero-news-thumbnailActive" : ""}`}
             key={slide.label}
             type="button"
             aria-label={slide.label}
             aria-pressed={index === activeSlideIndex}
             onClick={() => setActiveSlideIndex(index)}
           >
-            <img className={styles.thumbnailImage} src={slide.image} alt="" />
-            <span className={styles.progress} />
+            <img className="components-hero-news-thumbnailImage" src={slide.image} alt="" />
+            <span className="components-hero-news-progress" />
           </button>
         ))}
       </div>
