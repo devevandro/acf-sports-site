@@ -29,9 +29,6 @@ export type NewsItem = {
   quote?: string;
 };
 
-const firstNewsImage =
-  "https://www.figma.com/api/mcp/asset/1955d02b-e66e-4f52-9546-e862ab291451";
-
 export const newsItems: NewsItem[] = [
   {
     slug: "acf-sports-teste-de-fogo-meninos-de-ouro",
@@ -43,7 +40,7 @@ export const newsItems: NewsItem[] = [
     caption: "Imagem, feita por; O Guru das imagens.",
     image: {
       type: "single",
-      src: firstNewsImage,
+      src: "/home-news/news-01.png",
       alt: "Jogadores comemorando em campo com bandeira da ACF Sports",
     },
     body: [
@@ -66,8 +63,8 @@ export const newsItems: NewsItem[] = [
     caption: "Registro dos atletas da ACF Sports.",
     image: {
       type: "layered",
-      background: "https://www.figma.com/api/mcp/asset/3d2fd1a6-6497-472d-917a-48c48136ce3b",
-      foreground: "https://www.figma.com/api/mcp/asset/6143f9de-56ad-4dc7-ab1e-4589869987a6",
+      background: "/home-news/news-02.png",
+      foreground: "/home-news/news-02.png",
       alt: "Atletas da ACF Sports em uniforme azul",
     },
     body: [
@@ -85,7 +82,7 @@ export const newsItems: NewsItem[] = [
     caption: "Torcida acompanhando a partida.",
     image: {
       type: "single",
-      src: "https://www.figma.com/api/mcp/asset/f036bfb5-cf94-421c-9b6a-bbc2cbfece78",
+      src: "/home-news/news-03.png",
       alt: "Torcida em arquibancada",
     },
     body: [
@@ -103,7 +100,7 @@ export const newsItems: NewsItem[] = [
     caption: "Mascote oficial da ACF Sports.",
     image: {
       type: "mascot",
-      src: "https://www.figma.com/api/mcp/asset/cfc920b2-7a52-4a9c-bb94-84eaed1f4db4",
+      src: "/home-news/news-04.png",
       alt: "Mascote touro da ACF Sports",
     },
     body: [
@@ -121,7 +118,7 @@ export const newsItems: NewsItem[] = [
     caption: "Campanha beneficente da ACF Sports.",
     image: {
       type: "single",
-      src: "https://www.figma.com/api/mcp/asset/f9af87a6-408c-4af7-91c4-ff9b96f91526",
+      src: "/home-news/news-05.png",
       alt: "Bandeira com identidade da ACF Sports",
     },
     body: [
