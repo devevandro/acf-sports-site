@@ -27,13 +27,13 @@ const menuLinks = ["Home", "Notícias", "Clube", "Contato"];
 
 export function SiteFooter() {
   return (
-    <footer className="components-site-footer-footer" data-node-id="1675:15287" data-name="footer">
-      <img className="components-site-footer-backgroundMascot" src="/soberano-rodape.png" alt="" aria-hidden="true" />
+    <footer className="components-site-footer-footer">
+      <img className="components-site-footer-backgroundMascot" src="/footer/sovereign-footer.png" alt="" aria-hidden="true" />
 
       <div className="components-site-footer-columns">
         <section className="components-site-footer-column">
           <h2>Informações</h2>
-          <nav className="components-site-footer-menu" aria-label="Informações do rodapé">
+          <nav className="components-site-footer-menu text-acf-gray" aria-label="Informações do rodapé">
             {menuLinks.map((link) => (
               <a
                 href={
@@ -54,17 +54,17 @@ export function SiteFooter() {
           </nav>
         </section>
 
-        <section className="components-site-footer-column">
-          <h2>social mídias</h2>
+        <section className="components-site-footer-column text-acf-gray w-100">
+          <h2>mídias sociais</h2>
           <a className="components-site-footer-acfTv" href="http://www.youtube.com/@ACFsportsTV" target="_blank" rel="noreferrer">
-            ACF TV
+            Soberano TV
           </a>
-          <div className="components-site-footer-socials">
+          <div className="components-site-footer-socials text-acf-gray">
             <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
-              <img src="/footer/insta.png" alt="" />
+              <img src="/footer/instagram.png" alt="" />
             </a>
             <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook">
-              <img src="/footer/face.png" alt="" />
+              <img src="/footer/facebook.png" alt="" />
             </a>
             <a href="https://www.youtube.com/" target="_blank" rel="noreferrer" aria-label="YouTube">
               <img src="/footer/youtube.png" alt="" />
@@ -91,7 +91,7 @@ export function SiteFooter() {
 
       <div className="components-site-footer-brand">
         <div className="components-site-footer-brandImages">
-          <img src="/acf-logo-rodape.png" alt="" />
+          <img src="/footer/acf-footer-logo.png" alt="" />
         </div>
         <p>E©F © Alguns direitos reservados</p>
       </div>

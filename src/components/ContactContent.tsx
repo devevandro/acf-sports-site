@@ -1,14 +1,14 @@
 
 const assets = {
-  bull: "https://www.figma.com/api/mcp/asset/213de4f7-3a6d-41f6-a50b-e9affcd84ea0",
-  phone: "https://www.figma.com/api/mcp/asset/9f768385-e424-4a74-ba9f-8029d877407e",
-  email: "https://www.figma.com/api/mcp/asset/96798e38-1b9c-4381-8f0e-65363f689bc0",
-  location: "https://www.figma.com/api/mcp/asset/cbb1da6d-14ff-45c2-89b6-7fd3e65530aa",
-  clock: "https://www.figma.com/api/mcp/asset/5e13bacc-7713-4726-a1e4-58c4b82c4422",
-  instagram: "https://www.figma.com/api/mcp/asset/f4405210-5cd5-42b4-83b0-6e38bcaff96a",
-  facebook: "https://www.figma.com/api/mcp/asset/69cb66c7-61f8-4e3c-b251-1f899cde6295",
-  youtube: "https://www.figma.com/api/mcp/asset/f49483e3-7201-4555-a48a-fbbae0b17644",
-  whatsapp: "https://www.figma.com/api/mcp/asset/3aa02129-38f7-4440-be77-147937612020",
+  bull: "/contact/bull.png",
+  phone: "/contact/phone.png",
+  email: "/contact/email.png",
+  location: "/contact/local.png",
+  clock: "/contact/time.png",
+  instagram: "/contact/insta.png",
+  facebook: "/contact/face.png",
+  youtube: "/contact/youtube.png",
+  whatsapp: "/contact/whatsapp.png",
 };
 
 const contactItems = [

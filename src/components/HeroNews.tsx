@@ -4,21 +4,21 @@ import { useState } from "react";
 
 const slides = [
   {
-    image: "/carousel-01.png",
+    image: "/carousel/carousel-01.png",
     label: "Jogos Abertos",
     title: "ACF Sports Tem Teste de Fogo Contra os Fortes Meninos de Ouro",
     summary: "A equipe quadricolor, tem estreia agendada para dia 05/11, já com grande clássico",
     alt: "Jogadores da ACF Sports comemorando em campo com bandeira",
   },
   {
-    image: "/carouse-02.png",
+    image: "/carousel/carousel-02.png",
     label: "Novidades",
     title: "ACF Sports Abre Novas Conversas Para Fortalecer o Projeto",
     summary: "Parcerias e bastidores movimentam a preparação da equipe para os próximos desafios",
     alt: "Pessoa sorrindo em arte promocional com elementos gráficos",
   },
   {
-    image: "/carousel-03.png",
+    image: "/carousel/carousel-03.png",
     label: "Mascote",
     title: "Mascote da ACF Sports Ganha Destaque na Identidade do Clube",
     summary: "O touro Ber reforça a presença visual da equipe dentro e fora das competições",
