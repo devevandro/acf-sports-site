@@ -5,7 +5,6 @@ import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
 import { athletes, getAthleteBySlug } from "@/data/roster";
 import { notFound } from "next/navigation";
-import styles from "./page.module.css";
 
 export function generateStaticParams() {
   return athletes.map((athlete) => ({
@@ -22,10 +21,10 @@ export default async function JogadorDetalhePage({ params }: { params: Promise<{
   }
 
   return (
-    <main className={styles.page}>
+    <main className="app-clube-elenco-slug-page-page">
       <TopCf />
       <MainMenu active="clube" activeClub="elenco" />
-      <header className={styles.heading}>
+      <header className="app-clube-elenco-slug-page-heading">
         <div>
           <p>clube</p>
           <h1>

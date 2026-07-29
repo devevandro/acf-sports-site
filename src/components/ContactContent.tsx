@@ -1,15 +1,14 @@
-import styles from "./ContactContent.module.css";
 
 const assets = {
-  bull: "https://www.figma.com/api/mcp/asset/213de4f7-3a6d-41f6-a50b-e9affcd84ea0",
-  phone: "https://www.figma.com/api/mcp/asset/9f768385-e424-4a74-ba9f-8029d877407e",
-  email: "https://www.figma.com/api/mcp/asset/96798e38-1b9c-4381-8f0e-65363f689bc0",
-  location: "https://www.figma.com/api/mcp/asset/cbb1da6d-14ff-45c2-89b6-7fd3e65530aa",
-  clock: "https://www.figma.com/api/mcp/asset/5e13bacc-7713-4726-a1e4-58c4b82c4422",
-  instagram: "https://www.figma.com/api/mcp/asset/f4405210-5cd5-42b4-83b0-6e38bcaff96a",
-  facebook: "https://www.figma.com/api/mcp/asset/69cb66c7-61f8-4e3c-b251-1f899cde6295",
-  youtube: "https://www.figma.com/api/mcp/asset/f49483e3-7201-4555-a48a-fbbae0b17644",
-  whatsapp: "https://www.figma.com/api/mcp/asset/3aa02129-38f7-4440-be77-147937612020",
+  bull: "/contact/bull.png",
+  phone: "/contact/phone.png",
+  email: "/contact/email.png",
+  location: "/contact/local.png",
+  clock: "/contact/time.png",
+  instagram: "/contact/insta.png",
+  facebook: "/contact/face.png",
+  youtube: "/contact/youtube.png",
+  whatsapp: "/contact/whatsapp.png",
 };
 
 const contactItems = [
@@ -45,19 +44,19 @@ const masterBenefits = [
 
 export function ContactContent() {
   return (
-    <section className={styles.section} data-node-id="640:2361" data-name="contato">
-      <div className={styles.inner}>
-        <div className={styles.leftColumn}>
-          <div className={styles.titleBlock}>
+    <section className="components-contact-content-section" data-node-id="640:2361" data-name="contato">
+      <div className="components-contact-content-inner">
+        <div className="components-contact-content-leftColumn">
+          <div className="components-contact-content-titleBlock">
             <h2>contate - nos</h2>
             <p>Ou entre em contato através de um de nossos canais</p>
           </div>
 
-          <section className={styles.infoCard} aria-label="Informações de contato">
-            <img className={styles.bull} src={assets.bull} alt="" aria-hidden="true" />
-            <div className={styles.infoList}>
+          <section className="components-contact-content-infoCard" aria-label="Informações de contato">
+            <img className="components-contact-content-bull" src={assets.bull} alt="" aria-hidden="true" />
+            <div className="components-contact-content-infoList">
               {contactItems.map((item) => (
-                <article className={styles.infoItem} key={item.title}>
+                <article className="components-contact-content-infoItem" key={item.title}>
                   <img src={item.icon} alt="" />
                   <div>
                     <h3>{item.title}</h3>
@@ -67,7 +66,7 @@ export function ContactContent() {
               ))}
             </div>
 
-            <div className={styles.socials}>
+            <div className="components-contact-content-socials">
               <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
                 <img src={assets.instagram} alt="" />
               </a>
@@ -83,14 +82,14 @@ export function ContactContent() {
             </div>
           </section>
 
-          <section className={styles.formBlock} aria-labelledby="contact-form-title">
-            <div className={styles.titleBlock}>
+          <section className="components-contact-content-formBlock" aria-labelledby="contact-form-title">
+            <div className="components-contact-content-titleBlock">
               <h2 id="contact-form-title">vamos conversar?</h2>
               <p>Responderemos em até 24 horas</p>
             </div>
 
-            <form className={styles.form}>
-              <div className={styles.formRow}>
+            <form className="components-contact-content-form">
+              <div className="components-contact-content-formRow">
                 <input aria-label="Nome" placeholder="Digite seu nome" type="text" />
                 <input aria-label="Telefone" placeholder="(43) 9 9999 - 9999" type="tel" />
               </div>
@@ -101,14 +100,14 @@ export function ContactContent() {
           </section>
         </div>
 
-        <aside className={styles.planPanel} aria-label="Plano de patrocínio">
+        <aside className="components-contact-content-planPanel" aria-label="Plano de patrocínio">
           <h2>Nossos Planos</h2>
-          <div className={styles.planTabs} aria-label="Tipos de plano">
+          <div className="components-contact-content-planTabs" aria-label="Tipos de plano">
             <span>Master</span>
             <span>Mensal</span>
             <span>Pontual</span>
           </div>
-          <article className={styles.planCard}>
+          <article className="components-contact-content-planCard">
             <h3>master</h3>
             <ul>
               {masterBenefits.map((benefit) => (

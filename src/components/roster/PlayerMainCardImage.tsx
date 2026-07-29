@@ -1,5 +1,4 @@
 import type { Athlete } from "@/data/roster";
-import styles from "./PlayerMainCardImage.module.css";
 
 type PlayerMainCardImageProps = {
   name: string;
@@ -27,7 +26,7 @@ export function PlayerMainCardImage({
     category,
   });
 
-  return <img className={styles.cardImage} src={src} alt={`Card do jogador ${name}`} />;
+  return <img className="components-roster-player-main-card-image-cardImage" src={src} alt={`Card do jogador ${name}`} />;
 }
 
 function createCardImage(props: PlayerMainCardImageProps) {

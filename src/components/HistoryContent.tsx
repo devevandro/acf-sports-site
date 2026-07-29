@@ -1,4 +1,3 @@
-import styles from "./HistoryContent.module.css";
 
 const heroImage =
   "https://www.figma.com/api/mcp/asset/fd137877-ddce-4e0c-9ddf-323915568270";
@@ -28,14 +27,14 @@ const symbols = [
 
 export function HistoryContent() {
   return (
-    <section className={styles.section} data-node-id="640:2275" data-name="historia">
-      <div className={styles.inner}>
+    <section className="components-history-content-section" data-node-id="640:2275" data-name="historia">
+      <div className="components-history-content-inner">
         <SectionTitle eyebrow="acf sports" title="A origem do nome" />
 
-        <figure className={styles.heroFigure}>
-          <div className={styles.heroImage}>
+        <figure className="components-history-content-heroFigure">
+          <div className="components-history-content-heroImage">
             <img src={heroImage} alt="Antônio Carlos Ferreira com camisa da ACF Sports" />
-            <img className={styles.stamp} src={imageStamp} alt="" aria-hidden="true" />
+            <img className="components-history-content-stamp" src={imageStamp} alt="" aria-hidden="true" />
           </div>
           <figcaption>
             <span>Na imagem, Antônio Carlos Ferreira.</span>
@@ -45,11 +44,11 @@ export function HistoryContent() {
 
         <ArticleText />
 
-        <section className={styles.symbols} aria-labelledby="symbols-title">
+        <section className="components-history-content-symbols" aria-labelledby="symbols-title">
           <SectionTitle eyebrow="símbolos" title="O desenvolvimento do nosso símbolo" id="symbols-title" />
-          <div className={styles.symbolGrid}>
+          <div className="components-history-content-symbolGrid">
             {symbols.map((symbol) => (
-              <article className={styles.symbolCard} key={symbol}>
+              <article className="components-history-content-symbolCard" key={symbol}>
                 <div aria-hidden="true" />
                 <p>{symbol}</p>
               </article>
@@ -57,11 +56,11 @@ export function HistoryContent() {
           </div>
         </section>
 
-        <section className={styles.mascot} aria-labelledby="mascot-title">
+        <section className="components-history-content-mascot" aria-labelledby="mascot-title">
           <SectionTitle eyebrow="mascote" title="A história por trás do Touro" id="mascot-title" />
-          <div className={styles.mascotImage}>
-            <img className={styles.glow} src={mascotGlow} alt="" aria-hidden="true" />
-            <img className={styles.bull} src={mascotImage} alt="Mascote touro da ACF Sports" />
+          <div className="components-history-content-mascotImage">
+            <img className="components-history-content-glow" src={mascotGlow} alt="" aria-hidden="true" />
+            <img className="components-history-content-bull" src={mascotImage} alt="Mascote touro da ACF Sports" />
           </div>
           <ArticleText emphasizeLast />
         </section>
@@ -72,7 +71,7 @@ export function HistoryContent() {
 
 function SectionTitle({ eyebrow, title, id }: { eyebrow: string; title: string; id?: string }) {
   return (
-    <div className={styles.titleBlock}>
+    <div className="components-history-content-titleBlock">
       <p>{eyebrow}</p>
       <h2 id={id}>{title}</h2>
     </div>
@@ -81,11 +80,11 @@ function SectionTitle({ eyebrow, title, id }: { eyebrow: string; title: string; 
 
 function ArticleText({ emphasizeLast = false }: { emphasizeLast?: boolean }) {
   return (
-    <div className={styles.articleText}>
+    <div className="components-history-content-articleText">
       {historyParagraphs.map((paragraph, index) => {
         const isLast = index === historyParagraphs.length - 1;
         return (
-          <p className={emphasizeLast && isLast ? styles.emphasis : ""} key={paragraph}>
+          <p className={emphasizeLast && isLast ? "components-history-content-emphasis" : ""} key={paragraph}>
             {paragraph}
           </p>
         );

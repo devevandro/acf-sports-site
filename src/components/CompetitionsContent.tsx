@@ -1,4 +1,3 @@
-import styles from "./CompetitionsContent.module.css";
 
 const acfLogo =
   "https://www.figma.com/api/mcp/asset/dd1c5a3c-322d-4586-9085-6aff6a4f1936";
@@ -52,7 +51,7 @@ const standings = [
 
 function Team({ logo, name }: { logo: string; name: string }) {
   return (
-    <div className={styles.team}>
+    <div className="components-competitions-content-team">
       <img src={logo} alt="" />
       <span>{name}</span>
     </div>
@@ -61,7 +60,7 @@ function Team({ logo, name }: { logo: string; name: string }) {
 
 function DetailsLink() {
   return (
-    <a className={styles.details} href="#">
+    <a className="components-competitions-content-details" href="#">
       <img src={eventIcon} alt="" />
       Ver mais detalhes da partida
     </a>
@@ -71,40 +70,40 @@ function DetailsLink() {
 export function CompetitionsContent() {
   return (
     <section
-      className={styles.section}
+      className="components-competitions-content-section"
       data-node-id="640:2508"
       aria-label="Tabelas e jogos"
     >
-      <img className={styles.bullMark} src={bullMark} alt="" aria-hidden="true" />
+      <img className="components-competitions-content-bullMark" src={bullMark} alt="" aria-hidden="true" />
 
-      <div className={styles.inner}>
+      <div className="components-competitions-content-inner">
         <h2>Próxima Partida</h2>
-        <article className={styles.nextMatch}>
-          <div className={styles.matchTeams}>
+        <article className="components-competitions-content-nextMatch">
+          <div className="components-competitions-content-matchTeams">
             <Team logo={nextHomeLogo} name="ACF Sport Club" />
             <strong>x</strong>
             <Team logo={nextAwayLogo} name="Real Figueira" />
           </div>
-          <div className={styles.separator} />
-          <div className={styles.matchMeta}>
+          <div className="components-competitions-content-separator" />
+          <div className="components-competitions-content-matchMeta">
             <p>Citadino Segunda Divisão / 2026</p>
             <DetailsLink />
           </div>
         </article>
 
-        <hr className={styles.sectionDivider} />
+        <hr className="components-competitions-content-sectionDivider" />
 
-        <div className={styles.contentGrid}>
-          <section className={styles.previous} aria-labelledby="previous-title">
+        <div className="components-competitions-content-contentGrid">
+          <section className="components-competitions-content-previous" aria-labelledby="previous-title">
             <h2 id="previous-title">Partidas Anteriores</h2>
-            <div className={styles.previousList}>
+            <div className="components-competitions-content-previousList">
               {previousMatches.map((match) => (
-                <article className={styles.previousCard} key={`${match.score}-${match.away}`}>
+                <article className="components-competitions-content-previousCard" key={`${match.score}-${match.away}`}>
                   <Team logo={acfLogo} name="ACF Sport Club" />
                   <strong>{match.score}</strong>
                   <Team logo={match.awayLogo} name={match.away} />
-                  <div className={styles.cardSeparator} />
-                  <div className={styles.previousMeta}>
+                  <div className="components-competitions-content-cardSeparator" />
+                  <div className="components-competitions-content-previousMeta">
                     <p>Citadino Segunda Divisão / 2026</p>
                     <DetailsLink />
                   </div>
@@ -113,12 +112,12 @@ export function CompetitionsContent() {
             </div>
           </section>
 
-          <section className={styles.tableBlock} aria-labelledby="standings-title">
-            <button className={styles.tableTitle} type="button" id="standings-title">
+          <section className="components-competitions-content-tableBlock" aria-labelledby="standings-title">
+            <button className="components-competitions-content-tableTitle" type="button" id="standings-title">
               Citadino Primeira Divisão - Cp
               <img src={chevronIcon} alt="" />
             </button>
-            <div className={styles.tableWrap}>
+            <div className="components-competitions-content-tableWrap">
               <table>
                 <thead>
                   <tr>
@@ -137,11 +136,11 @@ export function CompetitionsContent() {
                   {standings.map((row) => (
                     <tr key={row[0]}>
                       <td>
-                        <span className={Number(row[0]) > 6 ? styles.relegated : ""}>{row[0]}</span>
+                        <span className={Number(row[0]) > 6 ? "components-competitions-content-relegated" : ""}>{row[0]}</span>
                         {row[1]}
                       </td>
                       {row.slice(2, 10).map((cell, index) => (
-                        <td className={index === 0 ? styles.points : ""} key={`${row[0]}-${index}`}>
+                        <td className={index === 0 ? "components-competitions-content-points" : ""} key={`${row[0]}-${index}`}>
                           {cell}
                         </td>
                       ))}
@@ -150,13 +149,13 @@ export function CompetitionsContent() {
                 </tbody>
               </table>
             </div>
-            <div className={styles.legend}>
+            <div className="components-competitions-content-legend">
               <span>
-                <i className={styles.promotedDot} />
+                <i className="components-competitions-content-promotedDot" />
                 Classificados para próxima fase
               </span>
               <span>
-                <i className={styles.relegatedDot} />
+                <i className="components-competitions-content-relegatedDot" />
                 Rebaixados para a segunda divisão
               </span>
             </div>

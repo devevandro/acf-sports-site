@@ -1,7 +1,4 @@
-import styles from "./PlansSection.module.css";
-
-const backgroundAsset =
-  "https://www.figma.com/api/mcp/asset/b323c628-e84b-4319-833d-5a1a4d34b30f";
+import { ArrowUpRight } from "lucide-react";
 
 const arrowAsset =
   "https://www.figma.com/api/mcp/asset/1b2b3532-68ec-4ef4-bbf9-23a66f49a996";
@@ -53,24 +50,24 @@ const plans: Plan[] = [
 
 function PlanCard({ plan }: { plan: Plan }) {
   return (
-    <article className={`${styles.card} ${plan.featured ? styles.featuredCard : ""}`}>
-      <header className={styles.cardHeader}>
+    <article className={`components-plans-section-card ${plan.featured ? "components-plans-section-featuredCard" : ""}`}>
+      <header className="components-plans-section-cardHeader">
         <h3>{plan.name}</h3>
-        <div className={styles.price}>
+        <div className="components-plans-section-price">
           <strong>{plan.price}</strong>
           <span>mensal</span>
         </div>
       </header>
 
-      <ul className={styles.benefits}>
+      <ul className="components-plans-section-benefits">
         {plan.benefits.map((benefit) => (
           <li key={benefit}>{benefit}</li>
         ))}
       </ul>
 
-      <a className={`${styles.button} ${plan.featured ? styles.featuredButton : ""}`} href="#planos">
+      <a className={`components-plans-section-button ${plan.featured ? "components-plans-section-featuredButton" : ""}`} href="#planos">
         ver mais
-        <img src={arrowAsset} alt="" />
+        <ArrowUpRight className="components-plans-section-buttonIcon" />
       </a>
     </article>
   );
@@ -79,20 +76,20 @@ function PlanCard({ plan }: { plan: Plan }) {
 export function PlansSection() {
   return (
     <section
-      className={styles.section}
+      className="components-plans-section-section"
       data-node-id="1695:10075"
       data-name="planos"
       aria-labelledby="plans-title"
     >
-      <img className={styles.background} src={backgroundAsset} alt="" />
-      <div className={styles.overlay} />
+      <img className="components-plans-section-background" src="/backgrounds/background-plans.png" alt="" />
+      <div className="components-plans-section-overlay" />
 
-      <div className={styles.inner}>
-        <h2 className={styles.title} id="plans-title">
+      <div className="components-plans-section-inner">
+        <h2 className="components-plans-section-title" id="plans-title">
           planos<span>.</span>
         </h2>
 
-        <div className={styles.cards}>
+        <div className="components-plans-section-cards">
           {plans.map((plan) => (
             <PlanCard key={plan.name} plan={plan} />
           ))}

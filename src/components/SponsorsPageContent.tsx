@@ -1,4 +1,3 @@
-import styles from "./SponsorsPageContent.module.css";
 
 type Plan = {
   name: string;
@@ -121,10 +120,10 @@ const oneOffLogos: Logo[] = [
 
 export function SponsorsPageContent() {
   return (
-    <section className={styles.section} data-node-id="640:2418" data-name="patrocinadores">
-      <div className={styles.reasons}>
+    <section className="components-sponsors-page-content-section" data-node-id="640:2418" data-name="patrocinadores">
+      <div className="components-sponsors-page-content-reasons">
         {reasons.map((reason, index) => (
-          <article className={styles.reason} key={reason.title}>
+          <article className="components-sponsors-page-content-reason" key={reason.title}>
             <h2>
               {index + 1}. {reason.title}
             </h2>
@@ -135,10 +134,10 @@ export function SponsorsPageContent() {
         ))}
       </div>
 
-      <section className={styles.plansBand} aria-labelledby="sponsor-plans-title">
-        <div className={styles.plansInner}>
+      <section className="components-sponsors-page-content-plansBand" aria-labelledby="sponsor-plans-title">
+        <div className="components-sponsors-page-content-plansInner">
           <h2 id="sponsor-plans-title">Nossos Planos</h2>
-          <div className={styles.planGrid}>
+          <div className="components-sponsors-page-content-planGrid">
             {plans.map((plan) => (
               <PlanCard key={plan.name} plan={plan} />
             ))}
@@ -146,7 +145,7 @@ export function SponsorsPageContent() {
         </div>
       </section>
 
-      <section className={styles.logoSection} aria-label="Lista de patrocinadores">
+      <section className="components-sponsors-page-content-logoSection" aria-label="Lista de patrocinadores">
         <SponsorGroup title="Patrocinador Master" logos={masterLogos} variant="master" />
         <SponsorGroup title="Parceiros" logos={partnerLogos} />
         <SponsorGroup title="Pontuais" logos={oneOffLogos} />
@@ -159,7 +158,7 @@ function PlanCard({ plan }: { plan: Plan }) {
   const whatsAppUrl = `https://wa.me/5543991802793?text=${encodeURIComponent(plan.message)}`;
 
   return (
-    <article className={styles.planCard}>
+    <article className="components-sponsors-page-content-planCard">
       <h3>{plan.name}</h3>
       <ul>
         {plan.benefits.map((benefit) => (
@@ -184,11 +183,11 @@ function SponsorGroup({
   variant?: "master";
 }) {
   return (
-    <div className={styles.logoGroup}>
+    <div className="components-sponsors-page-content-logoGroup">
       <h2>{title}</h2>
-      <div className={`${styles.logoGrid} ${variant === "master" ? styles.masterGrid : ""}`}>
+      <div className={`components-sponsors-page-content-logoGrid ${variant === "master" ? "components-sponsors-page-content-masterGrid" : ""}`}>
         {logos.map((logo) => (
-          <article className={`${styles.logoCard} ${logo.dark ? styles.darkLogo : ""}`} key={`${title}-${logo.src}`}>
+          <article className={`components-sponsors-page-content-logoCard ${logo.dark ? "components-sponsors-page-content-darkLogo" : ""}`} key={`${title}-${logo.src}`}>
             <img src={logo.src} alt={logo.alt} />
           </article>
         ))}

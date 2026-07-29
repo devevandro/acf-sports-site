@@ -3,14 +3,13 @@ import { SponsorsPageContent } from "@/components/SponsorsPageContent";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
-import styles from "./page.module.css";
 
 export default function PatrocinadoresPage() {
   return (
-    <main className={styles.page}>
+    <main className="app-clube-patrocinadores-page-page">
       <TopCf />
       <MainMenu active="clube" activeClub="patrocinadores" />
-      <header className={styles.heading}>
+      <header className="app-clube-patrocinadores-page-heading">
         <div>
           <p>nossos parceiros</p>
           <h1>

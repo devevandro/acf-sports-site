@@ -1,4 +1,4 @@
-import styles from "./RosterSection.module.css";
+import { ArrowUpRight } from "lucide-react";
 
 const athleteCards = Array.from({ length: 5 }, (_, index) => index + 1);
 
@@ -20,34 +20,36 @@ const cardPath = `M8 1
   Q1 1 8 1
   Z`;
 
-const arrowAsset =
-  "https://www.figma.com/api/mcp/asset/b847c4b4-aafc-4f55-bb07-941e552cb1d8";
-
 export function RosterSection() {
   return (
     <section
-      className={styles.section}
+      style={{
+        position: "relative",
+        minHeight: "1048px",
+        overflow: "hidden",
+        backgroundImage: "url('/backgrounds/background-player.png')",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        color: "#f5f5f5",
+      }}
       data-node-id="1278:3855"
       data-name="elenco"
       aria-labelledby="roster-title"
     >
-      <div className={styles.backgroundGrid} aria-hidden="true" />
-      <div className={styles.glowBlue} aria-hidden="true" />
-      <div className={styles.glowOrange} aria-hidden="true" />
-
-      <div className={styles.inner}>
-        <h2 className={styles.title} id="roster-title">
+      <div className="components-roster-section-inner">
+        <h2 className="components-roster-section-title" id="roster-title">
           elenco<span>.</span>
         </h2>
 
-        <div className={styles.athletes}>
+        <div className="components-roster-section-athletes">
           {athleteCards.map((cardNumber) => (
             <article
-              className={`${styles.athlete} ${styles[`athlete${cardNumber}`]}`}
+              className={`components-roster-section-athlete ${`components-roster-section-athlete${cardNumber}`}`}
               key={cardNumber}
             >
               <svg
-                className={styles.athleteCard}
+                className="components-roster-section-athleteCard"
                 viewBox="0 0 256 448"
                 role="img"
                 aria-label={`Atleta ${cardNumber} do ACF Sports`}
@@ -58,8 +60,10 @@ export function RosterSection() {
                   </clipPath>
                 </defs>
 
+                <path d={cardPath} fill="#01121F" />
+
                 <image
-                  href="/player.png"
+                  href="/squad/player.png"
                   width="256"
                   height="448"
                   preserveAspectRatio="xMidYMid slice"
@@ -78,11 +82,16 @@ export function RosterSection() {
           ))}
         </div>
 
-        <img className={styles.centerBull} src="/center-bull.jpg" alt="" aria-hidden="true" />
+        <img
+          className="components-roster-section-centerBull"
+          src="/squad/center-bull.jpg"
+          alt=""
+          aria-hidden="true"
+        />
 
-        <a className={styles.button} href="/clube/elenco">
+        <a className="components-roster-section-button" href="/clube/elenco">
           ver elenco completo
-          <img src={arrowAsset} alt="" />
+          <ArrowUpRight size={20} className="font-extrabold" />
         </a>
       </div>
     </section>

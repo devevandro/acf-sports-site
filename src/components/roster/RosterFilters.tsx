@@ -1,5 +1,4 @@
 import type { RosterCategory, RosterPosition } from "@/data/roster";
-import styles from "./RosterFilters.module.css";
 
 const categories: { id: RosterCategory | "todos"; label: string }[] = [
   { id: "campo", label: "Futebol de Campo" },
@@ -13,11 +12,11 @@ type RosterFiltersProps = {
 
 export function RosterFilters({ activeCategory, activePosition }: RosterFiltersProps) {
   return (
-    <div className={styles.filters}>
-      <div className={styles.categoryGroup} aria-label="Filtrar por modalidade">
+    <div className="components-roster-roster-filters-filters">
+      <div className="components-roster-roster-filters-categoryGroup" aria-label="Filtrar por modalidade">
         {categories.map((category) => (
           <a
-            className={category.id === activeCategory ? styles.active : ""}
+            className={category.id === activeCategory ? "components-roster-roster-filters-active" : ""}
             href={buildHref(category.id, activePosition)}
             key={category.id}
           >
@@ -26,15 +25,15 @@ export function RosterFilters({ activeCategory, activePosition }: RosterFiltersP
         ))}
       </div>
 
-      <nav className={styles.positionGroup} aria-label="Filtrar por posição">
+      <nav className="components-roster-roster-filters-positionGroup" aria-label="Filtrar por posição">
         <a
-          className={activePosition === "todos" ? styles.active : ""}
+          className={activePosition === "todos" ? "components-roster-roster-filters-active" : ""}
           href={buildHref(activeCategory, "todos")}
         >
           Todas às posições
         </a>
         <a
-          className={activePosition !== "todos" ? styles.active : ""}
+          className={activePosition !== "todos" ? "components-roster-roster-filters-active" : ""}
           href={buildHref(activeCategory, activePosition === "todos" ? "goleiro" : activePosition)}
         >
           Ver por posições
