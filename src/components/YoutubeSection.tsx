@@ -5,16 +5,16 @@ export function YoutubeSection() {
     <section
       className="components-youtube-section-section"
       data-node-id="1695:10759"
-      data-name="card_touyube"
+      data-name="card_youtube"
       aria-labelledby="youtube-title"
     >
-      <img className="components-youtube-section-background" src="/img-fundo.png" alt="" />
-      <img className="components-youtube-section-leftBull" src="/touro_desfoque-02.png" alt="" aria-hidden="true" />
-      <img className="components-youtube-section-rightBull" src="/touro_desfoque-01.png" alt="" aria-hidden="true" />
+      <img className="components-youtube-section-background" src="/youtube-section/background.png" alt="" />
+      <img className="components-youtube-section-leftBull" src="/youtube-section/blurred-bull-02.png" alt="" aria-hidden="true" />
+      <img className="components-youtube-section-rightBull" src="/youtube-section/blurred-bull-01.png" alt="" aria-hidden="true" />
 
       <div className="components-youtube-section-card">
         <div className="components-youtube-section-intro">
-          <img className="components-youtube-section-mascot" src="/touro-youtube.png" alt="" />
+          <img className="components-youtube-section-mascot" src="/youtube-section/youtube-bull.png" alt="" />
           <div>
             <h2 id="youtube-title">o acf sports agora está no YouTube</h2>
             <p>a mesma resenha, ainda mais acessível e com a qualidade de sempre.</p>
@@ -51,7 +51,7 @@ export function YoutubeSection() {
         </div>
 
         <div className="components-youtube-section-network">
-          <img src="/boi-logo.png" alt="" />
+          <img src="/youtube-section/bull-logo.png" alt="" />
           <p>
             <span>rede</span>
             ACF soberano

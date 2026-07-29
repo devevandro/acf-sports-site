@@ -16,6 +16,7 @@
   --laranja: #cc4529;
   --laranja-branco-medio: #f5d4ce;
   --tom-preto: #050505;
+  --main-menu-height: 96px;
 }
 
 * {
@@ -26,6 +27,10 @@ html,
 body {
   margin: 0;
   min-height: 100%;
+}
+
+html {
+  scroll-padding-top: var(--main-menu-height);
 }
 
 body {
@@ -2007,14 +2012,21 @@ button {
 
 
 .components-main-menu-menu {
-  position: relative;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 96px;
+  height: var(--main-menu-height);
   padding: 16px clamp(24px, 13.75vw, 220px);
   background: var(--azul-ceu-fechado-tom-1);
+}
+
+.components-main-menu-spacer {
+  display: none;
 }
 
 .components-main-menu-logo {
@@ -3320,6 +3332,7 @@ button {
 
 .components-site-footer-footer {
   position: relative;
+  scroll-margin-top: var(--main-menu-height);
   min-height: 800px;
   overflow: hidden;
   background: var(--azul-preto);
@@ -3344,7 +3357,7 @@ button {
   gap: 204px;
   width: min(1160px, calc(100% - 40px));
   margin: 0 auto;
-  padding-top: 120px;
+  padding-top: calc(120px + var(--main-menu-height));
 }
 
 .components-site-footer-column,
@@ -3479,21 +3492,35 @@ button {
 }
 
 .components-site-footer-backTop {
-  position: sticky;
+  position: absolute;
+  right: calc((100% - min(1160px, calc(100% - 40px))) / 2);
   bottom: 80px;
-  left: calc(50% + 540px);
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 80px;
   height: 80px;
-  margin-left: auto;
-  margin-right: calc((100% - min(1160px, calc(100% - 40px))) / 2);
 }
 
 .components-site-footer-backTop img {
   width: 67px;
   height: 67px;
+  animation: components-site-footer-backTopPulse 1.6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes components-site-footer-backTopPulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
 }
 
 @media (max-width: 1120px) {
@@ -3518,7 +3545,7 @@ button {
     grid-template-columns: 1fr;
     gap: 48px;
     width: min(330px, calc(100% - 32px));
-    padding-top: 64px;
+    padding-top: calc(64px + var(--main-menu-height));
   }
 
   .components-site-footer-brand {
@@ -3539,7 +3566,7 @@ button {
   .components-site-footer-backTop {
     width: 64px;
     height: 64px;
-    margin-right: 16px;
+    right: 16px;
   }
 }
 
@@ -4114,7 +4141,7 @@ button {
 .components-top-cf-topCf {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: auto;
   overflow: hidden;
   background: var(--azul-preto);
 }

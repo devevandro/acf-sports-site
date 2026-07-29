@@ -9,7 +9,7 @@ export function AthleteCard({ person, variant = "athlete" }: AthleteCardProps) {
   const isAthlete = "position" in person;
   const content = (
     <>
-      <img className="components-roster-athlete-card-image" src="/jogador.png" alt={person.name} />
+      <img className="components-roster-athlete-card-image" src="/squad/player-placeholder.png" alt={person.name} />
       <div className="components-roster-athlete-card-info">
         {isAthlete ? <span className="components-roster-athlete-card-label">{person.number}</span> : null}
         <div>

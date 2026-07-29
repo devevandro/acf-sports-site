@@ -37,16 +37,6 @@ export function RosterSection() {
       data-name="elenco"
       aria-labelledby="roster-title"
     >
-      <div
-        className="components-roster-section-backgroundGrid"
-        aria-hidden="true"
-      />
-      <div className="components-roster-section-glowBlue" aria-hidden="true" />
-      <div
-        className="components-roster-section-glowOrange"
-        aria-hidden="true"
-      />
-
       <div className="components-roster-section-inner">
         <h2 className="components-roster-section-title" id="roster-title">
           elenco<span>.</span>
@@ -70,8 +60,10 @@ export function RosterSection() {
                   </clipPath>
                 </defs>
 
+                <path d={cardPath} fill="#01121F" />
+
                 <image
-                  href="/player.png"
+                  href="/squad/player.png"
                   width="256"
                   height="448"
                   preserveAspectRatio="xMidYMid slice"
@@ -92,7 +84,7 @@ export function RosterSection() {
 
         <img
           className="components-roster-section-centerBull"
-          src="/center-bull.jpg"
+          src="/squad/center-bull.jpg"
           alt=""
           aria-hidden="true"
         />
