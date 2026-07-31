@@ -32,6 +32,13 @@ npm run build
 - Site media is stored in `public`, grouped by page or section.
 - `docs/figma/README.md` records the Figma extraction mapping.
 
-## Recent Asset Update
+## Recent Updates
 
-The site now references local assets for the header, carousel, contact, squad, YouTube, and footer sections instead of relying on temporary Figma MCP asset URLs for those areas.
+- **Figma Layout Alignment (`node-id=640-1333` & `node-id=1564-11705`)**:
+  - Replaced temporary external Figma MCP URLs across Home & Noticias components (`NewsDetail`, `NewsArchive`, `MainMenu`, `GamesPanel`, etc.) with local assets and Lucide icon components.
+  - Replaced HTML `<a>` tags with Next.js client-side `<Link>` navigation.
+  - Added dynamic `generateMetadata` to `/noticias/[slug]` and SEO metadata to `/noticias`.
+  - Added interactive mobile navigation drawer in `MainMenu.tsx`.
+  - Validated production build with `npm run build` (55 static pages rendered cleanly).
+
+
