@@ -2102,29 +2102,25 @@ button {
   background: var(--laranja);
 }
 
-.components-main-menu-clubMenu:focus-within .components-main-menu-dropdown,
-.components-main-menu-clubMenu:hover .components-main-menu-dropdown {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
-}
-
-.components-main-menu-clubMenu:focus-within .components-main-menu-chevron,
-.components-main-menu-clubMenu:hover .components-main-menu-chevron {
-  transform: rotate(180deg);
-}
-
 .components-main-menu-clubLabel {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 4px;
 }
 
 .components-main-menu-chevron {
+  position: absolute;
+  left: 100%;
+  top: 50%;
   width: 12px;
   height: 7px;
+  margin-left: 4px;
+  transform: translateY(-50%);
   transition: transform 180ms ease;
+}
+
+.components-main-menu-chevronOpen {
+  transform: translateY(-50%) rotate(180deg);
 }
 
 .components-main-menu-dropdown {
@@ -2145,6 +2141,12 @@ button {
   transition:
     opacity 160ms ease,
     transform 160ms ease;
+}
+
+.components-main-menu-dropdownOpen {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
 }
 
 .components-main-menu-dropdownLink {
@@ -2188,7 +2190,7 @@ button {
   background: var(--laranja);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 767px) {
   .components-main-menu-menu {
     gap: 24px;
     height: auto;
@@ -2197,9 +2199,21 @@ button {
   }
 
   .components-main-menu-links {
-    gap: 18px;
-    overflow-x: auto;
-    overflow-y: visible;
+    display: none;
+  }
+
+  .components-main-menu-linksOpen {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 50;
+    width: 100%;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    background: #01121f;
+    border-bottom: 1px solid rgba(184, 62, 37, 0.3);
   }
 
   .components-main-menu-link,
@@ -2207,9 +2221,29 @@ button {
     font-size: 16px;
   }
 
+  .components-main-menu-clubMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
   .components-main-menu-dropdown {
-    top: 58px;
-    width: 168px;
+    position: static;
+    width: 100%;
+    max-width: 260px;
+    max-height: 0;
+    padding: 0 8px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    overflow: hidden;
+    transition: max-height 200ms ease;
+  }
+
+  .components-main-menu-dropdownOpen {
+    max-height: 220px;
+    padding: 0 8px 10px;
   }
 }
 
