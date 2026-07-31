@@ -8,7 +8,7 @@ export default function PatrocinadoresPage() {
   return (
     <main className="app-clube-patrocinadores-page-page">
       <TopCf />
-      <MainMenu active="clube" activeClub="patrocinadores" />
+      <MainMenu active="patrocinadores" />
       <header className="app-clube-patrocinadores-page-heading">
         <div>
           <p>nossos parceiros</p>

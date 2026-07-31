@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { NewsDetail } from "@/components/NewsDetail";
 import { MainMenu } from "@/components/MainMenu";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -10,6 +11,29 @@ export function generateStaticParams() {
   return newsItems.map((item) => ({
     slug: item.slug,
   }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const news = getNewsBySlug(slug);
+
+  if (!news) {
+    return {
+      title: "Notícia Não Encontrada | ACF Sports",
+    };
+  }
+
+  return {
+    title: `${news.title} | ACF Sports`,
+    description: news.description,
+    openGraph: {
+      title: news.title,
+      description: news.description,
+      type: "article",
+      publishedTime: news.date,
+      authors: [news.author],
+    },
+  };
 }
 
 export default async function NoticiaDetalhePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -26,7 +50,7 @@ export default async function NoticiaDetalhePage({ params }: { params: Promise<{
       <MainMenu active="noticias" />
       <header className="app-noticias-slug-page-heading">
         <div>
-          <p>atualidades</p>
+          <p>{news.category}</p>
           <h1>
             notícias<span>.</span>
           </h1>
@@ -38,3 +62,4 @@ export default async function NoticiaDetalhePage({ params }: { params: Promise<{
     </main>
   );
 }
+

@@ -1,9 +1,6 @@
 
-const arrowAsset =
-  "https://www.figma.com/api/mcp/asset/6609ea1e-247d-4096-af35-3a2b2173c8b0";
-
-const chevronAsset =
-  "https://www.figma.com/api/mcp/asset/45ea76e6-1603-40fe-9abd-2378156ec2eb";
+import Link from "next/link";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 
 const rows = [
   ["01", "ACF S.C"],
@@ -21,16 +18,16 @@ export function StandingsPanel() {
         <h2 id="standings-title">
           tabelas<span>.</span>
         </h2>
-        <a href="#tabelas">
+        <Link href="/clube/competicoes" className="inline-flex items-center gap-1">
           ver mais
-          <img src={arrowAsset} alt="" />
-        </a>
+          <ArrowUpRight size={16} />
+        </Link>
       </header>
 
       <div className="components-standings-panel-tableCard">
-        <button className="components-standings-panel-selectButton" type="button">
-          Segunda Divisão
-          <img src={chevronAsset} alt="" />
+        <button className="components-standings-panel-selectButton flex items-center justify-between w-full" type="button">
+          <span>Segunda Divisão</span>
+          <ChevronDown size={16} />
         </button>
 
         <table className="components-standings-panel-table">
@@ -64,3 +61,4 @@ export function StandingsPanel() {
     </aside>
   );
 }
+

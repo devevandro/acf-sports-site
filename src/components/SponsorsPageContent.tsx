@@ -1,4 +1,6 @@
 
+import { MessageCircle } from "lucide-react";
+
 type Plan = {
   name: string;
   price: string;
@@ -7,8 +9,8 @@ type Plan = {
 };
 
 type Logo = {
-  src: string;
-  alt: string;
+  name: string;
+  subtitle?: string;
   dark?: boolean;
 };
 
@@ -16,7 +18,7 @@ const plans: Plan[] = [
   {
     name: "pontual",
     price: "R$ 180,00 / Mês",
-    message: "Olá boa tarde, gostaria de saber mais sobre, o plano pontual...",
+    message: "Olá boa tarde, gostaria de saber mais sobre o plano pontual do ACF Sports...",
     benefits: [
       "Logo de tamanho médio em partes do uniforme",
       "1 Post dedicado no dia do jogo",
@@ -28,21 +30,21 @@ const plans: Plan[] = [
   {
     name: "master",
     price: "R$ 500,00 / Mês",
-    message: "Olá boa tarde, gostaria de saber mais sobre, o plano master...",
+    message: "Olá boa tarde, gostaria de saber mais sobre o plano master do ACF Sports...",
     benefits: [
-      "Post fixado no instagram",
+      "Post fixado no Instagram",
       "Destaque central no uniforme",
       "Logo em destaque nas artes de todos os jogos",
       "Banner de destaque na home do site",
-      "Pagina exclusiva no site sobre a sua marca",
+      "Página exclusiva no site sobre a sua marca",
     ],
   },
   {
     name: "mensal",
     price: "R$ 250,00 / Mês",
-    message: "Olá boa tarde, gostaria de saber mais sobre, o plano mensal...",
+    message: "Olá boa tarde, gostaria de saber mais sobre o plano mensal do ACF Sports...",
     benefits: [
-      "Logo em partes segundarias no uniforme junto ao calção",
+      "Logo em partes secundárias no uniforme junto ao calção",
       "Post dedicado por mês",
       "Menções em todas as artes de dias de jogos",
       "Logo em tamanho médio nas artes de jogos",
@@ -61,66 +63,33 @@ const reasons = [
     text: "Um time padronizado e com marcas parceiras estampadas transmite credibilidade. Isso eleva a autoestima do grupo e atrai a atenção de novos talentos e até da mídia local, tirando a equipe do anonimato.",
   },
   {
-    title: "Conexão com a o publico",
+    title: "Conexão com o Público",
     text: "O patrocínio cria um ciclo de ganha-ganha. Para a equipe: estabilidade para focar apenas no desempenho em campo. Para o patrocinador: visibilidade direta com um público fiel e engajado, associando a marca ao bem-estar e ao esporte.",
   },
 ];
 
 const masterLogos: Logo[] = [
-  {
-    src: "https://www.figma.com/api/mcp/asset/13714137-a58e-40ee-ac50-43603ea7b86b",
-    alt: "Auto Vidros",
-  },
-  {
-    src: "https://www.figma.com/api/mcp/asset/c8621abe-c571-4172-8642-0bd4ef995353",
-    alt: "Innova Dev",
-  },
+  { name: "Auto Vidros", subtitle: "Patrocinador Master" },
+  { name: "Innova Dev", subtitle: "Soluções Tecnológicas" },
 ];
 
 const partnerLogos: Logo[] = [
-  {
-    src: "https://www.figma.com/api/mcp/asset/d36d31f2-d7ab-4a3c-a0a2-561e46468cdf",
-    alt: "Apex",
-  },
-  {
-    src: "https://www.figma.com/api/mcp/asset/78fc0a67-bcc6-4e68-80b6-ba16c69377e1",
-    alt: "Apex",
-  },
-  {
-    src: "https://www.figma.com/api/mcp/asset/6ff3046a-4c54-4987-8b9c-a5200634fcab",
-    alt: "Mercat",
-  },
-  {
-    src: "https://www.figma.com/api/mcp/asset/d1093d7d-1466-45aa-9bfb-934cef6e351b",
-    alt: "VoltGreen",
-  },
-  {
-    src: "https://www.figma.com/api/mcp/asset/c2938408-1ce2-4f84-8e62-1db0d675c25d",
-    alt: "Velocity",
-  },
+  { name: "Apex Sports" },
+  { name: "Apex Nutrição" },
+  { name: "Mercat Supermercados" },
+  { name: "VoltGreen Energia" },
+  { name: "Velocity Fit" },
 ];
 
 const oneOffLogos: Logo[] = [
-  {
-    src: "https://www.figma.com/api/mcp/asset/aa4c4233-ddb9-4ad2-aec4-c695d51a4b1d",
-    alt: "Tech Genius",
-    dark: true,
-  },
-  {
-    src: "https://www.figma.com/api/mcp/asset/238c89f0-09f5-4a2e-aab8-ca5f58b73124",
-    alt: "Titan",
-    dark: true,
-  },
-  {
-    src: "https://www.figma.com/api/mcp/asset/bd0224ae-deec-46d0-b1b2-3cb7a3f533f9",
-    alt: "Velocity",
-    dark: true,
-  },
+  { name: "Tech Genius", dark: true },
+  { name: "Titan Suplementos", dark: true },
+  { name: "Velocity Express", dark: true },
 ];
 
 export function SponsorsPageContent() {
   return (
-    <section className="components-sponsors-page-content-section" data-node-id="640:2418" data-name="patrocinadores">
+    <section className="components-sponsors-page-content-section" data-node-id="2372:9111" data-name="patrocinadores">
       <div className="components-sponsors-page-content-reasons">
         {reasons.map((reason, index) => (
           <article className="components-sponsors-page-content-reason" key={reason.title}>
@@ -166,7 +135,8 @@ function PlanCard({ plan }: { plan: Plan }) {
         ))}
       </ul>
       <p>{plan.price}</p>
-      <a href={whatsAppUrl} target="_blank" rel="noreferrer">
+      <a href={whatsAppUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2">
+        <MessageCircle size={18} />
         enviar direct no whatsapp
       </a>
     </article>
@@ -187,11 +157,18 @@ function SponsorGroup({
       <h2>{title}</h2>
       <div className={`components-sponsors-page-content-logoGrid ${variant === "master" ? "components-sponsors-page-content-masterGrid" : ""}`}>
         {logos.map((logo) => (
-          <article className={`components-sponsors-page-content-logoCard ${logo.dark ? "components-sponsors-page-content-darkLogo" : ""}`} key={`${title}-${logo.src}`}>
-            <img src={logo.src} alt={logo.alt} />
+          <article
+            className={`components-sponsors-page-content-logoCard flex flex-col items-center justify-center p-4 rounded text-center ${
+              logo.dark ? "components-sponsors-page-content-darkLogo bg-[#01121F] text-white" : "bg-white/5 border border-white/10"
+            }`}
+            key={`${title}-${logo.name}`}
+          >
+            <span className="font-bold text-base tracking-wide text-white uppercase">{logo.name}</span>
+            {logo.subtitle ? <small className="text-xs text-white/70 mt-1">{logo.subtitle}</small> : null}
           </article>
         ))}
       </div>
     </div>
   );
 }
+

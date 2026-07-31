@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 const athleteCards = Array.from({ length: 5 }, (_, index) => index + 1);
@@ -89,11 +90,12 @@ export function RosterSection() {
           aria-hidden="true"
         />
 
-        <a className="components-roster-section-button" href="/clube/elenco">
+        <Link className="components-roster-section-button" href="/clube/elenco">
           ver elenco completo
           <ArrowUpRight size={20} className="font-extrabold" />
-        </a>
+        </Link>
       </div>
     </section>
   );
 }
+
