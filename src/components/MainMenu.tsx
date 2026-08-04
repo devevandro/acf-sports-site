@@ -1,71 +1,151 @@
 
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { ChevronDown, Menu, X } from "lucide-react";
+
 const logoAsset = "/header/symbol.png";
 
-const chevronAsset =
-  "https://www.figma.com/api/mcp/asset/7c8419d2-9f00-4f88-aac3-8e2a5f6095d4";
-
 type MainMenuProps = {
-  active?: "home" | "noticias" | "clube" | "contato";
-  activeClub?: "historia" | "elenco" | "competicoes" | "patrocinadores";
+  active?: "home" | "noticias" | "clube" | "patrocinadores" | "contato";
+  activeClub?: "historia" | "elenco" | "competicoes";
 };
 
 export function MainMenu({ active = "home", activeClub }: MainMenuProps) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [clubDropdownOpen, setClubDropdownOpen] = useState(false);
+  const clubMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!clubDropdownOpen) return;
+
+    function handleOutsideInteraction(event: MouseEvent | FocusEvent) {
+      if (!clubMenuRef.current?.contains(event.target as Node)) {
+        setClubDropdownOpen(false);
+      }
+    }
+
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") setClubDropdownOpen(false);
+    }
+
+    document.addEventListener("mousedown", handleOutsideInteraction);
+    document.addEventListener("focusin", handleOutsideInteraction);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideInteraction);
+      document.removeEventListener("focusin", handleOutsideInteraction);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [clubDropdownOpen]);
+
   return (
     <>
       <nav className="components-main-menu-menu" data-node-id="2010:10724" data-name="menu">
-        <a href="/" aria-label="ACF Sports - início">
+        <Link href="/" aria-label="ACF Sports - início">
           <img className="components-main-menu-logo" src={logoAsset} alt="ACF Sports" />
-        </a>
+        </Link>
 
-        <div className="components-main-menu-links" aria-label="Menu principal">
-          <a className={`components-main-menu-link ${active === "home" ? "components-main-menu-active" : ""}`} href="/">
+        <button
+          className="md:hidden text-white p-2 focus:outline-none"
+          type="button"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
+        >
+          {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+
+        <div className={`components-main-menu-links ${mobileOpen ? "components-main-menu-linksOpen" : ""}`} aria-label="Menu principal">
+          <Link
+            className={`components-main-menu-link ${active === "home" ? "components-main-menu-active" : ""}`}
+            href="/"
+            onClick={() => setMobileOpen(false)}
+          >
             <span className="components-main-menu-dot" />
             Home
-          </a>
-          <a className={`components-main-menu-link ${active === "noticias" ? "components-main-menu-active" : ""}`} href="/noticias">
+          </Link>
+          <Link
+            className={`components-main-menu-link ${active === "noticias" ? "components-main-menu-active" : ""}`}
+            href="/noticias"
+            onClick={() => setMobileOpen(false)}
+          >
             <span className="components-main-menu-dot" />
-            noticias
-          </a>
-          <div className={`components-main-menu-clubMenu ${active === "clube" ? "components-main-menu-active" : ""}`}>
-            <button className="components-main-menu-linkButton" type="button" aria-haspopup="true">
+            notícias
+          </Link>
+          <div
+            className={`components-main-menu-clubMenu ${active === "clube" ? "components-main-menu-active" : ""}`}
+            ref={clubMenuRef}
+          >
+            <button
+              className="components-main-menu-linkButton"
+              type="button"
+              aria-haspopup="true"
+              aria-expanded={clubDropdownOpen}
+              onClick={() => setClubDropdownOpen((open) => !open)}
+            >
               <span className="components-main-menu-dot" />
               <span className="components-main-menu-clubLabel">
                 clube
-                <img className="components-main-menu-chevron" src={chevronAsset} alt="" />
+                <ChevronDown
+                  size={14}
+                  className={`components-main-menu-chevron ${clubDropdownOpen ? "components-main-menu-chevronOpen" : ""}`}
+                />
               </span>
             </button>
 
-            <div className="components-main-menu-dropdown" aria-label="Submenu Clube">
-              <a
+            <div
+              className={`components-main-menu-dropdown ${clubDropdownOpen ? "components-main-menu-dropdownOpen" : ""}`}
+              aria-label="Submenu Clube"
+            >
+              <Link
                 className={`components-main-menu-dropdownLink ${activeClub === "historia" ? "components-main-menu-dropdownActive" : ""}`}
                 href="/clube/historia"
+                onClick={() => {
+                  setMobileOpen(false);
+                  setClubDropdownOpen(false);
+                }}
               >
                 História
-              </a>
-              <a
+              </Link>
+              <Link
                 className={`components-main-menu-dropdownLink ${activeClub === "elenco" ? "components-main-menu-dropdownActive" : ""}`}
                 href="/clube/elenco"
+                onClick={() => {
+                  setMobileOpen(false);
+                  setClubDropdownOpen(false);
+                }}
               >
                 Elenco
-              </a>
-              <a
+              </Link>
+              <Link
                 className={`components-main-menu-dropdownLink ${activeClub === "competicoes" ? "components-main-menu-dropdownActive" : ""}`}
                 href="/clube/competicoes"
+                onClick={() => {
+                  setMobileOpen(false);
+                  setClubDropdownOpen(false);
+                }}
               >
                 Competições
-              </a>
-              <a
-                className={`components-main-menu-dropdownLink ${activeClub === "patrocinadores" ? "components-main-menu-dropdownActive" : ""}`}
-                href="/clube/patrocinadores"
-              >
-                Patrocinadores
-              </a>
+              </Link>
             </div>
           </div>
-          <a className={`components-main-menu-link ${active === "contato" ? "components-main-menu-active" : ""}`} href="/contato">
+          <Link
+            className={`components-main-menu-link ${active === "patrocinadores" ? "components-main-menu-active" : ""}`}
+            href="/clube/patrocinadores"
+            onClick={() => setMobileOpen(false)}
+          >
+            <span className="components-main-menu-dot" />
+            patrocinadores
+          </Link>
+          <Link
+            className={`components-main-menu-link ${active === "contato" ? "components-main-menu-active" : ""}`}
+            href="/contato"
+            onClick={() => setMobileOpen(false)}
+          >
             <span className="components-main-menu-dot" />
             contato
-          </a>
+          </Link>
         </div>
 
         <span className="components-main-menu-bottomLine" aria-hidden="true" />
@@ -74,3 +154,4 @@ export function MainMenu({ active = "home", activeClub }: MainMenuProps) {
     </>
   );
 }
+

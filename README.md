@@ -32,6 +32,9 @@ npm run build
 - Site media is stored in `public`, grouped by page or section.
 - `docs/figma/README.md` records the Figma extraction mapping.
 
-## Recent Asset Update
-
-The site now references local assets for the header, carousel, contact, squad, YouTube, and footer sections instead of relying on temporary Figma MCP asset URLs for those areas.
+- **Figma Site Alignment (`node-id=2396-21910`, `2392-9111`, `2394-9599`, `2394-20847`)**:
+  - Aligned the competitions, contact, history, and player profile sections with current Figma frames.
+  - Replaced temporary Figma image URLs with committed local assets under `public/history`, `public/squad`, `public/header`, and `public/contact`.
+  - Added interactive competition filtering, match detail modal behavior, sponsorship plan tabs, and contact form confirmation state.
+  - Migrated roster and player profile navigation links to Next.js `<Link>`.
+  - Validated production build (`npm run build`).

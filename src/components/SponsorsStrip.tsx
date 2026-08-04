@@ -1,13 +1,13 @@
 
-const sponsorAssets = [
-  "https://www.figma.com/api/mcp/asset/a6fac5d8-6588-4106-ae7d-2e289b4d26aa",
-  "https://www.figma.com/api/mcp/asset/3c9ba544-d428-4649-b0b1-162b1b008adf",
-  "https://www.figma.com/api/mcp/asset/5dbcce94-1534-4f46-ad73-541c80044a4b",
-  "https://www.figma.com/api/mcp/asset/5662b2cf-be40-4e78-a800-cb33338f449c",
-  "https://www.figma.com/api/mcp/asset/602ff16e-f2bc-48a2-b9c0-9f875cb1df67",
-  "https://www.figma.com/api/mcp/asset/b3dbc2d6-7a98-4e96-939b-d465c2252bd9",
-  "https://www.figma.com/api/mcp/asset/a04cda42-08d9-45b1-a7f4-5e1a235b6848",
-  "https://www.figma.com/api/mcp/asset/19a6a39f-05e9-4dda-958d-a326662ec417"
+const sponsorList = [
+  "Parceiro Oficial 1",
+  "Soberano Store",
+  "Patrocinador Master",
+  "Academia Fit",
+  "DM Tech",
+  "EBC Cons",
+  "CP Futsal",
+  "ACF Sports",
 ];
 
 export function SponsorsStrip() {
@@ -38,9 +38,9 @@ export function SponsorsStrip() {
       <div className="components-sponsors-strip-inner">
         <h2 id="sponsors-title">patrocinadores</h2>
         <div className="components-sponsors-strip-track">
-          {[...sponsorAssets, ...sponsorAssets].map((src, index) => (
-            <div className="components-sponsors-strip-logoCard" key={`${src}-${index}`}>
-              <img src={src} alt={`Patrocinador ${(index % sponsorAssets.length) + 1}`} />
+          {[...sponsorList, ...sponsorList].map((name, index) => (
+            <div className="components-sponsors-strip-logoCard flex items-center justify-center p-3 bg-white/10 backdrop-blur-sm rounded border border-white/20 text-xs font-bold text-white uppercase tracking-wider min-w-[120px]" key={`${name}-${index}`}>
+              <span>{name}</span>
             </div>
           ))}
         </div>
@@ -48,3 +48,4 @@ export function SponsorsStrip() {
     </section>
   );
 }
+

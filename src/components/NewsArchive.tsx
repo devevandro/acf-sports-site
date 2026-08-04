@@ -1,10 +1,6 @@
+import Link from "next/link";
+import { ChevronRight, ChevronsRight } from "lucide-react";
 import { newsItems, type NewsItem } from "@/data/news";
-
-const arrowRightAsset =
-  "https://www.figma.com/api/mcp/asset/eae11955-b143-497d-9aee-f236a5e4c414";
-
-const arrowEndAsset =
-  "https://www.figma.com/api/mcp/asset/88490890-b8f5-4030-a54e-d77937549a88";
 
 function ArchiveImage({ item }: { item: NewsItem }) {
   if (item.image.type === "layered") {
@@ -32,34 +28,35 @@ export function NewsArchive() {
     <section
       className="components-news-archive-archive"
       data-node-id="1345:3596"
-      aria-label="Todas as noticias"
+      aria-label="Todas as notícias"
     >
       <div className="components-news-archive-grid">
         {newsItems.map((item) => (
-          <a className="components-news-archive-card" href={`/noticias/${item.slug}`} key={item.slug}>
+          <Link className="components-news-archive-card" href={`/noticias/${item.slug}`} key={item.slug}>
             <ArchiveImage item={item} />
             <div className="components-news-archive-copy">
               <h2>{item.title}</h2>
               <p>{item.description}</p>
             </div>
-          </a>
+          </Link>
         ))}
       </div>
 
       <nav className="components-news-archive-pagination" aria-label="Paginação de notícias">
         {[1, 2, 3, 4, 5, 6].map((page) => (
-          <a className={page === 1 ? "components-news-archive-currentPage" : ""} href="#" key={page}>
+          <Link className={page === 1 ? "components-news-archive-currentPage" : ""} href="/noticias" key={page}>
             {page}
-          </a>
+          </Link>
         ))}
         <span>...</span>
-        <a className="components-news-archive-iconPage" href="#" aria-label="Próxima página">
-          <img src={arrowRightAsset} alt="" />
-        </a>
-        <a className="components-news-archive-iconPage" href="#" aria-label="Última página">
-          <img src={arrowEndAsset} alt="" />
-        </a>
+        <Link className="components-news-archive-iconPage inline-flex items-center justify-center" href="/noticias" aria-label="Próxima página">
+          <ChevronRight size={18} />
+        </Link>
+        <Link className="components-news-archive-iconPage inline-flex items-center justify-center" href="/noticias" aria-label="Última página">
+          <ChevronsRight size={18} />
+        </Link>
       </nav>
     </section>
   );
 }
+

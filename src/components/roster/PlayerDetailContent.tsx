@@ -1,15 +1,12 @@
+import Link from "next/link";
 import { athletes, getRelatedAthletes, type Athlete } from "@/data/roster";
 
 type PlayerDetailContentProps = {
   athlete: Athlete;
 };
 
-const profileFrameAsset = "https://www.figma.com/api/mcp/asset/22d3a957-fdae-4aa6-a714-0e196d3cde0e";
-const decoAsset = "https://www.figma.com/api/mcp/asset/116cb7c0-44f3-4c56-9129-78ce14823a6e";
-const acfAsset = "https://www.figma.com/api/mcp/asset/c1a208b3-1f93-4cf2-85e9-00d57893ca61";
-const crestAsset = "https://www.figma.com/api/mcp/asset/30fbe56a-ab3d-4767-8404-a512b08645e6";
-const signatureAsset = "https://www.figma.com/api/mcp/asset/fdf0c764-dcf4-47f1-a805-aac320bc4938";
-const socialsAsset = "https://www.figma.com/api/mcp/asset/23b293ce-5d1c-43ad-aeeb-f3ebaca0d152";
+const profileFrameAsset = "/squad/player-profile.png";
+const crestAsset = "/header/symbol.png";
 
 export function PlayerDetailContent({ athlete }: PlayerDetailContentProps) {
   const related = getRelatedAthletes(athlete)
@@ -27,12 +24,10 @@ export function PlayerDetailContent({ athlete }: PlayerDetailContentProps) {
   const lastName = lastNameParts.join(" ") || athlete.nickname;
 
   return (
-    <section className="components-roster-player-detail-content-section" data-node-id="640:1971" data-name="elenco-perfil-jogador">
+    <section className="components-roster-player-detail-content-section" data-node-id="2394:20847" data-name="elenco-perfil-jogador">
       <div className="components-roster-player-detail-content-inner">
         <article className="components-roster-player-detail-content-profileCard">
           <img className="components-roster-player-detail-content-frameAsset" src={profileFrameAsset} alt="" aria-hidden="true" />
-          <img className="components-roster-player-detail-content-decoAsset" src={decoAsset} alt="" aria-hidden="true" />
-          <img className="components-roster-player-detail-content-acfAsset" src={acfAsset} alt="" aria-hidden="true" />
           <img className="components-roster-player-detail-content-crestAsset" src={crestAsset} alt="" aria-hidden="true" />
 
           <div className="components-roster-player-detail-content-identity">
@@ -56,9 +51,9 @@ export function PlayerDetailContent({ athlete }: PlayerDetailContentProps) {
                 <h3 id="related-players-title">{positionGroupTitle(athlete.position)}</h3>
                 <span />
               </div>
-              <a href={`/clube/elenco?modalidade=${athlete.category}&posicao=${athlete.position}`}>
+              <Link href={`/clube/elenco?modalidade=${athlete.category}&posicao=${athlete.position}`}>
                 Ver mais posições
-              </a>
+              </Link>
             </div>
 
             <div className="components-roster-player-detail-content-relatedGrid">
@@ -75,8 +70,12 @@ export function PlayerDetailContent({ athlete }: PlayerDetailContentProps) {
           <p className="components-roster-player-detail-content-number">#{String(athlete.number).padStart(2, "0")}</p>
 
           <div className="components-roster-player-detail-content-footerMarks" aria-hidden="true">
-            <img src={signatureAsset} alt="" />
-            <img src={socialsAsset} alt="" />
+            <span className="components-roster-player-detail-content-signature">ACF SPORTS #NAVEIA</span>
+            <div className="components-roster-player-detail-content-socialsList">
+              <span>INSTAGRAM</span>
+              <span>FACEBOOK</span>
+              <span>YOUTUBE</span>
+            </div>
           </div>
         </article>
       </div>
@@ -95,9 +94,9 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 
 function MiniPlayerCard({ athlete }: { athlete: Athlete }) {
   return (
-    <a className="components-roster-player-detail-content-miniCard" href={`/clube/elenco/${athlete.slug}`}>
+    <Link className="components-roster-player-detail-content-miniCard" href={`/clube/elenco/${athlete.slug}`}>
       <img src={athlete.image} alt={athlete.name} />
-    </a>
+    </Link>
   );
 }
 
@@ -122,3 +121,4 @@ function positionGroupTitle(position: Athlete["position"]) {
 
   return labels[position];
 }
+

@@ -1,7 +1,5 @@
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-
-const arrowAsset =
-  "https://www.figma.com/api/mcp/asset/1b2b3532-68ec-4ef4-bbf9-23a66f49a996";
 
 type Plan = {
   name: string;
@@ -40,7 +38,7 @@ const plans: Plan[] = [
     price: "R$ 250",
     benefits: [
       "logo em partes segundarias no uniforme",
-      "1 post dedicado por mês",
+      "1 post dedicated por mês",
       "menções nas artes de dias de jogo",
       "logo em tamanho médio nas artes de jogos",
       "link no site e logo na home"
@@ -65,10 +63,13 @@ function PlanCard({ plan }: { plan: Plan }) {
         ))}
       </ul>
 
-      <a className={`components-plans-section-button ${plan.featured ? "components-plans-section-featuredButton" : ""}`} href="#planos">
+      <Link
+        className={`components-plans-section-button ${plan.featured ? "components-plans-section-featuredButton" : ""}`}
+        href="/contato"
+      >
         ver mais
         <ArrowUpRight className="components-plans-section-buttonIcon" />
-      </a>
+      </Link>
     </article>
   );
 }
@@ -98,3 +99,4 @@ export function PlansSection() {
     </section>
   );
 }
+

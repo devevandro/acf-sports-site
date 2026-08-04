@@ -1,8 +1,6 @@
+import Link from "next/link";
 import { newsItems, type NewsItem } from "@/data/news";
 import { ArrowUpRight } from "lucide-react";
-
-const arrowAsset =
-  "https://www.figma.com/api/mcp/asset/e5b05588-9adf-425f-9894-1050cfad9599";
 
 function NewsImage({ item }: { item: NewsItem }) {
   if (item.image.type === "layered") {
@@ -39,20 +37,21 @@ export function NewsGrid() {
 
       <div className="components-news-grid-grid">
         {newsItems.map((item) => (
-          <a className="components-news-grid-card" href={`/noticias/${item.slug}`} key={item.slug}>
+          <Link className="components-news-grid-card" href={`/noticias/${item.slug}`} key={item.slug}>
             <NewsImage item={item} />
             <div className="components-news-grid-copy">
               <h3>{item.title}</h3>
               <p>{item.description}</p>
             </div>
-          </a>
+          </Link>
         ))}
       </div>
 
-      <a className="components-news-grid-moreButton" href="/noticias">
-        ver mais noticias
+      <Link className="components-news-grid-moreButton" href="/noticias">
+        ver mais notícias
         <ArrowUpRight className="components-news-grid-moreButtonIcon" />
-      </a>
+      </Link>
     </section>
   );
 }
+

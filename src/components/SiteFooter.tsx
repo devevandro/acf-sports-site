@@ -1,29 +1,13 @@
 
-const mascotAsset =
-  "https://www.figma.com/api/mcp/asset/06d114a6-53dc-4bf9-9a91-450d0fa2bb11";
+import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 
-const logoLeftAsset =
-  "https://www.figma.com/api/mcp/asset/b8951d2a-28f0-4650-a32a-179012c54361";
-
-const logoRightAsset =
-  "https://www.figma.com/api/mcp/asset/0f338042-57c9-4c76-bd80-5f96d03ff5c3";
-
-const instagramAsset =
-  "https://www.figma.com/api/mcp/asset/d11ea4e5-25dd-4039-8562-4602ca18dd45";
-
-const facebookAsset =
-  "https://www.figma.com/api/mcp/asset/092561bf-23bb-4de9-b005-09e4344b30bf";
-
-const youtubeAsset =
-  "https://www.figma.com/api/mcp/asset/102eea08-1c53-430d-9da3-a1c4dfeda746";
-
-const chevronAsset =
-  "https://www.figma.com/api/mcp/asset/781d0216-011a-4c60-ab67-7fb4d595c1c2";
-
-const topArrowAsset =
-  "https://www.figma.com/api/mcp/asset/731a83fa-9275-4a58-901b-83987ff23428";
-
-const menuLinks = ["Home", "Notícias", "Clube", "Contato"];
+const menuLinks = [
+  { name: "Home", href: "/" },
+  { name: "Notícias", href: "/noticias" },
+  { name: "Clube", href: "/clube/historia" },
+  { name: "Contato", href: "/contato" }
+];
 
 export function SiteFooter() {
   return (
@@ -34,22 +18,11 @@ export function SiteFooter() {
         <section className="components-site-footer-column">
           <h2>Informações</h2>
           <nav className="components-site-footer-menu text-acf-gray" aria-label="Informações do rodapé">
-            {menuLinks.map((link) => (
-              <a
-                href={
-                  link === "Notícias"
-                    ? "/noticias"
-                    : link === "Clube"
-                      ? "/clube/competicoes"
-                      : link === "Contato"
-                        ? "/contato"
-                        : "/"
-                }
-                key={link}
-              >
-                {link}
-                {link === "Clube" ? <img src={chevronAsset} alt="" /> : null}
-              </a>
+            {menuLinks.map((item) => (
+              <Link href={item.href} key={item.name} className="inline-flex items-center gap-1">
+                {item.name}
+                {item.name === "Clube" ? <ChevronDown size={14} /> : null}
+              </Link>
             ))}
           </nav>
         </section>
@@ -61,13 +34,13 @@ export function SiteFooter() {
           </a>
           <div className="components-site-footer-socials text-acf-gray">
             <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
-              <img src="/footer/instagram.png" alt="" />
+              <img src="/footer/instagram.png" alt="Instagram" />
             </a>
             <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook">
-              <img src="/footer/facebook.png" alt="" />
+              <img src="/footer/facebook.png" alt="Facebook" />
             </a>
             <a href="https://www.youtube.com/" target="_blank" rel="noreferrer" aria-label="YouTube">
-              <img src="/footer/youtube.png" alt="" />
+              <img src="/footer/youtube.png" alt="YouTube" />
             </a>
           </div>
         </section>
@@ -77,13 +50,13 @@ export function SiteFooter() {
           <p>
             +55 43 99999-9999
             <br />
-            contato@bikcraft.com
+            contato@acf-sports.com.br
           </p>
           <hr />
           <p>
             Rua: Maria Staiger Vilar, 59 - Fortunato Sibim
             <br />
-            Botafogo - RJ
+            Cornélio Procópio - PR
           </p>
           <hr />
         </section>
@@ -91,9 +64,9 @@ export function SiteFooter() {
 
       <div className="components-site-footer-brand">
         <div className="components-site-footer-brandImages">
-          <img src="/footer/acf-footer-logo.png" alt="" />
+          <img src="/footer/acf-footer-logo.png" alt="ACF Sports" />
         </div>
-        <p>E©F © Alguns direitos reservados</p>
+        <p>© ACF Sports — Alguns direitos reservados</p>
       </div>
 
       <a className="components-site-footer-backTop" href="#" aria-label="Voltar ao topo">
@@ -102,3 +75,4 @@ export function SiteFooter() {
     </footer>
   );
 }
+

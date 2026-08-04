@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const slides = [
   {
+    slug: "acf-sports-teste-de-fogo-meninos-de-ouro",
     image: "/carousel/carousel-01.png",
     label: "Jogos Abertos",
     title: "ACF Sports Tem Teste de Fogo Contra os Fortes Meninos de Ouro",
@@ -11,6 +13,7 @@ const slides = [
     alt: "Jogadores da ACF Sports comemorando em campo com bandeira",
   },
   {
+    slug: "acf-sports-empata-estreia-segunda-divisao",
     image: "/carousel/carousel-02.png",
     label: "Novidades",
     title: "ACF Sports Abre Novas Conversas Para Fortalecer o Projeto",
@@ -18,6 +21,7 @@ const slides = [
     alt: "Pessoa sorrindo em arte promocional com elementos gráficos",
   },
   {
+    slug: "mascote-acf-sports-referencia-futebol-amador",
     image: "/carousel/carousel-03.png",
     label: "Mascote",
     title: "Mascote da ACF Sports Ganha Destaque na Identidade do Clube",
@@ -35,7 +39,7 @@ export function HeroNews() {
       className="components-hero-news-hero"
       data-node-id="1234:7124"
       data-name="noticias"
-      aria-label="Noticia em destaque"
+      aria-label="Notícia em destaque"
     >
       <div className="components-hero-news-stage">
         <img
@@ -44,11 +48,11 @@ export function HeroNews() {
           alt={activeSlide.alt}
         />
 
-        <a className="components-hero-news-storyCard" href="#noticias">
+        <Link className="components-hero-news-storyCard" href={`/noticias/${activeSlide.slug}`}>
           <p className="components-hero-news-category">{activeSlide.label}</p>
           <h1 className="components-hero-news-title">{activeSlide.title}</h1>
           <p className="components-hero-news-summary">{activeSlide.summary}</p>
-        </a>
+        </Link>
       </div>
 
       <div className="components-hero-news-thumbnails" aria-label="Selecionar destaque">
@@ -69,3 +73,4 @@ export function HeroNews() {
     </section>
   );
 }
+

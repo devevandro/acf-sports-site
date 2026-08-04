@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Athlete, StaffMember } from "@/data/roster";
 
 type AthleteCardProps = {
@@ -22,9 +23,9 @@ export function AthleteCard({ person, variant = "athlete" }: AthleteCardProps) {
 
   if (isAthlete) {
     return (
-      <a className={`components-roster-athlete-card-card components-roster-athlete-card-linkCard`} href={`/clube/elenco/${person.slug}`}>
+      <Link className={`components-roster-athlete-card-card components-roster-athlete-card-linkCard`} href={`/clube/elenco/${person.slug}`}>
         {content}
-      </a>
+      </Link>
     );
   }
 

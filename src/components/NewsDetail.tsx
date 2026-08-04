@@ -1,10 +1,6 @@
+import Link from "next/link";
+import { ChevronRight, ChevronsRight } from "lucide-react";
 import { getRelatedNews, type NewsItem } from "@/data/news";
-
-const arrowRightAsset =
-  "https://www.figma.com/api/mcp/asset/686c6feb-316b-4b23-a9be-82c25fca4ec8";
-
-const arrowEndAsset =
-  "https://www.figma.com/api/mcp/asset/d2ee2f79-c0b5-489d-96c5-3ab5915f8d93";
 
 export function NewsDetail({ news }: { news: NewsItem }) {
   const relatedNews = getRelatedNews(news.slug);
@@ -43,7 +39,7 @@ export function NewsDetail({ news }: { news: NewsItem }) {
           <h2 id="related-title">Mais notícias sobre o ACF</h2>
           <div className="components-news-detail-relatedList">
             {relatedNews.map((item) => (
-              <a className="components-news-detail-relatedCard" href={`/noticias/${item.slug}`} key={item.slug}>
+              <Link className="components-news-detail-relatedCard" href={`/noticias/${item.slug}`} key={item.slug}>
                 <NewsImage item={item} variant="related" />
                 <div className="components-news-detail-relatedCopy">
                   <p>{item.category}</p>
@@ -54,23 +50,23 @@ export function NewsDetail({ news }: { news: NewsItem }) {
                     <small>{item.date}</small>
                   </div>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
 
           <nav className="components-news-detail-pagination" aria-label="Paginação de notícias relacionadas">
             {[1, 2, 3, 4, 5, 6].map((page) => (
-              <a className={page === 1 ? "components-news-detail-currentPage" : ""} href="/noticias" key={page}>
+              <Link className={page === 1 ? "components-news-detail-currentPage" : ""} href="/noticias" key={page}>
                 {page}
-              </a>
+              </Link>
             ))}
             <span>...</span>
-            <a className="components-news-detail-iconPage" href="/noticias" aria-label="Próxima página">
-              <img src={arrowRightAsset} alt="" />
-            </a>
-            <a className="components-news-detail-iconPage" href="/noticias" aria-label="Última página">
-              <img src={arrowEndAsset} alt="" />
-            </a>
+            <Link className="components-news-detail-iconPage inline-flex items-center justify-center" href="/noticias" aria-label="Próxima página">
+              <ChevronRight size={18} />
+            </Link>
+            <Link className="components-news-detail-iconPage inline-flex items-center justify-center" href="/noticias" aria-label="Última página">
+              <ChevronsRight size={18} />
+            </Link>
           </nav>
         </section>
       </div>
@@ -100,3 +96,4 @@ function NewsImage({ item, variant }: { item: NewsItem; variant: "hero" | "relat
 
   return <img className={className} src={item.image.src} alt={item.image.alt} />;
 }
+

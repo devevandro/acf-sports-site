@@ -17,3 +17,10 @@ Prefer committed local assets under `public` for production UI. Avoid introducin
 ## Commit Requirements
 
 When preparing commits, keep `README.md` and this `AGENTS.md` updated with concise notes that reflect the completed change.
+
+## Recent Changes (Figma Site Alignment)
+- Refactored competitions, contact, history, and player profile UI (`CompetitionsContent.tsx`, `ContactContent.tsx`, `HistoryContent.tsx`, `PlayerDetailContent.tsx`, `globals.css`) according to current Figma frames.
+- Replaced temporary external Figma URLs with committed local assets under `public/history`, `public/squad`, `public/header`, and `public/contact`.
+- Added interactive competition filtering, match detail modal behavior, sponsorship plan tabs, and contact form confirmation state.
+- Migrated roster and player profile navigation links to Next.js `<Link>`.
+- Validated production build (`npm run build`).
