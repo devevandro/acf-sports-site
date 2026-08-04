@@ -18,11 +18,9 @@ Prefer committed local assets under `public` for production UI. Avoid introducin
 
 When preparing commits, keep `README.md` and this `AGENTS.md` updated with concise notes that reflect the completed change.
 
-## Recent Changes (Figma node-id=640-1333 & 1564-11705 Alignment)
-- Refactored `/noticias` archive page and `/noticias/[slug]` detail page (`NewsDetail.tsx` and `NewsArchive.tsx`) according to Figma frame `1564:11705`.
-- Removed all external Figma MCP asset URLs, replacing them with Lucide icons (`ChevronRight`, `ChevronsRight`) and local assets.
-- Added dynamic `generateMetadata` for news detail routes (`/noticias/[slug]`).
-- Migrated all navigation links to Next.js `<Link>`.
+## Recent Changes (Figma Site Alignment)
+- Refactored competitions, contact, history, and player profile UI (`CompetitionsContent.tsx`, `ContactContent.tsx`, `HistoryContent.tsx`, `PlayerDetailContent.tsx`, `globals.css`) according to current Figma frames.
+- Replaced temporary external Figma URLs with committed local assets under `public/history`, `public/squad`, `public/header`, and `public/contact`.
+- Added interactive competition filtering, match detail modal behavior, sponsorship plan tabs, and contact form confirmation state.
+- Migrated roster and player profile navigation links to Next.js `<Link>`.
 - Validated production build (`npm run build`).
-
-
