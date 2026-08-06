@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const slides = [
@@ -34,43 +34,64 @@ export function HeroNews() {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const activeSlide = slides[activeSlideIndex];
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlideIndex((prev) => (prev + 1) % slides.length);
+    }, 12000);
+
+    return () => clearInterval(timer);
+  }, [activeSlideIndex]);
+
   return (
-    <section
-      className="components-hero-news-hero"
-      data-node-id="1234:7124"
-      data-name="noticias"
-      aria-label="Notícia em destaque"
-    >
-      <div className="components-hero-news-stage">
-        <img
-          className="components-hero-news-background"
-          src={activeSlide.image}
-          alt={activeSlide.alt}
-        />
+    <div className="components-hero-news-wrapper">
+      <section
+        className="components-hero-news-hero"
+        data-node-id="1234:7124"
+        data-name="noticias"
+        aria-label="Notícia em destaque"
+      >
+        <div className="components-hero-news-stage">
+          <img
+            className="components-hero-news-background"
+            src={activeSlide.image}
+            alt={activeSlide.alt}
+          />
 
-        <Link className="components-hero-news-storyCard" href={`/noticias/${activeSlide.slug}`}>
-          <p className="components-hero-news-category">{activeSlide.label}</p>
-          <h1 className="components-hero-news-title">{activeSlide.title}</h1>
-          <p className="components-hero-news-summary">{activeSlide.summary}</p>
-        </Link>
-      </div>
+          <Link className="components-hero-news-storyCard" href={`/noticias/${activeSlide.slug}`}>
+            <p className="components-hero-news-category">{activeSlide.label}</p>
+            <h1 className="components-hero-news-title">{activeSlide.title}</h1>
+            <p className="components-hero-news-summary">{activeSlide.summary}</p>
+          </Link>
+        </div>
 
-      <div className="components-hero-news-thumbnails" aria-label="Selecionar destaque">
-        {slides.map((slide, index) => (
-          <button
-            className={`components-hero-news-thumbnail ${index === activeSlideIndex ? "components-hero-news-thumbnailActive" : ""}`}
-            key={slide.label}
-            type="button"
-            aria-label={slide.label}
-            aria-pressed={index === activeSlideIndex}
-            onClick={() => setActiveSlideIndex(index)}
-          >
-            <img className="components-hero-news-thumbnailImage" src={slide.image} alt="" />
-            <span className="components-hero-news-progress" />
-          </button>
-        ))}
-      </div>
-    </section>
+        <div className="components-hero-news-thumbnails" aria-label="Selecionar destaque">
+          {slides.map((slide, index) => {
+            const isActive = index === activeSlideIndex;
+            return (
+              <button
+                className={`components-hero-news-thumbnail ${isActive ? "components-hero-news-thumbnailActive" : ""}`}
+                key={slide.slug}
+                type="button"
+                aria-label={slide.label}
+                aria-pressed={isActive}
+                onClick={() => setActiveSlideIndex(index)}
+              >
+                <img
+                  className="components-hero-news-thumbnailImage"
+                  src={slide.image}
+                  alt=""
+                />
+                {isActive && (
+                  <span
+                    key={activeSlideIndex}
+                    className="components-hero-news-progress"
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </section>
+    </div>
   );
 }
-

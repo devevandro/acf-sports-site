@@ -32,9 +32,12 @@ npm run build
 - Site media is stored in `public`, grouped by page or section.
 - `docs/figma/README.md` records the Figma extraction mapping.
 
-- **Figma Site Alignment (`node-id=2396-21910`, `2392-9111`, `2394-9599`, `2394-20847`)**:
-  - Aligned the competitions, contact, history, and player profile sections with current Figma frames.
+- **Figma Site Alignment & Responsive Breakpoints**:
+  - Standardized responsive breakpoints across the project: `576px` (celulares grandes), `768px` (tablets), `992px` (laptops), and `1200px` (desktops).
+  - Aligned competitions, contact, history, and player profile sections with Figma design nodes (`node-id=2396-21910`, `2392-9111`, `2394-9599`, `2394-20847`).
   - Replaced temporary Figma image URLs with committed local assets under `public/history`, `public/squad`, `public/header`, and `public/contact`.
   - Added interactive competition filtering, match detail modal behavior, sponsorship plan tabs, and contact form confirmation state.
   - Migrated roster and player profile navigation links to Next.js `<Link>`.
+  - Refactored `HeroNews.tsx` carousel: 12-second auto-play timer, active thumbnail progress bar animation, inactive thumbnail grayscale filter, full screen (100%) width container, and viewport height optimization for scroll-free viewing.
+  - Aligned sponsorship reasons content section left margin to match the page header container title ("patrocinadores.").
   - Validated production build (`npm run build`).
