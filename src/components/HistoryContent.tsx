@@ -1,15 +1,10 @@
 
-const heroImage =
-  "https://www.figma.com/api/mcp/asset/fd137877-ddce-4e0c-9ddf-323915568270";
-
-const imageStamp =
-  "https://www.figma.com/api/mcp/asset/40bb2fd0-e805-4a1d-89d7-5bc797820788";
-
-const mascotImage =
-  "https://www.figma.com/api/mcp/asset/27a68641-17e9-4f8c-a48f-3abbb5ea336d";
-
-const mascotGlow =
-  "https://www.figma.com/api/mcp/asset/04b8e9dd-3ced-432c-979f-a66dabc868e2";
+const assets = {
+  hero: "/history/hero.png",
+  stamp: "/header/symbol.png",
+  bull: "/history/bull.png",
+  symbol: "/header/symbol.png",
+};
 
 const historyParagraphs = [
   "Fundado no dia 16 de janeiro de 2002, inicialmente como equipe de futsal apenas, com o nome de Juventus Futsal, 3 garotos que tinham o sonho de ter a sua própria equipe e assim poder disputar campeonatos.",
@@ -19,22 +14,21 @@ const historyParagraphs = [
 ];
 
 const symbols = [
-  "Primeiro símbolo Ano 2000",
-  "Segundo Símbolo Ano 2004",
-  "Terceiro Símbolo Ano 2010",
-  "Símbolo Atual",
+  { year: "Ano 2000", label: "Primeiro símbolo", tag: "2000" },
+  { year: "Ano 2004", label: "Segundo Símbolo", tag: "2004" },
+  { year: "Ano 2010", label: "Terceiro Símbolo", tag: "2010" },
+  { year: "Atual", label: "Símbolo Atual", tag: "Atual" },
 ];
 
 export function HistoryContent() {
   return (
-    <section className="components-history-content-section" data-node-id="640:2275" data-name="historia">
+    <section className="components-history-content-section" data-node-id="2394:9599" data-name="historia">
       <div className="components-history-content-inner">
         <SectionTitle eyebrow="acf sports" title="A origem do nome" />
 
         <figure className="components-history-content-heroFigure">
           <div className="components-history-content-heroImage">
-            <img src={heroImage} alt="Antônio Carlos Ferreira com camisa da ACF Sports" />
-            <img className="components-history-content-stamp" src={imageStamp} alt="" aria-hidden="true" />
+            <img src={assets.hero} alt="Antônio Carlos Ferreira com a equipe ACF Sports" />
           </div>
           <figcaption>
             <span>Na imagem, Antônio Carlos Ferreira.</span>
@@ -47,10 +41,13 @@ export function HistoryContent() {
         <section className="components-history-content-symbols" aria-labelledby="symbols-title">
           <SectionTitle eyebrow="símbolos" title="O desenvolvimento do nosso símbolo" id="symbols-title" />
           <div className="components-history-content-symbolGrid">
-            {symbols.map((symbol) => (
-              <article className="components-history-content-symbolCard" key={symbol}>
-                <div aria-hidden="true" />
-                <p>{symbol}</p>
+            {symbols.map((item) => (
+              <article className="components-history-content-symbolCard" key={item.label}>
+                <div className="components-history-content-symbolBox">
+                  <img src={assets.symbol} alt={`Logo ACF Sports - ${item.label}`} />
+                  <span className="components-history-content-symbolBadge">{item.tag}</span>
+                </div>
+                <p>{`${item.label} ${item.year}`}</p>
               </article>
             ))}
           </div>
@@ -59,8 +56,8 @@ export function HistoryContent() {
         <section className="components-history-content-mascot" aria-labelledby="mascot-title">
           <SectionTitle eyebrow="mascote" title="A história por trás do Touro" id="mascot-title" />
           <div className="components-history-content-mascotImage">
-            <img className="components-history-content-glow" src={mascotGlow} alt="" aria-hidden="true" />
-            <img className="components-history-content-bull" src={mascotImage} alt="Mascote touro da ACF Sports" />
+            <div className="components-history-content-glow" aria-hidden="true" />
+            <img className="components-history-content-bull" src={assets.bull} alt="Mascote touro da ACF Sports" />
           </div>
           <ArticleText emphasizeLast />
         </section>
@@ -92,3 +89,4 @@ function ArticleText({ emphasizeLast = false }: { emphasizeLast?: boolean }) {
     </div>
   );
 }
+

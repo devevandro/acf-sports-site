@@ -1,4 +1,8 @@
 
+"use client";
+
+import { useState, FormEvent } from "react";
+
 const assets = {
   bull: "/contact/bull.png",
   phone: "/contact/phone.png",
@@ -34,17 +38,83 @@ const contactItems = [
   },
 ];
 
-const masterBenefits = [
-  "Post fixado no Instagram",
-  "Destaque central no uniforme",
-  "Logo em destaque nas artes de todos os jogos",
-  "Banner de destaque na home do site",
-  "Página exclusiva no site sobre a marca do patrocinador",
-];
+type PlanType = "master" | "mensal" | "pontual";
+
+interface PlanData {
+  id: PlanType;
+  label: string;
+  name: string;
+  price: string;
+  whatsappMessage: string;
+  benefits: string[];
+}
+
+const plansData: Record<PlanType, PlanData> = {
+  master: {
+    id: "master",
+    label: "Master",
+    name: "MASTER",
+    price: "R$ 500,00 / Mês",
+    whatsappMessage:
+      "https://wa.me/5543991802793?text=Ol%C3%A1%20boa%20tarde%2C%20gostaria%20de%20saber%20mais%20sobre%2C%20o%20plano%20master...",
+    benefits: [
+      "Post fixado no Instagram",
+      "Destaque central no uniforme",
+      "Logo em destaque nas artes de todos os jogos",
+      "Banner de destaque na home do site",
+      "Pagina exclusiva no site sobre a marca do patrocinador",
+    ],
+  },
+  mensal: {
+    id: "mensal",
+    label: "Mensal",
+    name: "MENSAL",
+    price: "R$ 250,00 / Mês",
+    whatsappMessage:
+      "https://wa.me/5543991802793?text=Ol%C3%A1%20boa%20tarde%2C%20gostaria%20de%20saber%20mais%20sobre%2C%20o%20plano%20mensal...",
+    benefits: [
+      "Logo em partes secundárias no uniforme",
+      "1 post dedicado por mês",
+      "Menções nas artes de dias de jogo",
+      "Logo em tamanho médio nas artes de jogos",
+      "Link no site e logo na home",
+    ],
+  },
+  pontual: {
+    id: "pontual",
+    label: "Pontual",
+    name: "PONTUAL",
+    price: "R$ 180,00 / Mês",
+    whatsappMessage:
+      "https://wa.me/5543991802793?text=Ol%C3%A1%20boa%20tarde%2C%20gostaria%20de%20saber%20mais%20sobre%2C%20o%20plano%20pontual...",
+    benefits: [
+      "Logo de tamanho médio exposto no uniforme",
+      "1 post dedicado no dia do jogo",
+      "2 stories no dia do jogo",
+      "Destaque nas artes de resultados e de dia do jogo em tamanho médio",
+      "Logo na seção parceiros do site",
+    ],
+  },
+};
 
 export function ContactContent() {
+  const [activePlan, setActivePlan] = useState<PlanType>("master");
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "", message: "" });
+
+  const currentPlan = plansData[activePlan];
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setTimeout(() => {
+      setSubmitted(false);
+      setFormData({ name: "", phone: "", email: "", message: "" });
+    }, 4000);
+  };
+
   return (
-    <section className="components-contact-content-section" data-node-id="640:2361" data-name="contato">
+    <section className="components-contact-content-section" data-node-id="2392:9111" data-name="contato">
       <div className="components-contact-content-inner">
         <div className="components-contact-content-leftColumn">
           <div className="components-contact-content-titleBlock">
@@ -68,16 +138,16 @@ export function ContactContent() {
 
             <div className="components-contact-content-socials">
               <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
-                <img src={assets.instagram} alt="" />
+                <img src={assets.instagram} alt="Instagram" />
               </a>
               <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook">
-                <img src={assets.facebook} alt="" />
+                <img src={assets.facebook} alt="Facebook" />
               </a>
               <a href="https://www.youtube.com/" target="_blank" rel="noreferrer" aria-label="YouTube">
-                <img src={assets.youtube} alt="" />
+                <img src={assets.youtube} alt="YouTube" />
               </a>
               <a href="https://wa.me/5543999999999" target="_blank" rel="noreferrer" aria-label="WhatsApp">
-                <img src={assets.whatsapp} alt="" />
+                <img src={assets.whatsapp} alt="WhatsApp" />
               </a>
             </div>
           </section>
@@ -88,38 +158,90 @@ export function ContactContent() {
               <p>Responderemos em até 24 horas</p>
             </div>
 
-            <form className="components-contact-content-form">
-              <div className="components-contact-content-formRow">
-                <input aria-label="Nome" placeholder="Digite seu nome" type="text" />
-                <input aria-label="Telefone" placeholder="(43) 9 9999 - 9999" type="tel" />
+            {submitted ? (
+              <div className="components-contact-content-success">
+                <p>Mensagem enviada com sucesso! Entraremos em contato em breve.</p>
               </div>
-              <input aria-label="E-mail" placeholder="contato@gmail.com" type="email" />
-              <textarea aria-label="Mensagem" placeholder="Digite sua mensagem aqui!" />
-              <button type="submit">enviar mensagem</button>
-            </form>
+            ) : (
+              <form className="components-contact-content-form" onSubmit={handleSubmit}>
+                <div className="components-contact-content-formRow">
+                  <input
+                    aria-label="Nome"
+                    placeholder="Digite seu nome"
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
+                  <input
+                    aria-label="Telefone"
+                    placeholder="(43) 9 9999 - 9999"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  />
+                </div>
+                <input
+                  aria-label="E-mail"
+                  placeholder="contato@gmail.com"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                />
+                <textarea
+                  aria-label="Mensagem"
+                  placeholder="Digite sua mensagem aqui!"
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                />
+                <button type="submit">enviar mensagem</button>
+              </form>
+            )}
           </section>
         </div>
 
         <aside className="components-contact-content-planPanel" aria-label="Plano de patrocínio">
           <h2>Nossos Planos</h2>
-          <div className="components-contact-content-planTabs" aria-label="Tipos de plano">
-            <span>Master</span>
-            <span>Mensal</span>
-            <span>Pontual</span>
+          <div className="components-contact-content-planTabs" role="tablist" aria-label="Tipos de plano">
+            {(Object.keys(plansData) as PlanType[]).map((planKey) => {
+              const plan = plansData[planKey];
+              const isActive = activePlan === planKey;
+              return (
+                <button
+                  key={planKey}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`components-contact-content-planTab ${isActive ? "active" : ""}`}
+                  onClick={() => setActivePlan(planKey)}
+                >
+                  <span className="components-contact-content-radioIcon" aria-hidden="true">
+                    <span className="components-contact-content-radioDot" />
+                  </span>
+                  {plan.label}
+                </button>
+              );
+            })}
           </div>
+
           <article className="components-contact-content-planCard">
-            <h3>master</h3>
+            <h3>{currentPlan.name}</h3>
             <ul>
-              {masterBenefits.map((benefit) => (
-                <li key={benefit}>{benefit}</li>
+              {currentPlan.benefits.map((benefit) => (
+                <li key={benefit}>
+                  <span className="components-contact-content-bullet" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="6" cy="6" r="4.5" stroke="#F56345" strokeWidth="2" />
+                    </svg>
+                  </span>
+                  <span>{benefit}</span>
+                </li>
               ))}
             </ul>
-            <p>R$ 500,00 / Mês</p>
-            <a
-              href="https://wa.me/5543991802793?text=Ol%C3%A1%20boa%20tarde%2C%20gostaria%20de%20saber%20mais%20sobre%2C%20o%20plano%20master..."
-              target="_blank"
-              rel="noreferrer"
-            >
+            <p className="components-contact-content-price">{currentPlan.price}</p>
+            <a href={currentPlan.whatsappMessage} target="_blank" rel="noreferrer">
               enviar direct no whatsapp
             </a>
           </article>
@@ -128,3 +250,4 @@ export function ContactContent() {
     </section>
   );
 }
+
