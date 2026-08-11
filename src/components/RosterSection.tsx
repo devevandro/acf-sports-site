@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-const athleteCards = Array.from({ length: 5 }, (_, index) => index + 1);
+const athleteCards = [
+  { id: 1, name: "Carlos", number: "01" },
+  { id: 2, name: "David", number: "06" },
+  { id: 3, name: "Rafael", number: "10" },
+  { id: 4, name: "Marcos", number: "18" },
+  { id: 5, name: "Felipe", number: "23" },
+];
 
 const cardPath = `M8 1
   H248
@@ -44,19 +50,19 @@ export function RosterSection() {
         </h2>
 
         <div className="components-roster-section-athletes">
-          {athleteCards.map((cardNumber) => (
+          {athleteCards.map((athlete) => (
             <article
-              className={`components-roster-section-athlete ${`components-roster-section-athlete${cardNumber}`}`}
-              key={cardNumber}
+              className={`components-roster-section-athlete ${`components-roster-section-athlete${athlete.id}`}`}
+              key={athlete.id}
             >
               <svg
                 className="components-roster-section-athleteCard"
                 viewBox="0 0 256 448"
                 role="img"
-                aria-label={`Atleta ${cardNumber} do ACF Sports`}
+                aria-label={`${athlete.name}, camisa ${athlete.number}, atleta do ACF Sports`}
               >
                 <defs>
-                  <clipPath id={`roster-card-shape-${cardNumber}`}>
+                  <clipPath id={`roster-card-shape-${athlete.id}`}>
                     <path d={cardPath} />
                   </clipPath>
                 </defs>
@@ -68,10 +74,11 @@ export function RosterSection() {
                   width="256"
                   height="448"
                   preserveAspectRatio="xMidYMid slice"
-                  clipPath={`url(#roster-card-shape-${cardNumber})`}
+                  clipPath={`url(#roster-card-shape-${athlete.id})`}
                 />
 
                 <path
+                  className="components-roster-section-athleteStroke"
                   d={cardPath}
                   fill="none"
                   stroke="#b83e25"
@@ -79,6 +86,10 @@ export function RosterSection() {
                   vectorEffect="non-scaling-stroke"
                 />
               </svg>
+              <div className="components-roster-section-athleteInfo" aria-hidden="true">
+                <span className="components-roster-section-athleteName">{athlete.name}</span>
+                <span className="components-roster-section-athleteNumber">{athlete.number}</span>
+              </div>
             </article>
           ))}
         </div>
@@ -98,4 +109,3 @@ export function RosterSection() {
     </section>
   );
 }
-

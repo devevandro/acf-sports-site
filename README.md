@@ -43,3 +43,4 @@ npm run build
   - Updated the top header to rotate committed GIF assets from `public/gif` and adjusted the player profile figure/frame layout to use the shared local player image.
   - Standardized internal code identifiers to English for page component names, menu state keys, roster helpers, sponsorship plan keys, and roster query parameter constants while preserving Portuguese UI copy and routes.
   - Validated production build (`npm run build`).
+  - Refined home page interactions for the hero slide fade, main menu dropdown active states, news CTA layout, roster hover details, sponsor marquee, and sponsorship plan card feedback.

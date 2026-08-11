@@ -28,4 +28,5 @@ When preparing commits, keep `README.md` and this `AGENTS.md` updated with conci
 - Aligned sponsorship reasons section (`SponsorsPageContent.tsx`, `globals.css`) left alignment (`width: min(1160px, calc(100% - 40px))`) to line up precisely with the page heading title ("patrocinadores.").
 - Updated the top header to rotate committed GIF assets from `public/gif` and adjusted player profile figure/frame sizing to use the shared local player image.
 - Standardized internal code identifiers to English for page component names, menu state keys, roster helpers, sponsorship plan keys, and roster query parameter constants while preserving Portuguese UI copy and routes.
+- Refined home page interactions for hero slide fade animation, main menu dropdown active states, news CTA placement, roster hover overlays, sponsor strip marquee behavior, and sponsorship plan card/button feedback.
 - Validated production build (`npm run build`).

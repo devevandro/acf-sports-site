@@ -59,6 +59,7 @@ export function MainMenu({ active = "home", activeClub }: MainMenuProps) {
         <div className={`components-main-menu-links ${mobileOpen ? "components-main-menu-linksOpen" : ""}`} aria-label="Menu principal">
           <Link
             className={`components-main-menu-link ${active === "home" ? "components-main-menu-active" : ""}`}
+            data-active={active === "home"}
             href="/"
             onClick={() => setMobileOpen(false)}
           >
@@ -67,6 +68,7 @@ export function MainMenu({ active = "home", activeClub }: MainMenuProps) {
           </Link>
           <Link
             className={`components-main-menu-link ${active === "news" ? "components-main-menu-active" : ""}`}
+            data-active={active === "news"}
             href="/noticias"
             onClick={() => setMobileOpen(false)}
           >
@@ -75,7 +77,10 @@ export function MainMenu({ active = "home", activeClub }: MainMenuProps) {
           </Link>
           <div
             className={`components-main-menu-clubMenu ${active === "club" ? "components-main-menu-active" : ""}`}
+            data-active={active === "club"}
             ref={clubMenuRef}
+            onMouseEnter={() => setClubDropdownOpen(true)}
+            onMouseLeave={() => setClubDropdownOpen(false)}
           >
             <button
               className="components-main-menu-linkButton"
@@ -132,6 +137,7 @@ export function MainMenu({ active = "home", activeClub }: MainMenuProps) {
           </div>
           <Link
             className={`components-main-menu-link ${active === "sponsors" ? "components-main-menu-active" : ""}`}
+            data-active={active === "sponsors"}
             href="/clube/patrocinadores"
             onClick={() => setMobileOpen(false)}
           >
@@ -140,6 +146,7 @@ export function MainMenu({ active = "home", activeClub }: MainMenuProps) {
           </Link>
           <Link
             className={`components-main-menu-link ${active === "contact" ? "components-main-menu-active" : ""}`}
+            data-active={active === "contact"}
             href="/contato"
             onClick={() => setMobileOpen(false)}
           >

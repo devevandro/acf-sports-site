@@ -52,12 +52,13 @@ export function HeroNews() {
       >
         <div className="components-hero-news-stage">
           <img
+            key={activeSlide.image}
             className="components-hero-news-background"
             src={activeSlide.image}
             alt={activeSlide.alt}
           />
 
-          <Link className="components-hero-news-storyCard" href={`/noticias/${activeSlide.slug}`}>
+          <Link key={activeSlide.slug} className="components-hero-news-storyCard" href={`/noticias/${activeSlide.slug}`}>
             <p className="components-hero-news-category">{activeSlide.label}</p>
             <h1 className="components-hero-news-title">{activeSlide.title}</h1>
             <p className="components-hero-news-summary">{activeSlide.summary}</p>
