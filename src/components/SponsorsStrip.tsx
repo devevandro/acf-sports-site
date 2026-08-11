@@ -39,7 +39,7 @@ export function SponsorsStrip() {
         <h2 id="sponsors-title">patrocinadores</h2>
         <div className="components-sponsors-strip-track">
           {[...sponsorList, ...sponsorList].map((name, index) => (
-            <div className="components-sponsors-strip-logoCard flex items-center justify-center p-3 bg-white/10 backdrop-blur-sm rounded border border-white/20 text-xs font-bold text-white uppercase tracking-wider min-w-[120px]" key={`${name}-${index}`}>
+            <div className="components-sponsors-strip-logoCard flex items-center justify-center p-3 bg-white/10 backdrop-blur-sm rounded border border-white/20 text-xs font-bold text-white uppercase tracking-wider min-w-30" key={`${name}-${index}`}>
               <span>{name}</span>
             </div>
           ))}
