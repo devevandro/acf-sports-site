@@ -7,6 +7,7 @@ type PlayerDetailContentProps = {
 
 const profileFrameAsset = "/squad/player-profile.png";
 const crestAsset = "/header/symbol.png";
+const playerProfileAsset = "/squad/player.png";
 
 export function PlayerDetailContent({ athlete }: PlayerDetailContentProps) {
   const related = getRelatedAthletes(athlete)
@@ -64,7 +65,7 @@ export function PlayerDetailContent({ athlete }: PlayerDetailContentProps) {
           </section>
 
           <div className="components-roster-player-detail-content-playerFigure">
-            <img src={athlete.image} alt={athlete.name} />
+            <img src={playerProfileAsset} alt={athlete.name} />
           </div>
 
           <p className="components-roster-player-detail-content-number">#{String(athlete.number).padStart(2, "0")}</p>
@@ -121,4 +122,3 @@ function positionGroupTitle(position: Athlete["position"]) {
 
   return labels[position];
 }
-

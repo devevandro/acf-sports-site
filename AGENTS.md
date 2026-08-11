@@ -26,4 +26,5 @@ When preparing commits, keep `README.md` and this `AGENTS.md` updated with conci
 - Migrated roster and player profile navigation links to Next.js `<Link>`.
 - Refactored `HeroNews.tsx` carousel: added 12-second automatic slide transition, animated progress bar on active thumbnail, grayscale styling & hidden progress bar on inactive thumbnails, restored full screen container width (100%), and optimized height (`min(620px, calc(100vh - 120px))`) so the hero fits vertically on display viewports without requiring scrolling.
 - Aligned sponsorship reasons section (`SponsorsPageContent.tsx`, `globals.css`) left alignment (`width: min(1160px, calc(100% - 40px))`) to line up precisely with the page heading title ("patrocinadores.").
+- Updated the top header to rotate committed GIF assets from `public/gif` and adjusted player profile figure/frame sizing to use the shared local player image.
 - Validated production build (`npm run build`).
