@@ -40,4 +40,5 @@ npm run build
   - Migrated roster and player profile navigation links to Next.js `<Link>`.
   - Refactored `HeroNews.tsx` carousel: 12-second auto-play timer, active thumbnail progress bar animation, inactive thumbnail grayscale filter, full screen (100%) width container, and viewport height optimization for scroll-free viewing.
   - Aligned sponsorship reasons content section left margin to match the page header container title ("patrocinadores.").
+  - Updated the top header to rotate committed GIF assets from `public/gif` and adjusted the player profile figure/frame layout to use the shared local player image.
   - Validated production build (`npm run build`).
