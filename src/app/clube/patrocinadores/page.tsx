@@ -4,11 +4,11 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
 
-export default function PatrocinadoresPage() {
+export default function SponsorsPage() {
   return (
     <main className="app-clube-patrocinadores-page-page">
       <TopCf />
-      <MainMenu active="patrocinadores" />
+      <MainMenu active="sponsors" />
       <header className="app-clube-patrocinadores-page-heading">
         <div>
           <p>nossos parceiros</p>

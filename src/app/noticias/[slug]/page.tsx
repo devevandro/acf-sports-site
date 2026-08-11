@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function NoticiaDetalhePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const news = getNewsBySlug(slug);
 
@@ -47,7 +47,7 @@ export default async function NoticiaDetalhePage({ params }: { params: Promise<{
   return (
     <main className="app-noticias-slug-page-page">
       <TopCf />
-      <MainMenu active="noticias" />
+      <MainMenu active="news" />
       <header className="app-noticias-slug-page-heading">
         <div>
           <p>{news.category}</p>
@@ -62,4 +62,3 @@ export default async function NoticiaDetalhePage({ params }: { params: Promise<{
     </main>
   );
 }
-

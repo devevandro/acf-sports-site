@@ -4,11 +4,11 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
 
-export default function CompeticoesPage() {
+export default function CompetitionsPage() {
   return (
     <main className="app-clube-competicoes-page-page">
       <TopCf />
-      <MainMenu active="clube" activeClub="competicoes" />
+      <MainMenu active="club" activeClub="competitions" />
       <header className="app-clube-competicoes-page-heading">
         <div>
           <p>clube</p>

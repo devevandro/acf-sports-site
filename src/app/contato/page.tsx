@@ -4,11 +4,11 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
 
-export default function ContatoPage() {
+export default function ContactPage() {
   return (
     <main className="app-contato-page-page">
       <TopCf />
-      <MainMenu active="contato" />
+      <MainMenu active="contact" />
       <header className="app-contato-page-heading">
         <div>
           <p>social</p>
