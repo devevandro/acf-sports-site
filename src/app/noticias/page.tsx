@@ -15,11 +15,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function NoticiasPage() {
+export default function NewsPage() {
   return (
     <main className="app-noticias-page-page">
       <TopCf />
-      <MainMenu active="noticias" />
+      <MainMenu active="news" />
       <header className="app-noticias-page-heading">
         <div>
           <p>atualidades</p>
@@ -34,4 +34,3 @@ export default function NoticiasPage() {
     </main>
   );
 }
-

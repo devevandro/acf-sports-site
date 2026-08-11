@@ -6,24 +6,23 @@ import { TopCf } from "@/components/TopCf";
 import type { RosterCategory, RosterPosition } from "@/data/roster";
 
 type PageProps = {
-  searchParams: Promise<{
-    modalidade?: string;
-    posicao?: string;
-  }>;
+  searchParams: Promise<Record<string, string | undefined>>;
 };
 
+const categoryQueryParam = "modalidade";
+const positionQueryParam = "posicao";
 const validCategories = new Set(["todos", "campo", "futsal"]);
 const validPositions = new Set(["todos", "goleiro", "defensor", "meio-campo", "atacante"]);
 
-export default async function ElencoPage({ searchParams }: PageProps) {
+export default async function RosterPage({ searchParams }: PageProps) {
   const params = await searchParams;
-  const category = parseCategory(params.modalidade);
-  const position = parsePosition(params.posicao);
+  const category = parseCategory(params[categoryQueryParam]);
+  const position = parsePosition(params[positionQueryParam]);
 
   return (
     <main className="app-clube-elenco-page-page">
       <TopCf />
-      <MainMenu active="clube" activeClub="elenco" />
+      <MainMenu active="club" activeClub="roster" />
       <header className="app-clube-elenco-page-heading">
         <div>
           <p>clube</p>

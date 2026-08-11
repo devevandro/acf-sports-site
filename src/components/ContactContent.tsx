@@ -38,7 +38,7 @@ const contactItems = [
   },
 ];
 
-type PlanType = "master" | "mensal" | "pontual";
+type PlanType = "master" | "monthly" | "oneOff";
 
 interface PlanData {
   id: PlanType;
@@ -65,8 +65,8 @@ const plansData: Record<PlanType, PlanData> = {
       "Pagina exclusiva no site sobre a marca do patrocinador",
     ],
   },
-  mensal: {
-    id: "mensal",
+  monthly: {
+    id: "monthly",
     label: "Mensal",
     name: "MENSAL",
     price: "R$ 250,00 / Mês",
@@ -80,8 +80,8 @@ const plansData: Record<PlanType, PlanData> = {
       "Link no site e logo na home",
     ],
   },
-  pontual: {
-    id: "pontual",
+  oneOff: {
+    id: "oneOff",
     label: "Pontual",
     name: "PONTUAL",
     price: "R$ 180,00 / Mês",
@@ -250,4 +250,3 @@ export function ContactContent() {
     </section>
   );
 }
-
