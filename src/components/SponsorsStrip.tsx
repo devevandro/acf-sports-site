@@ -13,6 +13,7 @@ const sponsorList = [
 export function SponsorsStrip() {
   return (
     <section
+      className="components-sponsors-strip-strip"
       style={{
         position: "relative",
         width: "100%",
@@ -38,7 +39,7 @@ export function SponsorsStrip() {
       <div className="components-sponsors-strip-inner">
         <h2 id="sponsors-title">patrocinadores</h2>
         <div className="components-sponsors-strip-track">
-          {[...sponsorList, ...sponsorList].map((name, index) => (
+          {[...sponsorList, ...sponsorList, ...sponsorList].map((name, index) => (
             <div className="components-sponsors-strip-logoCard flex items-center justify-center p-3 bg-white/10 backdrop-blur-sm rounded border border-white/20 text-xs font-bold text-white uppercase tracking-wider min-w-30" key={`${name}-${index}`}>
               <span>{name}</span>
             </div>
@@ -48,4 +49,3 @@ export function SponsorsStrip() {
     </section>
   );
 }
-
