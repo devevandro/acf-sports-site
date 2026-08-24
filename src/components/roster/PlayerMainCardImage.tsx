@@ -46,7 +46,7 @@ function createCardImage(props: PlayerMainCardImageProps) {
           <stop offset="1" stop-color="#121212"/>
         </linearGradient>
         <linearGradient id="orange" x1="48" y1="56" x2="420" y2="620" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#F56345"/>
+          <stop stop-color="#FF3203"/>
           <stop offset="1" stop-color="#8F301D"/>
         </linearGradient>
         <linearGradient id="fade" x1="234" y1="360" x2="234" y2="602" gradientUnits="userSpaceOnUse">
@@ -60,7 +60,7 @@ function createCardImage(props: PlayerMainCardImageProps) {
       </defs>
       <rect width="468" height="640" rx="8" fill="#020C14"/>
       <path d="M20 20H448V620H20V20Z" fill="url(#bg)" stroke="url(#orange)" stroke-width="3"/>
-      <path d="M42 34H426V450L234 584L42 450V34Z" fill="#051829" stroke="#F56345" stroke-width="2"/>
+      <path d="M42 34H426V450L234 584L42 450V34Z" fill="#051829" stroke="#FF3203" stroke-width="2"/>
       <path d="M72 64H396V428L234 540L72 428V64Z" fill="#08243B" opacity="0.72"/>
       <image href="${props.photo}" x="58" y="42" width="352" height="506" preserveAspectRatio="xMidYMin slice" clip-path="url(#photoClip)"/>
       <rect x="42" y="344" width="384" height="240" fill="url(#fade)"/>
@@ -68,9 +68,9 @@ function createCardImage(props: PlayerMainCardImageProps) {
       <circle cx="92" cy="510" r="38" fill="url(#orange)"/>
       <text x="92" y="523" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="34" font-weight="800" fill="#F5F5F5">${props.number}</text>
       <text x="146" y="486" font-family="Montserrat, Arial, sans-serif" font-size="22" font-weight="700" fill="#F5F5F5">${safeName}</text>
-      <text x="146" y="520" font-family="Outfit, Arial, sans-serif" font-size="22" font-weight="600" fill="#F56345">${safeNickname}</text>
+      <text x="146" y="520" font-family="Outfit, Arial, sans-serif" font-size="22" font-weight="600" fill="#FF3203">${safeNickname}</text>
       <text x="146" y="552" font-family="Outfit, Arial, sans-serif" font-size="17" font-weight="500" fill="#B3B3B3">${safePosition} / ${safeCategory}</text>
-      <text x="234" y="606" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="700" fill="#F56345">ACF SPORTS</text>
+      <text x="234" y="606" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="700" fill="#FF3203">ACF SPORTS</text>
     </svg>
   `;
 

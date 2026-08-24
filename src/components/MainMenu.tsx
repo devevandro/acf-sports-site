@@ -3,9 +3,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, Plus, X } from "lucide-react";
 
 const logoAsset = "/header/symbol.png";
+const whatsappAsset = "/contact/whatsapp.png";
+const instagramAsset = "/contact/insta.png";
 
 type MainMenuProps = {
   active?: "home" | "news" | "club" | "sponsors" | "contact";
@@ -43,18 +45,27 @@ export function MainMenu({ active = "home", activeClub }: MainMenuProps) {
   return (
     <>
       <nav className="components-main-menu-menu" data-node-id="2010:10724" data-name="menu">
-        <Link href="/" aria-label="ACF Sports - início">
-          <img className="components-main-menu-logo" src={logoAsset} alt="ACF Sports" />
-        </Link>
-
         <button
-          className="md:hidden text-white p-2 focus:outline-none"
+          className="components-main-menu-toggle md:hidden"
           type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
         >
-          {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+          {mobileOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
+
+        <Link className="components-main-menu-logoLink" href="/" aria-label="ACF Sports - início">
+          <img className="components-main-menu-logo" src={logoAsset} alt="ACF Sports" />
+        </Link>
+
+        <div className="components-main-menu-mobileActions md:hidden">
+          <a href="https://wa.me/5543991802793" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+            <img src={whatsappAsset} alt="" />
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
+            <img src={instagramAsset} alt="" />
+          </a>
+        </div>
 
         <div className={`components-main-menu-links ${mobileOpen ? "components-main-menu-linksOpen" : ""}`} aria-label="Menu principal">
           <Link
@@ -96,6 +107,9 @@ export function MainMenu({ active = "home", activeClub }: MainMenuProps) {
                   size={14}
                   className={`components-main-menu-chevron ${clubDropdownOpen ? "components-main-menu-chevronOpen" : ""}`}
                 />
+              </span>
+              <span className="components-main-menu-accordionIcon" aria-hidden="true">
+                {clubDropdownOpen ? <X size={16} /> : <Plus size={16} />}
               </span>
             </button>
 
