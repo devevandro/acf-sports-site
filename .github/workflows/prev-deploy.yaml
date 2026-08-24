@@ -28,4 +28,10 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project Artifacts
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        id: deploy
+        run: |
+          DEPLOYMENT_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "url=$DEPLOYMENT_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Alias Preview Deployment to Staging Domain
+        run: vercel alias set ${{ steps.deploy.outputs.url }} stage.acfsports.com.br --token=${{ secrets.VERCEL_TOKEN }}
