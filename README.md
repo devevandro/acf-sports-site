@@ -1,4 +1,4 @@
-# ACF Site Figma
+# ACF Site Figma.
 
 Next.js site for ACF Sports, built from Figma design context and local public assets.
 
