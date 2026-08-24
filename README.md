@@ -44,3 +44,9 @@ npm run build
   - Standardized internal code identifiers to English for page component names, menu state keys, roster helpers, sponsorship plan keys, and roster query parameter constants while preserving Portuguese UI copy and routes.
   - Validated production build (`npm run build`).
   - Refined home page interactions for the hero slide fade, main menu dropdown active states, news CTA layout, roster hover details, sponsor marquee, and sponsorship plan card feedback.
+
+- **Mobile Navigation & Brand Refresh**:
+  - Added a mobile hamburger menu to `MainMenu.tsx`: a toggle button and collapsible full-width panel with a row-style accordion for the "clube" submenu, plus WhatsApp/Instagram quick-action icons visible only below the `768px` breakpoint.
+  - Updated the primary brand orange (`--laranja` and related accent colors) from `#f56345`/`#cc4529` to `#ff3203` across `globals.css`, `ContactContent.tsx`, and `PlayerMainCardImage.tsx`.
+  - Switched `globals.css` `font-family` declarations to reference the CSS custom properties (`--font-montserrat`, `--font-outfit`, `--font-rubik`, `--font-roboto`, `--font-poppins`) exposed by `next/font/google` in `layout.tsx`, replacing hardcoded font names.
+  - Replaced hero carousel and related news images with new local assets (`public/carousel/image-01.jpg`, `public/carousel/image-02.jpg`).
