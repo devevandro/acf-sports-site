@@ -53,3 +53,4 @@ npm run build
 
 - **CI/CD**:
   - Added GitHub Actions workflows (`.github/workflows/prev-deploy.yaml`, `.github/workflows/prod-deploy.yaml`) that build and deploy to Vercel: preview deployments on push to `stage`, production deployments on push to `main`.
+  - Fixed `prev-deploy.yaml`: removed the unsupported `--preview` flag from the `vercel build` and `vercel deploy` steps (Vercel CLI 59.x has no such flag; preview is the default target when `--prod` is omitted), which was failing the workflow with `unknown or unexpected option: --preview`.
