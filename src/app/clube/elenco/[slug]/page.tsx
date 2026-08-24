@@ -12,7 +12,7 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function JogadorDetalhePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function PlayerDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const athlete = getAthleteBySlug(slug);
 
@@ -23,7 +23,7 @@ export default async function JogadorDetalhePage({ params }: { params: Promise<{
   return (
     <main className="app-clube-elenco-slug-page-page">
       <TopCf />
-      <MainMenu active="clube" activeClub="elenco" />
+      <MainMenu active="club" activeClub="roster" />
       <header className="app-clube-elenco-slug-page-heading">
         <div>
           <p>clube</p>

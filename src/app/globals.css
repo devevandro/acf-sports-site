@@ -16,7 +16,7 @@
   --azul-ceu-fechado-tom-1: #051829;
   --cinza-medio: #959595;
   --cinza-claro: #b3b3b3;
-  --laranja: #cc4529;
+  --laranja: #ff3203;
   --laranja-branco-medio: #f5d4ce;
   --tom-preto: #050505;
   --main-menu-height: 96px;
@@ -39,7 +39,7 @@ html {
 body {
   background: var(--azul-preto);
   color: #ffffff;
-  font-family: Rubik, Arial, Helvetica, sans-serif;
+  font-family: var(--font-rubik), Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -76,7 +76,7 @@ button {
 .app-clube-competicoes-page-heading p {
   margin: 0 0 8px;
   color: var(--cinza-medio);
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -86,7 +86,7 @@ button {
 .app-clube-competicoes-page-heading h1 {
   margin: 0;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 64px;
   font-weight: 700;
   line-height: 72px;
@@ -94,7 +94,7 @@ button {
 }
 
 .app-clube-competicoes-page-heading h1 span {
-  color: #f56345;
+  color: #ff3203;
 }
 
 @media (max-width: 768px) {
@@ -133,7 +133,7 @@ button {
 .app-clube-elenco-slug-page-heading p {
   margin: 0 0 8px;
   color: var(--cinza-medio);
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -143,7 +143,7 @@ button {
 .app-clube-elenco-slug-page-heading h1 {
   margin: 0;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 64px;
   font-weight: 700;
   line-height: 72px;
@@ -151,7 +151,7 @@ button {
 }
 
 .app-clube-elenco-slug-page-heading h1 span {
-  color: #f56345;
+  color: #ff3203;
 }
 
 @media (max-width: 768px) {
@@ -190,7 +190,7 @@ button {
 .app-clube-elenco-page-heading p {
   margin: 0 0 8px;
   color: var(--cinza-medio);
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -200,7 +200,7 @@ button {
 .app-clube-elenco-page-heading h1 {
   margin: 0;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 64px;
   font-weight: 700;
   line-height: 72px;
@@ -208,7 +208,7 @@ button {
 }
 
 .app-clube-elenco-page-heading h1 span {
-  color: #f56345;
+  color: #ff3203;
 }
 
 @media (max-width: 768px) {
@@ -247,7 +247,7 @@ button {
 .app-clube-historia-page-heading p {
   margin: 0 0 8px;
   color: var(--cinza-medio);
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -257,7 +257,7 @@ button {
 .app-clube-historia-page-heading h1 {
   margin: 0;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 64px;
   font-weight: 700;
   line-height: 72px;
@@ -265,7 +265,7 @@ button {
 }
 
 .app-clube-historia-page-heading h1 span {
-  color: #f56345;
+  color: #ff3203;
 }
 
 @media (max-width: 768px) {
@@ -304,7 +304,7 @@ button {
 .app-clube-patrocinadores-page-heading p {
   margin: 0 0 8px;
   color: var(--cinza-medio);
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -314,7 +314,7 @@ button {
 .app-clube-patrocinadores-page-heading h1 {
   margin: 0;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 64px;
   font-weight: 700;
   line-height: 72px;
@@ -322,7 +322,7 @@ button {
 }
 
 .app-clube-patrocinadores-page-heading h1 span {
-  color: #f56345;
+  color: #ff3203;
 }
 
 @media (max-width: 768px) {
@@ -361,7 +361,7 @@ button {
 .app-contato-page-heading p {
   margin: 0 0 8px;
   color: var(--cinza-medio);
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -371,7 +371,7 @@ button {
 .app-contato-page-heading h1 {
   margin: 0;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 64px;
   font-weight: 700;
   line-height: 72px;
@@ -379,7 +379,7 @@ button {
 }
 
 .app-contato-page-heading h1 span {
-  color: #f56345;
+  color: #ff3203;
 }
 
 @media (max-width: 768px) {
@@ -418,7 +418,7 @@ button {
 .app-noticias-slug-page-heading p {
   margin: 0 0 8px;
   color: var(--cinza-medio);
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -428,7 +428,7 @@ button {
 .app-noticias-slug-page-heading h1 {
   margin: 0;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 64px;
   font-weight: 700;
   line-height: 72px;
@@ -436,7 +436,7 @@ button {
 }
 
 .app-noticias-slug-page-heading h1 span {
-  color: #f56345;
+  color: #ff3203;
 }
 
 @media (max-width: 768px) {
@@ -475,7 +475,7 @@ button {
 .app-noticias-page-heading p {
   margin: 0 0 8px;
   color: var(--cinza-medio);
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -485,7 +485,7 @@ button {
 .app-noticias-page-heading h1 {
   margin: 0;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 64px;
   font-weight: 700;
   line-height: 72px;
@@ -493,7 +493,7 @@ button {
 }
 
 .app-noticias-page-heading h1 span {
-  color: #f56345;
+  color: #ff3203;
 }
 
 @media (max-width: 768px) {
@@ -520,7 +520,7 @@ button {
 .app-page-newsBand {
   width: 100%;
   background: #f5f5f5;
-  padding: 120px 0 0;
+  padding: 120px 0 120px;
 }
 
 .app-page-contentRow {
@@ -562,6 +562,7 @@ button {
 
   .app-page-newsBand {
     padding-top: 80px;
+    padding-bottom: 96px;
   }
 }
 
@@ -595,7 +596,7 @@ button {
 .components-competitions-content-previous h2 {
   margin: 0 0 32px;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 32px;
@@ -628,7 +629,7 @@ button {
 }
 
 .components-competitions-content-matchTeams strong {
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;
@@ -651,7 +652,7 @@ button {
 }
 
 .components-competitions-content-team span {
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 14px;
   font-weight: 600;
   line-height: 20px;
@@ -674,8 +675,8 @@ button {
 .components-competitions-content-matchMeta p,
 .components-competitions-content-previousMeta p {
   margin: 0;
-  color: #f56345;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  color: #ff3203;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
@@ -686,7 +687,7 @@ button {
   align-items: center;
   gap: 8px;
   color: #777777;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
@@ -699,7 +700,7 @@ button {
 }
 
 .components-competitions-content-details:hover {
-  color: #f56345;
+  color: #ff3203;
   text-decoration: underline;
 }
 
@@ -754,7 +755,7 @@ button {
 
 .components-competitions-content-previousCard > strong {
   color: #f5f5f5;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;
@@ -777,7 +778,7 @@ button {
 }
 
 .components-competitions-content-previousMeta .components-competitions-content-details:hover {
-  color: #f56345;
+  color: #ff3203;
 }
 
 .components-competitions-content-tableHeaderWrap {
@@ -795,7 +796,7 @@ button {
   background: transparent;
   color: #121212;
   cursor: pointer;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 32px;
@@ -823,7 +824,7 @@ button {
   text-align: left;
   background: none;
   border: none;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 15px;
   font-weight: 500;
   color: #334155;
@@ -834,7 +835,7 @@ button {
 .components-competitions-content-dropdownItem:hover,
 .components-competitions-content-dropdownItem.active {
   background: #f1f5f9;
-  color: #f56345;
+  color: #ff3203;
   font-weight: 600;
 }
 
@@ -846,14 +847,14 @@ button {
   width: 100%;
   min-width: 500px;
   border-collapse: collapse;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 14px;
   line-height: 24px;
 }
 
 .components-competitions-content-tableWrap th {
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 14px;
   font-weight: 600;
   text-align: center;
@@ -875,7 +876,7 @@ button {
 .components-competitions-content-tableWrap td:first-child {
   width: 165px;
   color: #050505;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-weight: 500;
   white-space: nowrap;
 }
@@ -884,7 +885,7 @@ button {
   display: inline-block;
   width: 28px;
   color: #1d598f;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-weight: 300;
 }
 
@@ -902,7 +903,7 @@ button {
   gap: 24px;
   margin-top: 16px;
   color: #474747;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 12px;
   font-weight: 600;
   line-height: 20px;
@@ -995,7 +996,7 @@ button {
   padding: 4px 10px;
   background: #fff7ed;
   color: #c2410c;
-  font-family: Montserrat, sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
   font-size: 12px;
   font-weight: 600;
   border-radius: 999px;
@@ -1004,7 +1005,7 @@ button {
 
 .components-competitions-modal-header h3 {
   margin: 0;
-  font-family: Montserrat, sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
   font-size: 20px;
   font-weight: 700;
   color: #0f172a;
@@ -1037,13 +1038,13 @@ button {
 }
 
 .components-competitions-modal-team span {
-  font-family: Montserrat, sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
   font-size: 12px;
   font-weight: 600;
 }
 
 .components-competitions-modal-score {
-  font-family: Outfit, sans-serif;
+  font-family: var(--font-outfit), sans-serif;
   font-size: 26px;
   font-weight: 700;
   color: #f8fafc;
@@ -1063,13 +1064,13 @@ button {
   align-items: center;
   gap: 10px;
   color: #475569;
-  font-family: Montserrat, sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
   font-size: 14px;
 }
 
 .components-competitions-modal-highlights h4 {
   margin: 0 0 10px;
-  font-family: Montserrat, sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
   font-size: 14px;
   font-weight: 600;
   color: #1e293b;
@@ -1085,7 +1086,7 @@ button {
 }
 
 .components-competitions-modal-highlights li {
-  font-family: Montserrat, sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
   font-size: 13px;
   color: #475569;
   display: flex;
@@ -1174,7 +1175,7 @@ button {
 .components-contact-content-titleBlock h2 {
   margin: 0 0 6px;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;
@@ -1183,8 +1184,8 @@ button {
 
 .components-contact-content-titleBlock p {
   margin: 0;
-  color: #f56345;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  color: #ff3203;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
@@ -1233,7 +1234,7 @@ button {
 .components-contact-content-infoItem h3 {
   margin: 0 0 4px;
   color: #ffffff;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
@@ -1242,7 +1243,7 @@ button {
 .components-contact-content-infoItem p {
   margin: 0;
   color: #b0c4de;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 15px;
   font-weight: 400;
   line-height: 22px;
@@ -1290,11 +1291,11 @@ button {
 .components-contact-content-form input,
 .components-contact-content-form textarea {
   width: 100%;
-  border: 1px solid #dcdcdc;
+  border: 1px solid #cfcfcf;
   border-radius: 8px;
   background: #ffffff;
   color: #121212;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 15px;
   line-height: 24px;
   outline: none;
@@ -1314,13 +1315,13 @@ button {
 
 .components-contact-content-form input:focus,
 .components-contact-content-form textarea:focus {
-  border-color: #f56345;
-  box-shadow: 0 0 0 3px rgba(245, 99, 69, 0.15);
+  border-color: #ff3203;
+  box-shadow: 0 0 0 3px rgba(255, 50, 3, 0.15);
 }
 
 .components-contact-content-form input::placeholder,
 .components-contact-content-form textarea::placeholder {
-  color: #8c8c8c;
+  color: #959595;
 }
 
 .components-contact-content-form button {
@@ -1329,10 +1330,10 @@ button {
   margin-top: 12px;
   border: none;
   border-radius: 8px;
-  background: linear-gradient(165deg, #f56345 0%, #8f301d 99%);
+  background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
   color: #ffffff;
   cursor: pointer;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
@@ -1348,25 +1349,25 @@ button {
 .components-contact-content-success {
   padding: 24px;
   border-radius: 8px;
-  background: #e6f4ea;
-  border: 1px solid #34a853;
-  color: #137333;
-  font-family: Montserrat, sans-serif;
+  background: #051829;
+  border: 1px solid #ff3203;
+  color: #f5f5f5;
+  font-family: var(--font-montserrat), sans-serif;
   font-weight: 600;
 }
 
 .components-contact-content-planPanel {
   padding: 48px 40px;
   border-radius: 12px;
-  background: #f0f3f6;
-  border: 1px solid #e2e8f0;
+  background: #fdfdfd;
+  border: 1px solid #cfcfcf;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
 .components-contact-content-planPanel > h2 {
   margin: 0 0 24px;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
@@ -1386,10 +1387,10 @@ button {
   gap: 8px;
   padding: 10px 20px;
   border-radius: 999px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #cfcfcf;
   background: #ffffff;
-  color: #475569;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  color: #4e4e4e;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -1397,14 +1398,14 @@ button {
 }
 
 .components-contact-content-planTab:hover {
-  border-color: #3b82f6;
-  color: #1d4ed8;
+  border-color: #ff3203;
+  color: #ff3203;
 }
 
 .components-contact-content-planTab.active {
-  background: #dbeafe;
-  border-color: #93c5fd;
-  color: #1d4ed8;
+  background: rgba(255, 50, 3, 0.08);
+  border-color: #ff3203;
+  color: #ff3203;
   font-weight: 600;
 }
 
@@ -1412,7 +1413,7 @@ button {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 1.5px solid #94a3b8;
+  border: 1.5px solid #959595;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1421,7 +1422,7 @@ button {
 }
 
 .components-contact-content-planTab.active .components-contact-content-radioIcon {
-  border-color: #2563eb;
+  border-color: #ff3203;
 }
 
 .components-contact-content-radioDot {
@@ -1433,7 +1434,7 @@ button {
 }
 
 .components-contact-content-planTab.active .components-contact-content-radioDot {
-  background: #2563eb;
+  background: #ff3203;
 }
 
 .components-contact-content-planCard {
@@ -1442,15 +1443,15 @@ button {
   border-radius: 12px;
   background: #ffffff;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-  border: 1px solid #e5e7eb;
+  border: 1px solid #cfcfcf;
 }
 
 .components-contact-content-planCard h3 {
   margin: 0 0 24px;
   padding-bottom: 24px;
-  border-bottom: 1px solid #e5e7eb;
-  color: #374151;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  border-bottom: 1px solid #cfcfcf;
+  color: #121212;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 28px;
   font-weight: 700;
   line-height: 36px;
@@ -1472,8 +1473,8 @@ button {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  color: #4b5563;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  color: #4e4e4e;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 15px;
   line-height: 24px;
 }
@@ -1488,7 +1489,7 @@ button {
 .components-contact-content-price {
   margin: 0 0 24px;
   color: #1d598f;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 22px;
   font-weight: 700;
   line-height: 32px;
@@ -1501,9 +1502,9 @@ button {
   width: 100%;
   min-height: 52px;
   border-radius: 8px;
-  background: linear-gradient(165deg, #f56345 0%, #8f301d 99%);
+  background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
   color: #ffffff;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 15px;
   font-weight: 700;
   line-height: 24px;
@@ -1610,7 +1611,7 @@ button {
 .components-games-panel-header h2 {
   margin: 0;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 40px;
   font-weight: 700;
   line-height: 48px;
@@ -1618,7 +1619,7 @@ button {
 }
 
 .components-games-panel-header h2 span {
-  color: #f56345;
+  color: #ff3203;
 }
 
 .components-games-panel-header a {
@@ -1627,7 +1628,7 @@ button {
   gap: 8px;
   margin-top: 14px;
   color: var(--cinza-medio);
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 16px;
@@ -1668,7 +1669,7 @@ button {
 .components-games-panel-dividerTitle h3 {
   margin: 0;
   color: var(--tom-preto);
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
@@ -1705,7 +1706,7 @@ button {
   border-top-left-radius: 8px;
   background: var(--laranja);
   color: #141414;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 12px;
   font-weight: 600;
   line-height: 20px;
@@ -1756,7 +1757,7 @@ button {
 }
 
 .components-games-panel-team span {
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 12px;
   font-weight: 600;
   line-height: 20px;
@@ -1766,7 +1767,7 @@ button {
 
 .components-games-panel-score {
   color: #f5f5f5;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 800;
   line-height: 40px;
@@ -1775,7 +1776,7 @@ button {
 }
 
 .components-games-panel-upcomingCard .components-games-panel-score {
-  font-family: Rubik, Arial, sans-serif;
+  font-family: var(--font-rubik), Arial, sans-serif;
 }
 
 @media (max-width: 1200px) {
@@ -1807,7 +1808,7 @@ button {
 
 .components-hero-news-wrapper {
   width: 100%;
-  background: #050505;
+  background: #f5f5f5;
 }
 
 .components-hero-news-hero {
@@ -1816,7 +1817,7 @@ button {
   height: min(620px, calc(100vh - 120px));
   min-height: 480px;
   overflow: hidden;
-  background: #050505;
+  background: #f5f5f5;
 }
 
 .components-hero-news-stage {
@@ -1835,6 +1836,19 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  animation: heroSlideFade 650ms ease both;
+}
+
+@keyframes heroSlideFade {
+  0% {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .components-hero-news-warmGlow {
@@ -1884,13 +1898,26 @@ button {
     rgba(166, 207, 245, 0.6) 89%
   );
   backdrop-filter: blur(6px);
+  animation: heroCopyFade 520ms ease both;
+}
+
+@keyframes heroCopyFade {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .components-hero-news-category {
   width: min(883px, 100%);
   margin: 0 0 4px;
   color: var(--laranja-branco-medio);
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 22px;
   font-weight: 500;
   letter-spacing: 0.16px;
@@ -1902,7 +1929,7 @@ button {
   width: min(883px, 100%);
   margin: 0 0 6px;
   color: var(--tom-preto);
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 26px;
   font-weight: 600;
   line-height: 32px;
@@ -1911,7 +1938,7 @@ button {
 .components-hero-news-summary {
   margin: 0;
   color: var(--cinza-claro);
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
@@ -2084,14 +2111,16 @@ button {
   .components-hero-news-thumbnails {
     left: 20px;
     right: 20px;
-    overflow-x: auto;
-    padding-bottom: 4px;
+    justify-content: center;
+    gap: 10px;
   }
 
   .components-hero-news-thumbnail {
-    width: 110px;
-    height: 80px;
-    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    flex: 0 1 100px;
+    aspect-ratio: 4 / 3;
+    min-width: 0;
   }
 }
 
@@ -2112,8 +2141,8 @@ button {
 
 .components-history-content-titleBlock p {
   margin: 0 0 8px;
-  color: #f56345;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  color: #ff3203;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
@@ -2123,7 +2152,7 @@ button {
 .components-history-content-titleBlock h2 {
   margin: 0;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;
@@ -2155,7 +2184,7 @@ button {
   padding: 24px 0;
   border-bottom: 2px solid #e2e8f0;
   color: #8c8c8c;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
 }
@@ -2166,7 +2195,7 @@ button {
   gap: 24px;
   margin-top: 36px;
   color: #333333;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 20px;
   font-weight: 400;
   line-height: 36px;
@@ -2235,7 +2264,7 @@ button {
   border-radius: 999px;
   background: #f0f3f6;
   color: #64748b;
-  font-family: Montserrat, sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
   font-size: 12px;
   font-weight: 600;
 }
@@ -2243,7 +2272,7 @@ button {
 .components-history-content-symbolCard p {
   margin: 0;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
   line-height: 22px;
@@ -2368,9 +2397,39 @@ button {
   display: none;
 }
 
+.components-main-menu-logoLink {
+  display: inline-flex;
+}
+
 .components-main-menu-logo {
   width: 50px;
   height: 64px;
+  object-fit: contain;
+}
+
+.components-main-menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f5f5f5;
+  cursor: pointer;
+}
+
+.components-main-menu-mobileActions {
+  display: none;
+  align-items: center;
+  gap: 16px;
+  justify-self: end;
+}
+
+.components-main-menu-mobileActions img {
+  width: 22px;
+  height: 22px;
   object-fit: contain;
 }
 
@@ -2385,12 +2444,14 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  height: 40px;
+  justify-content: center;
+  min-height: 40px;
   padding: 0;
+  border: 0;
   background: transparent;
   color: var(--cinza-medio);
   cursor: pointer;
+  font-family: inherit;
   font-size: 18px;
   font-weight: 400;
   letter-spacing: 0.36px;
@@ -2399,18 +2460,17 @@ button {
   white-space: nowrap;
 }
 
-.components-main-menu-linkButton {
-  border: 0;
-  font-family: inherit;
-}
-
-.components-main-menu-active {
-  color: var(--laranja);
+.components-main-menu-link.components-main-menu-active,
+.components-main-menu-link[data-active="true"],
+.components-main-menu-clubMenu.components-main-menu-active .components-main-menu-linkButton,
+.components-main-menu-clubMenu[data-active="true"] .components-main-menu-linkButton {
+  color: var(--laranja) !important;
   font-weight: 600;
   letter-spacing: 0.18px;
 }
 
 .components-main-menu-dot {
+  display: block;
   width: 8px;
   height: 8px;
   flex: 0 0 auto;
@@ -2418,53 +2478,51 @@ button {
   background: transparent;
 }
 
-.components-main-menu-active .components-main-menu-dot {
+.components-main-menu-link.components-main-menu-active .components-main-menu-dot,
+.components-main-menu-link[data-active="true"] .components-main-menu-dot,
+.components-main-menu-clubMenu.components-main-menu-active .components-main-menu-dot,
+.components-main-menu-clubMenu[data-active="true"] .components-main-menu-dot {
   background: var(--laranja);
 }
 
 .components-main-menu-clubMenu {
   position: relative;
   z-index: 2;
-}
-
-.components-main-menu-clubMenu .components-main-menu-linkButton {
-  color: var(--cinza-medio);
-}
-
-.components-main-menu-clubMenu.components-main-menu-active .components-main-menu-linkButton {
-  color: var(--laranja);
-  font-weight: 600;
-  letter-spacing: 0.18px;
-}
-
-.components-main-menu-clubMenu.components-main-menu-active .components-main-menu-dot {
-  background: var(--laranja);
+  display: flex;
+  align-items: center;
+  min-height: 40px;
 }
 
 .components-main-menu-clubLabel {
   position: relative;
   display: inline-flex;
   align-items: center;
+  gap: 4px;
 }
 
 .components-main-menu-chevron {
-  position: absolute;
-  left: 100%;
-  top: 50%;
   width: 12px;
-  height: 7px;
-  margin-left: 4px;
-  transform: translateY(-50%);
+  height: 12px;
+  flex: 0 0 auto;
+  transform: translateY(0);
   transition: transform 180ms ease;
 }
 
 .components-main-menu-chevronOpen {
-  transform: translateY(-50%) rotate(180deg);
+  transform: translateY(0) rotate(180deg);
+}
+
+.components-main-menu-accordionIcon {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: #959595;
 }
 
 .components-main-menu-dropdown {
   position: absolute;
-  top: 68px;
+  top: 42px;
   left: 50%;
   display: flex;
   width: 174px;
@@ -2488,6 +2546,18 @@ button {
   transform: translateX(-50%) translateY(0);
 }
 
+.components-main-menu-clubMenu:hover .components-main-menu-dropdown,
+.components-main-menu-clubMenu:focus-within .components-main-menu-dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.components-main-menu-clubMenu:hover .components-main-menu-chevron,
+.components-main-menu-clubMenu:focus-within .components-main-menu-chevron {
+  transform: translateY(0) rotate(180deg);
+}
+
 .components-main-menu-dropdownLink {
   display: flex;
   align-items: center;
@@ -2499,6 +2569,10 @@ button {
   font-weight: 400;
   letter-spacing: 0.34px;
   line-height: 1;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    padding-left 180ms ease;
 }
 
 .components-main-menu-dropdownLink:last-child {
@@ -2508,16 +2582,23 @@ button {
 .components-main-menu-dropdownLink:focus,
 .components-main-menu-dropdownLink:hover {
   color: var(--laranja);
+  background: rgba(245, 99, 69, 0.08);
+  padding-left: 12px;
 }
 
 .components-main-menu-dropdownActive {
-  min-height: 32px;
-  margin-block: 8px;
+  min-height: 36px;
+  margin-block: 6px;
   border-radius: 4px;
   border-bottom: 0;
   background: rgba(184, 171, 164, 0.2);
-  color: var(--laranja);
+  color: var(--laranja) !important;
   font-weight: 600;
+}
+
+.components-main-menu-dropdownLink.components-main-menu-dropdownActive:focus,
+.components-main-menu-dropdownLink.components-main-menu-dropdownActive:hover {
+  color: var(--laranja) !important;
 }
 
 .components-main-menu-bottomLine {
@@ -2531,10 +2612,27 @@ button {
 
 @media (max-width: 768px) {
   .components-main-menu-menu {
-    gap: 24px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 16px;
     height: auto;
-    min-height: 96px;
+    min-height: 72px;
     padding-inline: 20px;
+  }
+
+  .components-main-menu-toggle,
+  .components-main-menu-mobileActions {
+    display: flex;
+  }
+
+  .components-main-menu-logoLink {
+    justify-self: center;
+  }
+
+  .components-main-menu-logo {
+    width: 40px;
+    height: 52px;
   }
 
   .components-main-menu-links {
@@ -2548,41 +2646,107 @@ button {
     left: 0;
     z-index: 50;
     width: 100%;
+    max-height: calc(100vh - 72px);
     flex-direction: column;
-    gap: 16px;
-    padding: 24px;
+    gap: 0;
+    padding: 0;
+    overflow-y: auto;
     background: #01121f;
-    border-bottom: 1px solid rgba(184, 62, 37, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 50, 3, 0.3);
+  }
+
+  .components-main-menu-dot {
+    display: none;
   }
 
   .components-main-menu-link,
   .components-main-menu-linkButton {
-    font-size: 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 0;
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: #f5f5f5;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
   }
 
   .components-main-menu-clubMenu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: block;
     width: 100%;
+  }
+
+  .components-main-menu-clubMenu:has(.components-main-menu-dropdownOpen) .components-main-menu-linkButton {
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom-color: transparent;
+  }
+
+  .components-main-menu-clubLabel {
+    justify-content: flex-start;
+  }
+
+  .components-main-menu-chevron {
+    display: none;
+  }
+
+  .components-main-menu-accordionIcon {
+    display: inline-flex;
   }
 
   .components-main-menu-dropdown {
     position: static;
     width: 100%;
-    max-width: 260px;
+    max-width: none;
     max-height: 0;
-    padding: 0 8px;
+    padding: 0;
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: none;
     opacity: 1;
     pointer-events: auto;
     transform: none;
     overflow: hidden;
-    transition: max-height 200ms ease;
+    transition: max-height 220ms ease;
   }
 
   .components-main-menu-dropdownOpen {
-    max-height: 220px;
-    padding: 0 8px 10px;
+    max-height: 320px;
+    padding: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .components-main-menu-clubMenu:hover .components-main-menu-dropdown,
+  .components-main-menu-clubMenu:focus-within .components-main-menu-dropdown {
+    max-height: 0;
+  }
+
+  .components-main-menu-clubMenu:hover .components-main-menu-dropdownOpen,
+  .components-main-menu-clubMenu:focus-within .components-main-menu-dropdownOpen {
+    max-height: 320px;
+  }
+
+  .components-main-menu-dropdownLink {
+    min-height: 0;
+    padding: 14px 20px 14px 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: #cfcfcf;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+
+  .components-main-menu-dropdownLink:last-child {
+    border-bottom: 0;
+  }
+
+  .components-main-menu-dropdownLink:focus,
+  .components-main-menu-dropdownLink:hover {
+    padding-left: 40px;
   }
 }
 
@@ -2665,7 +2829,7 @@ button {
 .components-news-archive-copy h2 {
   margin: 0;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
@@ -2674,7 +2838,7 @@ button {
 .components-news-archive-copy p {
   margin: 0;
   color: #777777;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
@@ -2695,7 +2859,7 @@ button {
   justify-content: center;
   min-width: 14px;
   color: var(--cinza-medio);
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-weight: 300;
   line-height: 32px;
@@ -2777,8 +2941,8 @@ button {
 
 .components-news-detail-articleHeader p {
   margin: 0;
-  color: #f56345;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  color: #ff3203;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   line-height: 32px;
   text-transform: capitalize;
@@ -2787,7 +2951,7 @@ button {
 .components-news-detail-articleHeader h2 {
   margin: 0;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 600;
   line-height: 40px;
@@ -2795,7 +2959,7 @@ button {
 
 .components-news-detail-articleHeader span {
   color: #959595;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   line-height: 32px;
 }
@@ -2817,7 +2981,7 @@ button {
   padding: 32px 0;
   border-bottom: 2px solid #cfcfcf;
   color: #b3b3b3;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   text-transform: capitalize;
@@ -2829,7 +2993,7 @@ button {
   gap: 16px;
   padding: 56px 0 72px;
   color: #4e4e4e;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   line-height: 40px;
 }
@@ -2866,9 +3030,9 @@ button {
 .components-news-detail-related > h2 {
   margin: 0;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 32px;
 }
 
@@ -2904,8 +3068,8 @@ button {
 
 .components-news-detail-relatedCopy p {
   margin: 0;
-  color: #f56345;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  color: #ff3203;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   text-transform: capitalize;
@@ -2914,7 +3078,7 @@ button {
 .components-news-detail-relatedCopy h3 {
   margin: 0;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 32px;
@@ -2922,7 +3086,7 @@ button {
 
 .components-news-detail-relatedCopy span {
   color: #777777;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   line-height: 22px;
 }
@@ -2933,7 +3097,7 @@ button {
   gap: 24px;
   margin-top: 48px;
   color: #b3b3b3;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
 }
@@ -2990,7 +3154,7 @@ button {
   flex-direction: column;
   align-items: center;
   color: var(--cinza-medio);
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-weight: 300;
   line-height: 32px;
@@ -3115,7 +3279,7 @@ button {
 .components-news-grid-section {
   position: relative;
   width: 100%;
-  min-height: 1026px;
+  min-height: auto;
   margin: 0;
   color: var(--tom-preto);
 }
@@ -3123,7 +3287,7 @@ button {
 .components-news-grid-title {
   margin: 0 0 40px 140px;
   color: var(--azul-preto);
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 64px;
   font-weight: 700;
   line-height: 72px;
@@ -3131,7 +3295,7 @@ button {
 }
 
 .components-news-grid-title span {
-  color: #f56345;
+  color: #ff3203;
 }
 
 .components-news-grid-grid {
@@ -3205,7 +3369,7 @@ button {
 .components-news-grid-copy h3 {
   margin: 0;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
@@ -3214,43 +3378,51 @@ button {
 .components-news-grid-copy p {
   margin: 0;
   color: #777777;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
 }
 
+.components-news-grid-action {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 72px;
+  padding-right: 116px;
+}
+
 .components-news-grid-moreButton {
-  position: absolute;
-  right: 200px;
-  bottom: 0;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  width: fit-content;
   height: 56px;
   min-width: 298px;
   padding: 16px 40px;
   border-radius: 8px;
-  background: linear-gradient(168deg, #f56345 0%, #8f301d 99%);
-  color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  background: linear-gradient(168deg, #ff3203 0%, #8f301d 99%);
+  color: #f5f5f5 !important;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
   text-transform: uppercase;
 }
 
-.components-news-grid-moreButton img {
+.components-news-grid-moreButton svg {
   width: 24px;
   height: 24px;
+  color: currentColor;
+  stroke-width: 2;
 }
 
 @media (max-width: 1200px) {
   .components-news-grid-section {
     width: min(700px, 100%);
     min-height: auto;
-    padding-bottom: 96px;
+    padding-bottom: 0;
   }
 
   .components-news-grid-title {
@@ -3261,8 +3433,8 @@ button {
     grid-template-columns: repeat(2, 330px);
   }
 
-  .components-news-grid-moreButton {
-    right: 0;
+  .components-news-grid-action {
+    padding-right: 0;
   }
 }
 
@@ -3288,9 +3460,12 @@ button {
     width: 100%;
   }
 
+  .components-news-grid-action {
+    margin-top: 56px;
+    padding-right: 0;
+  }
+
   .components-news-grid-moreButton {
-    right: auto;
-    left: 0;
     width: 100%;
     min-width: 0;
   }
@@ -3330,7 +3505,7 @@ button {
 .components-plans-section-title {
   margin: 0 0 31px;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 64px;
   font-weight: 700;
   line-height: 72px;
@@ -3338,7 +3513,7 @@ button {
 }
 
 .components-plans-section-title span {
-  color: #f56345;
+  color: #ff3203;
 }
 
 .components-plans-section-cards {
@@ -3358,6 +3533,14 @@ button {
   border-radius: 8px;
   background: #07243d;
   box-shadow: 0 0 16px -4px rgba(37, 114, 184, 0.32);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.components-plans-section-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 34px -18px rgba(245, 99, 69, 0.55), 0 0 18px -4px rgba(37, 114, 184, 0.42);
 }
 
 .components-plans-section-featuredCard {
@@ -3380,7 +3563,7 @@ button {
 .components-plans-section-card h3 {
   margin: 0;
   color: #b3b3b3;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 32px;
@@ -3401,7 +3584,7 @@ button {
 
 .components-plans-section-price strong {
   color: #fdfdfd;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 500;
   line-height: 40px;
@@ -3415,7 +3598,7 @@ button {
 .components-plans-section-price span {
   margin-top: -8px;
   color: #b3b3b3;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.16px;
@@ -3438,7 +3621,7 @@ button {
 .components-plans-section-benefits li {
   position: relative;
   padding-left: 18px;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -3448,7 +3631,7 @@ button {
   position: absolute;
   top: 0;
   left: 0;
-  color: #f56345;
+  color: #ff3203;
   content: "✓";
 }
 
@@ -3457,27 +3640,38 @@ button {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: 166px;
+  width: 200px;
   height: 56px;
   margin-top: auto;
   border-radius: 8px;
   background: #777777;
-  color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  color: #f5f5f5 !important;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
   text-transform: uppercase;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.components-plans-section-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.22);
 }
 
 .components-plans-section-featuredButton {
-  width: 128px;
-  background: linear-gradient(168deg, #f56345 0%, #8f301d 99%);
+  width: 200px;
+  background: linear-gradient(168deg, #ff3203 0%, #8f301d 99%);
 }
 
-.components-plans-section-button img {
+.components-plans-section-button svg {
   width: 24px;
   height: 24px;
+  color: currentColor;
+  stroke-width: 2;
 }
 
 @media (max-width: 1200px) {
@@ -3567,7 +3761,7 @@ button {
 .components-roster-section-title {
   margin: 0 0 40px 140px;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 64px;
   font-weight: 700;
   line-height: 72px;
@@ -3575,7 +3769,7 @@ button {
 }
 
 .components-roster-section-title span {
-  color: #f56345;
+  color: #ff3203;
 }
 
 .components-roster-section-athletes {
@@ -3590,12 +3784,67 @@ button {
   width: 256px;
   height: 448px;
   flex: 0 0 auto;
+  transition: transform 220ms ease;
 }
 
 .components-roster-section-athleteCard {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.components-roster-section-athleteStroke {
+  transition: stroke 180ms ease, stroke-width 180ms ease;
+}
+
+.components-roster-section-athleteInfo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.components-roster-section-athleteName {
+  position: absolute;
+  top: 20px;
+  left: 22px;
+  color: #f5f5f5;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.components-roster-section-athleteNumber {
+  position: absolute;
+  top: 24px;
+  right: 10px;
+  min-width: 52px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  background: #f5f5f5;
+  color: #01121f;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+}
+
+.components-roster-section-athlete:hover {
+  transform: translateY(-6px);
+}
+
+.components-roster-section-athlete:hover .components-roster-section-athleteStroke {
+  stroke: #f5f5f5;
+  stroke-width: 3;
+}
+
+.components-roster-section-athlete:hover .components-roster-section-athleteInfo {
+  opacity: 1;
 }
 
 .components-roster-section-athleteCard image {
@@ -3609,6 +3858,15 @@ button {
 
 .components-roster-section-athlete3 {
   transform: translateY(-32px);
+}
+
+.components-roster-section-athlete2:hover,
+.components-roster-section-athlete4:hover {
+  transform: translateY(-22px);
+}
+
+.components-roster-section-athlete3:hover {
+  transform: translateY(-38px);
 }
 
 .components-roster-section-centerBull {
@@ -3630,9 +3888,9 @@ button {
   height: 56px;
   margin: 40px auto 0;
   border-radius: 8px;
-  background: linear-gradient(166deg, #f56345 0%, #8f301d 99%);
+  background: linear-gradient(166deg, #ff3203 0%, #8f301d 99%);
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
@@ -3744,7 +4002,7 @@ button {
 .components-site-footer-contact h2 {
   margin: 0;
   color: #f5f5f5;
-  font-family: Rubik, Arial, sans-serif;
+  font-family: var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-weight: 500;
   line-height: 32px;
@@ -3765,7 +4023,7 @@ button {
   gap: 4px;
   width: max-content;
   color: var(--cinza-medio);
-  font-family: Rubik, Arial, sans-serif;
+  font-family: var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 32px;
@@ -3803,7 +4061,7 @@ button {
 .components-site-footer-contact p {
   margin: 0;
   color: var(--cinza-medio);
-  font-family: Roboto, Arial, sans-serif;
+  font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
@@ -3856,7 +4114,7 @@ button {
 .components-site-footer-brand p {
   margin: 0;
   color: var(--cinza-medio);
-  font-family: Poppins, Arial, sans-serif;
+  font-family: var(--font-poppins), Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 36px;
@@ -3965,7 +4223,7 @@ button {
 .components-sponsors-page-content-reason h2 {
   margin: 0 0 8px;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
@@ -3974,7 +4232,7 @@ button {
 .components-sponsors-page-content-reason p {
   margin: 0;
   color: #4e4e4e;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -4022,7 +4280,7 @@ button {
 .components-sponsors-page-content-plansInner > h2 {
   margin: 0 0 40px;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;
@@ -4048,8 +4306,8 @@ button {
 
 .components-sponsors-page-content-planCard h3 {
   margin: 0 0 64px;
-  color: #474747;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  color: #4e4e4e;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-weight: 500;
   line-height: 32px;
@@ -4070,7 +4328,7 @@ button {
 .components-sponsors-page-content-planCard li {
   position: relative;
   padding-left: 20px;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 28px;
@@ -4080,14 +4338,14 @@ button {
   position: absolute;
   top: 0;
   left: 0;
-  color: #f56345;
+  color: #ff3203;
   content: "•";
 }
 
 .components-sponsors-page-content-planCard p {
   margin: 28px 0 24px;
   color: #1d598f;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 20px;
   font-weight: 600;
   line-height: 32px;
@@ -4099,9 +4357,9 @@ button {
   justify-content: center;
   min-height: 56px;
   border-radius: 8px;
-  background: linear-gradient(165deg, #f56345 0%, #8f301d 99%);
+  background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
@@ -4130,7 +4388,7 @@ button {
 .components-sponsors-page-content-logoGroup h2 {
   margin: 0;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;
@@ -4273,7 +4531,7 @@ button {
 .components-sponsors-strip-decorText strong {
   position: absolute;
   color: #ff3203;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-rampart-one), Arial, Helvetica, sans-serif;
   font-size: 96px;
   font-weight: 800;
   line-height: 70px;
@@ -4319,7 +4577,7 @@ button {
 .components-sponsors-strip-inner h2 {
   margin: 0;
   padding-left: 204px;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
@@ -4331,9 +4589,25 @@ button {
   gap: 40px;
   align-items: center;
   height: 120px;
-  overflow-x: auto;
+  width: max-content;
+  overflow: visible;
   padding: 0 16px;
   scrollbar-width: none;
+  animation: sponsorsMarquee 28s linear infinite;
+}
+
+.components-sponsors-strip-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes sponsorsMarquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-1 * ((280px + 40px) * 8)));
+  }
 }
 
 .components-sponsors-strip-track::-webkit-scrollbar {
@@ -4368,6 +4642,17 @@ button {
   .components-sponsors-strip-track {
     gap: 16px;
     padding-inline: 0;
+    animation-duration: 22s;
+  }
+
+  @keyframes sponsorsMarquee {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(calc(-1 * ((220px + 16px) * 8)));
+    }
   }
 
   .components-sponsors-strip-logoCard {
@@ -4377,6 +4662,18 @@ button {
 
   .components-sponsors-strip-decorText strong {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .components-hero-news-background,
+  .components-hero-news-storyCard,
+  .components-sponsors-strip-track,
+  .components-roster-section-athlete,
+  .components-roster-section-athleteStroke,
+  .components-roster-section-athleteInfo {
+    animation: none;
+    transition: none;
   }
 }
 
@@ -4397,7 +4694,7 @@ button {
 .components-standings-panel-header h2 {
   margin: 0;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 40px;
   font-weight: 700;
   line-height: 48px;
@@ -4405,7 +4702,7 @@ button {
 }
 
 .components-standings-panel-header h2 span {
-  color: #f56345;
+  color: #ff3203;
 }
 
 .components-standings-panel-header a {
@@ -4414,7 +4711,7 @@ button {
   gap: 8px;
   margin-top: 14px;
   color: var(--cinza-medio);
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 16px;
@@ -4447,7 +4744,7 @@ button {
   background: transparent;
   color: #292929;
   cursor: pointer;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
@@ -4463,7 +4760,7 @@ button {
   width: 100%;
   border-collapse: collapse;
   color: #4e4e4e;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 14px;
   line-height: 24px;
 }
@@ -4471,7 +4768,7 @@ button {
 .components-standings-panel-table th {
   height: 40px;
   color: #292929;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 600;
   text-align: center;
@@ -4498,7 +4795,7 @@ button {
   display: inline-block;
   margin-right: 4px;
   color: #2165a3;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-weight: 500;
 }
 
@@ -4615,7 +4912,7 @@ button {
   width: 464px;
   margin: 0 0 8px;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 800;
   line-height: 40px;
@@ -4627,7 +4924,7 @@ button {
 .components-youtube-section-ctaBlock p {
   margin: 0;
   color: #777777;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 12px;
   font-weight: 500;
   line-height: 20px;
@@ -4645,7 +4942,7 @@ button {
 .components-youtube-section-ctaBlock h3 {
   margin: 0 0 8px;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-weight: 800;
   line-height: 32px;
@@ -4661,9 +4958,9 @@ button {
   width: 457px;
   height: 56px;
   border-radius: 8px;
-  background: linear-gradient(162deg, #f56345 0%, #8f301d 99%);
+  background: linear-gradient(162deg, #ff3203 0%, #8f301d 99%);
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
@@ -4694,7 +4991,7 @@ button {
 .components-youtube-section-network p {
   margin: 0;
   color: #e7e7e7;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
@@ -4840,7 +5137,7 @@ button {
   overflow: hidden;
   margin: 0;
   color: #f4f5f7;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-weight: 700;
   line-height: 1.15;
@@ -4864,7 +5161,7 @@ button {
 }
 
 .components-roster-athlete-card-card:focus-visible {
-  outline: 3px solid #f56345;
+  outline: 3px solid #ff3203;
   outline-offset: 4px;
 }
 
@@ -4888,10 +5185,10 @@ button {
 
 .components-roster-player-detail-content-frameAsset {
   position: absolute;
-  inset: 0;
+  inset: 18px;
   z-index: 0;
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 36px);
+  height: calc(100% - 72px);
   object-fit: fill;
   pointer-events: none;
 }
@@ -4939,18 +5236,18 @@ button {
 .components-roster-player-detail-content-firstName {
   margin: 0;
   color: transparent;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 700;
   line-height: 56px;
   text-transform: uppercase;
-  -webkit-text-stroke: 1px #f56345;
+  -webkit-text-stroke: 1px #ff3203;
 }
 
 .components-roster-player-detail-content-identity h2 {
   margin: 0;
   color: #f5f5f5;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: clamp(72px, 6.8vw, 128px);
   font-weight: 800;
   line-height: 1;
@@ -4965,8 +5262,8 @@ button {
 }
 
 .components-roster-player-detail-content-profileList dt {
-  color: #f56345;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  color: #ff3203;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 14px;
   font-weight: 600;
   line-height: 24px;
@@ -4975,7 +5272,7 @@ button {
 .components-roster-player-detail-content-profileList dd {
   margin: 0;
   color: #b3b3b3;
-  font-family: Outfit, Rubik, Arial, sans-serif;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   line-height: 32px;
   text-transform: capitalize;
@@ -5016,8 +5313,8 @@ button {
 
 .components-roster-player-detail-content-relatedHeader h3 {
   margin: 0 0 4px;
-  color: #f56345;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  color: #ff3203;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-style: italic;
   font-weight: 700;
@@ -5029,7 +5326,7 @@ button {
   display: block;
   width: 451px;
   height: 2px;
-  background: #f56345;
+  background: #ff3203;
 }
 
 .components-roster-player-detail-content-relatedHeader a {
@@ -5042,7 +5339,7 @@ button {
   border-radius: 8px;
   background: #020c14;
   color: #b3b3b3;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
@@ -5092,18 +5389,18 @@ button {
 .components-roster-player-detail-content-playerFigure {
   position: absolute;
   z-index: 3;
-  top: 100px;
-  right: 186px;
-  width: 522px;
-  height: 760px;
+  top: 150px;
+  right: 260px;
+  width: 380px;
+  height: 560px;
   overflow: hidden;
 }
 
 .components-roster-player-detail-content-playerFigure img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: center;
   filter: drop-shadow(0 0 18px rgba(245, 99, 69, 0.55));
 }
 
@@ -5114,7 +5411,7 @@ button {
   bottom: 178px;
   margin: 0;
   color: rgba(2, 12, 20, 0.1);
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 152px;
   font-style: italic;
   font-weight: 800;
@@ -5136,17 +5433,17 @@ button {
 }
 
 .components-roster-player-detail-content-signature {
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 14px;
   font-weight: 700;
-  color: #f56345;
+  color: #ff3203;
   letter-spacing: 1.5px;
 }
 
 .components-roster-player-detail-content-socialsList {
   display: flex;
   gap: 20px;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 12px;
   font-weight: 600;
   color: #b3b3b3;
@@ -5171,9 +5468,9 @@ button {
   }
 
   .components-roster-player-detail-content-playerFigure {
-    right: 100px;
-    width: 450px;
-    height: 680px;
+    right: 150px;
+    width: 340px;
+    height: 500px;
   }
 
   .components-roster-player-detail-content-number {
@@ -5188,7 +5485,7 @@ button {
     flex-direction: column;
     gap: 32px;
     padding: 56px 32px;
-    border: 2px solid #f56345;
+    border: 2px solid #ff3203;
     border-radius: 24px;
     background: #020c14;
   }
@@ -5367,7 +5664,7 @@ button {
   flex-direction: column;
   align-items: center;
   color: #959595;
-  font-family: Rubik, Outfit, Arial, sans-serif;
+  font-family: var(--font-rubik), var(--font-outfit), Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 32px;
@@ -5383,14 +5680,14 @@ button {
 }
 
 .components-roster-roster-filters-categoryGroup .components-roster-roster-filters-active {
-  color: #cc4529;
-  font-family: Rubik, Outfit, Arial, sans-serif;
+  color: #ff3203;
+  font-family: var(--font-rubik), var(--font-outfit), Arial, sans-serif;
   font-weight: 600;
   letter-spacing: 0.18px;
 }
 
 .components-roster-roster-filters-categoryGroup .components-roster-roster-filters-active::before {
-  background: #cc4529;
+  background: #ff3203;
 }
 
 .components-roster-roster-filters-positionGroup a {
@@ -5400,7 +5697,7 @@ button {
   justify-content: center;
   padding: 4px 8px;
   color: #959595;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -5408,7 +5705,7 @@ button {
 }
 
 .components-roster-roster-filters-positionGroup .components-roster-roster-filters-active {
-  color: #cc4529;
+  color: #ff3203;
   font-weight: 600;
   letter-spacing: 0;
 }
@@ -5456,7 +5753,7 @@ button {
 .components-roster-roster-page-content-staff h2 {
   margin: 0;
   color: #121212;
-  font-family: Montserrat, Rubik, Arial, sans-serif;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 600;
   line-height: 40px;

@@ -47,11 +47,12 @@ export function NewsGrid() {
         ))}
       </div>
 
-      <Link className="components-news-grid-moreButton" href="/noticias">
-        ver mais notícias
-        <ArrowUpRight className="components-news-grid-moreButtonIcon" />
-      </Link>
+      <div className="components-news-grid-action">
+        <Link className="components-news-grid-moreButton" href="/noticias">
+          ver mais notícias
+          <ArrowUpRight className="components-news-grid-moreButtonIcon" />
+        </Link>
+      </div>
     </section>
   );
 }
-

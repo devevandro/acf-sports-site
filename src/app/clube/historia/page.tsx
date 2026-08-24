@@ -4,11 +4,11 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
 
-export default function HistoriaPage() {
+export default function HistoryPage() {
   return (
     <main className="app-clube-historia-page-page">
       <TopCf />
-      <MainMenu active="clube" activeClub="historia" />
+      <MainMenu active="club" activeClub="history" />
       <header className="app-clube-historia-page-heading">
         <div>
           <p>clube</p>

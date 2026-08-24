@@ -38,7 +38,7 @@ const contactItems = [
   },
 ];
 
-type PlanType = "master" | "mensal" | "pontual";
+type PlanType = "master" | "monthly" | "oneOff";
 
 interface PlanData {
   id: PlanType;
@@ -65,8 +65,8 @@ const plansData: Record<PlanType, PlanData> = {
       "Pagina exclusiva no site sobre a marca do patrocinador",
     ],
   },
-  mensal: {
-    id: "mensal",
+  monthly: {
+    id: "monthly",
     label: "Mensal",
     name: "MENSAL",
     price: "R$ 250,00 / Mês",
@@ -80,8 +80,8 @@ const plansData: Record<PlanType, PlanData> = {
       "Link no site e logo na home",
     ],
   },
-  pontual: {
-    id: "pontual",
+  oneOff: {
+    id: "oneOff",
     label: "Pontual",
     name: "PONTUAL",
     price: "R$ 180,00 / Mês",
@@ -233,7 +233,7 @@ export function ContactContent() {
                 <li key={benefit}>
                   <span className="components-contact-content-bullet" aria-hidden="true">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="6" cy="6" r="4.5" stroke="#F56345" strokeWidth="2" />
+                      <circle cx="6" cy="6" r="4.5" stroke="#FF3203" strokeWidth="2" />
                     </svg>
                   </span>
                   <span>{benefit}</span>
@@ -250,4 +250,3 @@ export function ContactContent() {
     </section>
   );
 }
-

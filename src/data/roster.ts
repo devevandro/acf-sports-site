@@ -104,9 +104,9 @@ const positions: Exclude<RosterPosition, "todos">[] = [
 function createAthletes(category: RosterCategory, startNumber: number): Athlete[] {
   return Array.from({ length: 20 }, (_, index) => {
     const number = startNumber + index;
-    const isCampo = category === "campo";
-    const name = isCampo ? fieldAthleteNames[index] : `Futsal ACF ${String(index + 1).padStart(2, "0")}`;
-    const nickname = isCampo ? name.split(" ")[0] : `Futsal ${index + 1}`;
+    const isFieldCategory = category === "campo";
+    const name = isFieldCategory ? fieldAthleteNames[index] : `Futsal ACF ${String(index + 1).padStart(2, "0")}`;
+    const nickname = isFieldCategory ? name.split(" ")[0] : `Futsal ${index + 1}`;
 
     return {
       id: `${category}-${number}`,
@@ -116,7 +116,7 @@ function createAthletes(category: RosterCategory, startNumber: number): Athlete[
       number,
       position: positions[index % positions.length],
       category,
-      image: isCampo ? fieldAthleteImages[index] : athleteImages[(index + 2) % athleteImages.length],
+      image: isFieldCategory ? fieldAthleteImages[index] : athleteImages[(index + 2) % athleteImages.length],
       birthDate: `${String((index % 27) + 1).padStart(2, "0")}/0${(index % 9) + 1}/199${index % 10}`,
       height: `${1.68 + (index % 18) / 100}m`,
       weight: `${68 + (index % 18)}kg`,
