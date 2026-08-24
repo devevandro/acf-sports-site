@@ -50,3 +50,6 @@ npm run build
   - Updated the primary brand orange (`--laranja` and related accent colors) from `#f56345`/`#cc4529` to `#ff3203` across `globals.css`, `ContactContent.tsx`, and `PlayerMainCardImage.tsx`.
   - Switched `globals.css` `font-family` declarations to reference the CSS custom properties (`--font-montserrat`, `--font-outfit`, `--font-rubik`, `--font-roboto`, `--font-poppins`) exposed by `next/font/google` in `layout.tsx`, replacing hardcoded font names.
   - Replaced hero carousel and related news images with new local assets (`public/carousel/image-01.jpg`, `public/carousel/image-02.jpg`).
+
+- **CI/CD**:
+  - Added GitHub Actions workflows (`.github/workflows/prev-deploy.yaml`, `.github/workflows/prod-deploy.yaml`) that build and deploy to Vercel: preview deployments on push to `stage`, production deployments on push to `main`.
