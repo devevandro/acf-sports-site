@@ -37,9 +37,15 @@ GitHub Actions workflows in `.github/workflows/` deploy to Vercel via the Vercel
 
 The `acf-site` Vercel project has no Git repository connected (created via CLI), so the Vercel dashboard cannot list branches for domain assignment. `prev-deploy.yaml` works around this by capturing the deployment URL from `vercel deploy --prebuilt` and running `vercel alias set <url> stage.acfsports.com.br` right after, giving `stage` a fixed preview domain without needing Git integration. `prod-deploy.yaml` doesn't need this step because `acfsports.com.br` is assigned to the Production target and Vercel auto-aliases it on every `--prod` deploy. The `stage.acfsports.com.br` DNS record (CNAME to `cname.vercel-dns.com`) must be created in Cloudflare for the alias to resolve.
 
+The project's SSO deployment protection (`vercel project protection`) is set to `all_except_custom_domains`, which only exempts domains formally registered on the project (`vercel domains add`), not bare aliases (`vercel alias set`). `stage.acfsports.com.br` was registered as a project domain via `vercel domains add stage.acfsports.com.br acf-site` so it resolves publicly without a Vercel login prompt, same as `acfsports.com.br`.
+
 ## Recent Changes (Mobile Navigation & Brand Refresh)
 - Added a mobile hamburger menu to `MainMenu.tsx`: a toggle button and full-width collapsible panel, with a row-style accordion (plus/close icon) replacing the hover dropdown for the "clube" submenu below `768px`, and WhatsApp/Instagram quick-action icons shown only on mobile.
 - Updated the primary brand orange from `#f56345`/`#cc4529` to `#ff3203` in `globals.css`, `ContactContent.tsx`, and `PlayerMainCardImage.tsx`.
 - Switched `globals.css` font-family declarations to use the CSS custom properties (`--font-montserrat`, `--font-outfit`, `--font-rubik`, `--font-roboto`, `--font-poppins`) exposed by `next/font/google` in `layout.tsx`, instead of hardcoded font names.
 - Replaced hero carousel and related news images with new local assets (`public/carousel/image-01.jpg`, `public/carousel/image-02.jpg`), removing the dependency on the old `public/home-news` PNGs for those entries.
 - Validated production build (`npm run build`).
+
+## Recent Changes (Carousel Image Update)
+- Replaced `public/carousel/image-01.jpg`/`image-02.jpg` with `image-01.png`/`image-02.png` and updated references in `HeroNews.tsx` and `src/data/news.ts`.
+- Renamed the new PNG files from their originally saved capitalized names (`Image-01.png`/`Image-02.png`) to lowercase, since Vercel's Linux build environment is case-sensitive and would 404 on the mismatch even though it works locally on macOS.
