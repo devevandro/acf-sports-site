@@ -31,6 +31,10 @@ When preparing commits, keep `README.md` and this `AGENTS.md` updated with conci
 - Refined home page interactions for hero slide fade animation, main menu dropdown active states, news CTA placement, roster hover overlays, sponsor strip marquee behavior, and sponsorship plan card/button feedback.
 - Validated production build (`npm run build`).
 
+## CI/CD
+
+GitHub Actions workflows in `.github/workflows/` deploy to Vercel via the Vercel CLI: `prev-deploy.yaml` runs on push to `stage` (preview environment), `prod-deploy.yaml` runs on push to `main` (production environment). Both require `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, and `VERCEL_TOKEN` secrets configured in the `Deploy` GitHub environment.
+
 ## Recent Changes (Mobile Navigation & Brand Refresh)
 - Added a mobile hamburger menu to `MainMenu.tsx`: a toggle button and full-width collapsible panel, with a row-style accordion (plus/close icon) replacing the hover dropdown for the "clube" submenu below `768px`, and WhatsApp/Instagram quick-action icons shown only on mobile.
 - Updated the primary brand orange from `#f56345`/`#cc4529` to `#ff3203` in `globals.css`, `ContactContent.tsx`, and `PlayerMainCardImage.tsx`.
