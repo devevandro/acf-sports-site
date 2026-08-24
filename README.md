@@ -51,7 +51,11 @@ npm run build
   - Switched `globals.css` `font-family` declarations to reference the CSS custom properties (`--font-montserrat`, `--font-outfit`, `--font-rubik`, `--font-roboto`, `--font-poppins`) exposed by `next/font/google` in `layout.tsx`, replacing hardcoded font names.
   - Replaced hero carousel and related news images with new local assets (`public/carousel/image-01.jpg`, `public/carousel/image-02.jpg`).
 
+- **Carousel Image Update**:
+  - Replaced `public/carousel/image-01.jpg` and `image-02.jpg` with `image-01.png`/`image-02.png`, updating references in `HeroNews.tsx` and `src/data/news.ts` accordingly. Files were saved with capitalized names (`Image-01.png`/`Image-02.png`) and renamed to lowercase to avoid breaking on Vercel's case-sensitive Linux build environment (macOS's filesystem is case-insensitive, so the mismatch wasn't visible locally).
+
 - **CI/CD**:
   - Added GitHub Actions workflows (`.github/workflows/prev-deploy.yaml`, `.github/workflows/prod-deploy.yaml`) that build and deploy to Vercel: preview deployments on push to `stage`, production deployments on push to `main`.
   - Fixed `prev-deploy.yaml`: removed the unsupported `--preview` flag from the `vercel build` and `vercel deploy` steps (Vercel CLI 59.x has no such flag; preview is the default target when `--prod` is omitted), which was failing the workflow with `unknown or unexpected option: --preview`.
   - Added a step to `prev-deploy.yaml` that aliases every `stage` preview deployment to a fixed domain, `stage.acfsports.com.br`, via `vercel alias set` — needed because the Vercel project has no Git repository connected, so the dashboard can't offer branch-based domain assignment. Requires a CNAME record for `stage` pointing to `cname.vercel-dns.com` on the DNS provider (Cloudflare).
+  - Registered `stage.acfsports.com.br` as a formal project domain on Vercel (`vercel domains add`) so it's exempt from SSO deployment protection like the production domain — a bare `vercel alias set` alias alone doesn't qualify for that exemption and was prompting a Vercel login on first access.

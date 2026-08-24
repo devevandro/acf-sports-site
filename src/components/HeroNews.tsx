@@ -6,7 +6,7 @@ import Link from "next/link";
 const slides = [
   {
     slug: "acf-sports-teste-de-fogo-meninos-de-ouro",
-    image: "/carousel/image-01.jpg",
+    image: "/carousel/image-01.png",
     label: "Copa SESC Futsal - Categoria Adultos",
     title: "ACF Sports Tem Teste de Fogo Contra os Fortes Meninos de Ouro",
     summary: "A equipe quadricolor, tem estreia agendada para dia 05/11, já com grande clássico",
@@ -14,20 +14,20 @@ const slides = [
   },
   {
     slug: "acf-sports-empata-estreia-segunda-divisao",
-    image: "/carousel/image-02.jpg",
+    image: "/carousel/image-02.png",
     label: "Campeonato Amador - Segunda Divisão 2026",
     title: "ACF Sports Abre Novas Conversas Para Fortalecer o Projeto",
     summary: "Parcerias e bastidores movimentam a preparação da equipe para os próximos desafios",
     alt: "Pessoa sorrindo em arte promocional com elementos gráficos",
   },
   {
-    slug: "mascote-acf-sports-referencia-futebol-amador",
-    image: "/carousel/carousel-03.png",
-    label: "Mascote",
-    title: "Mascote da ACF Sports Ganha Destaque na Identidade do Clube",
-    summary: "O touro Ber reforça a presença visual da equipe dentro e fora das competições",
-    alt: "Mascote touro da ACF Sports em diferentes poses",
-  }
+    slug: "acf-sports-empata-estreia-segunda-divisao",
+    image: "/carousel/carousel-02.png",
+    label: "Campeonato Amador - Segunda Divisão 2026",
+    title: "ACF Sports Abre Novas Conversas Para Fortalecer o Projeto",
+    summary: "Parcerias e bastidores movimentam a preparação da equipe para os próximos desafios",
+    alt: "Pessoa sorrindo em arte promocional com elementos gráficos",
+  },
 ];
 
 export function HeroNews() {

@@ -40,7 +40,7 @@ export const newsItems: NewsItem[] = [
     caption: "Imagem, feita por; O Guru das imagens.",
     image: {
       type: "single",
-      src: "/carousel/image-01.jpg",
+      src: "/carousel/image-01.png",
       alt: "Jogadores comemorando em campo com bandeira da ACF Sports",
     },
     body: [
@@ -63,7 +63,7 @@ export const newsItems: NewsItem[] = [
     caption: "Registro dos atletas da ACF Sports.",
     image: {
       type: "layered",
-      background: "/carousel/image-02.jpg",
+      background: "/carousel/image-02.png",
       foreground: "",
       alt: "",
     },
