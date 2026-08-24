@@ -33,7 +33,7 @@ When preparing commits, keep `README.md` and this `AGENTS.md` updated with conci
 
 ## CI/CD
 
-GitHub Actions workflows in `.github/workflows/` deploy to Vercel via the Vercel CLI: `prev-deploy.yaml` runs on push to `stage` (preview environment), `prod-deploy.yaml` runs on push to `main` (production environment). Both require `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, and `VERCEL_TOKEN` secrets configured in the `Deploy` GitHub environment.
+GitHub Actions workflows in `.github/workflows/` deploy to Vercel via the Vercel CLI: `prev-deploy.yaml` runs on push to `stage` (preview environment), `prod-deploy.yaml` runs on push to `main` (production environment). Both require `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, and `VERCEL_TOKEN` secrets configured in the `Deploy` GitHub environment. `prev-deploy.yaml`'s `vercel build`/`vercel deploy` steps take no `--preview` flag — Vercel CLI 59.x rejects it (`unknown or unexpected option: --preview`); preview is simply the default target when `--prod` is omitted.
 
 ## Recent Changes (Mobile Navigation & Brand Refresh)
 - Added a mobile hamburger menu to `MainMenu.tsx`: a toggle button and full-width collapsible panel, with a row-style accordion (plus/close icon) replacing the hover dropdown for the "clube" submenu below `768px`, and WhatsApp/Instagram quick-action icons shown only on mobile.
