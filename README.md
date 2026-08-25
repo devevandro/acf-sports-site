@@ -54,6 +54,10 @@ npm run build
 - **Carousel Image Update**:
   - Replaced `public/carousel/image-01.jpg` and `image-02.jpg` with `image-01.png`/`image-02.png`, updating references in `HeroNews.tsx` and `src/data/news.ts` accordingly. Files were saved with capitalized names (`Image-01.png`/`Image-02.png`) and renamed to lowercase to avoid breaking on Vercel's case-sensitive Linux build environment (macOS's filesystem is case-insensitive, so the mismatch wasn't visible locally).
 
+- **Favicon Fix**:
+  - Moved `favicon.ico` from `src/favicon.ico` to `src/app/favicon.ico` — Next.js App Router only picks up the favicon automatically from `app/favicon.ico` (or `public/favicon.ico`); it was previously outside `app/` and silently ignored.
+  - Shortened the page `<title>` metadata in `layout.tsx` to "ACF Sports | Site Oficial".
+
 - **CI/CD**:
   - Added GitHub Actions workflows (`.github/workflows/prev-deploy.yaml`, `.github/workflows/prod-deploy.yaml`) that build and deploy to Vercel: preview deployments on push to `stage`, production deployments on push to `main`.
   - Fixed `prev-deploy.yaml`: removed the unsupported `--preview` flag from the `vercel build` and `vercel deploy` steps (Vercel CLI 59.x has no such flag; preview is the default target when `--prod` is omitted), which was failing the workflow with `unknown or unexpected option: --preview`.
