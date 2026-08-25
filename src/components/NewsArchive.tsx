@@ -1,29 +1,10 @@
 import Link from "next/link";
 import { ChevronRight, ChevronsRight } from "lucide-react";
-import { newsItems, type NewsItem } from "@/data/news";
+import { getAllNews } from "@/data/news";
 
-function ArchiveImage({ item }: { item: NewsItem }) {
-  if (item.image.type === "layered") {
-    return (
-      <div className="components-news-archive-layeredImage">
-        <img className="components-news-archive-layeredBackground" src={item.image.background} alt="" />
-        <img className="components-news-archive-layeredPlayers" src={item.image.foreground} alt={item.image.alt} />
-      </div>
-    );
-  }
+export async function NewsArchive() {
+  const newsItems = await getAllNews();
 
-  if (item.image.type === "mascot") {
-    return (
-      <div className="components-news-archive-mascotImage">
-        <img src={item.image.src} alt={item.image.alt} />
-      </div>
-    );
-  }
-
-  return <img className="components-news-archive-cardImage" src={item.image.src} alt={item.image.alt} />;
-}
-
-export function NewsArchive() {
   return (
     <section
       className="components-news-archive-archive"
@@ -32,11 +13,11 @@ export function NewsArchive() {
     >
       <div className="components-news-archive-grid">
         {newsItems.map((item) => (
-          <Link className="components-news-archive-card" href={`/noticias/${item.slug}`} key={item.slug}>
-            <ArchiveImage item={item} />
+          <Link className="components-news-archive-card" href={`/noticias/${item.id}`} key={item.id}>
+            <img className="components-news-archive-cardImage" src={item.image} alt={item.title} />
             <div className="components-news-archive-copy">
               <h2>{item.title}</h2>
-              <p>{item.description}</p>
+              <p>{item.subtitle}</p>
             </div>
           </Link>
         ))}
@@ -59,4 +40,3 @@ export function NewsArchive() {
     </section>
   );
 }
-

@@ -54,3 +54,51 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 - Moved `favicon.ico` from `src/favicon.ico` (not picked up by Next.js at all) to `src/app/favicon.ico`, the App Router's special-file location for automatic favicon serving.
 - If the icon still doesn't appear to a browser after this fix, it's very likely favicon-specific browser caching (Chrome/Firefox cache favicons separately from the normal HTTP cache and often ignore hard-refresh) — check `/favicon.ico` directly or in a private window before assuming a server/build issue.
 - Shortened the page `<title>` metadata in `layout.tsx` to "ACF Sports | Site Oficial".
+
+## Recent Changes (News: Neon Postgres Integration)
+- `src/data/news.ts` was rewritten from a static mock array to a data-access layer querying the `news` table in Neon Postgres (`@neondatabase/serverless`, lazy client in `src/db/index.ts`). This is the same database the `acf-site-manager` dashboard project writes to — `acf-site` only has read access via its own `DATABASE_URL` env var (copied from `acf-site-manager`'s Vercel env; not the same Vercel project).
+- `NewsItem` fields now mirror the real DB columns (`id`, `tag`, `title`, `subtitle`, `content`, `author`, `image`, `createdAt`) instead of the old mock shape (`slug`, `category`, `description`, `caption`, `body[]`, `quote`, layered/mascot image variants). `content` is CMS-authored rich HTML rendered with `dangerouslySetInnerHTML` in `NewsDetail.tsx` — this is trusted content from the internal dashboard editor, not public user input.
+- `getAllNews()` is wrapped in React's `cache()` (dedupes repeated calls within one request/render) and catches DB errors, returning `[]` so a DB outage degrades to an empty section instead of a 500.
+- Renamed `src/app/noticias/[slug]` → `src/app/noticias/[id]` (no slug column in the DB; the route param is the row's UUID). Removed `generateStaticParams` — data now comes from an externally-edited DB, so pages use ISR (`export const revalidate = 60`) instead of being enumerated at build time.
+- `HeroNews.tsx` lost its hardcoded `slides` array; it's still a client component (owns the auto-rotate timer/state) but now takes `news: NewsItem[]` as a prop. The fetch (`getFeaturedNews(3)`) happens server-side in `src/app/page.tsx`, which became `async`. `NewsGrid.tsx` and `NewsArchive.tsx` became `async` server components that fetch their own data (`getLatestNews(6)` and `getAllNews()` respectively).
+- Validated with `npm run build` and by hitting the dev server (`/`, `/noticias`, `/noticias/[id]`, and a nonexistent id → 404) to confirm real rows render, including the CMS's HTML `content`.
+
+## Recent Changes (Home Carousel: Highlight Filter & Pinned News)
+- `NewsItem`/`NewsRow` in `src/data/news.ts` gained a `highlight: boolean` field mapping the `news` table's `highlight` column.
+- Added `PINNED_CAROUSEL_NEWS_ID` (`cd288794-2014-4f37-8163-cb5082cd0b47`) as a shared constant in `src/data/news.ts`.
+- `HeroNews.tsx` now builds its slide list itself: only news with `highlight === true` are shown, and the pinned news ID is always forced into the list at position 2 (index 1) regardless of its `highlight` value. `src/app/page.tsx` now passes it the full `getAllNews()` result instead of a pre-sliced `getFeaturedNews(3)` (that helper was removed as unused).
+- `getLatestNews()` (used by the home `NewsGrid`) now always excludes the pinned news ID, so that item only ever appears in the hero carousel, never in the home "notícias" grid. `NewsArchive.tsx` (`/noticias` full listing) is unaffected — it still uses `getAllNews()` directly.
+- Validated with `npm run build` and by querying the live Neon `news` table directly to confirm the pinned row lands at carousel position 2 and is absent from the home grid output.
+
+## Recent Changes (Home Carousel: Pinned News Moved to Position 3)
+- Moved the pinned carousel insertion point in `HeroNews.tsx` from index 1 (position 2) to index 2 (position 3): `slides.splice(Math.min(2, slides.length), 0, pinned)`.
+
+## Recent Changes (Home News Grid: Fixed Layout for Fewer Than 3 Items)
+- `.components-news-grid-grid` used a hardcoded `grid-template-columns: repeat(3, 330px)` (and `repeat(2, 330px)` at the 1200px breakpoint), which reserved layout space for a full row even when fewer news items were available (e.g. once the pinned carousel item is excluded from the grid, only 2 of 6 items remain) — the grid.
+- Fixed by having `NewsGrid.tsx` compute `gridColumns = Math.min(newsItems.length, 3)` and pass it as a `--news-grid-columns` CSS custom property on `.components-news-grid-grid`. `globals.css` now reads `repeat(var(--news-grid-columns, 3), 330px)` at desktop and `repeat(min(var(--news-grid-columns, 2), 2), 330px)` at the 1200px breakpoint, so the grid always sizes to the actual item count instead of assuming 3.
+- Validated with `npm run build`/`tsc --noEmit` and by checking the rendered home page HTML (`curl localhost:3000/`) to confirm `style="--news-grid-columns:2"` is emitted when only 2 news items are available.
+
+## Recent Changes (Home "jogos" Panel: Wired to the `games` Table)
+- Added `src/data/games.ts`, a data-access layer for the `games` table (`id`, `competition_id` → joined against `competitions.title`, `opponent`, `result`, `date`, `location`), following the same `cache()`-wrapped, error-swallowing pattern as `src/data/news.ts`. A game is treated as **finished** when `result` is non-empty and not `"-"` (the sentinel the dashboard's games form defaults upcoming games to), and **upcoming** otherwise.
+- `getLatestFinishedGame()` returns the finished game with the latest `date`; `getNextUpcomingGame()` returns the upcoming game with the earliest `date`. Both return `null` when no matching row exists.
+- `GamesPanel.tsx` became an async server component that fetches both via `Promise.all` and conditionally renders each "partida finalizada" / "próxima partida" block only when its game exists (both previously hardcoded, static example matches). Neither team has a stored logo for the opponent side in the DB, so both sides currently reuse the club's own crest icon (`/header/symbol.png`) as a generic placeholder, matching what the prior hardcoded markup already did.
+- Verified against the live (currently empty) `games` table that the query runs without error and both blocks render as empty (`<div class="components-games-panel-blocks"></div>`), and validated the finished/upcoming selection + sort logic against mocked rows.
+
+## Recent Changes (Home "jogos" Panel: Opponent Logo)
+- The `games` table has no logo column of its own. Opponent crests instead live inside the linked `competitions.table` JSONB array (each entry has `team` and an optional `symbol` URL, e.g. from `COPA SESC FUTSAL ADULTO`'s standings table), so `getAllGames()` now also selects `c."table" AS competition_table` and `mapRow()` looks up `opponentLogo` by matching `team === opponent` (exact, trimmed).
+- `GamesPanel.tsx` uses `game.opponentLogo` when present, falling back to the club's own crest icon (`/header/symbol.png`) when the opponent has no `symbol` in the competition table (e.g. "Oficina das Máquinas" currently has none) or when the game has no linked competition at all.
+- Verified against the live `games` table (now with 2 real upcoming rows) that the nearest upcoming game ("Cyber Futsal / Arena Cassimiro", 2026-09-03) renders its real crest URL from Vercel Blob storage instead of the fallback.
+
+## Recent Changes (Home "jogos" Panel: Text Overflow on Long Team Names)
+- Long opponent/club names (e.g. "Cyber Futsal / Arena Cassimiro") could overflow `.components-games-panel-team`'s fixed 95px width, because the span had `white-space: nowrap` with no truncation and the team block is a flex item whose default `min-width: auto` lets its min-content (the full unbroken text) win over the explicit width.
+- Fixed in `globals.css`: added `min-width: 0` to `.components-games-panel-team` (lets it actually shrink to 95px) and `display: block; width: 100%; overflow: hidden; text-overflow: ellipsis;` to `.components-games-panel-team span`, for both "partida finalizada" and "próxima partida" cards (shared styles).
+- `GamesPanel.tsx`'s `MatchCard` now also sets a `title` attribute on each team name span with the full untruncated name, so it's still available on hover/inspection.
+
+## Recent Changes (Home "jogos" Panel: Correct Club Name)
+- `GamesPanel.tsx` had "ACF Sport Club" hardcoded as the home team's name — a leftover from the original static mock, mismatched with the club's actual name everywhere else in the codebase (`ACF Sports/Vila Mercado`, e.g. `CLUB_NAME` in `src/data/news.ts` and the `team` entries inside `competitions.table`).
+- Added a matching `CLUB_NAME = "ACF Sports/Vila Mercado"` constant in `GamesPanel.tsx` and used it for both match cards' home team name.
+
+## Recent Changes (Home "jogos" Panel: Text-Overflow on the Date/Competition Badge)
+- `.components-games-panel-matchDate` (the orange/white date badge, e.g. "02/09/2026 - COPA SESC FUTSAL ADULTO / Ginásio Pedro Mariucci") had `white-space: nowrap` with no truncation; long competition/location strings just got hard-clipped by the parent card's `overflow: hidden`, cutting text off mid-word with no ellipsis.
+- Added `overflow: hidden; text-overflow: ellipsis;` to `.components-games-panel-matchDate` in `globals.css`.
+- `GamesPanel.tsx`'s `MatchCard` now also sets a `title` attribute on the date badge with the full untruncated string, same pattern already used for the team name spans.

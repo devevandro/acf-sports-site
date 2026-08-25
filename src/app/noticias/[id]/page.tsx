@@ -4,18 +4,14 @@ import { MainMenu } from "@/components/MainMenu";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
-import { getNewsBySlug, newsItems } from "@/data/news";
+import { getNewsById } from "@/data/news";
 import { notFound } from "next/navigation";
 
-export function generateStaticParams() {
-  return newsItems.map((item) => ({
-    slug: item.slug,
-  }));
-}
+export const revalidate = 60;
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
-  const news = getNewsBySlug(slug);
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const news = await getNewsById(id);
 
   if (!news) {
     return {
@@ -25,20 +21,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     title: `${news.title} | ACF Sports`,
-    description: news.description,
+    description: news.subtitle,
     openGraph: {
       title: news.title,
-      description: news.description,
+      description: news.subtitle,
       type: "article",
-      publishedTime: news.date,
+      publishedTime: news.createdAt,
       authors: [news.author],
     },
   };
 }
 
-export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const news = getNewsBySlug(slug);
+export default async function NewsDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const news = await getNewsById(id);
 
   if (!news) {
     notFound();
@@ -50,7 +46,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
       <MainMenu active="news" />
       <header className="app-noticias-slug-page-heading">
         <div>
-          <p>{news.category}</p>
+          <p>{news.tag}</p>
           <h1>
             notícias<span>.</span>
           </h1>

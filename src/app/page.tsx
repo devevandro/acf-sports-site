@@ -9,13 +9,18 @@ import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { StandingsPanel } from "@/components/StandingsPanel";
 import { TopCf } from "@/components/TopCf";
 import { YoutubeSection } from "@/components/YoutubeSection";
+import { getAllNews } from "@/data/news";
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const allNews = await getAllNews();
+
   return (
     <main className="app-page-page">
       <TopCf />
       <MainMenu active="home" />
-      <HeroNews />
+      <HeroNews news={allNews} />
       <section className="app-page-newsBand">
         <div className="app-page-contentRow">
           <NewsGrid />

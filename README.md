@@ -63,3 +63,45 @@ npm run build
   - Fixed `prev-deploy.yaml`: removed the unsupported `--preview` flag from the `vercel build` and `vercel deploy` steps (Vercel CLI 59.x has no such flag; preview is the default target when `--prod` is omitted), which was failing the workflow with `unknown or unexpected option: --preview`.
   - Added a step to `prev-deploy.yaml` that aliases every `stage` preview deployment to a fixed domain, `stage.acfsports.com.br`, via `vercel alias set` — needed because the Vercel project has no Git repository connected, so the dashboard can't offer branch-based domain assignment. Requires a CNAME record for `stage` pointing to `cname.vercel-dns.com` on the DNS provider (Cloudflare).
   - Registered `stage.acfsports.com.br` as a formal project domain on Vercel (`vercel domains add`) so it's exempt from SSO deployment protection like the production domain — a bare `vercel alias set` alias alone doesn't qualify for that exemption and was prompting a Vercel login on first access.
+
+- **News: Neon Postgres Integration**:
+  - `src/data/news.ts` no longer holds static mock data — it now queries the `news` table in the shared Neon Postgres database (via `@neondatabase/serverless`, lazily initialized in `src/db/index.ts`) that the `acf-site-manager` dashboard (`dashboard.acfsports.com.br`) writes to. `getAllNews()` is wrapped in React's `cache()` and falls back to `[]` on a DB error so pages degrade gracefully instead of crashing.
+  - The `acf-site` Vercel project's `DATABASE_URL` env var points at the same Neon database `acf-site-manager` uses (read access); locally it lives in `.env` (gitignored).
+  - `NewsItem` shape changed to match the DB columns: `id`, `tag`, `title`, `subtitle`, `content` (rich HTML from the dashboard's editor, rendered via `dangerouslySetInnerHTML`), `author`, `image`, `createdAt`. The old mock-only fields (`slug`, `category`, `description`, `caption`, `body[]`, `quote`, and the `layered`/`mascot` image variants) are gone.
+  - Detail route renamed from `src/app/noticias/[slug]` to `src/app/noticias/[id]` since the DB has no slug column — links now use the row's `id` (UUID). `generateStaticParams` was removed in favor of ISR (`export const revalidate = 60` on `/`, `/noticias`, and `/noticias/[id]`) since content is edited live via the external dashboard.
+  - `HeroNews.tsx` no longer has its own hardcoded `slides` array — it's now a client component that receives `news: NewsItem[]` as a prop, fetched server-side in `src/app/page.tsx` via `getFeaturedNews(3)`. `NewsGrid.tsx` and `NewsArchive.tsx` became async server components fetching `getLatestNews(6)` / `getAllNews()` directly.
+
+- **Carousel da Home: Filtro por Highlight e Notícia Fixada**:
+  - `NewsItem` ganhou o campo `highlight: boolean` (da coluna `highlight` da tabela `news`). `HeroNews.tsx` agora só exibe no carousel da home notícias com `highlight === true`, e sempre força a notícia de ID `cd288794-2014-4f37-8163-cb5082cd0b47` para a posição fixa do carousel, independente do seu próprio valor de `highlight`. `src/app/page.tsx` agora passa `getAllNews()` no lugar do antigo helper `getFeaturedNews(3)` (removido).
+  - `getLatestNews()` (o grid "notícias" da home, `NewsGrid.tsx`) agora sempre exclui essa mesma notícia fixada, então ela só aparece no carousel. O arquivo completo `/noticias` (`NewsArchive.tsx`, via `getAllNews()`) não é afetado.
+
+- **Carousel da Home: Notícia Fixada Movida para a Posição 3**:
+  - O ponto de inserção da notícia fixada no `HeroNews.tsx` mudou do índice 1 (posição 2) para o índice 2 (posição 3).
+
+- **Grid de Notícias da Home: Layout Corrigido com Menos de 3 Itens**:
+  - `.components-news-grid-grid` usava `grid-template-columns: repeat(3, 330px)` fixo, o que reservava espaço de layout para 3 itens mesmo quando havia menos disponíveis (ex.: com a notícia fixada excluída do grid, sobram só 2 dos 6 itens buscados), deixando o layout desbalanceado.
+  - `NewsGrid.tsx` agora calcula `gridColumns = Math.min(newsItems.length, 3)` e passa via custom property CSS `--news-grid-columns`; `globals.css` usa `repeat(var(--news-grid-columns, 3), 330px)` no desktop e `repeat(min(var(--news-grid-columns, 2), 2), 330px)` no breakpoint de 1200px, então o grid sempre reflete a quantidade real de notícias.
+
+- **Painel "jogos" da Home: Conectado à Tabela `games`**:
+  - Adicionado `src/data/games.ts`, uma camada de acesso a dados para a tabela `games` (`id`, `competition_id` → join com `competitions.title`, `opponent`, `result`, `date`, `location`), seguindo o mesmo padrão de `src/data/news.ts` (`cache()` + fallback silencioso em erro). Uma partida é considerada **finalizada** quando `result` não é vazio nem `"-"` (o valor padrão que o formulário de jogos do dashboard usa para partidas futuras), e **próxima** caso contrário.
+  - `getLatestFinishedGame()` retorna a partida finalizada com a `date` mais recente; `getNextUpcomingGame()` retorna a próxima partida com a `date` mais próxima. Ambas retornam `null` quando não há partida correspondente.
+  - `GamesPanel.tsx` virou um componente de servidor assíncrono que busca as duas via `Promise.all` e só renderiza cada bloco ("partida finalizada" / "próxima partida") quando a partida correspondente existe (antes eram exemplos estáticos fixos no código).
+
+- **Painel "jogos" da Home: Logo do Adversário**:
+  - A tabela `games` não tem coluna própria de logo. Os brasões dos adversários ficam dentro do JSON `competitions.table` (cada item tem `team` e, opcionalmente, `symbol`), então `getAllGames()` agora também busca `c."table" AS competition_table` e resolve `opponentLogo` casando `team === opponent` (exato, com trim).
+  - `GamesPanel.tsx` usa `game.opponentLogo` quando existe, caindo para o brasão do próprio clube (`/header/symbol.png`) quando o adversário não tem `symbol` cadastrado na tabela da competição ou quando a partida não tem competição vinculada.
+  - Confirmado com dados reais na tabela `games`: a próxima partida mais próxima ("Cyber Futsal / Arena Cassimiro", 03/09/2026) já renderiza o brasão real hospedado no Vercel Blob.
+
+- **Painel "jogos" da Home: Text-Overflow em Nomes Extensos**:
+  - Nomes longos de adversário/clube podiam estourar a largura fixa de 95px do `.components-games-panel-team`, pois o `span` tinha `white-space: nowrap` sem truncamento, e o bloco do time é um item flex cujo `min-width: auto` padrão deixa o conteúdo mínimo (o texto inteiro) vencer a largura explícita.
+  - Corrigido no `globals.css`: adicionado `min-width: 0` em `.components-games-panel-team` (permite encolher de fato para 95px) e `display: block; width: 100%; overflow: hidden; text-overflow: ellipsis;` em `.components-games-panel-team span`, valendo tanto para "partida finalizada" quanto "próxima partida" (estilos compartilhados).
+  - `MatchCard` em `GamesPanel.tsx` agora também define `title` com o nome completo em cada span de time, para ficar disponível ao passar o mouse mesmo com o texto truncado.
+
+- **Painel "jogos" da Home: Nome Correto do Clube**:
+  - `GamesPanel.tsx` tinha "ACF Sport Club" fixo como nome do time da casa — resquício do mock estático original, divergente do nome real do clube usado no restante do código (`ACF Sports/Vila Mercado`, ex.: `CLUB_NAME` em `src/data/news.ts` e os itens `team` dentro de `competitions.table`).
+  - Adicionada a constante `CLUB_NAME = "ACF Sports/Vila Mercado"` em `GamesPanel.tsx`, usada no nome do time da casa nos dois cards.
+
+- **Painel "jogos" da Home: Text-Overflow na Faixa de Data/Competição**:
+  - `.components-games-panel-matchDate` (a faixa laranja/branca com a data, ex.: "02/09/2026 - COPA SESC FUTSAL ADULTO / Ginásio Pedro Mariucci") tinha `white-space: nowrap` sem truncamento; textos longos de competição/local eram simplesmente cortados pelo `overflow: hidden` do card pai, no meio da palavra e sem reticências.
+  - Adicionado `overflow: hidden; text-overflow: ellipsis;` em `.components-games-panel-matchDate` no `globals.css`.
+  - `MatchCard` em `GamesPanel.tsx` agora também define `title` com o texto completo da faixa de data, mesmo padrão já usado nos nomes dos times.
