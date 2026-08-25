@@ -5,6 +5,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Notícias | ACF Sports",
   description: "Fique por dentro das últimas notícias, partidas, novidades e cobertura completa do ACF Sports.",

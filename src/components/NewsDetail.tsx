@@ -1,37 +1,31 @@
 import Link from "next/link";
 import { ChevronRight, ChevronsRight } from "lucide-react";
-import { getRelatedNews, type NewsItem } from "@/data/news";
+import { formatNewsDate, getRelatedNews, type NewsItem } from "@/data/news";
 
-export function NewsDetail({ news }: { news: NewsItem }) {
-  const relatedNews = getRelatedNews(news.slug);
+export async function NewsDetail({ news }: { news: NewsItem }) {
+  const relatedNews = await getRelatedNews(news.id);
 
   return (
     <article className="components-news-detail-article" data-node-id="1564:11705" data-name="detalhe-noticia">
       <div className="components-news-detail-inner">
         <header className="components-news-detail-articleHeader">
-          <p>{news.category}</p>
+          <p>{news.tag}</p>
           <h2>{news.title}</h2>
-          <span>{news.description}</span>
+          <span>{news.subtitle}</span>
         </header>
 
-        <NewsImage item={news} variant="hero" />
+        <img className="components-news-detail-heroImage" src={news.image} alt={news.title} />
 
         <div className="components-news-detail-caption">
-          <span>{news.caption}</span>
-          <span>{news.date}</span>
+          <span>Por {news.author}</span>
+          <span>{formatNewsDate(news.createdAt)}</span>
         </div>
 
         <div className="components-news-detail-body">
-          {news.body.slice(0, 3).map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-          {news.quote ? <blockquote>{news.quote}</blockquote> : null}
-          {news.body.slice(3).map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+          <div className="components-news-detail-content" dangerouslySetInnerHTML={{ __html: news.content }} />
           <footer>
             <span>Escrito por {news.author}</span>
-            <span>{news.date}</span>
+            <span>{formatNewsDate(news.createdAt)}</span>
           </footer>
         </div>
 
@@ -39,15 +33,15 @@ export function NewsDetail({ news }: { news: NewsItem }) {
           <h2 id="related-title">Mais notícias sobre o ACF</h2>
           <div className="components-news-detail-relatedList">
             {relatedNews.map((item) => (
-              <Link className="components-news-detail-relatedCard" href={`/noticias/${item.slug}`} key={item.slug}>
-                <NewsImage item={item} variant="related" />
+              <Link className="components-news-detail-relatedCard" href={`/noticias/${item.id}`} key={item.id}>
+                <img className="components-news-detail-relatedImage" src={item.image} alt={item.title} />
                 <div className="components-news-detail-relatedCopy">
-                  <p>{item.category}</p>
+                  <p>{item.tag}</p>
                   <h3>{item.title}</h3>
-                  <span>{item.description}</span>
+                  <span>{item.subtitle}</span>
                   <div>
                     <small>Por {item.author}</small>
-                    <small>{item.date}</small>
+                    <small>{formatNewsDate(item.createdAt)}</small>
                   </div>
                 </div>
               </Link>
@@ -73,27 +67,3 @@ export function NewsDetail({ news }: { news: NewsItem }) {
     </article>
   );
 }
-
-function NewsImage({ item, variant }: { item: NewsItem; variant: "hero" | "related" }) {
-  const className = variant === "hero" ? "components-news-detail-heroImage" : "components-news-detail-relatedImage";
-
-  if (item.image.type === "layered") {
-    return (
-      <div className={`${className} components-news-detail-layeredImage`}>
-        <img className="components-news-detail-layeredBackground" src={item.image.background} alt="" />
-        <img className="components-news-detail-layeredPlayers" src={item.image.foreground} alt={item.image.alt} />
-      </div>
-    );
-  }
-
-  if (item.image.type === "mascot") {
-    return (
-      <div className={`${className} components-news-detail-mascotImage`}>
-        <img src={item.image.src} alt={item.image.alt} />
-      </div>
-    );
-  }
-
-  return <img className={className} src={item.image.src} alt={item.image.alt} />;
-}
-

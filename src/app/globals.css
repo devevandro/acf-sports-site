@@ -1702,6 +1702,7 @@ button {
   left: 0;
   max-width: 100%;
   padding: 4px 8px;
+  overflow: hidden;
   border-bottom-right-radius: 8px;
   border-top-left-radius: 8px;
   background: var(--laranja);
@@ -1712,6 +1713,7 @@ button {
   line-height: 20px;
   text-transform: capitalize;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .components-games-panel-upcomingDate {
@@ -1741,6 +1743,7 @@ button {
   align-items: center;
   gap: 4px;
   width: 95px;
+  min-width: 0;
   color: #f5f5f5;
   text-align: center;
 }
@@ -1757,12 +1760,16 @@ button {
 }
 
 .components-games-panel-team span {
+  display: block;
+  width: 100%;
+  overflow: hidden;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 12px;
   font-weight: 600;
   line-height: 20px;
   text-transform: capitalize;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .components-games-panel-score {
@@ -3000,7 +3007,15 @@ button {
 
 .components-news-detail-body p {
   margin: 0;
-  text-indent: 48px;
+}
+
+.components-news-detail-content > * + * {
+  margin-top: 16px;
+}
+
+.components-news-detail-clubName {
+  color: var(--laranja);
+  font-weight: 700;
 }
 
 .components-news-detail-body blockquote {
@@ -3250,10 +3265,6 @@ button {
     line-height: 30px;
   }
 
-  .components-news-detail-body p {
-    text-indent: 24px;
-  }
-
   .components-news-detail-body footer {
     font-size: 15px;
     line-height: 24px;
@@ -3300,7 +3311,7 @@ button {
 
 .components-news-grid-grid {
   display: grid;
-  grid-template-columns: repeat(3, 330px);
+  grid-template-columns: repeat(var(--news-grid-columns, 3), 330px);
   gap: 80px 40px;
 }
 
@@ -3430,7 +3441,7 @@ button {
   }
 
   .components-news-grid-grid {
-    grid-template-columns: repeat(2, 330px);
+    grid-template-columns: repeat(min(var(--news-grid-columns, 2), 2), 330px);
   }
 
   .components-news-grid-action {
