@@ -3,8 +3,13 @@ import { MainMenu } from "@/components/MainMenu";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
+import { getTeamInfo } from "@/data/teamInfo";
 
-export default function ContactPage() {
+export const revalidate = 60;
+
+export default async function ContactPage() {
+  const teamInfo = await getTeamInfo();
+
   return (
     <main className="app-contato-page-page">
       <TopCf />
@@ -17,7 +22,7 @@ export default function ContactPage() {
           </h1>
         </div>
       </header>
-      <ContactContent />
+      <ContactContent teamInfo={teamInfo} />
       <SponsorsStrip />
       <SiteFooter />
     </main>

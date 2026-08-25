@@ -104,4 +104,54 @@ npm run build
 - **Painel "jogos" da Home: Text-Overflow na Faixa de Data/Competição**:
   - `.components-games-panel-matchDate` (a faixa laranja/branca com a data, ex.: "02/09/2026 - COPA SESC FUTSAL ADULTO / Ginásio Pedro Mariucci") tinha `white-space: nowrap` sem truncamento; textos longos de competição/local eram simplesmente cortados pelo `overflow: hidden` do card pai, no meio da palavra e sem reticências.
   - Adicionado `overflow: hidden; text-overflow: ellipsis;` em `.components-games-panel-matchDate` no `globals.css`.
+
+- **Painel "jogos" da Home: Local Movido para Dentro do Card**:
+  - `formatGameDate()` (`src/data/games.ts`) não inclui mais o `location` na string da faixa de data/competição no topo do card — só data + competição. Nova função `formatGameTime()` extrai só o horário (`HH:mm`) de `game.date`, usada na página de competições.
+  - `MatchCard` em `GamesPanel.tsx` ganhou a prop `location` e agora renderiza o local do jogo dentro do card, centralizado, logo abaixo da linha dos times/placar (antes ficava embutido na faixa do topo).
+  - `globals.css`: `.components-games-panel-matchBody` virou um container flex-column (a antiga disposição em linha dos times/placar foi extraída para `.components-games-panel-matchTeams`); nova classe `.components-games-panel-matchLocation` estiliza o texto do local; a altura fixa dos cards (`.components-games-panel-matchCard` / `.components-games-panel-upcomingCard`) aumentou de 116px/136px para 140px/160px para acomodar a linha extra.
+
+- **Página de Notícias: Notícia Fixada Ausente do Arquivo Completo**:
+  - `NewsArchive.tsx` (`/noticias`) agora filtra `PINNED_CAROUSEL_NEWS_ID` da lista, igual ao que `getLatestNews()` já fazia para o grid da home — a notícia fixada só aparece no carousel da home, nunca junto das demais no arquivo.
+
+- **Página de Notícias: Paginação Condicional**:
+  - A navegação de paginação (números de página + setas) em `NewsArchive.tsx` só é renderizada quando há mais de 6 notícias (após excluir a fixada); os números de página agora são gerados dinamicamente (`Math.ceil(newsItems.length / 6)`) em vez do array fixo `[1, 2, 3, 4, 5, 6]`.
+
+- **Página de Competições: Card "Próxima Partida" Conectado ao Banco**:
+  - `src/app/clube/competicoes/page.tsx` virou um Server Component assíncrono que busca `getNextUpcomingGame()` (mesma fonte usada pelo painel "jogos" da home) e passa os dados formatados como prop `nextGame` para `CompetitionsContent`; ganhou `export const revalidate = 60`, igual à home.
+  - `CompetitionsContent.tsx` não usa mais o mock estático `nextMatchData` — monta o card e o modal de detalhes a partir da prop `nextGame` (times, competição, data, hora, local), e mostra "Nenhuma partida agendada no momento." quando não há próxima partida no banco. A lista "Partidas Anteriores" abaixo permanece com dados mock (fora do escopo desta mudança).
+
+- **Rodapé: Contato e Redes Sociais Conectados à Tabela `team_info`**:
+  - Adicionado `src/data/teamInfo.ts`, seguindo o mesmo padrão (`cache()` + fallback em erro) de `games.ts`/`news.ts`, buscando `facebook`, `instagram`, `youtube`, `phone`, `email`, `address` e `symbol` da tabela `team_info` (linha única).
+  - `SiteFooter.tsx` virou um componente de servidor assíncrono que usa `getTeamInfo()` para preencher os links de redes sociais, telefone, e-mail e endereço, no lugar dos valores fixos anteriores. Campos vazios no banco (ex.: `email`) caem no fallback estático anterior.
+
+- **Página de Contato: Conectada à Tabela `team_info`**:
+  - `src/app/contato/page.tsx` virou um Server Component assíncrono (`export const revalidate = 60`) que busca `getTeamInfo()` e passa como prop `teamInfo` para `ContactContent`.
+  - `ContactContent.tsx` (client component) recebe `teamInfo: TeamInfo` e monta `contactItems` (telefone, e-mail, endereço) e os links de redes sociais (Instagram/Facebook/YouTube) a partir dela, no lugar dos valores fixos anteriores. O campo "Atendimento" continua estático — não existe coluna correspondente em `team_info`. O link do WhatsApp agora é derivado do `teamInfo.phone` (nova função `toWhatsappNumber()`: extrai só os dígitos e prefixa `55` quando o número tem 11 dígitos, ou seja, sem código de país).
+
+- **Carousel da Home: Notícia Fixada Sem Overlay de Texto**:
+  - Quando o slide ativo do carousel é a notícia fixada (`PINNED_CAROUSEL_NEWS_ID`, usada como banner/anúncio — ex.: a notícia "Patrocinadores"), `HeroNews.tsx` não renderiza mais o `storyCard` (categoria, título e resumo sobrepostos à imagem), deixando só a imagem de fundo visível. Para as demais notícias do carousel o comportamento não muda.
   - `MatchCard` em `GamesPanel.tsx` agora também define `title` com o texto completo da faixa de data, mesmo padrão já usado nos nomes dos times.
+
+- **Carousel da Home: Notícia Fixada Sempre na 4ª Posição**:
+  - `buildCarouselSlides()` em `HeroNews.tsx` inseria a notícia fixada (`PINNED_CAROUSEL_NEWS_ID`) na 3ª posição (`Math.min(2, slides.length)`); ajustado para `Math.min(3, slides.length)`, garantindo que ela sempre ocupe a 4ª posição do carousel quando houver slides suficientes.
+
+- **Painel "tabelas" da Home: Conectado à Tabela `competitions`**:
+  - Adicionado `src/data/competitions.ts` (padrão `cache()` + fallback em erro, igual a `games.ts`/`teamInfo.ts`), com `getHomeCompetitions()` buscando em `competitions` apenas as linhas com `home_page = true`, ordenadas por `updated_at` desc; a coluna jsonb `table` é normalizada e ordenada por posição.
+  - `StandingsPanel.tsx` virou um Server Component assíncrono que busca `getHomeCompetitions()` e repassa para o novo `StandingsPanelClient.tsx` (client component), que renderiza a tabela de classificação real (posição, clube, pontos, jogos, saldo de gols, vitórias, derrotas) e mostra "Nenhuma tabela disponível no momento." quando nenhuma competição está marcada para a home. Quando há mais de uma competição com `home_page = true`, o botão com `ChevronDown` (antes decorativo) agora abre um dropdown funcional para trocar entre elas — mesmo padrão visual do dropdown em `CompetitionsContent.tsx`.
+  - `globals.css`: `.components-standings-panel-tableCard` passou a `position: relative; overflow: visible` (antes `overflow: hidden`) para não cortar o dropdown; novas classes `.components-standings-panel-dropdownMenu`, `.components-standings-panel-dropdownItem` e `.components-standings-panel-empty`.
+
+- **Painel "tabelas" da Home: Tabela Quebrada com Nomes Reais de Clube**:
+  - Com dados reais (ex.: "Cyber Futsal/Arena Cassimiro"), a tabela colapsava: `table-layout` (padrão `auto`) redistribuía a largura das colunas com base no conteúdo, e a coluna do clube (`white-space: nowrap`, sem truncamento) forçava as colunas numéricas (Pts/Jgs/Sgs/Vit/De) a espremerem e sobrepor o texto — inclusive no cabeçalho.
+  - Corrigido em `globals.css`: `.components-standings-panel-table` ganhou `table-layout: fixed`, com `.components-standings-panel-clubColumn` fixada em `40%` e as demais colunas em `12%` cada (soma 100%); `.components-standings-panel-clubColumn` ganhou `overflow: hidden; text-overflow: ellipsis` para truncar nomes longos em vez de estourar a célula.
+  - A altura fixa do card (`316px`, que sobrava vazia para competições com poucos times) virou altura automática; a tabela agora fica dentro de `.components-standings-panel-tableScroll` (nova classe, `max-height: 280px; overflow-y: auto`) com cabeçalho `position: sticky`, então competições com muitos times (ex.: 8) ganham rolagem interna em vez de esticar o card.
+  - `StandingsPanelClient.tsx` passou a envolver a `<table>` nesse novo wrapper e a adicionar `title={entry.team}` na célula do clube, para o nome completo aparecer ao passar o mouse quando truncado.
+
+- **Página de Competições: Tabelas de Classificação Conectadas ao Banco**:
+  - Adicionado `getAllCompetitions()` em `src/data/competitions.ts`, buscando todas as linhas de `competitions` ordenadas por `home_page DESC, updated_at DESC` — a competição marcada com `home_page = true` sempre vem primeiro no array (e, portanto, pré-selecionada na tabela).
+  - `src/app/clube/competicoes/page.tsx` agora busca `getAllCompetitions()` junto com `getNextUpcomingGame()` e passa o resultado como prop `competitions` para `CompetitionsContent`.
+  - `CompetitionsContent.tsx` não usa mais os mocks estáticos `competitionOptions`/`standingsData` — o dropdown de competições e a tabela de classificação são montados a partir da prop `competitions` (mesmo shape `HomeCompetition`/`StandingEntry` usado no painel da home); o dropdown fica desabilitado quando há só uma competição, e é exibido "Nenhuma tabela disponível no momento." quando o banco não retorna nenhuma.
+
+- **Página de Competições: "Partidas Anteriores" Conectada ao Banco**:
+  - Adicionado `getPreviousGames()` em `src/data/games.ts`, reaproveitando o mesmo filtro `isFinished` já usado por `getLatestFinishedGame()` (jogo é considerado finalizado quando `result` não é vazio nem `"-"`), retornando todos os jogos finalizados ordenados do mais recente para o mais antigo (em vez de só o último).
+  - `src/app/clube/competicoes/page.tsx` agora também busca `getPreviousGames()` e monta a prop `previousMatches` (tipo `PreviousMatchData`, exportado por `CompetitionsContent.tsx`) com o mesmo padrão de formatação já usado para `nextGame` (`formatGameDate`/`formatGameTime`, logo do adversário via `competition.table`).
+  - `CompetitionsContent.tsx` removeu o mock estático `previousMatchesData` — a lista "Partidas Anteriores" é montada a partir da prop `previousMatches` e só aparece quando há pelo menos um jogo finalizado cadastrado no banco; caso contrário mostra "Nenhuma partida anterior registrada no momento." (mesmo padrão das outras seções). Como a tabela `games` não tem um placar estruturado por lado (só a coluna livre `result`, ex.: usada como "3 x 1" no painel "jogos" da home), o tipo `MatchDetail` trocou os campos `homeTeam.score`/`awayTeam.score` (números fixos do mock) por um único campo `result: string`, exibido tal como vem do banco tanto no card quanto no modal de detalhes. Os campos `highlights`/`referee` do mock (sem coluna correspondente no banco) foram removidos, junto com o bloco "Observações da Partida" no modal que os exibia.

@@ -1,6 +1,7 @@
 
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
+import { getTeamInfo } from "@/data/teamInfo";
 
 const menuLinks = [
   { name: "Home", href: "/" },
@@ -9,7 +10,9 @@ const menuLinks = [
   { name: "Contato", href: "/contato" }
 ];
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const teamInfo = await getTeamInfo();
+
   return (
     <footer className="components-site-footer-footer">
       <img className="components-site-footer-backgroundMascot" src="/footer/sovereign-footer.png" alt="" aria-hidden="true" />
@@ -29,17 +32,17 @@ export function SiteFooter() {
 
         <section className="components-site-footer-column text-acf-gray w-100">
           <h2>mídias sociais</h2>
-          <a className="components-site-footer-acfTv" href="http://www.youtube.com/@ACFsportsTV" target="_blank" rel="noreferrer">
+          <a className="components-site-footer-acfTv" href={teamInfo.youtube} target="_blank" rel="noreferrer">
             Soberano TV
           </a>
           <div className="components-site-footer-socials text-acf-gray">
-            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
+            <a href={teamInfo.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
               <img src="/footer/instagram.png" alt="Instagram" />
             </a>
-            <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook">
+            <a href={teamInfo.facebook} target="_blank" rel="noreferrer" aria-label="Facebook">
               <img src="/footer/facebook.png" alt="Facebook" />
             </a>
-            <a href="https://www.youtube.com/" target="_blank" rel="noreferrer" aria-label="YouTube">
+            <a href={teamInfo.youtube} target="_blank" rel="noreferrer" aria-label="YouTube">
               <img src="/footer/youtube.png" alt="YouTube" />
             </a>
           </div>
@@ -48,16 +51,12 @@ export function SiteFooter() {
         <section className="components-site-footer-contact">
           <h2>Contato</h2>
           <p>
-            +55 43 99999-9999
+            {teamInfo.phone}
             <br />
-            contato@acf-sports.com.br
+            {teamInfo.email}
           </p>
           <hr />
-          <p>
-            Rua: Maria Staiger Vilar, 59 - Fortunato Sibim
-            <br />
-            Cornélio Procópio - PR
-          </p>
+          <p>{teamInfo.address}</p>
           <hr />
         </section>
       </div>

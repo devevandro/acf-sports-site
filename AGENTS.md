@@ -102,3 +102,53 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 - `.components-games-panel-matchDate` (the orange/white date badge, e.g. "02/09/2026 - COPA SESC FUTSAL ADULTO / Ginásio Pedro Mariucci") had `white-space: nowrap` with no truncation; long competition/location strings just got hard-clipped by the parent card's `overflow: hidden`, cutting text off mid-word with no ellipsis.
 - Added `overflow: hidden; text-overflow: ellipsis;` to `.components-games-panel-matchDate` in `globals.css`.
 - `GamesPanel.tsx`'s `MatchCard` now also sets a `title` attribute on the date badge with the full untruncated string, same pattern already used for the team name spans.
+
+## Recent Changes (Home "jogos" Panel: Location Moved Inside the Card)
+- `formatGameDate()` (`src/data/games.ts`) no longer folds `location` into the top badge string — just date + competition now. Added `formatGameTime()`, extracting only the `HH:mm` portion of `game.date`, used on the competitions page.
+- `MatchCard` in `GamesPanel.tsx` gained a `location` prop and now renders the game's venue inside the card, centered, below the team/score row (previously it was crammed into the top badge).
+- `globals.css`: `.components-games-panel-matchBody` is now a flex-column container (the previous row layout for teams/score was extracted into `.components-games-panel-matchTeams`); added `.components-games-panel-matchLocation` for the venue text; fixed card heights (`.components-games-panel-matchCard` / `.components-games-panel-upcomingCard`) grew from 116px/136px to 140px/160px to fit the extra line.
+
+## Recent Changes (News Page: Pinned Article Excluded from the Full Archive)
+- `NewsArchive.tsx` (`/noticias`) now filters out `PINNED_CAROUSEL_NEWS_ID`, mirroring what `getLatestNews()` already did for the home grid — the pinned news item only ever shows in the home hero carousel, never alongside the rest in the archive.
+
+## Recent Changes (News Page: Conditional Pagination)
+- The pagination nav (page numbers + arrows) in `NewsArchive.tsx` only renders when there are more than 6 news items (after excluding the pinned one); page numbers are now generated dynamically (`Math.ceil(newsItems.length / 6)`) instead of the hardcoded `[1, 2, 3, 4, 5, 6]` array.
+
+## Recent Changes (Competitions Page: "Próxima Partida" Card Wired to the Database)
+- `src/app/clube/competicoes/page.tsx` became an async Server Component that fetches `getNextUpcomingGame()` (same source the home "jogos" panel uses) and passes the formatted data down as a `nextGame` prop to `CompetitionsContent`; added `export const revalidate = 60`, matching the home page.
+- `CompetitionsContent.tsx` no longer uses the static `nextMatchData` mock — it builds the card and detail modal from the `nextGame` prop (teams, competition, date, time, location), and shows "Nenhuma partida agendada no momento." when there's no upcoming game in the database. The "Partidas Anteriores" list below is unchanged and still mock data (out of scope for this change).
+
+## Recent Changes (Footer: Contact & Social Links Wired to `team_info`)
+- Added `src/data/teamInfo.ts`, following the same `cache()` + error-fallback pattern as `games.ts`/`news.ts`, querying `facebook`, `instagram`, `youtube`, `phone`, `email`, `address`, and `symbol` from the single-row `team_info` table.
+- `SiteFooter.tsx` became an async server component using `getTeamInfo()` to populate the social links, phone, email, and address instead of the previous hardcoded values. Empty fields in the DB (e.g. `email`) fall back to the prior static defaults.
+
+## Recent Changes (Contact Page: Wired to `team_info`)
+- `src/app/contato/page.tsx` became an async Server Component (`export const revalidate = 60`) that fetches `getTeamInfo()` and passes it down as a `teamInfo` prop to `ContactContent`.
+- `ContactContent.tsx` (client component) now takes `teamInfo: TeamInfo` and builds `contactItems` (phone, email, address) and the social links (Instagram/Facebook/YouTube) from it instead of hardcoded values. The "Atendimento" (hours) field stays static — `team_info` has no matching column. The WhatsApp link is now derived from `teamInfo.phone` via a new `toWhatsappNumber()` helper: strips to digits only and prefixes `55` when the number is 11 digits (i.e. missing the country code).
+
+## Recent Changes (Home Carousel: Pinned News Renders Image-Only, No Text Overlay)
+- When the active carousel slide is the pinned news item (`PINNED_CAROUSEL_NEWS_ID`, used as a banner/ad slot — e.g. the "Patrocinadores" news row), `HeroNews.tsx` no longer renders the `storyCard` (category/title/summary text overlaid on the image), leaving just the background image visible. Behavior for all other carousel slides is unchanged.
+
+## Recent Changes (Home Carousel: Pinned News Always in 4th Position)
+- `buildCarouselSlides()` in `HeroNews.tsx` inserted the pinned news item (`PINNED_CAROUSEL_NEWS_ID`) at the 3rd slot (`Math.min(2, slides.length)`); changed to `Math.min(3, slides.length)` so it always lands in the 4th slot of the carousel when there are enough slides.
+
+## Recent Changes (Home "tabelas" Panel: Wired to the `competitions` Table)
+- Added `src/data/competitions.ts` (same `cache()` + error-fallback pattern as `games.ts`/`teamInfo.ts`), exposing `getHomeCompetitions()`, which queries `competitions` for rows where `home_page = true` only, ordered by `updated_at` desc; the jsonb `table` column is normalized and sorted by position.
+- `StandingsPanel.tsx` became an async Server Component that fetches `getHomeCompetitions()` and hands the result to a new client component, `StandingsPanelClient.tsx`, which renders the real standings table (position, club, points, games played, goal difference, wins, losses) and shows "Nenhuma tabela disponível no momento." when no competition is flagged for the home page. When more than one competition has `home_page = true`, the previously decorative `ChevronDown` button now opens a working dropdown to switch between them — same visual pattern as the dropdown in `CompetitionsContent.tsx`.
+- `globals.css`: `.components-standings-panel-tableCard` switched to `position: relative; overflow: visible` (was `overflow: hidden`) so the dropdown isn't clipped; added `.components-standings-panel-dropdownMenu`, `.components-standings-panel-dropdownItem`, and `.components-standings-panel-empty`.
+
+## Recent Changes (Home "tabelas" Panel: Broken Table Layout with Real Club Names)
+- With real data (e.g. "Cyber Futsal/Arena Cassimiro"), the table broke: default `table-layout: auto` sizes columns from content, and the club-name column (`white-space: nowrap`, no truncation) forced the numeric columns (Pts/Jgs/Sgs/Vit/De) to shrink to near-zero and their text to overlap — including in the header row.
+- Fixed in `globals.css`: `.components-standings-panel-table` now uses `table-layout: fixed`, with `.components-standings-panel-clubColumn` pinned at `40%` and the remaining columns at `12%` each (sums to 100%); `.components-standings-panel-clubColumn` gained `overflow: hidden; text-overflow: ellipsis` so long names truncate instead of blowing out the cell.
+- The card's fixed height (`316px`, which left empty space for competitions with few teams) became auto height; the table now lives inside a new `.components-standings-panel-tableScroll` wrapper (`max-height: 280px; overflow-y: auto`) with a `position: sticky` header, so competitions with many teams (e.g. 8) scroll internally instead of stretching the card.
+- `StandingsPanelClient.tsx` now wraps the `<table>` in that scroll container and adds `title={entry.team}` on the club cell so the full name is available on hover when truncated.
+
+## Recent Changes (Competitions Page: Standings Tables Wired to the Database)
+- Added `getAllCompetitions()` to `src/data/competitions.ts`, fetching every row from `competitions` ordered by `home_page DESC, updated_at DESC` — the competition flagged `home_page = true` always lands first in the array (and is therefore pre-selected in the table).
+- `src/app/clube/competicoes/page.tsx` now fetches `getAllCompetitions()` alongside `getNextUpcomingGame()` and passes the result down as a `competitions` prop to `CompetitionsContent`.
+- `CompetitionsContent.tsx` no longer uses the static `competitionOptions`/`standingsData` mocks — the competition dropdown and standings table are built from the `competitions` prop (same `HomeCompetition`/`StandingEntry` shape used by the home panel); the dropdown is disabled when there's only one competition, and shows "Nenhuma tabela disponível no momento." when the database returns none.
+
+## Recent Changes (Competitions Page: "Partidas Anteriores" Wired to the Database)
+- Added `getPreviousGames()` to `src/data/games.ts`, reusing the same `isFinished` filter already used by `getLatestFinishedGame()` (a game counts as finished when `result` is neither empty nor `"-"`), returning every finished game sorted most-recent-first (instead of just the latest one).
+- `src/app/clube/competicoes/page.tsx` now also fetches `getPreviousGames()` and builds a `previousMatches` prop (type `PreviousMatchData`, exported from `CompetitionsContent.tsx`) using the same formatting already used for `nextGame` (`formatGameDate`/`formatGameTime`, opponent logo via `competition.table`).
+- `CompetitionsContent.tsx` dropped the static `previousMatchesData` mock — the "Partidas Anteriores" list is built from the `previousMatches` prop and only renders when at least one finished game exists in the database; otherwise it shows "Nenhuma partida anterior registrada no momento." (same pattern as the other sections). Since the `games` table has no structured per-side score (just the freeform `result` column, e.g. used as "3 x 1" in the home "jogos" panel), `MatchDetail`'s `homeTeam.score`/`awayTeam.score` fields (fixed numbers from the mock) were replaced by a single `result: string` field, rendered as-is from the database in both the card and the detail modal. The mock's `highlights`/`referee` fields (no matching database column) were removed, along with the "Observações da Partida" modal block that displayed them.

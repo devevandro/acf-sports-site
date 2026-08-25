@@ -621,6 +621,21 @@ button {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.components-competitions-content-noMatch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 124px;
+  padding: 20px 80px;
+  border-radius: 8px;
+  background: #fdfdfd;
+  box-shadow: 0 0 2px 2px rgba(167, 165, 165, 0.26);
+  color: var(--cinza-medio);
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
 .components-competitions-content-matchTeams {
   display: flex;
   align-items: center;
@@ -1684,7 +1699,7 @@ button {
 
 .components-games-panel-matchCard {
   position: relative;
-  height: 116px;
+  height: 140px;
   overflow: hidden;
   border-radius: 8px;
   background: var(--azul-preto);
@@ -1692,7 +1707,7 @@ button {
 }
 
 .components-games-panel-upcomingCard {
-  height: 136px;
+  height: 160px;
   background: var(--azul-ceu-fechado-tom-1);
 }
 
@@ -1726,15 +1741,40 @@ button {
   top: 36px;
   left: 50%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 4px;
+  gap: 8px;
+  width: 100%;
   transform: translateX(-50%);
 }
 
 .components-games-panel-upcomingCard .components-games-panel-matchBody {
   top: 44px;
+}
+
+.components-games-panel-matchTeams {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.components-games-panel-upcomingCard .components-games-panel-matchTeams {
   gap: 15px;
+}
+
+.components-games-panel-matchLocation {
+  max-width: calc(100% - 24px);
+  overflow: hidden;
+  color: #b3b3b3;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  text-transform: capitalize;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .components-games-panel-team {
@@ -4736,9 +4776,9 @@ button {
 }
 
 .components-standings-panel-tableCard {
+  position: relative;
   width: 290px;
-  height: 316px;
-  overflow: hidden;
+  overflow: visible;
   border: 2px solid var(--cinza-claro);
   border-radius: 8px;
   background: #e7e7e7;
@@ -4762,13 +4802,66 @@ button {
   text-align: left;
 }
 
+.components-standings-panel-selectButton:disabled {
+  cursor: default;
+}
+
 .components-standings-panel-selectButton img {
   width: 24px;
   height: 24px;
 }
 
+.components-standings-panel-dropdownMenu {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.components-standings-panel-dropdownItem {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.components-standings-panel-dropdownItem:hover,
+.components-standings-panel-dropdownItem.active {
+  background: #f1f5f9;
+  color: #ff3203;
+  font-weight: 600;
+}
+
+.components-standings-panel-empty {
+  padding: 16px;
+  color: #4e4e4e;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 14px;
+}
+
+.components-standings-panel-tableScroll {
+  max-height: 280px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .components-standings-panel-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   color: #4e4e4e;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
@@ -4777,17 +4870,24 @@ button {
 }
 
 .components-standings-panel-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   height: 40px;
+  padding: 0 2px;
   color: #292929;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   text-align: center;
   text-transform: capitalize;
+  background: #e7e7e7;
+  white-space: nowrap;
 }
 
 .components-standings-panel-table td {
   height: 40px;
+  padding: 0 2px;
   text-align: center;
 }
 
@@ -4795,10 +4895,17 @@ button {
   border-bottom: 1px solid rgba(179, 179, 179, 0.6);
 }
 
+.components-standings-panel-table th:not(.components-standings-panel-clubColumn),
+.components-standings-panel-table td:not(.components-standings-panel-clubColumn) {
+  width: 12%;
+}
+
 .components-standings-panel-clubColumn {
-  width: 118px;
+  width: 40%;
   padding-left: 8px;
+  overflow: hidden;
   text-align: left !important;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 

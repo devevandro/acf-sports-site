@@ -81,11 +81,22 @@ export async function getNextUpcomingGame(): Promise<GameItem | null> {
   return upcoming[0] ?? null;
 }
 
+export async function getPreviousGames(): Promise<GameItem[]> {
+  const finished = (await getAllGames()).filter(isFinished);
+  finished.sort((a, b) => gameDateTime(b) - gameDateTime(a));
+  return finished;
+}
+
 export function formatGameDate(game: GameItem): string {
   const time = new Date(game.date).getTime();
   const datePart = Number.isNaN(time)
     ? game.date
     : new Intl.DateTimeFormat("pt-BR").format(new Date(time));
-  const segments = [game.competitionTitle, game.location].filter(Boolean);
-  return segments.length > 0 ? `${datePart} - ${segments.join(" / ")}` : datePart;
+  return game.competitionTitle ? `${datePart} - ${game.competitionTitle}` : datePart;
+}
+
+export function formatGameTime(game: GameItem): string {
+  const time = new Date(game.date).getTime();
+  if (Number.isNaN(time)) return "";
+  return new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit" }).format(new Date(time));
 }
