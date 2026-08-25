@@ -39,7 +39,7 @@ const rampartOne = Rampart_One({
 });
 
 export const metadata: Metadata = {
-  title: "ACF Sports | Site Oficial — Clube de Futebol & Futsal",
+  title: "ACF Sports | Site Oficial",
   description: "Site Oficial do ACF Sports. Acompanhe as notícias, jogos, tabelas, elenco de campo e futsal, planos de patrocínio e história do clube de Cornélio Procópio.",
   openGraph: {
     title: "ACF Sports | Site Oficial",

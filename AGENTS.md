@@ -49,3 +49,8 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 ## Recent Changes (Carousel Image Update)
 - Replaced `public/carousel/image-01.jpg`/`image-02.jpg` with `image-01.png`/`image-02.png` and updated references in `HeroNews.tsx` and `src/data/news.ts`.
 - Renamed the new PNG files from their originally saved capitalized names (`Image-01.png`/`Image-02.png`) to lowercase, since Vercel's Linux build environment is case-sensitive and would 404 on the mismatch even though it works locally on macOS.
+
+## Recent Changes (Favicon Fix)
+- Moved `favicon.ico` from `src/favicon.ico` (not picked up by Next.js at all) to `src/app/favicon.ico`, the App Router's special-file location for automatic favicon serving.
+- If the icon still doesn't appear to a browser after this fix, it's very likely favicon-specific browser caching (Chrome/Firefox cache favicons separately from the normal HTTP cache and often ignore hard-refresh) — check `/favicon.ico` directly or in a private window before assuming a server/build issue.
+- Shortened the page `<title>` metadata in `layout.tsx` to "ACF Sports | Site Oficial".
