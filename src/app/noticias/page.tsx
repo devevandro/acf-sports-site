@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MainMenu } from "@/components/MainMenu";
+import { SiteHeader } from "@/components/SiteHeader";
 import { NewsArchive } from "@/components/NewsArchive";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
@@ -17,11 +17,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function NewsPage() {
+export default async function NewsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const { page } = await searchParams;
+
   return (
     <main className="app-noticias-page-page">
       <TopCf />
-      <MainMenu active="news" />
+      <SiteHeader active="news" />
       <header className="app-noticias-page-heading">
         <div>
           <p>atualidades</p>
@@ -30,7 +36,7 @@ export default function NewsPage() {
           </h1>
         </div>
       </header>
-      <NewsArchive />
+      <NewsArchive page={page ? Number(page) : 1} />
       <SponsorsStrip />
       <SiteFooter />
     </main>

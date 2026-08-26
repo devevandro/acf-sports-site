@@ -72,9 +72,9 @@ export async function getNewsById(id: string): Promise<NewsItem | undefined> {
   return news.find((item) => item.id === id);
 }
 
-export async function getRelatedNews(id: string, limit = 3): Promise<NewsItem[]> {
+export async function getRelatedNews(id: string): Promise<NewsItem[]> {
   const news = await getAllNews();
-  return news.filter((item) => item.id !== id).slice(0, limit);
+  return news.filter((item) => item.id !== id && item.id !== PINNED_CAROUSEL_NEWS_ID);
 }
 
 export function formatNewsDate(iso: string): string {

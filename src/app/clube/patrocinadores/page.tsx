@@ -1,4 +1,4 @@
-import { MainMenu } from "@/components/MainMenu";
+import { SiteHeader } from "@/components/SiteHeader";
 import { SponsorsPageContent } from "@/components/SponsorsPageContent";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
@@ -8,7 +8,7 @@ export default function SponsorsPage() {
   return (
     <main className="app-clube-patrocinadores-page-page">
       <TopCf />
-      <MainMenu active="sponsors" />
+      <SiteHeader active="sponsors" />
       <header className="app-clube-patrocinadores-page-heading">
         <div>
           <p>nossos parceiros</p>

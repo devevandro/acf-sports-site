@@ -1,4 +1,4 @@
-import { MainMenu } from "@/components/MainMenu";
+import { SiteHeader } from "@/components/SiteHeader";
 import { RosterPageContent } from "@/components/roster/RosterPageContent";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
@@ -22,7 +22,7 @@ export default async function RosterPage({ searchParams }: PageProps) {
   return (
     <main className="app-clube-elenco-page-page">
       <TopCf />
-      <MainMenu active="club" activeClub="roster" />
+      <SiteHeader active="club" activeClub="roster" />
       <header className="app-clube-elenco-page-heading">
         <div>
           <p>clube</p>

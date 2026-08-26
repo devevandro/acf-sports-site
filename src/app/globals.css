@@ -3788,7 +3788,6 @@ button {
 
 .components-roster-section-section {
   position: relative;
-  min-height: 1048px;
   overflow: hidden;
   background: #121212;
   color: #f5f5f5;
@@ -3830,7 +3829,7 @@ button {
   position: relative;
   width: min(1440px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 80px 0 64px;
+  padding: 80px 0 40px;
 }
 
 .components-roster-section-title {
@@ -3991,13 +3990,10 @@ button {
 }
 
 @media (max-width: 768px) {
-  .components-roster-section-section {
-    min-height: 760px;
-  }
-
   .components-roster-section-inner {
     width: min(330px, calc(100% - 32px));
     padding-top: 56px;
+    padding-bottom: 32px;
   }
 
   .components-roster-section-title {
@@ -5100,7 +5096,7 @@ button {
   width: 457px;
   height: 56px;
   border-radius: 8px;
-  background: linear-gradient(162deg, #ff3203 0%, #8f301d 99%);
+  background: linear-gradient(162deg, #ff7a5c 0%, #8f1d00 99%);
   color: #f5f5f5;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;

@@ -1,5 +1,5 @@
 import { ContactContent } from "@/components/ContactContent";
-import { MainMenu } from "@/components/MainMenu";
+import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
@@ -13,7 +13,7 @@ export default async function ContactPage() {
   return (
     <main className="app-contato-page-page">
       <TopCf />
-      <MainMenu active="contact" />
+      <SiteHeader active="contact" />
       <header className="app-contato-page-heading">
         <div>
           <p>social</p>

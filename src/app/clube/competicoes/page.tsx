@@ -1,5 +1,5 @@
 import { CompetitionsContent, type PreviousMatchData } from "@/components/CompetitionsContent";
-import { MainMenu } from "@/components/MainMenu";
+import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
@@ -41,7 +41,7 @@ export default async function CompetitionsPage() {
   return (
     <main className="app-clube-competicoes-page-page">
       <TopCf />
-      <MainMenu active="club" activeClub="competitions" />
+      <SiteHeader active="club" activeClub="competitions" />
       <header className="app-clube-competicoes-page-heading">
         <div>
           <p>clube</p>
