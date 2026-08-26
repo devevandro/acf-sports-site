@@ -50,11 +50,18 @@ export function HeroNews({ news }: { news: NewsItem[] }) {
             alt={activeSlide.title}
           />
 
-          {activeSlide.id !== PINNED_CAROUSEL_NEWS_ID && (
-            <Link key={activeSlide.id} className="components-hero-news-storyCard" href={`/noticias/${activeSlide.id}`}>
-              <p className="components-hero-news-category">{activeSlide.tag}</p>
+          <div className="components-hero-news-scrim" />
+
+          {activeSlide.id === PINNED_CAROUSEL_NEWS_ID ? (
+            <div key={activeSlide.id} className="components-hero-news-storyCard">
               <h1 className="components-hero-news-title">{activeSlide.title}</h1>
-              <p className="components-hero-news-summary">{activeSlide.subtitle}</p>
+              <Link className="components-hero-news-ctaButton" href="/clube/patrocinadores">
+                Ver Planos <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+          ) : (
+            <Link key={activeSlide.id} className="components-hero-news-storyCard" href={`/noticias/${activeSlide.id}`}>
+              <h1 className="components-hero-news-title">{activeSlide.title}</h1>
             </Link>
           )}
         </div>
