@@ -189,3 +189,13 @@ npm run build
 
 - **Página de Competições: Legenda de Classificação/Rebaixamento Removida**:
   - Removido o bloco de legenda ("Classificados para próxima fase" / "Rebaixados para a segunda divisão") abaixo da tabela de classificação em `CompetitionsContent.tsx`, a pedido do usuário.
+
+- **Logo do Clube nos Cards de Partida Vinda do Banco**:
+  - `TeamBadge` (`CompetitionsContent.tsx`) ganhou a prop `home`, aplicando um destaque visual (fundo circular escuro) apenas no brasão do time da casa. `CompetitionsContent` e `GamesPanel.tsx` agora recebem/buscam `teamInfo.symbol` (via `getTeamInfo()`) e usam esse valor como logo do ACF nos cards de "Próxima Partida"/"Partidas Anteriores"/painel "jogos", com fallback para `/header/symbol.png` quando o banco não tem o campo preenchido.
+
+- **Jogos: Horário Separado da Data**:
+  - `src/data/games.ts` passou a selecionar também a coluna `time` da tabela `games` (campo `GameItem.time`, `string | null`), separada de `date`. A ordenação por data mais recente/próxima (`gameDateTime`) agora compara strings `"YYYY-MM-DD HH:MM"` diretamente, em vez de converter para `Date`/timestamp — evita ambiguidade de fuso horário na comparação.
+
+- **Página de Patrocinadores: Cards de Plano Redesenhados**:
+  - `SponsorsPageContent.tsx` ganhou as flags `SHOW_PARTNERS`/`SHOW_ONE_OFFS` (ambas `false`) para esconder os grupos "Parceiros" e "Pontuais" sem apagar os dados.
+  - `PlanCard` agora separa o preço em valor e período (`plan.price.split(" / ")`), renderizados em `<span>`s distintos (`.components-sponsors-page-content-planPriceAmount`/`...PricePeriod`), e ganhou um divisor (`.components-sponsors-page-content-planDivider`) abaixo do título. O botão do WhatsApp deixou de usar as classes utilitárias do Tailwind e passou a ter estilo próprio no `globals.css`, com o ícone posicionado absolutamente.

@@ -186,3 +186,13 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 
 ## Recent Changes (Competitions Page: Removed Standings Legend)
 - Removed the promoted/relegated legend block ("Classificados para próxima fase" / "Rebaixados para a segunda divisão") below the standings table in `CompetitionsContent.tsx`, per user request.
+
+## Recent Changes (Club Logo Wired to `team_info` in Match Cards)
+- `TeamBadge` (`CompetitionsContent.tsx`) gained a `home` prop, applying a visual highlight (dark circular background) only to the home team's crest. `CompetitionsContent` and `GamesPanel.tsx` now receive/fetch `teamInfo.symbol` (via `getTeamInfo()`) and use it as the ACF crest in the "Próxima Partida"/"Partidas Anteriores" cards and the home "jogos" panel, falling back to `/header/symbol.png` when the database field is empty.
+
+## Recent Changes (Games: Separate Time Field)
+- `src/data/games.ts` now also selects the `time` column from the `games` table (`GameItem.time`, `string | null`), separate from `date`. Sorting by most-recent/soonest date (`gameDateTime`) now compares `"YYYY-MM-DD HH:MM"` strings directly instead of converting to `Date`/timestamp, avoiding timezone ambiguity in the comparison.
+
+## Recent Changes (Sponsors Page: Redesigned Plan Cards)
+- `SponsorsPageContent.tsx` gained `SHOW_PARTNERS`/`SHOW_ONE_OFFS` flags (both `false`) to hide the "Parceiros" and "Pontuais" logo groups without deleting their data.
+- `PlanCard` now splits the price into amount and period (`plan.price.split(" / ")`), rendered in separate spans (`.components-sponsors-page-content-planPriceAmount`/`...PricePeriod`), and gained a divider (`.components-sponsors-page-content-planDivider`) below the title. The WhatsApp CTA button dropped its Tailwind utility classes in favor of dedicated `globals.css` styles, with the icon absolutely positioned inside the pill button.
