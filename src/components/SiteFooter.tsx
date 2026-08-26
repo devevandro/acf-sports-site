@@ -55,9 +55,9 @@ export async function SiteFooter() {
             <br />
             {teamInfo.email}
           </p>
-          <hr />
-          <p>{teamInfo.address}</p>
-          <hr />
+          <hr className="components-site-footer-addressDivider" />
+          <p className="components-site-footer-address">{teamInfo.address}</p>
+          <hr className="components-site-footer-addressDivider" />
         </section>
       </div>
 
