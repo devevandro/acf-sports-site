@@ -177,3 +177,15 @@ npm run build
 
 - **Atualização de Assets**:
   - Substituídos `public/footer/acf-footer-logo.png`, `public/footer/sovereign-footer.png` e `public/youtube-section/youtube-bull.png` por exports atualizados (sem mudanças de código).
+
+- **Notícias: Corrigido Fuso Horário na Exibição da Data**:
+  - `formatNewsDate()` (`src/data/news.ts`) formatava a data com `Intl.DateTimeFormat("pt-BR")` sem especificar `timeZone`, então o resultado dependia do fuso do ambiente de execução. Em produção (runtime em UTC), notícias criadas à noite no horário de Brasília apareciam com a data do dia seguinte (UTC), divergindo da data real armazenada no banco. Corrigido fixando `timeZone: "America/Sao_Paulo"` nas duas chamadas de formatação.
+
+- **Página "Nossa História": Conectada à Tabela `team_history`**:
+  - Adicionado `src/data/teamHistory.ts` (`getTeamHistory()`), no mesmo padrão de `teamInfo.ts`: busca a linha mais recente de `team_history` (`title`, `content`, `symbol`, `mascot`, `content_image`, `mascot_images`, `created_at`), com fallback estático apenas para `title`/`content`/`content_image` (o núcleo da página).
+  - `src/app/clube/historia/page.tsx` virou um Server Component assíncrono (`export const revalidate = 60`) que busca `getTeamHistory()` e passa como prop `history` para `HistoryContent.tsx`, que deixou de ter texto/imagens hardcoded — `content`/`mascot`/`symbol` são HTML vindo do banco, renderizado via `dangerouslySetInnerHTML` (mesmo padrão de `NewsDetail.tsx`).
+  - As seções "símbolos" e "mascote" agora só renderizam quando há dado correspondente no banco (`history.symbol` não vazio; `history.mascot` não vazio ou `history.mascotImages` com pelo menos um item) — sem fallback estático, para não mostrar conteúdo de exemplo quando o CMS ainda não preencheu esses campos.
+  - O texto do artigo (`.components-history-content-articleText`) teve o `text-indent` removido e a tipografia ajustada para bater com o corpo de texto de notícias (`.components-news-detail-body`: `24px`/`40px`, cor `#4e4e4e`, alinhado à esquerda).
+
+- **Página de Competições: Legenda de Classificação/Rebaixamento Removida**:
+  - Removido o bloco de legenda ("Classificados para próxima fase" / "Rebaixados para a segunda divisão") abaixo da tabela de classificação em `CompetitionsContent.tsx`, a pedido do usuário.

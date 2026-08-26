@@ -3,8 +3,13 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
+import { getTeamHistory } from "@/data/teamHistory";
 
-export default function HistoryPage() {
+export const revalidate = 60;
+
+export default async function HistoryPage() {
+  const history = await getTeamHistory();
+
   return (
     <main className="app-clube-historia-page-page">
       <TopCf />
@@ -17,7 +22,7 @@ export default function HistoryPage() {
           </h1>
         </div>
       </header>
-      <HistoryContent />
+      <HistoryContent history={history} />
       <SponsorsStrip />
       <SiteFooter />
     </main>

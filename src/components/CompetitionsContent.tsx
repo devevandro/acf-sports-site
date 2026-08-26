@@ -284,16 +284,6 @@ export function CompetitionsContent({
                   </table>
                 </div>
 
-                <div className="components-competitions-content-legend">
-                  <span>
-                    <i className="components-competitions-content-promotedDot" />
-                    Classificados para próxima fase
-                  </span>
-                  <span>
-                    <i className="components-competitions-content-relegatedDot" />
-                    Rebaixados para a segunda divisão
-                  </span>
-                </div>
               </>
             ) : (
               <p className="components-competitions-content-noMatch">

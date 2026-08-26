@@ -2252,21 +2252,22 @@ button {
 .components-history-content-articleText {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   margin-top: 36px;
-  color: #333333;
+  color: #4e4e4e;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 400;
-  line-height: 36px;
+  line-height: 40px;
+  text-align: left;
 }
 
 .components-history-content-articleText p {
   margin: 0;
-  text-indent: 32px;
 }
 
-.components-history-content-emphasis {
+.components-history-content-emphasis,
+.components-history-content-mascot .components-history-content-articleText p:last-child {
   color: #121212;
   font-weight: 600;
 }
@@ -2410,10 +2411,6 @@ button {
     margin-top: 24px;
     font-size: 16px;
     line-height: 28px;
-  }
-
-  .components-history-content-articleText p {
-    text-indent: 16px;
   }
 
   .components-history-content-symbols,
