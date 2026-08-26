@@ -3071,6 +3071,17 @@ button {
   font-weight: 700;
 }
 
+.components-news-detail-content a {
+  color: var(--laranja);
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.components-news-detail-content a:hover {
+  color: #8f301d;
+}
+
 .components-news-detail-body blockquote {
   margin: 16px 0;
   color: #4e4e4e;
@@ -3635,7 +3646,7 @@ button {
 }
 
 .components-plans-section-featuredCard h3 {
-  color: #7a210f;
+  color: #661400;
   font-size: 32px;
   line-height: 48px;
 }
@@ -3655,7 +3666,7 @@ button {
 }
 
 .components-plans-section-featuredCard .components-plans-section-price strong {
-  color: #7a210f;
+  color: #661400;
   line-height: 48px;
 }
 
@@ -3728,7 +3739,7 @@ button {
 
 .components-plans-section-featuredButton {
   width: 200px;
-  background: linear-gradient(168deg, #ff3203 0%, #8f301d 99%);
+  background: linear-gradient(168deg, #ff7a5c 0%, #8f1d00 99%);
 }
 
 .components-plans-section-button svg {
