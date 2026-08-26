@@ -174,3 +174,25 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 
 ## Recent Changes (Asset Updates)
 - Replaced `public/footer/acf-footer-logo.png`, `public/footer/sovereign-footer.png`, and `public/youtube-section/youtube-bull.png` with updated exports (no code changes).
+
+## Recent Changes (News: Fixed Timezone Bug in Displayed Dates)
+- `formatNewsDate()` (`src/data/news.ts`) formatted dates with `Intl.DateTimeFormat("pt-BR")` without an explicit `timeZone`, so the rendered date depended on the server runtime's default timezone. In production (UTC runtime), news created late at night in Brasília time rendered with the next day's date (UTC), not matching what's actually stored in the database. Fixed by passing `timeZone: "America/Sao_Paulo"` explicitly to both `Intl.DateTimeFormat` calls.
+
+## Recent Changes (History Page: Wired to the `team_history` Table)
+- Added `src/data/teamHistory.ts` (`getTeamHistory()`), following the same `cache()` + error-fallback pattern as `teamInfo.ts`: fetches the most recent row from `team_history` (`title`, `content`, `symbol`, `mascot`, `content_image`, `mascot_images`, `created_at`). Only `title`/`content`/`contentImage` (the page's core article) get a static fallback; `symbol`/`mascot`/`mascotImages` pass through raw (empty when the DB has no data).
+- `src/app/clube/historia/page.tsx` became an async Server Component (`export const revalidate = 60`) that fetches `getTeamHistory()` and passes it down as a `history` prop. `HistoryContent.tsx` no longer has hardcoded copy/images — `content`/`mascot`/`symbol` are CMS-authored HTML rendered via `dangerouslySetInnerHTML` (same trust model as `news.content` in `NewsDetail.tsx`).
+- The "símbolos" and "mascote" sections are now conditionally rendered: "símbolos" only shows when `history.symbol` is non-empty; "mascote" only shows when `history.mascot` is non-empty or `history.mascotImages` has at least one entry. No placeholder content is shown when the CMS hasn't filled these fields yet.
+- `.components-history-content-articleText` had its `text-indent` removed and typography aligned with the news article body (`.components-news-detail-body`: `24px`/`40px` line-height, `#4e4e4e`, left-aligned) per user request to match the news page's text styling.
+
+## Recent Changes (Competitions Page: Removed Standings Legend)
+- Removed the promoted/relegated legend block ("Classificados para próxima fase" / "Rebaixados para a segunda divisão") below the standings table in `CompetitionsContent.tsx`, per user request.
+
+## Recent Changes (Club Logo Wired to `team_info` in Match Cards)
+- `TeamBadge` (`CompetitionsContent.tsx`) gained a `home` prop, applying a visual highlight (dark circular background) only to the home team's crest. `CompetitionsContent` and `GamesPanel.tsx` now receive/fetch `teamInfo.symbol` (via `getTeamInfo()`) and use it as the ACF crest in the "Próxima Partida"/"Partidas Anteriores" cards and the home "jogos" panel, falling back to `/header/symbol.png` when the database field is empty.
+
+## Recent Changes (Games: Separate Time Field)
+- `src/data/games.ts` now also selects the `time` column from the `games` table (`GameItem.time`, `string | null`), separate from `date`. Sorting by most-recent/soonest date (`gameDateTime`) now compares `"YYYY-MM-DD HH:MM"` strings directly instead of converting to `Date`/timestamp, avoiding timezone ambiguity in the comparison.
+
+## Recent Changes (Sponsors Page: Redesigned Plan Cards)
+- `SponsorsPageContent.tsx` gained `SHOW_PARTNERS`/`SHOW_ONE_OFFS` flags (both `false`) to hide the "Parceiros" and "Pontuais" logo groups without deleting their data.
+- `PlanCard` now splits the price into amount and period (`plan.price.split(" / ")`), rendered in separate spans (`.components-sponsors-page-content-planPriceAmount`/`...PricePeriod`), and gained a divider (`.components-sponsors-page-content-planDivider`) below the title. The WhatsApp CTA button dropped its Tailwind utility classes in favor of dedicated `globals.css` styles, with the icon absolutely positioned inside the pill button.

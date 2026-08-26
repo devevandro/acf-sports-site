@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Calendar, ChevronDown, Clock, MapPin, Trophy, X } from "lucide-react";
 import type { HomeCompetition } from "@/data/competitions";
 
-const acfLogo = "/header/symbol.png";
+const fallbackAcfLogo = "/header/symbol.png";
 const bullMark = "/contact/bull.png";
 
 type MatchDetail = {
@@ -41,10 +41,12 @@ export type PreviousMatchData = Array<{
 
 const CLUB_NAME = "ACF Sports/Vila Mercado";
 
-function TeamBadge({ logo, name }: { logo: string; name: string }) {
+function TeamBadge({ logo, name, home }: { logo: string; name: string; home?: boolean }) {
   return (
     <div className="components-competitions-content-team">
-      <img src={logo} alt={name} />
+      <span className={`components-competitions-content-teamLogo ${home ? "components-competitions-content-teamLogoHome" : ""}`}>
+        <img src={logo} alt={name} />
+      </span>
       <span>{name}</span>
     </div>
   );
@@ -53,12 +55,15 @@ function TeamBadge({ logo, name }: { logo: string; name: string }) {
 export function CompetitionsContent({
   nextGame,
   competitions,
-  previousMatches
+  previousMatches,
+  clubLogo
 }: {
   nextGame: NextGameData;
   competitions: HomeCompetition[];
   previousMatches: PreviousMatchData;
+  clubLogo?: string;
 }) {
+  const acfLogo = clubLogo || fallbackAcfLogo;
   const [selectedCompId, setSelectedCompId] = useState<string | undefined>(competitions[0]?.id);
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [activeModalMatch, setActiveModalMatch] = useState<MatchDetail | null>(null);
@@ -110,7 +115,7 @@ export function CompetitionsContent({
         {nextMatchData ? (
           <article className="components-competitions-content-nextMatch">
             <div className="components-competitions-content-matchTeams">
-              <TeamBadge logo={nextMatchData.homeTeam.logo} name={nextMatchData.homeTeam.name} />
+              <TeamBadge logo={nextMatchData.homeTeam.logo} name={nextMatchData.homeTeam.name} home />
               <strong>x</strong>
               <TeamBadge logo={nextMatchData.awayTeam.logo} name={nextMatchData.awayTeam.name} />
             </div>
@@ -150,7 +155,7 @@ export function CompetitionsContent({
                     className="components-competitions-content-previousCard"
                     key={match.id}
                   >
-                    <TeamBadge logo={match.homeTeam.logo} name={match.homeTeam.name} />
+                    <TeamBadge logo={match.homeTeam.logo} name={match.homeTeam.name} home />
                     <strong>{match.result}</strong>
                     <TeamBadge logo={match.awayTeam.logo} name={match.awayTeam.name} />
 
@@ -284,16 +289,6 @@ export function CompetitionsContent({
                   </table>
                 </div>
 
-                <div className="components-competitions-content-legend">
-                  <span>
-                    <i className="components-competitions-content-promotedDot" />
-                    Classificados para próxima fase
-                  </span>
-                  <span>
-                    <i className="components-competitions-content-relegatedDot" />
-                    Rebaixados para a segunda divisão
-                  </span>
-                </div>
               </>
             ) : (
               <p className="components-competitions-content-noMatch">

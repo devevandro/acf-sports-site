@@ -77,9 +77,15 @@ export async function getRelatedNews(id: string): Promise<NewsItem[]> {
   return news.filter((item) => item.id !== id && item.id !== PINNED_CAROUSEL_NEWS_ID);
 }
 
+const NEWS_TIME_ZONE = "America/Sao_Paulo";
+
 export function formatNewsDate(iso: string): string {
   const date = new Date(iso);
-  const datePart = new Intl.DateTimeFormat("pt-BR").format(date);
-  const timePart = new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit" }).format(date);
+  const datePart = new Intl.DateTimeFormat("pt-BR", { timeZone: NEWS_TIME_ZONE }).format(date);
+  const timePart = new Intl.DateTimeFormat("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: NEWS_TIME_ZONE,
+  }).format(date);
   return `${datePart} às ${timePart}`;
 }

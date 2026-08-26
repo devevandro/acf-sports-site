@@ -666,6 +666,23 @@ button {
   object-fit: contain;
 }
 
+.components-competitions-content-teamLogo {
+  display: inline-flex;
+}
+
+.components-competitions-content-teamLogoHome {
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  background: var(--azul-preto);
+}
+
+.components-competitions-content-teamLogoHome img {
+  width: 44px;
+  height: 44px;
+}
+
 .components-competitions-content-team span {
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 14px;
@@ -2252,21 +2269,22 @@ button {
 .components-history-content-articleText {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   margin-top: 36px;
-  color: #333333;
+  color: #4e4e4e;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 400;
-  line-height: 36px;
+  line-height: 40px;
+  text-align: left;
 }
 
 .components-history-content-articleText p {
   margin: 0;
-  text-indent: 32px;
 }
 
-.components-history-content-emphasis {
+.components-history-content-emphasis,
+.components-history-content-mascot .components-history-content-articleText p:last-child {
   color: #121212;
   font-weight: 600;
 }
@@ -2412,10 +2430,6 @@ button {
     line-height: 28px;
   }
 
-  .components-history-content-articleText p {
-    text-indent: 16px;
-  }
-
   .components-history-content-symbols,
   .components-history-content-mascot {
     margin-top: 56px;
@@ -2462,8 +2476,8 @@ button {
 }
 
 .components-main-menu-logo {
-  width: 50px;
-  height: 64px;
+  width: 70px;
+  height: 90px;
   object-fit: contain;
 }
 
@@ -2691,8 +2705,8 @@ button {
   }
 
   .components-main-menu-logo {
-    width: 40px;
-    height: 52px;
+    width: 52px;
+    height: 68px;
   }
 
   .components-main-menu-links {
@@ -4056,7 +4070,7 @@ button {
   z-index: 1;
   display: grid;
   grid-template-columns: 176px 176px 400px;
-  gap: 204px;
+  gap: 64px;
   width: min(1160px, calc(100% - 40px));
   margin: 0 auto;
   padding-top: calc(120px + var(--main-menu-height));
@@ -4376,14 +4390,22 @@ button {
 }
 
 .components-sponsors-page-content-planCard h3 {
-  margin: 0 0 64px;
-  color: #4e4e4e;
+  margin: 0 0 16px;
+  color: #661400;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 32px;
   text-align: center;
   text-transform: uppercase;
+}
+
+.components-sponsors-page-content-planDivider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: 0 0 32px;
+  background: #e7e7e7;
 }
 
 .components-sponsors-page-content-planCard ul {
@@ -4398,44 +4420,66 @@ button {
 
 .components-sponsors-page-content-planCard li {
   position: relative;
-  padding-left: 20px;
+  padding-left: 24px;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 400;
   line-height: 28px;
 }
 
 .components-sponsors-page-content-planCard li::before {
   position: absolute;
-  top: 0;
+  top: 8px;
   left: 0;
-  color: #ff3203;
-  content: "•";
+  width: 10px;
+  height: 10px;
+  border: 2px solid #f56345;
+  border-radius: 50%;
+  content: "";
 }
 
-.components-sponsors-page-content-planCard p {
+.components-sponsors-page-content-planPrice {
   margin: 28px 0 24px;
-  color: #1d598f;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 20px;
-  font-weight: 600;
   line-height: 32px;
 }
 
+.components-sponsors-page-content-planPriceAmount {
+  color: #1d598f;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.components-sponsors-page-content-planPricePeriod {
+  color: #4e4e4e;
+  font-size: 16px;
+  font-weight: 400;
+}
+
 .components-sponsors-page-content-planCard a {
-  display: inline-flex;
+  position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
   min-height: 56px;
-  border-radius: 8px;
-  background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
+  padding: 12px 20px 12px 48px;
+  border-radius: 154.97px;
+  background: linear-gradient(165deg, #ff7a5c 0%, #8f1d00 100%);
   color: #f5f5f5;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
+  font-weight: 600;
+  line-height: 22px;
   text-align: center;
   text-transform: uppercase;
+}
+
+.components-sponsors-page-content-planCard a svg {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  flex-shrink: 0;
+  transform: translateY(-50%);
 }
 
 .components-sponsors-page-content-logoSection {
@@ -4541,7 +4585,11 @@ button {
   }
 
   .components-sponsors-page-content-planCard h3 {
-    margin-bottom: 40px;
+    margin-bottom: 16px;
+  }
+
+  .components-sponsors-page-content-planDivider {
+    margin-bottom: 24px;
   }
 
   .components-sponsors-page-content-planCard li {

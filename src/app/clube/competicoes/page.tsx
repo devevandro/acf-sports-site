@@ -5,16 +5,18 @@ import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
 import { getAllCompetitions } from "@/data/competitions";
 import { formatGameDate, formatGameTime, getNextUpcomingGame, getPreviousGames } from "@/data/games";
+import { getTeamInfo } from "@/data/teamInfo";
 
 export const revalidate = 60;
 
 const fallbackOpponentLogo = "/header/symbol.png";
 
 export default async function CompetitionsPage() {
-  const [upcomingGame, competitions, previousGames] = await Promise.all([
+  const [upcomingGame, competitions, previousGames, teamInfo] = await Promise.all([
     getNextUpcomingGame(),
     getAllCompetitions(),
     getPreviousGames(),
+    getTeamInfo(),
   ]);
   const nextGame = upcomingGame
     ? {
@@ -50,7 +52,12 @@ export default async function CompetitionsPage() {
           </h1>
         </div>
       </header>
-      <CompetitionsContent nextGame={nextGame} competitions={competitions} previousMatches={previousMatches} />
+      <CompetitionsContent
+        nextGame={nextGame}
+        competitions={competitions}
+        previousMatches={previousMatches}
+        clubLogo={teamInfo.symbol}
+      />
       <SponsorsStrip />
       <SiteFooter />
     </main>

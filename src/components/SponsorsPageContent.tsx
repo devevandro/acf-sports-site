@@ -87,6 +87,10 @@ const oneOffLogos: Logo[] = [
   { name: "Velocity Express", dark: true },
 ];
 
+// Flags para esconder grupos de patrocinadores sem remover os dados.
+const SHOW_PARTNERS = false;
+const SHOW_ONE_OFFS = false;
+
 export function SponsorsPageContent() {
   return (
     <section className="components-sponsors-page-content-section" data-node-id="2372:9111" data-name="patrocinadores">
@@ -116,8 +120,8 @@ export function SponsorsPageContent() {
 
       <section className="components-sponsors-page-content-logoSection" aria-label="Lista de patrocinadores">
         <SponsorGroup title="Patrocinador Master" logos={masterLogos} variant="master" />
-        <SponsorGroup title="Parceiros" logos={partnerLogos} />
-        <SponsorGroup title="Pontuais" logos={oneOffLogos} />
+        {SHOW_PARTNERS && <SponsorGroup title="Parceiros" logos={partnerLogos} />}
+        {SHOW_ONE_OFFS && <SponsorGroup title="Pontuais" logos={oneOffLogos} />}
       </section>
     </section>
   );
@@ -125,17 +129,22 @@ export function SponsorsPageContent() {
 
 function PlanCard({ plan }: { plan: Plan }) {
   const whatsAppUrl = `https://wa.me/5543991802793?text=${encodeURIComponent(plan.message)}`;
+  const [priceAmount, pricePeriod] = plan.price.split(" / ");
 
   return (
     <article className="components-sponsors-page-content-planCard">
       <h3>{plan.name}</h3>
+      <span className="components-sponsors-page-content-planDivider" aria-hidden="true" />
       <ul>
         {plan.benefits.map((benefit) => (
           <li key={benefit}>{benefit}</li>
         ))}
       </ul>
-      <p>{plan.price}</p>
-      <a href={whatsAppUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2">
+      <p className="components-sponsors-page-content-planPrice">
+        <span className="components-sponsors-page-content-planPriceAmount">{priceAmount}</span>
+        {pricePeriod ? <span className="components-sponsors-page-content-planPricePeriod"> / {pricePeriod}</span> : null}
+      </p>
+      <a href={whatsAppUrl} target="_blank" rel="noreferrer">
         <MessageCircle size={18} />
         enviar direct no whatsapp
       </a>

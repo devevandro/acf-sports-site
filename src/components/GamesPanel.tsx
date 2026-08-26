@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { formatGameDate, getLatestFinishedGame, getNextUpcomingGame } from "@/data/games";
+import { getTeamInfo } from "@/data/teamInfo";
 
 const CLUB_NAME = "ACF Sports/Vila Mercado";
-const acfLogo = "/header/symbol.png";
 const fallbackOpponentLogo = "/header/symbol.png";
 
 type Team = {
@@ -62,7 +62,12 @@ function DividerTitle({ children, accent = false }: { children: React.ReactNode;
 }
 
 export async function GamesPanel() {
-  const [finishedGame, upcomingGame] = await Promise.all([getLatestFinishedGame(), getNextUpcomingGame()]);
+  const [finishedGame, upcomingGame, teamInfo] = await Promise.all([
+    getLatestFinishedGame(),
+    getNextUpcomingGame(),
+    getTeamInfo(),
+  ]);
+  const acfLogo = teamInfo.symbol;
 
   return (
     <aside className="components-games-panel-panel" data-node-id="1888:10650" aria-labelledby="games-title">

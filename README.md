@@ -177,3 +177,25 @@ npm run build
 
 - **Atualização de Assets**:
   - Substituídos `public/footer/acf-footer-logo.png`, `public/footer/sovereign-footer.png` e `public/youtube-section/youtube-bull.png` por exports atualizados (sem mudanças de código).
+
+- **Notícias: Corrigido Fuso Horário na Exibição da Data**:
+  - `formatNewsDate()` (`src/data/news.ts`) formatava a data com `Intl.DateTimeFormat("pt-BR")` sem especificar `timeZone`, então o resultado dependia do fuso do ambiente de execução. Em produção (runtime em UTC), notícias criadas à noite no horário de Brasília apareciam com a data do dia seguinte (UTC), divergindo da data real armazenada no banco. Corrigido fixando `timeZone: "America/Sao_Paulo"` nas duas chamadas de formatação.
+
+- **Página "Nossa História": Conectada à Tabela `team_history`**:
+  - Adicionado `src/data/teamHistory.ts` (`getTeamHistory()`), no mesmo padrão de `teamInfo.ts`: busca a linha mais recente de `team_history` (`title`, `content`, `symbol`, `mascot`, `content_image`, `mascot_images`, `created_at`), com fallback estático apenas para `title`/`content`/`content_image` (o núcleo da página).
+  - `src/app/clube/historia/page.tsx` virou um Server Component assíncrono (`export const revalidate = 60`) que busca `getTeamHistory()` e passa como prop `history` para `HistoryContent.tsx`, que deixou de ter texto/imagens hardcoded — `content`/`mascot`/`symbol` são HTML vindo do banco, renderizado via `dangerouslySetInnerHTML` (mesmo padrão de `NewsDetail.tsx`).
+  - As seções "símbolos" e "mascote" agora só renderizam quando há dado correspondente no banco (`history.symbol` não vazio; `history.mascot` não vazio ou `history.mascotImages` com pelo menos um item) — sem fallback estático, para não mostrar conteúdo de exemplo quando o CMS ainda não preencheu esses campos.
+  - O texto do artigo (`.components-history-content-articleText`) teve o `text-indent` removido e a tipografia ajustada para bater com o corpo de texto de notícias (`.components-news-detail-body`: `24px`/`40px`, cor `#4e4e4e`, alinhado à esquerda).
+
+- **Página de Competições: Legenda de Classificação/Rebaixamento Removida**:
+  - Removido o bloco de legenda ("Classificados para próxima fase" / "Rebaixados para a segunda divisão") abaixo da tabela de classificação em `CompetitionsContent.tsx`, a pedido do usuário.
+
+- **Logo do Clube nos Cards de Partida Vinda do Banco**:
+  - `TeamBadge` (`CompetitionsContent.tsx`) ganhou a prop `home`, aplicando um destaque visual (fundo circular escuro) apenas no brasão do time da casa. `CompetitionsContent` e `GamesPanel.tsx` agora recebem/buscam `teamInfo.symbol` (via `getTeamInfo()`) e usam esse valor como logo do ACF nos cards de "Próxima Partida"/"Partidas Anteriores"/painel "jogos", com fallback para `/header/symbol.png` quando o banco não tem o campo preenchido.
+
+- **Jogos: Horário Separado da Data**:
+  - `src/data/games.ts` passou a selecionar também a coluna `time` da tabela `games` (campo `GameItem.time`, `string | null`), separada de `date`. A ordenação por data mais recente/próxima (`gameDateTime`) agora compara strings `"YYYY-MM-DD HH:MM"` diretamente, em vez de converter para `Date`/timestamp — evita ambiguidade de fuso horário na comparação.
+
+- **Página de Patrocinadores: Cards de Plano Redesenhados**:
+  - `SponsorsPageContent.tsx` ganhou as flags `SHOW_PARTNERS`/`SHOW_ONE_OFFS` (ambas `false`) para esconder os grupos "Parceiros" e "Pontuais" sem apagar os dados.
+  - `PlanCard` agora separa o preço em valor e período (`plan.price.split(" / ")`), renderizados em `<span>`s distintos (`.components-sponsors-page-content-planPriceAmount`/`...PricePeriod`), e ganhou um divisor (`.components-sponsors-page-content-planDivider`) abaixo do título. O botão do WhatsApp deixou de usar as classes utilitárias do Tailwind e passou a ter estilo próprio no `globals.css`, com o ícone posicionado absolutamente.
