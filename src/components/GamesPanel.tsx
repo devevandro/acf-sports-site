@@ -17,9 +17,10 @@ type MatchCardProps = {
   away: Team;
   score?: string;
   upcoming?: boolean;
+  location?: string;
 };
 
-function MatchCard({ date, home, away, score, upcoming = false }: MatchCardProps) {
+function MatchCard({ date, home, away, score, upcoming = false, location }: MatchCardProps) {
   return (
     <article className={`components-games-panel-matchCard ${upcoming ? "components-games-panel-upcomingCard" : ""}`}>
       <div
@@ -29,15 +30,22 @@ function MatchCard({ date, home, away, score, upcoming = false }: MatchCardProps
         {date}
       </div>
       <div className="components-games-panel-matchBody">
-        <div className="components-games-panel-team">
-          <img src={home.logo} alt={home.name} className="w-8 h-8 object-contain" />
-          <span title={home.name}>{home.name}</span>
+        <div className="components-games-panel-matchTeams">
+          <div className="components-games-panel-team">
+            <img src={home.logo} alt={home.name} className="w-8 h-8 object-contain" />
+            <span title={home.name}>{home.name}</span>
+          </div>
+          <div className="components-games-panel-score">{score ?? "x"}</div>
+          <div className="components-games-panel-team">
+            <img src={away.logo} alt={away.name} className="w-8 h-8 object-contain" />
+            <span title={away.name}>{away.name}</span>
+          </div>
         </div>
-        <div className="components-games-panel-score">{score ?? "x"}</div>
-        <div className="components-games-panel-team">
-          <img src={away.logo} alt={away.name} className="w-8 h-8 object-contain" />
-          <span title={away.name}>{away.name}</span>
-        </div>
+        {location && (
+          <div className="components-games-panel-matchLocation" title={location}>
+            {location}
+          </div>
+        )}
       </div>
     </article>
   );
@@ -77,6 +85,7 @@ export async function GamesPanel() {
               home={{ name: CLUB_NAME, logo: acfLogo }}
               away={{ name: finishedGame.opponent, logo: finishedGame.opponentLogo ?? fallbackOpponentLogo }}
               score={finishedGame.result}
+              location={finishedGame.location}
             />
           </section>
         )}
@@ -89,6 +98,7 @@ export async function GamesPanel() {
               home={{ name: CLUB_NAME, logo: acfLogo }}
               away={{ name: upcomingGame.opponent, logo: upcomingGame.opponentLogo ?? fallbackOpponentLogo }}
               upcoming
+              location={upcomingGame.location}
             />
           </section>
         )}

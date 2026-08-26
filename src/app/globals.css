@@ -621,6 +621,21 @@ button {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.components-competitions-content-noMatch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 124px;
+  padding: 20px 80px;
+  border-radius: 8px;
+  background: #fdfdfd;
+  box-shadow: 0 0 2px 2px rgba(167, 165, 165, 0.26);
+  color: var(--cinza-medio);
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
 .components-competitions-content-matchTeams {
   display: flex;
   align-items: center;
@@ -1684,7 +1699,7 @@ button {
 
 .components-games-panel-matchCard {
   position: relative;
-  height: 116px;
+  height: 140px;
   overflow: hidden;
   border-radius: 8px;
   background: var(--azul-preto);
@@ -1692,7 +1707,7 @@ button {
 }
 
 .components-games-panel-upcomingCard {
-  height: 136px;
+  height: 160px;
   background: var(--azul-ceu-fechado-tom-1);
 }
 
@@ -1726,15 +1741,40 @@ button {
   top: 36px;
   left: 50%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 4px;
+  gap: 8px;
+  width: 100%;
   transform: translateX(-50%);
 }
 
 .components-games-panel-upcomingCard .components-games-panel-matchBody {
   top: 44px;
+}
+
+.components-games-panel-matchTeams {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.components-games-panel-upcomingCard .components-games-panel-matchTeams {
   gap: 15px;
+}
+
+.components-games-panel-matchLocation {
+  max-width: calc(100% - 24px);
+  overflow: hidden;
+  color: #b3b3b3;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  text-transform: capitalize;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .components-games-panel-team {
@@ -1890,21 +1930,27 @@ button {
   object-position: center;
 }
 
+.components-hero-news-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
 .components-hero-news-storyCard {
   position: absolute;
   right: 32px;
-  bottom: 16px;
+  bottom: 32px;
   left: 32px;
-  max-width: min(720px, calc(100% - 500px));
-  min-height: 140px;
-  padding: 24px 28px;
-  border-radius: 16px;
-  background: linear-gradient(
-    183deg,
-    rgba(255, 255, 255, 0) 14%,
-    rgba(166, 207, 245, 0.6) 89%
-  );
-  backdrop-filter: blur(6px);
+  max-width: min(640px, calc(100% - 480px));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
   animation: heroCopyFade 520ms ease both;
 }
 
@@ -1920,35 +1966,39 @@ button {
   }
 }
 
-.components-hero-news-category {
-  width: min(883px, 100%);
-  margin: 0 0 4px;
-  color: var(--laranja-branco-medio);
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 22px;
-  font-weight: 500;
-  letter-spacing: 0.16px;
-  line-height: 26px;
-  text-transform: capitalize;
-}
-
 .components-hero-news-title {
-  width: min(883px, 100%);
-  margin: 0 0 6px;
-  color: var(--tom-preto);
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 26px;
-  font-weight: 600;
-  line-height: 32px;
+  margin: 0;
+  color: #ffffff;
+  text-align: left;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  font-family: var(--font-rubik), Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 38px;
+  text-transform: uppercase;
 }
 
-.components-hero-news-summary {
-  margin: 0;
-  color: var(--cinza-claro);
-  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 24px;
+.components-hero-news-ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
+  color: #ffffff;
+  font-family: var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(143, 48, 29, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.components-hero-news-ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(143, 48, 29, 0.45);
 }
 
 .components-hero-news-thumbnails {
@@ -2063,20 +2113,20 @@ button {
   .components-hero-news-storyCard {
     right: 20px;
     left: 20px;
-    max-width: 100%;
-    min-height: 150px;
-    padding: 20px;
+    bottom: 20px;
+    max-width: min(480px, calc(100% - 340px));
+    gap: 14px;
   }
 
-  .components-hero-news-category,
   .components-hero-news-title {
-    font-size: 22px;
-    line-height: 28px;
+    font-size: 26px;
+    line-height: 32px;
   }
 
-  .components-hero-news-summary {
-    font-size: 16px;
-    line-height: 22px;
+  .components-hero-news-ctaButton {
+    padding: 12px 24px;
+    font-size: 15px;
+    line-height: 18px;
   }
 
   .components-hero-news-thumbnails {
@@ -2100,19 +2150,22 @@ button {
   }
 
   .components-hero-news-storyCard {
-    min-height: 140px;
-    padding: 16px;
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+    max-width: 100%;
+    gap: 12px;
   }
 
-  .components-hero-news-category,
   .components-hero-news-title {
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 20px;
+    line-height: 26px;
   }
 
-  .components-hero-news-summary {
+  .components-hero-news-ctaButton {
+    padding: 10px 20px;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 18px;
   }
 
   .components-hero-news-thumbnails {
@@ -3018,6 +3071,17 @@ button {
   font-weight: 700;
 }
 
+.components-news-detail-content a {
+  color: var(--laranja);
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.components-news-detail-content a:hover {
+  color: #8f301d;
+}
+
 .components-news-detail-body blockquote {
   margin: 16px 0;
   color: #4e4e4e;
@@ -3582,7 +3646,7 @@ button {
 }
 
 .components-plans-section-featuredCard h3 {
-  color: #7a210f;
+  color: #661400;
   font-size: 32px;
   line-height: 48px;
 }
@@ -3602,7 +3666,7 @@ button {
 }
 
 .components-plans-section-featuredCard .components-plans-section-price strong {
-  color: #7a210f;
+  color: #661400;
   line-height: 48px;
 }
 
@@ -3675,7 +3739,7 @@ button {
 
 .components-plans-section-featuredButton {
   width: 200px;
-  background: linear-gradient(168deg, #ff3203 0%, #8f301d 99%);
+  background: linear-gradient(168deg, #ff7a5c 0%, #8f1d00 99%);
 }
 
 .components-plans-section-button svg {
@@ -3724,7 +3788,6 @@ button {
 
 .components-roster-section-section {
   position: relative;
-  min-height: 1048px;
   overflow: hidden;
   background: #121212;
   color: #f5f5f5;
@@ -3766,7 +3829,7 @@ button {
   position: relative;
   width: min(1440px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 80px 0 64px;
+  padding: 80px 0 40px;
 }
 
 .components-roster-section-title {
@@ -3927,13 +3990,10 @@ button {
 }
 
 @media (max-width: 768px) {
-  .components-roster-section-section {
-    min-height: 760px;
-  }
-
   .components-roster-section-inner {
     width: min(330px, calc(100% - 32px));
     padding-top: 56px;
+    padding-bottom: 32px;
   }
 
   .components-roster-section-title {
@@ -4736,9 +4796,9 @@ button {
 }
 
 .components-standings-panel-tableCard {
+  position: relative;
   width: 290px;
-  height: 316px;
-  overflow: hidden;
+  overflow: visible;
   border: 2px solid var(--cinza-claro);
   border-radius: 8px;
   background: #e7e7e7;
@@ -4762,13 +4822,66 @@ button {
   text-align: left;
 }
 
+.components-standings-panel-selectButton:disabled {
+  cursor: default;
+}
+
 .components-standings-panel-selectButton img {
   width: 24px;
   height: 24px;
 }
 
+.components-standings-panel-dropdownMenu {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.components-standings-panel-dropdownItem {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.components-standings-panel-dropdownItem:hover,
+.components-standings-panel-dropdownItem.active {
+  background: #f1f5f9;
+  color: #ff3203;
+  font-weight: 600;
+}
+
+.components-standings-panel-empty {
+  padding: 16px;
+  color: #4e4e4e;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 14px;
+}
+
+.components-standings-panel-tableScroll {
+  max-height: 280px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .components-standings-panel-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   color: #4e4e4e;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
@@ -4777,17 +4890,24 @@ button {
 }
 
 .components-standings-panel-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   height: 40px;
+  padding: 0 2px;
   color: #292929;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   text-align: center;
   text-transform: capitalize;
+  background: #e7e7e7;
+  white-space: nowrap;
 }
 
 .components-standings-panel-table td {
   height: 40px;
+  padding: 0 2px;
   text-align: center;
 }
 
@@ -4795,10 +4915,17 @@ button {
   border-bottom: 1px solid rgba(179, 179, 179, 0.6);
 }
 
+.components-standings-panel-table th:not(.components-standings-panel-clubColumn),
+.components-standings-panel-table td:not(.components-standings-panel-clubColumn) {
+  width: 12%;
+}
+
 .components-standings-panel-clubColumn {
-  width: 118px;
+  width: 40%;
   padding-left: 8px;
+  overflow: hidden;
   text-align: left !important;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -4969,7 +5096,7 @@ button {
   width: 457px;
   height: 56px;
   border-radius: 8px;
-  background: linear-gradient(162deg, #ff3203 0%, #8f301d 99%);
+  background: linear-gradient(162deg, #ff7a5c 0%, #8f1d00 99%);
   color: #f5f5f5;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;

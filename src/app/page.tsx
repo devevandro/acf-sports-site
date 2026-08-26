@@ -2,7 +2,7 @@ import { HeroNews } from "@/components/HeroNews";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RosterSection } from "@/components/RosterSection";
 import { GamesPanel } from "@/components/GamesPanel";
-import { MainMenu } from "@/components/MainMenu";
+import { SiteHeader } from "@/components/SiteHeader";
 import { NewsGrid } from "@/components/NewsGrid";
 import { PlansSection } from "@/components/PlansSection";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
@@ -19,7 +19,7 @@ export default async function Home() {
   return (
     <main className="app-page-page">
       <TopCf />
-      <MainMenu active="home" />
+      <SiteHeader active="home" />
       <HeroNews news={allNews} />
       <section className="app-page-newsBand">
         <div className="app-page-contentRow">

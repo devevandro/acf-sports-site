@@ -12,9 +12,10 @@ const instagramAsset = "/contact/insta.png";
 type MainMenuProps = {
   active?: "home" | "news" | "club" | "sponsors" | "contact";
   activeClub?: "history" | "roster" | "competitions";
+  logoSrc?: string;
 };
 
-export function MainMenu({ active = "home", activeClub }: MainMenuProps) {
+export function MainMenu({ active = "home", activeClub, logoSrc = logoAsset }: MainMenuProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [clubDropdownOpen, setClubDropdownOpen] = useState(false);
   const clubMenuRef = useRef<HTMLDivElement>(null);
@@ -55,7 +56,7 @@ export function MainMenu({ active = "home", activeClub }: MainMenuProps) {
         </button>
 
         <Link className="components-main-menu-logoLink" href="/" aria-label="ACF Sports - início">
-          <img className="components-main-menu-logo" src={logoAsset} alt="ACF Sports" />
+          <img className="components-main-menu-logo" src={logoSrc} alt="ACF Sports" />
         </Link>
 
         <div className="components-main-menu-mobileActions md:hidden">

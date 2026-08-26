@@ -13,7 +13,7 @@ function buildCarouselSlides(news: NewsItem[]): NewsItem[] {
   }
 
   const slides = [...others];
-  slides.splice(Math.min(2, slides.length), 0, pinned);
+  slides.splice(Math.min(3, slides.length), 0, pinned);
   return slides;
 }
 
@@ -50,11 +50,20 @@ export function HeroNews({ news }: { news: NewsItem[] }) {
             alt={activeSlide.title}
           />
 
-          <Link key={activeSlide.id} className="components-hero-news-storyCard" href={`/noticias/${activeSlide.id}`}>
-            <p className="components-hero-news-category">{activeSlide.tag}</p>
-            <h1 className="components-hero-news-title">{activeSlide.title}</h1>
-            <p className="components-hero-news-summary">{activeSlide.subtitle}</p>
-          </Link>
+          <div className="components-hero-news-scrim" />
+
+          {activeSlide.id === PINNED_CAROUSEL_NEWS_ID ? (
+            <div key={activeSlide.id} className="components-hero-news-storyCard">
+              <h1 className="components-hero-news-title">{activeSlide.title}</h1>
+              <Link className="components-hero-news-ctaButton" href="/clube/patrocinadores">
+                Ver Planos <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+          ) : (
+            <Link key={activeSlide.id} className="components-hero-news-storyCard" href={`/noticias/${activeSlide.id}`}>
+              <h1 className="components-hero-news-title">{activeSlide.title}</h1>
+            </Link>
+          )}
         </div>
 
         <div className="components-hero-news-thumbnails" aria-label="Selecionar destaque">

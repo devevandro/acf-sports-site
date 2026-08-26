@@ -1,4 +1,4 @@
-import { MainMenu } from "@/components/MainMenu";
+import { SiteHeader } from "@/components/SiteHeader";
 import { PlayerDetailContent } from "@/components/roster/PlayerDetailContent";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
@@ -23,7 +23,7 @@ export default async function PlayerDetailPage({ params }: { params: Promise<{ s
   return (
     <main className="app-clube-elenco-slug-page-page">
       <TopCf />
-      <MainMenu active="club" activeClub="roster" />
+      <SiteHeader active="club" activeClub="roster" />
       <header className="app-clube-elenco-slug-page-heading">
         <div>
           <p>clube</p>

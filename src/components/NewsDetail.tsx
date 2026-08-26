@@ -2,8 +2,16 @@ import Link from "next/link";
 import { ChevronRight, ChevronsRight } from "lucide-react";
 import { formatNewsDate, getRelatedNews, type NewsItem } from "@/data/news";
 
-export async function NewsDetail({ news }: { news: NewsItem }) {
-  const relatedNews = await getRelatedNews(news.id);
+const RELATED_PER_PAGE = 4;
+
+export async function NewsDetail({ news, page = 1 }: { news: NewsItem; page?: number }) {
+  const allRelatedNews = await getRelatedNews(news.id);
+  const totalPages = Math.max(1, Math.ceil(allRelatedNews.length / RELATED_PER_PAGE));
+  const currentPage = Math.min(Math.max(page, 1), totalPages);
+  const relatedNews = allRelatedNews.slice(
+    (currentPage - 1) * RELATED_PER_PAGE,
+    currentPage * RELATED_PER_PAGE
+  );
 
   return (
     <article className="components-news-detail-article" data-node-id="1564:11705" data-name="detalhe-noticia">
@@ -48,20 +56,37 @@ export async function NewsDetail({ news }: { news: NewsItem }) {
             ))}
           </div>
 
-          <nav className="components-news-detail-pagination" aria-label="Paginação de notícias relacionadas">
-            {[1, 2, 3, 4, 5, 6].map((page) => (
-              <Link className={page === 1 ? "components-news-detail-currentPage" : ""} href="/noticias" key={page}>
-                {page}
-              </Link>
-            ))}
-            <span>...</span>
-            <Link className="components-news-detail-iconPage inline-flex items-center justify-center" href="/noticias" aria-label="Próxima página">
-              <ChevronRight size={18} />
-            </Link>
-            <Link className="components-news-detail-iconPage inline-flex items-center justify-center" href="/noticias" aria-label="Última página">
-              <ChevronsRight size={18} />
-            </Link>
-          </nav>
+          {allRelatedNews.length > RELATED_PER_PAGE && (
+            <nav className="components-news-detail-pagination" aria-label="Paginação de notícias relacionadas">
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+                <Link
+                  className={pageNumber === currentPage ? "components-news-detail-currentPage" : ""}
+                  href={`/noticias/${news.id}?page=${pageNumber}`}
+                  key={pageNumber}
+                >
+                  {pageNumber}
+                </Link>
+              ))}
+              {currentPage < totalPages && (
+                <Link
+                  className="components-news-detail-iconPage inline-flex items-center justify-center"
+                  href={`/noticias/${news.id}?page=${currentPage + 1}`}
+                  aria-label="Próxima página"
+                >
+                  <ChevronRight size={18} />
+                </Link>
+              )}
+              {currentPage < totalPages && (
+                <Link
+                  className="components-news-detail-iconPage inline-flex items-center justify-center"
+                  href={`/noticias/${news.id}?page=${totalPages}`}
+                  aria-label="Última página"
+                >
+                  <ChevronsRight size={18} />
+                </Link>
+              )}
+            </nav>
+          )}
         </section>
       </div>
     </article>

@@ -32,7 +32,6 @@ export function RosterSection() {
     <section
       style={{
         position: "relative",
-        minHeight: "1048px",
         overflow: "hidden",
         backgroundImage: "url('/backgrounds/background-player.png')",
         backgroundPosition: "center",

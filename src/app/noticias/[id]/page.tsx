@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { NewsDetail } from "@/components/NewsDetail";
-import { MainMenu } from "@/components/MainMenu";
+import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
@@ -32,8 +32,15 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-export default async function NewsDetailPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function NewsDetailPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ page?: string }>;
+}) {
   const { id } = await params;
+  const { page } = await searchParams;
   const news = await getNewsById(id);
 
   if (!news) {
@@ -43,7 +50,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
   return (
     <main className="app-noticias-slug-page-page">
       <TopCf />
-      <MainMenu active="news" />
+      <SiteHeader active="news" />
       <header className="app-noticias-slug-page-heading">
         <div>
           <p>{news.tag}</p>
@@ -52,7 +59,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
           </h1>
         </div>
       </header>
-      <NewsDetail news={news} />
+      <NewsDetail news={news} page={page ? Number(page) : 1} />
       <SponsorsStrip />
       <SiteFooter />
     </main>

@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import type { TeamInfo } from "@/data/teamInfo";
 
 const assets = {
   bull: "/contact/bull.png",
@@ -15,28 +16,10 @@ const assets = {
   whatsapp: "/contact/whatsapp.png",
 };
 
-const contactItems = [
-  {
-    icon: assets.phone,
-    title: "Telefone",
-    value: "+55 (43) 99999-9999",
-  },
-  {
-    icon: assets.email,
-    title: "E-Mail",
-    value: "acfsport@gmail.com",
-  },
-  {
-    icon: assets.location,
-    title: "Endereço",
-    value: "Rua: Maria S Vilar, 59 - Bairro\nCornélio Procópio - PR, Brasil - BR",
-  },
-  {
-    icon: assets.clock,
-    title: "Atendimento",
-    value: "08 às 18hr de seg à dom",
-  },
-];
+function toWhatsappNumber(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  return digits.length === 11 ? `55${digits}` : digits;
+}
 
 type PlanType = "master" | "monthly" | "oneOff";
 
@@ -97,12 +80,20 @@ const plansData: Record<PlanType, PlanData> = {
   },
 };
 
-export function ContactContent() {
+export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
   const [activePlan, setActivePlan] = useState<PlanType>("master");
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", message: "" });
 
   const currentPlan = plansData[activePlan];
+  const whatsappNumber = toWhatsappNumber(teamInfo.phone);
+
+  const contactItems = [
+    { icon: assets.phone, title: "Telefone", value: teamInfo.phone },
+    { icon: assets.email, title: "E-Mail", value: teamInfo.email },
+    { icon: assets.location, title: "Endereço", value: teamInfo.address },
+    { icon: assets.clock, title: "Atendimento", value: "08 às 18hr de seg à dom" },
+  ];
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -137,16 +128,16 @@ export function ContactContent() {
             </div>
 
             <div className="components-contact-content-socials">
-              <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <a href={teamInfo.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
                 <img src={assets.instagram} alt="Instagram" />
               </a>
-              <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook">
+              <a href={teamInfo.facebook} target="_blank" rel="noreferrer" aria-label="Facebook">
                 <img src={assets.facebook} alt="Facebook" />
               </a>
-              <a href="https://www.youtube.com/" target="_blank" rel="noreferrer" aria-label="YouTube">
+              <a href={teamInfo.youtube} target="_blank" rel="noreferrer" aria-label="YouTube">
                 <img src={assets.youtube} alt="YouTube" />
               </a>
-              <a href="https://wa.me/5543999999999" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+              <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer" aria-label="WhatsApp">
                 <img src={assets.whatsapp} alt="WhatsApp" />
               </a>
             </div>
