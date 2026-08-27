@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
@@ -8,6 +11,17 @@ const athleteCards = [
   { id: 4, name: "Marcos", number: "18" },
   { id: 5, name: "Felipe", number: "23" },
 ];
+
+type Athlete = (typeof athleteCards)[number];
+
+const athleteSlides = athleteCards.reduce<Athlete[][]>((slides, athlete, index) => {
+  if (index % 2 === 0) {
+    slides.push([athlete]);
+  } else {
+    slides[slides.length - 1].push(athlete);
+  }
+  return slides;
+}, []);
 
 const cardPath = `M8 1
   H248
@@ -27,7 +41,68 @@ const cardPath = `M8 1
   Q1 1 8 1
   Z`;
 
+function AthleteCard({ athlete }: { athlete: (typeof athleteCards)[number] }) {
+  return (
+    <article
+      className={`components-roster-section-athlete ${`components-roster-section-athlete${athlete.id}`}`}
+    >
+      <svg
+        className="components-roster-section-athleteCard"
+        viewBox="0 0 256 448"
+        role="img"
+        aria-label={`${athlete.name}, camisa ${athlete.number}, atleta do ACF Sports`}
+      >
+        <defs>
+          <clipPath id={`roster-card-shape-${athlete.id}`}>
+            <path d={cardPath} />
+          </clipPath>
+        </defs>
+
+        <path d={cardPath} fill="#01121F" />
+
+        <image
+          href="/squad/player.png"
+          width="256"
+          height="448"
+          preserveAspectRatio="xMidYMid slice"
+          clipPath={`url(#roster-card-shape-${athlete.id})`}
+        />
+
+        <path
+          className="components-roster-section-athleteStroke"
+          d={cardPath}
+          fill="none"
+          stroke="#b83e25"
+          strokeWidth="2"
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
+      <div className="components-roster-section-athleteInfo" aria-hidden="true">
+        <span className="components-roster-section-athleteName">{athlete.name}</span>
+        <span className="components-roster-section-athleteNumber">{athlete.number}</span>
+      </div>
+    </article>
+  );
+}
+
 export function RosterSection() {
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const handleScroll = () => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const index = Math.round(viewport.scrollLeft / viewport.clientWidth);
+    setActiveSlide(index);
+  };
+
+  const goToSlide = (index: number) => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    viewport.scrollTo({ left: index * viewport.clientWidth, behavior: "smooth" });
+    setActiveSlide(index);
+  };
+
   return (
     <section
       style={{
@@ -48,48 +123,33 @@ export function RosterSection() {
           elenco<span>.</span>
         </h2>
 
-        <div className="components-roster-section-athletes">
-          {athleteCards.map((athlete) => (
-            <article
-              className={`components-roster-section-athlete ${`components-roster-section-athlete${athlete.id}`}`}
-              key={athlete.id}
-            >
-              <svg
-                className="components-roster-section-athleteCard"
-                viewBox="0 0 256 448"
-                role="img"
-                aria-label={`${athlete.name}, camisa ${athlete.number}, atleta do ACF Sports`}
-              >
-                <defs>
-                  <clipPath id={`roster-card-shape-${athlete.id}`}>
-                    <path d={cardPath} />
-                  </clipPath>
-                </defs>
+        <div
+          className="components-roster-section-athletes"
+          ref={viewportRef}
+          onScroll={handleScroll}
+        >
+          {athleteSlides.map((slide, index) => (
+            <div className="components-roster-section-slide" key={`slide-${index}`}>
+              {slide.map((athlete) => (
+                <AthleteCard athlete={athlete} key={athlete.id} />
+              ))}
+            </div>
+          ))}
+        </div>
 
-                <path d={cardPath} fill="#01121F" />
-
-                <image
-                  href="/squad/player.png"
-                  width="256"
-                  height="448"
-                  preserveAspectRatio="xMidYMid slice"
-                  clipPath={`url(#roster-card-shape-${athlete.id})`}
-                />
-
-                <path
-                  className="components-roster-section-athleteStroke"
-                  d={cardPath}
-                  fill="none"
-                  stroke="#b83e25"
-                  strokeWidth="2"
-                  vectorEffect="non-scaling-stroke"
-                />
-              </svg>
-              <div className="components-roster-section-athleteInfo" aria-hidden="true">
-                <span className="components-roster-section-athleteName">{athlete.name}</span>
-                <span className="components-roster-section-athleteNumber">{athlete.number}</span>
-              </div>
-            </article>
+        <div className="components-roster-section-dots" role="tablist" aria-label="Selecionar atletas">
+          {athleteSlides.map((_, index) => (
+            <button
+              key={`dot-${index}`}
+              type="button"
+              role="tab"
+              aria-selected={index === activeSlide}
+              aria-label={`Ver atletas ${index + 1}`}
+              className={`components-roster-section-dot ${
+                index === activeSlide ? "components-roster-section-dotActive" : ""
+              }`}
+              onClick={() => goToSlide(index)}
+            />
           ))}
         </div>
 

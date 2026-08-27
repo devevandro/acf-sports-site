@@ -142,55 +142,6 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
               </a>
             </div>
           </section>
-
-          <section className="components-contact-content-formBlock" aria-labelledby="contact-form-title">
-            <div className="components-contact-content-titleBlock">
-              <h2 id="contact-form-title">vamos conversar?</h2>
-              <p>Responderemos em até 24 horas</p>
-            </div>
-
-            {submitted ? (
-              <div className="components-contact-content-success">
-                <p>Mensagem enviada com sucesso! Entraremos em contato em breve.</p>
-              </div>
-            ) : (
-              <form className="components-contact-content-form" onSubmit={handleSubmit}>
-                <div className="components-contact-content-formRow">
-                  <input
-                    aria-label="Nome"
-                    placeholder="Digite seu nome"
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  />
-                  <input
-                    aria-label="Telefone"
-                    placeholder="(43) 9 9999 - 9999"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  />
-                </div>
-                <input
-                  aria-label="E-mail"
-                  placeholder="contato@gmail.com"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                />
-                <textarea
-                  aria-label="Mensagem"
-                  placeholder="Digite sua mensagem aqui!"
-                  required
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                />
-                <button type="submit">enviar mensagem</button>
-              </form>
-            )}
-          </section>
         </div>
 
         <aside className="components-contact-content-planPanel" aria-label="Plano de patrocínio">
@@ -217,7 +168,7 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
             })}
           </div>
 
-          <article className="components-contact-content-planCard">
+          <article className="components-contact-content-planCard components-contact-content-planCardDesktop">
             <h3>{currentPlan.name}</h3>
             <ul>
               {currentPlan.benefits.map((benefit) => (
@@ -236,7 +187,83 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
               enviar direct no whatsapp
             </a>
           </article>
+
+          <div className="components-contact-content-planCarousel">
+            {(Object.keys(plansData) as PlanType[]).map((planKey) => {
+              const plan = plansData[planKey];
+              return (
+                <article className="components-contact-content-planCard" key={plan.id}>
+                  <h3>{plan.name}</h3>
+                  <ul>
+                    {plan.benefits.map((benefit) => (
+                      <li key={benefit}>
+                        <span className="components-contact-content-bullet" aria-hidden="true">
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="6" cy="6" r="4.5" stroke="#FF3203" strokeWidth="2" />
+                          </svg>
+                        </span>
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="components-contact-content-price">{plan.price}</p>
+                  <a href={plan.whatsappMessage} target="_blank" rel="noreferrer">
+                    enviar direct no whatsapp
+                  </a>
+                </article>
+              );
+            })}
+          </div>
         </aside>
+
+        <section className="components-contact-content-formBlock" aria-labelledby="contact-form-title">
+          <div className="components-contact-content-titleBlock">
+            <h2 id="contact-form-title">vamos conversar?</h2>
+            <p>Responderemos em até 24 horas</p>
+          </div>
+
+          {submitted ? (
+            <div className="components-contact-content-success">
+              <p>Mensagem enviada com sucesso! Entraremos em contato em breve.</p>
+            </div>
+          ) : (
+            <form className="components-contact-content-form" onSubmit={handleSubmit}>
+              <div className="components-contact-content-formRow">
+                <input
+                  aria-label="Nome"
+                  placeholder="Digite seu nome"
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                />
+                <input
+                  aria-label="Telefone"
+                  placeholder="(43) 9 9999 - 9999"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                />
+              </div>
+              <input
+                aria-label="E-mail"
+                placeholder="contato@gmail.com"
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              />
+              <textarea
+                aria-label="Mensagem"
+                placeholder="Digite sua mensagem aqui!"
+                required
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              />
+              <button type="submit">enviar mensagem</button>
+            </form>
+          )}
+        </section>
       </div>
     </section>
   );
