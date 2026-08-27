@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { PINNED_CAROUSEL_NEWS_ID, type NewsItem } from "@/data/news";
 
 function buildCarouselSlides(news: NewsItem[]): NewsItem[] {
@@ -56,7 +57,7 @@ export function HeroNews({ news }: { news: NewsItem[] }) {
             <div key={activeSlide.id} className="components-hero-news-storyCard">
               <h1 className="components-hero-news-title">{activeSlide.title}</h1>
               <Link className="components-hero-news-ctaButton" href="/clube/patrocinadores">
-                Ver Planos <span aria-hidden="true">↗</span>
+                Ver Planos <ArrowUpRight size={18} aria-hidden="true" />
               </Link>
             </div>
           ) : (

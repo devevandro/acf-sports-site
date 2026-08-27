@@ -384,7 +384,7 @@ button {
 
 @media (max-width: 768px) {
   .app-contato-page-heading {
-    min-height: 144px;
+    min-height: 110px;
   }
 
   .app-contato-page-heading > div {
@@ -997,8 +997,33 @@ button {
   }
 
   .components-competitions-content-matchTeams {
-    flex-wrap: wrap;
-    gap: 16px;
+    flex-wrap: nowrap;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .components-competitions-content-matchTeams strong {
+    flex: 0 0 auto;
+    font-size: 24px;
+  }
+
+  .components-competitions-content-team {
+    min-width: 0;
+    max-width: 120px;
+    flex: 1 1 0;
+  }
+
+  .components-competitions-content-team img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .components-competitions-content-team span {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .components-competitions-content-matchMeta {
@@ -1030,11 +1055,13 @@ button {
   }
 
   .components-competitions-content-cardSeparator {
+    display: block;
     width: 100%;
     height: 2px;
   }
 
   .components-competitions-content-previousMeta {
+    display: flex;
     align-items: center;
     text-align: center;
   }
@@ -1240,43 +1267,12 @@ button {
   .components-competitions-content-previousCard {
     grid-template-columns: 88px auto 88px;
   }
+}
 
+@media (min-width: 769px) and (max-width: 1200px) {
   .components-competitions-content-previousCard .components-competitions-content-cardSeparator,
   .components-competitions-content-previousMeta {
     display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .components-competitions-content-section {
-    padding: 56px 0 72px;
-  }
-
-  .components-competitions-content-inner {
-    width: min(330px, calc(100% - 32px));
-  }
-
-  .components-competitions-content-nextMatch {
-    padding: 20px;
-  }
-
-  .components-competitions-content-matchTeams {
-    gap: 12px;
-  }
-
-  .components-competitions-content-previousCard {
-    grid-template-columns: 76px auto 76px;
-    gap: 10px;
-    padding: 12px;
-  }
-
-  .components-competitions-content-previousCard > strong {
-    font-size: 24px;
-  }
-
-  .components-competitions-content-legend {
-    flex-direction: column;
-    gap: 8px;
   }
 }
 
@@ -1682,7 +1678,7 @@ button {
 
 @media (max-width: 768px) {
   .components-contact-content-section {
-    padding: 56px 0 72px;
+    padding: 32px 0 72px;
   }
 
   .components-contact-content-inner {
@@ -1690,7 +1686,7 @@ button {
   }
 
   .components-contact-content-leftColumn {
-    gap: 56px;
+    gap: 28px;
   }
 
   .components-contact-content-titleBlock h2 {
@@ -1726,7 +1722,10 @@ button {
   }
 
   .components-contact-content-planPanel {
-    padding: 32px 20px;
+    padding: 32px 0 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
   }
 
   .components-contact-content-planTabs,
@@ -1737,8 +1736,8 @@ button {
   .components-contact-content-planCarousel {
     display: flex;
     gap: 16px;
-    margin: 0 -20px;
-    padding: 0 20px 8px;
+    margin: 0;
+    padding: 0 0 8px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
@@ -1761,6 +1760,7 @@ button {
 
 
 .components-games-panel-panel {
+  position: relative;
   width: 290px;
   color: var(--tom-preto);
 }
@@ -1771,6 +1771,23 @@ button {
   justify-content: space-between;
   height: 48px;
   margin-bottom: 40px;
+}
+
+.components-games-panel-more {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  color: var(--cinza-medio);
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.16px;
+  text-transform: lowercase;
 }
 
 .components-games-panel-header h2 {
@@ -1785,25 +1802,6 @@ button {
 
 .components-games-panel-header h2 span {
   color: #ff3203;
-}
-
-.components-games-panel-header a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 14px;
-  color: var(--cinza-medio);
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 16px;
-  letter-spacing: 0.16px;
-  text-transform: lowercase;
-}
-
-.components-games-panel-header a img {
-  width: 16px;
-  height: 16px;
 }
 
 .components-games-panel-blocks {
@@ -1995,6 +1993,12 @@ button {
 
   .components-games-panel-panel {
     max-width: 100%;
+  }
+
+  .components-games-panel-more {
+    position: static;
+    justify-content: flex-end;
+    margin-top: 24px;
   }
 
   .components-games-panel-matchCard {
@@ -2296,8 +2300,8 @@ button {
   }
 
   .components-hero-news-title {
-    font-size: 32px;
-    line-height: 38px;
+    font-size: 20px;
+    line-height: 26px;
   }
 
   .components-hero-news-ctaButton {
@@ -2335,8 +2339,8 @@ button {
   }
 
   .components-hero-news-title {
-    font-size: 32px;
-    line-height: 38px;
+    font-size: 20px;
+    line-height: 26px;
   }
 
   .components-hero-news-ctaButton {
@@ -2851,8 +2855,8 @@ button {
     align-items: center;
     column-gap: 16px;
     height: auto;
-    min-height: 72px;
-    padding-inline: 20px;
+    min-height: 64px;
+    padding: 8px 20px;
   }
 
   .components-main-menu-toggle,
@@ -2865,8 +2869,8 @@ button {
   }
 
   .components-main-menu-logo {
-    width: 52px;
-    height: 68px;
+    width: 44px;
+    height: 58px;
   }
 
   .components-main-menu-links {
@@ -5541,6 +5545,21 @@ button {
   .components-youtube-section-ctaBlock p {
     font-size: 16px;
     line-height: 24px;
+  }
+
+  .components-youtube-section-button {
+    height: auto;
+    min-height: 52px;
+    padding: 12px 20px;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+  }
+
+  .components-youtube-section-button img,
+  .components-youtube-section-button svg {
+    width: 20px;
+    height: 20px;
   }
 }
 

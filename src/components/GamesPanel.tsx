@@ -75,10 +75,6 @@ export async function GamesPanel() {
         <h2 id="games-title">
           jogos<span>.</span>
         </h2>
-        <Link href="/clube/competicoes" className="inline-flex items-center gap-1">
-          ver mais
-          <ArrowUpRight size={16} />
-        </Link>
       </header>
 
       <div className="components-games-panel-blocks">
@@ -108,6 +104,11 @@ export async function GamesPanel() {
           </section>
         )}
       </div>
+
+      <Link href="/clube/competicoes" className="components-games-panel-more">
+        ver mais
+        <ArrowUpRight size={16} />
+      </Link>
     </aside>
   );
 }
