@@ -48,7 +48,7 @@ export default async function CompetitionsPage() {
         <div>
           <p>clube</p>
           <h1>
-            tabelas & jogos<span>.</span>
+            competições<span>.</span>
           </h1>
         </div>
       </header>

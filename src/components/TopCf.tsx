@@ -1,5 +1,5 @@
 const headerGifs = [
-  { src: "/gif/acf-na-veia.gif", duration: 13400 },
+  { src: "/gif/cf_gif.gif", duration: 13400 },
   { src: "/gif/25-anos.gif", duration: 10010 },
 ];
 
