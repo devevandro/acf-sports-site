@@ -1,6 +1,4 @@
 
-import { MessageCircle } from "lucide-react";
-
 type Plan = {
   name: string;
   price: string;
@@ -145,7 +143,6 @@ function PlanCard({ plan }: { plan: Plan }) {
         {pricePeriod ? <span className="components-sponsors-page-content-planPricePeriod"> / {pricePeriod}</span> : null}
       </p>
       <a href={whatsAppUrl} target="_blank" rel="noreferrer">
-        <MessageCircle size={18} />
         enviar direct no whatsapp
       </a>
     </article>
