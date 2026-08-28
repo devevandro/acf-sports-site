@@ -42,6 +42,8 @@ body {
   font-family: var(--font-rubik), Arial, Helvetica, sans-serif;
 }
 
+@layer components {
+
 a {
   color: inherit;
   text-decoration: none;
@@ -52,9 +54,6 @@ button {
   color: inherit;
   font: inherit;
 }
-
-@layer components {
-
 
 .app-clube-competicoes-page-page {
   min-height: 100vh;
@@ -69,7 +68,7 @@ button {
 }
 
 .app-clube-competicoes-page-heading > div {
-  width: min(1160px, calc(100% - 40px));
+  width: min(1440px, calc(100% - 40px));
   margin: 0 auto;
 }
 
@@ -126,7 +125,7 @@ button {
 }
 
 .app-clube-elenco-slug-page-heading > div {
-  width: min(1160px, calc(100% - 40px));
+  width: min(1440px, calc(100% - 40px));
   margin: 0 auto;
 }
 
@@ -183,7 +182,7 @@ button {
 }
 
 .app-clube-elenco-page-heading > div {
-  width: min(1160px, calc(100% - 40px));
+  width: min(1440px, calc(100% - 40px));
   margin: 0 auto;
 }
 
@@ -240,7 +239,7 @@ button {
 }
 
 .app-clube-historia-page-heading > div {
-  width: min(1160px, calc(100% - 40px));
+  width: min(1440px, calc(100% - 40px));
   margin: 0 auto;
 }
 
@@ -297,7 +296,7 @@ button {
 }
 
 .app-clube-patrocinadores-page-heading > div {
-  width: min(1160px, calc(100% - 40px));
+  width: min(1440px, calc(100% - 40px));
   margin: 0 auto;
 }
 
@@ -354,7 +353,7 @@ button {
 }
 
 .app-contato-page-heading > div {
-  width: min(1160px, calc(100% - 40px));
+  width: min(1440px, calc(100% - 40px));
   margin: 0 auto;
 }
 
@@ -411,7 +410,7 @@ button {
 }
 
 .app-noticias-slug-page-heading > div {
-  width: min(1160px, calc(100% - 40px));
+  width: min(1440px, calc(100% - 40px));
   margin: 0 auto;
 }
 
@@ -468,7 +467,7 @@ button {
 }
 
 .app-noticias-page-heading > div {
-  width: min(1160px, calc(100% - 40px));
+  width: min(1440px, calc(100% - 40px));
   margin: 0 auto;
 }
 
@@ -588,7 +587,7 @@ button {
 .components-competitions-content-inner {
   position: relative;
   z-index: 1;
-  width: min(1160px, calc(100% - 40px));
+  width: min(1440px, calc(100% - 40px));
   margin: 0 auto;
 }
 
@@ -814,6 +813,7 @@ button {
 }
 
 .components-competitions-content-tableBlock {
+  min-width: 0;
   padding: 24px;
   border: 2px solid var(--cinza-claro);
   border-radius: 8px;
@@ -1279,13 +1279,13 @@ button {
 .components-contact-content-section {
   background: #f5f5f5;
   color: #121212;
-  padding: 64px 0 96px;
+  padding: 32px 0 96px;
 }
 
 .components-contact-content-inner {
   display: grid;
   grid-template-columns: 540px 1fr;
-  grid-template-areas: "left plan" "form plan";
+  grid-template-areas: "title title" "left plan" "form plan";
   gap: 64px;
   width: min(1160px, calc(100% - 40px));
   margin: 0 auto;
@@ -1298,6 +1298,10 @@ button {
   flex-direction: column;
   gap: 48px;
   min-width: 0;
+}
+
+.components-contact-content-inner > .components-contact-content-titleBlock {
+  grid-area: title;
 }
 
 .components-contact-content-titleBlock {
@@ -1646,17 +1650,19 @@ button {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 52px;
-  border-radius: 8px;
+  min-height: 40px;
+  padding: 8px 20px;
+  border-radius: 10px;
   background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
   color: #ffffff;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
-  line-height: 24px;
+  line-height: 20px;
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
+  white-space: nowrap;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -1668,7 +1674,7 @@ button {
 @media (max-width: 1200px) {
   .components-contact-content-inner {
     grid-template-columns: 1fr;
-    grid-template-areas: "left" "plan" "form";
+    grid-template-areas: "title" "left" "plan" "form";
   }
 
   .components-contact-content-planPanel {
@@ -2157,6 +2163,15 @@ button {
   font-weight: 800;
   line-height: 38px;
   text-transform: uppercase;
+}
+
+@media (min-width: 993px) {
+  .components-hero-news-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
 }
 
 .components-hero-news-ctaButton {
@@ -4320,7 +4335,7 @@ button {
   gap: 64px;
   width: min(1160px, calc(100% - 40px));
   margin: 0 auto;
-  padding-top: calc(120px + var(--main-menu-height));
+  padding-top: 120px;
 }
 
 .components-site-footer-column,
@@ -4635,20 +4650,34 @@ button {
 
 .components-sponsors-page-content-planGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 340px 400px 340px;
   gap: 40px;
-  align-items: start;
+  justify-content: center;
+  align-items: center;
 }
 
 .components-sponsors-page-content-planCard {
   display: flex;
-  min-height: 666px;
+  min-height: 566px;
   flex-direction: column;
   padding: 32px 40px;
   border-radius: 8px;
   background: #fdfdfd;
   color: #4e4e4e;
   box-shadow: 0 0 2px rgba(102, 102, 102, 0.16);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.components-sponsors-page-content-planCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 34px -18px rgba(245, 99, 69, 0.4), 0 0 18px -4px rgba(37, 114, 184, 0.3);
+}
+
+.components-sponsors-page-content-featuredPlanCard {
+  min-height: 720px;
+  padding: 40px 48px;
 }
 
 .components-sponsors-page-content-planCard h3 {
@@ -4674,7 +4703,7 @@ button {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -4684,9 +4713,9 @@ button {
   position: relative;
   padding-left: 24px;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
-  line-height: 28px;
+  line-height: 26px;
 }
 
 .components-sponsors-page-content-planCard li::before {
@@ -4719,29 +4748,21 @@ button {
 }
 
 .components-sponsors-page-content-planCard a {
-  position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 56px;
-  padding: 12px 20px 12px 48px;
-  border-radius: 154.97px;
+  min-height: 40px;
+  padding: 8px 20px;
+  border-radius: 10px;
   background: linear-gradient(165deg, #ff7a5c 0%, #8f1d00 100%);
   color: #f5f5f5;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 22px;
+  line-height: 20px;
   text-align: center;
   text-transform: uppercase;
-}
-
-.components-sponsors-page-content-planCard a svg {
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  flex-shrink: 0;
-  transform: translateY(-50%);
+  white-space: nowrap;
 }
 
 .components-sponsors-page-content-logoSection {

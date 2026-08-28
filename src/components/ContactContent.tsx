@@ -107,12 +107,12 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
   return (
     <section className="components-contact-content-section" data-node-id="2392:9111" data-name="contato">
       <div className="components-contact-content-inner">
-        <div className="components-contact-content-leftColumn">
-          <div className="components-contact-content-titleBlock">
-            <h2>contate - nos</h2>
-            <p>Ou entre em contato através de um de nossos canais</p>
-          </div>
+        <div className="components-contact-content-titleBlock">
+          <h2>contate - nos</h2>
+          <p>Ou entre em contato através de um de nossos canais</p>
+        </div>
 
+        <div className="components-contact-content-leftColumn">
           <section className="components-contact-content-infoCard" aria-label="Informações de contato">
             <img className="components-contact-content-bull" src={assets.bull} alt="" aria-hidden="true" />
             <div className="components-contact-content-infoList">

@@ -1,11 +1,10 @@
 
-import { MessageCircle } from "lucide-react";
-
 type Plan = {
   name: string;
   price: string;
   message: string;
   benefits: string[];
+  featured?: boolean;
 };
 
 type Logo = {
@@ -31,6 +30,7 @@ const plans: Plan[] = [
     name: "master",
     price: "R$ 500,00 / Mês",
     message: "Olá boa tarde, gostaria de saber mais sobre o plano master do ACF Sports...",
+    featured: true,
     benefits: [
       "Post fixado no Instagram",
       "Destaque central no uniforme",
@@ -132,7 +132,11 @@ function PlanCard({ plan }: { plan: Plan }) {
   const [priceAmount, pricePeriod] = plan.price.split(" / ");
 
   return (
-    <article className="components-sponsors-page-content-planCard">
+    <article
+      className={`components-sponsors-page-content-planCard ${
+        plan.featured ? "components-sponsors-page-content-featuredPlanCard" : ""
+      }`}
+    >
       <h3>{plan.name}</h3>
       <span className="components-sponsors-page-content-planDivider" aria-hidden="true" />
       <ul>
@@ -145,7 +149,6 @@ function PlanCard({ plan }: { plan: Plan }) {
         {pricePeriod ? <span className="components-sponsors-page-content-planPricePeriod"> / {pricePeriod}</span> : null}
       </p>
       <a href={whatsAppUrl} target="_blank" rel="noreferrer">
-        <MessageCircle size={18} />
         enviar direct no whatsapp
       </a>
     </article>
