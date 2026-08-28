@@ -1279,7 +1279,7 @@ button {
 .components-contact-content-section {
   background: #f5f5f5;
   color: #121212;
-  padding: 64px 0 96px;
+  padding: 32px 0 96px;
 }
 
 .components-contact-content-inner {
@@ -4650,20 +4650,34 @@ button {
 
 .components-sponsors-page-content-planGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 340px 400px 340px;
   gap: 40px;
-  align-items: stretch;
+  justify-content: center;
+  align-items: center;
 }
 
 .components-sponsors-page-content-planCard {
   display: flex;
-  min-height: 666px;
+  min-height: 566px;
   flex-direction: column;
   padding: 32px 40px;
   border-radius: 8px;
   background: #fdfdfd;
   color: #4e4e4e;
   box-shadow: 0 0 2px rgba(102, 102, 102, 0.16);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.components-sponsors-page-content-planCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 34px -18px rgba(245, 99, 69, 0.4), 0 0 18px -4px rgba(37, 114, 184, 0.3);
+}
+
+.components-sponsors-page-content-featuredPlanCard {
+  min-height: 720px;
+  padding: 40px 48px;
 }
 
 .components-sponsors-page-content-planCard h3 {
@@ -4689,7 +4703,7 @@ button {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -4699,9 +4713,9 @@ button {
   position: relative;
   padding-left: 24px;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
-  line-height: 28px;
+  line-height: 26px;
 }
 
 .components-sponsors-page-content-planCard li::before {
