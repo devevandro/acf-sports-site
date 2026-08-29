@@ -63,6 +63,9 @@ export function HeroNews({ news }: { news: NewsItem[] }) {
           ) : (
             <Link key={activeSlide.id} className="components-hero-news-storyCard" href={`/noticias/${activeSlide.id}`}>
               <h1 className="components-hero-news-title">{activeSlide.title}</h1>
+              <span className="components-hero-news-ctaButton">
+                Ler Notícia <ArrowUpRight size={18} aria-hidden="true" />
+              </span>
             </Link>
           )}
         </div>

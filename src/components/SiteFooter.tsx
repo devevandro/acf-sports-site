@@ -30,7 +30,7 @@ export async function SiteFooter() {
           </nav>
         </section>
 
-        <section className="components-site-footer-column text-acf-gray w-100">
+        <section className="components-site-footer-column text-acf-gray">
           <h2>mídias sociais</h2>
           <a className="components-site-footer-acfTv" href={teamInfo.youtube} target="_blank" rel="noreferrer">
             Soberano TV

@@ -3,20 +3,14 @@ import { PlayerDetailContent } from "@/components/roster/PlayerDetailContent";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
-import { athletes, getAthleteBySlug } from "@/data/roster";
+import { getPlayerBySlug } from "@/data/players";
 import { notFound } from "next/navigation";
-
-export function generateStaticParams() {
-  return athletes.map((athlete) => ({
-    slug: athlete.slug,
-  }));
-}
 
 export default async function PlayerDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const athlete = getAthleteBySlug(slug);
+  const player = await getPlayerBySlug(slug);
 
-  if (!athlete) {
+  if (!player) {
     notFound();
   }
 
@@ -32,7 +26,7 @@ export default async function PlayerDetailPage({ params }: { params: Promise<{ s
           </h1>
         </div>
       </header>
-      <PlayerDetailContent athlete={athlete} />
+      <PlayerDetailContent player={player} />
       <SponsorsStrip />
       <SiteFooter />
     </main>

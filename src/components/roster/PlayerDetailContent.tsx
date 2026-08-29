@@ -1,84 +1,69 @@
 import Link from "next/link";
-import { athletes, getRelatedAthletes, type Athlete } from "@/data/roster";
+import type { RosterPlayer } from "@/data/players";
 
 type PlayerDetailContentProps = {
-  athlete: Athlete;
+  player: RosterPlayer;
 };
 
-const profileFrameAsset = "/squad/player-profile.png";
-const crestAsset = "/header/symbol.png";
-const playerProfileAsset = "/squad/player.png";
+const frameAsset = "/squad/player-profile.png";
+const frameAssetMobile = "/squad/player-profile-mob.png";
+const playerPhotoAsset = "/squad/player-placeholder.png";
 
-export function PlayerDetailContent({ athlete }: PlayerDetailContentProps) {
-  const related = getRelatedAthletes(athlete)
-    .concat(athletes)
-    .filter(
-      (item, index, list) =>
-        item.slug !== athlete.slug &&
-        item.category === athlete.category &&
-        item.position === athlete.position &&
-        list.findIndex((candidate) => candidate.slug === item.slug) === index,
-    )
-    .slice(0, 3);
-  const position = positionLabel(athlete.position);
-  const [firstName, ...lastNameParts] = athlete.name.split(" ");
-  const lastName = lastNameParts.join(" ") || athlete.nickname;
+const socialIcons: Record<string, string> = {
+  facebook: "/footer/facebook.png",
+  instagram: "/squad/insta-azul.png",
+  youtube: "/footer/youtube.png",
+};
 
+export function PlayerDetailContent({ player }: PlayerDetailContentProps) {
   return (
     <section className="components-roster-player-detail-content-section" data-node-id="2394:20847" data-name="elenco-perfil-jogador">
       <div className="components-roster-player-detail-content-inner">
+        <header className="components-roster-player-detail-content-toolbar">
+          <h2>Perfil do Atleta</h2>
+          <Link href={`/clube/elenco?modalidade=${player.category}`}>Elenco →</Link>
+        </header>
+
         <article className="components-roster-player-detail-content-profileCard">
-          <img className="components-roster-player-detail-content-frameAsset" src={profileFrameAsset} alt="" aria-hidden="true" />
-          <img className="components-roster-player-detail-content-crestAsset" src={crestAsset} alt="" aria-hidden="true" />
+          <picture>
+            <source media="(max-width: 768px)" srcSet={frameAssetMobile} />
+            <img className="components-roster-player-detail-content-frameAsset" src={frameAsset} alt="" aria-hidden="true" />
+          </picture>
 
           <div className="components-roster-player-detail-content-identity">
-            <p className="components-roster-player-detail-content-firstName">{firstName}</p>
-            <h2>{lastName}</h2>
+            <img src="/squad/apelido.png" alt="" aria-hidden="true" />
+            <h2>{player.nickname}</h2>
 
             <dl className="components-roster-player-detail-content-profileList">
-              <InfoRow label="Apelido" value={athlete.nickname} />
-              <InfoRow label="Data de Nascimento" value={athlete.birthDate} />
-              <InfoRow label="Pé dominante" value={athlete.dominantFoot} />
+              <InfoRow label="Nome" value={player.name} />
+              {player.birthday ? <InfoRow label="Data de Nascimento" value={player.birthday} /> : null}
+              {player.dominantFoot ? <InfoRow label="Pé Dominante" value={player.dominantFoot} /> : null}
             </dl>
-          </div>
 
-          <blockquote className="components-roster-player-detail-content-quote">
-            “o tempo ruim vai passar é só uma fase, o sofrimento alimenta mais a sua coragem”
-          </blockquote>
+            {player.socialLinks.length > 0 ? (
+              <div className="components-roster-player-detail-content-socialsList">
+                {player.socialLinks.map((link) => {
+                  const icon = socialIcons[link.platform.toLowerCase()];
+                  if (!icon) return null;
 
-          <section className="components-roster-player-detail-content-related" aria-labelledby="related-players-title">
-            <div className="components-roster-player-detail-content-relatedHeader">
-              <div>
-                <h3 id="related-players-title">{positionGroupTitle(athlete.position)}</h3>
-                <span />
+                  return (
+                    <a href={link.url} target="_blank" rel="noreferrer" key={link.platform} aria-label={link.platform}>
+                      <img src={icon} alt="" aria-hidden="true" />
+                    </a>
+                  );
+                })}
               </div>
-              <Link href={`/clube/elenco?modalidade=${athlete.category}&posicao=${athlete.position}`}>
-                Ver mais posições
-              </Link>
-            </div>
-
-            <div className="components-roster-player-detail-content-relatedGrid">
-              {related.map((item) => (
-                <MiniPlayerCard athlete={item} key={item.id} />
-              ))}
-            </div>
-          </section>
+            ) : null}
+          </div>
 
           <div className="components-roster-player-detail-content-playerFigure">
-            <img src={playerProfileAsset} alt={athlete.name} />
+            <img src={playerPhotoAsset} alt={player.name} />
           </div>
 
-          <p className="components-roster-player-detail-content-number">#{String(athlete.number).padStart(2, "0")}</p>
-
-          <div className="components-roster-player-detail-content-footerMarks" aria-hidden="true">
-            <span className="components-roster-player-detail-content-signature">ACF SPORTS #NAVEIA</span>
-            <div className="components-roster-player-detail-content-socialsList">
-              <span>INSTAGRAM</span>
-              <span>FACEBOOK</span>
-              <span>YOUTUBE</span>
-            </div>
-          </div>
+          <p className="components-roster-player-detail-content-number">#{formatNumber(player.number)}</p>
         </article>
+
+        {player.quote ? <blockquote className="components-roster-player-detail-content-quote">“{player.quote}”</blockquote> : null}
       </div>
     </section>
   );
@@ -87,38 +72,12 @@ export function PlayerDetailContent({ athlete }: PlayerDetailContentProps) {
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt>{label}</dt>
-      <dd>{value}</dd>
+      <dt className="text-[#ffffff]">{label}</dt>
+      <dd className="text-[#FF7A5C]">{value}</dd>
     </div>
   );
 }
 
-function MiniPlayerCard({ athlete }: { athlete: Athlete }) {
-  return (
-    <Link className="components-roster-player-detail-content-miniCard" href={`/clube/elenco/${athlete.slug}`}>
-      <img src={athlete.image} alt={athlete.name} />
-    </Link>
-  );
-}
-
-function positionLabel(position: Athlete["position"]) {
-  const labels: Record<Athlete["position"], string> = {
-    goleiro: "Goleiro",
-    defensor: "Defensor",
-    "meio-campo": "Meio-campo",
-    atacante: "Atacante",
-  };
-
-  return labels[position];
-}
-
-function positionGroupTitle(position: Athlete["position"]) {
-  const labels: Record<Athlete["position"], string> = {
-    goleiro: "goleiros",
-    defensor: "zagueiros",
-    "meio-campo": "meio-campistas",
-    atacante: "atacantes",
-  };
-
-  return labels[position];
+function formatNumber(value: string) {
+  return /^\d+$/.test(value) ? value.padStart(2, "0") : value;
 }

@@ -1,59 +1,31 @@
-import type { RosterCategory, RosterPosition } from "@/data/roster";
+import type { RosterCategory } from "@/data/players";
 
-const categories: { id: RosterCategory | "todos"; label: string }[] = [
+const categories: { id: RosterCategory; label: string }[] = [
   { id: "campo", label: "Futebol de Campo" },
   { id: "futsal", label: "Futsal" },
 ];
 
 type RosterFiltersProps = {
-  activeCategory: RosterCategory | "todos";
-  activePosition: RosterPosition;
+  activeCategory: RosterCategory;
 };
 
-export function RosterFilters({ activeCategory, activePosition }: RosterFiltersProps) {
+export function RosterFilters({ activeCategory }: RosterFiltersProps) {
   return (
-    <div className="components-roster-roster-filters-filters">
-      <div className="components-roster-roster-filters-categoryGroup" aria-label="Filtrar por modalidade">
-        {categories.map((category) => (
-          <a
-            className={category.id === activeCategory ? "components-roster-roster-filters-active" : ""}
-            href={buildHref(category.id, activePosition)}
-            key={category.id}
-          >
-            {category.label}
-          </a>
-        ))}
-      </div>
-
-      <nav className="components-roster-roster-filters-positionGroup" aria-label="Filtrar por posição">
+    <nav className="components-roster-roster-filters-categoryGroup" aria-label="Filtrar por modalidade">
+      {categories.map((category) => (
         <a
-          className={activePosition === "todos" ? "components-roster-roster-filters-active" : ""}
-          href={buildHref(activeCategory, "todos")}
+          className={category.id === activeCategory ? "components-roster-roster-filters-active" : ""}
+          href={buildHref(category.id)}
+          key={category.id}
         >
-          Todas às posições
+          {category.label}
         </a>
-        <a
-          className={activePosition !== "todos" ? "components-roster-roster-filters-active" : ""}
-          href={buildHref(activeCategory, activePosition === "todos" ? "goleiro" : activePosition)}
-        >
-          Ver por posições
-        </a>
-      </nav>
-    </div>
+      ))}
+    </nav>
   );
 }
 
-function buildHref(category: RosterCategory | "todos", position: RosterPosition) {
-  const params = new URLSearchParams();
-
-  if (category !== "todos") {
-    params.set("modalidade", category);
-  }
-
-  if (position !== "todos") {
-    params.set("posicao", position);
-  }
-
-  const query = params.toString();
-  return query ? `/clube/elenco?${query}` : "/clube/elenco";
+function buildHref(category: RosterCategory) {
+  const params = new URLSearchParams({ modalidade: category });
+  return `/clube/elenco?${params.toString()}`;
 }
