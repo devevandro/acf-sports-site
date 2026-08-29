@@ -1279,38 +1279,19 @@ button {
 .components-contact-content-section {
   background: #f5f5f5;
   color: #121212;
-  padding: 32px 0 96px;
+  padding: 80px 0 96px;
 }
 
 .components-contact-content-inner {
-  display: grid;
-  grid-template-columns: 540px 1fr;
-  grid-template-areas: "title title" "left plan" "form plan";
-  gap: 64px;
-  width: min(1160px, calc(100% - 40px));
-  margin: 0 auto;
-  align-items: start;
-}
-
-.components-contact-content-leftColumn {
-  grid-area: left;
   display: flex;
   flex-direction: column;
-  gap: 48px;
-  min-width: 0;
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto;
 }
 
-.components-contact-content-inner > .components-contact-content-titleBlock {
-  grid-area: title;
-}
-
-.components-contact-content-titleBlock {
-  margin-bottom: 24px;
-}
-
-.components-contact-content-titleBlock h2 {
-  margin: 0 0 6px;
-  color: #121212;
+.components-contact-content-intro h2 {
+  margin: 0;
+  color: #000000;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 700;
@@ -1318,449 +1299,335 @@ button {
   text-transform: uppercase;
 }
 
-.components-contact-content-titleBlock p {
-  margin: 0;
-  color: #ff3203;
+.components-contact-content-intro p {
+  margin: 4px 0 0;
+  color: #4e4e4e;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
-  font-weight: 500;
-  line-height: 24px;
-}
-
-.components-contact-content-infoCard {
-  position: relative;
-  min-height: 480px;
-  overflow: hidden;
-  border-radius: 12px;
-  background: #051829;
-  box-shadow: 0 8px 32px rgba(5, 24, 41, 0.15);
-}
-
-.components-contact-content-bull {
-  position: absolute;
-  right: 0;
-  bottom: 30px;
-  width: 360px;
-  height: auto;
-  opacity: 0.25;
-  pointer-events: none;
-}
-
-.components-contact-content-infoList {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  padding: 40px 40px 100px;
-}
-
-.components-contact-content-infoItem {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  min-width: 0;
-}
-
-.components-contact-content-infoItem > img {
-  width: 48px;
-  height: 48px;
-  flex: 0 0 auto;
-}
-
-.components-contact-content-infoItem > div {
-  min-width: 0;
-  flex: 1 1 auto;
-}
-
-.components-contact-content-infoItem h3 {
-  margin: 0 0 4px;
-  color: #ffffff;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
-}
-
-.components-contact-content-infoItem p {
-  margin: 0;
-  color: #b0c4de;
-  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 15px;
   font-weight: 400;
-  line-height: 22px;
-  white-space: pre-line;
+  line-height: 28px;
 }
 
-.components-contact-content-socials {
-  position: absolute;
-  bottom: 32px;
-  left: 40px;
-  z-index: 1;
-  display: flex;
-  gap: 24px;
-  align-items: center;
+.components-contact-content-whereBlock {
+  margin-top: 40px;
+  max-width: 760px;
 }
 
-.components-contact-content-socials img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.components-contact-content-socials a:hover img {
-  transform: translateY(-2px);
-  opacity: 0.85;
-}
-
-.components-contact-content-formBlock {
-  grid-area: form;
-  width: 100%;
-  min-width: 0;
-}
-
-.components-contact-content-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.components-contact-content-formRow {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.components-contact-content-form input,
-.components-contact-content-form textarea {
-  width: 100%;
-  border: 1px solid #cfcfcf;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #121212;
-  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 15px;
-  line-height: 24px;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.components-contact-content-form input {
-  height: 48px;
-  padding: 0 16px;
-}
-
-.components-contact-content-form textarea {
-  min-height: 150px;
-  padding: 16px;
-  resize: vertical;
-}
-
-.components-contact-content-form input:focus,
-.components-contact-content-form textarea:focus {
-  border-color: #ff3203;
-  box-shadow: 0 0 0 3px rgba(255, 50, 3, 0.15);
-}
-
-.components-contact-content-form input::placeholder,
-.components-contact-content-form textarea::placeholder {
-  color: #959595;
-}
-
-.components-contact-content-form button {
-  width: max-content;
-  padding: 16px 36px;
-  margin-top: 12px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
-  color: #ffffff;
-  cursor: pointer;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-  text-transform: uppercase;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.components-contact-content-form button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(245, 99, 69, 0.3);
-}
-
-.components-contact-content-success {
-  padding: 24px;
-  border-radius: 8px;
-  background: #051829;
-  border: 1px solid #ff3203;
-  color: #f5f5f5;
-  font-family: var(--font-montserrat), sans-serif;
-  font-weight: 600;
-}
-
-.components-contact-content-planPanel {
-  grid-area: plan;
-  padding: 48px 40px;
-  border-radius: 12px;
-  background: #fdfdfd;
-  border: 1px solid #cfcfcf;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  min-width: 0;
-}
-
-.components-contact-content-planCarousel {
-  display: none;
-}
-
-.components-contact-content-planPanel > h2 {
-  margin: 0 0 24px;
-  color: #121212;
+.components-contact-content-whereBlock h3,
+.components-contact-content-freeBlock h3 {
+  margin: 0;
+  color: #000000;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
 }
 
-.components-contact-content-planTabs {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-}
-
-.components-contact-content-planTab {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 999px;
-  border: 1px solid #cfcfcf;
-  background: #ffffff;
+.components-contact-content-whereBlock p,
+.components-contact-content-freeBlock > p {
+  margin: 8px 0 0;
   color: #4e4e4e;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.components-contact-content-planTab:hover {
-  border-color: #ff3203;
-  color: #ff3203;
-}
-
-.components-contact-content-planTab.active {
-  background: rgba(255, 50, 3, 0.08);
-  border-color: #ff3203;
-  color: #ff3203;
-  font-weight: 600;
-}
-
-.components-contact-content-radioIcon {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 1.5px solid #959595;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-  transition: border-color 0.2s ease;
-}
-
-.components-contact-content-planTab.active .components-contact-content-radioIcon {
-  border-color: #ff3203;
-}
-
-.components-contact-content-radioDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: transparent;
-  transition: background-color 0.2s ease;
-}
-
-.components-contact-content-planTab.active .components-contact-content-radioDot {
-  background: #ff3203;
-}
-
-.components-contact-content-planCard {
-  width: 100%;
-  padding: 40px 36px;
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-  border: 1px solid #cfcfcf;
-}
-
-.components-contact-content-planCard h3 {
-  margin: 0 0 24px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #cfcfcf;
-  color: #121212;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 36px;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.components-contact-content-planCard ul {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  margin: 0 0 32px;
-  padding: 0;
-  list-style: none;
-}
-
-.components-contact-content-planCard li {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  color: #4e4e4e;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 15px;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
   line-height: 24px;
 }
 
-.components-contact-content-bullet {
-  flex-shrink: 0;
-  margin-top: 6px;
-  display: inline-flex;
-  align-items: center;
+.components-contact-content-infoCards {
+  display: flex;
+  gap: 40px;
+  margin-top: 24px;
 }
 
-.components-contact-content-price {
-  margin: 0 0 24px;
-  color: #1d598f;
+.components-contact-content-infoCard {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 24px;
+  border-radius: 8px;
+  background: #fdfdfd;
+  box-shadow: -1px -1px 4px rgba(160, 158, 158, 0.32), 1px 1px 4px rgba(160, 158, 158, 0.32);
+}
+
+.components-contact-content-infoCardHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.components-contact-content-infoCardHead svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  color: #ff3203;
+}
+
+.components-contact-content-infoCardHead h4 {
+  margin: 0;
+  color: #000000;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 32px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
 }
 
-.components-contact-content-planCard a {
+.components-contact-content-infoCard > p {
+  margin: 8px 0 0;
+  color: #4e4e4e;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  white-space: pre-line;
+}
+
+.components-contact-content-divider {
+  height: 2px;
+  margin: 40px 0;
+  border: none;
+  background: #cfcfcf;
+}
+
+.components-contact-content-freeBlock {
+  max-width: 760px;
+}
+
+.components-contact-content-freeCallout {
+  margin: 24px 0 0;
+  color: #000000;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.components-contact-content-whatsappButton {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 40px;
-  padding: 8px 20px;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 14px 32px;
   border-radius: 10px;
   background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
   color: #ffffff;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
-  line-height: 20px;
-  text-align: center;
-  text-transform: uppercase;
+  line-height: 24px;
   text-decoration: none;
-  white-space: nowrap;
+  text-transform: uppercase;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.components-contact-content-planCard a:hover {
+.components-contact-content-whatsappButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.components-contact-content-whatsappButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(245, 99, 69, 0.3);
 }
 
-@media (max-width: 1200px) {
-  .components-contact-content-inner {
-    grid-template-columns: 1fr;
-    grid-template-areas: "title" "left" "plan" "form";
+.components-contact-content-partnerBand {
+  background: var(--azul-preto);
+  padding: 80px 0;
+}
+
+.components-contact-content-partnerIntro {
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.components-contact-content-partnerIntro h2 {
+  margin: 0;
+  color: #f5f5f5;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.components-contact-content-partnerIntro p {
+  margin: 8px 0 0;
+  color: #b3b3b3;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  max-width: 760px;
+}
+
+.components-contact-content-partnerGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  width: min(1440px, calc(100% - 40px));
+  margin: 40px auto 0;
+}
+
+.components-contact-content-partnerCard {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 40px;
+  border-radius: 8px;
+  background: #fdfdfd;
+  color: #4e4e4e;
+  box-shadow: 0 0 2px rgba(102, 102, 102, 0.16);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.components-contact-content-partnerCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 34px -18px rgba(245, 99, 69, 0.4), 0 0 18px -4px rgba(37, 114, 184, 0.3);
+}
+
+.components-contact-content-partnerCard h3 {
+  margin: 0 0 16px;
+  color: #661400;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.components-contact-content-partnerDivider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: 0 0 32px;
+  background: #e7e7e7;
+}
+
+.components-contact-content-partnerCard ul {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.components-contact-content-partnerCard li {
+  position: relative;
+  padding-left: 24px;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.components-contact-content-partnerCard li::before {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #f56345;
+  border-radius: 50%;
+  content: "";
+}
+
+.components-contact-content-partnerPrice {
+  margin: 28px 0 24px;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  line-height: 32px;
+}
+
+.components-contact-content-partnerPriceAmount {
+  color: #1d598f;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.components-contact-content-partnerPricePeriod {
+  color: #4e4e4e;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.components-contact-content-partnerCard a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 20px;
+  border-radius: 10px;
+  background: linear-gradient(165deg, #ff7a5c 0%, #8f1d00 100%);
+  color: #f5f5f5;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 992px) {
+  .components-contact-content-infoCards {
+    flex-direction: column;
   }
 
-  .components-contact-content-planPanel {
-    min-height: 0;
+  .components-contact-content-partnerGrid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
   }
 }
 
 @media (max-width: 768px) {
   .components-contact-content-section {
-    padding: 32px 0 72px;
+    padding: 48px 0 72px;
   }
 
   .components-contact-content-inner {
     width: min(330px, calc(100% - 32px));
   }
 
-  .components-contact-content-leftColumn {
-    gap: 28px;
+  .components-contact-content-intro h2 {
+    font-size: 26px;
+    line-height: 34px;
   }
 
-  .components-contact-content-titleBlock h2 {
-    font-size: 28px;
-    line-height: 36px;
+  .components-contact-content-intro p {
+    font-size: 16px;
+    line-height: 24px;
   }
 
-  .components-contact-content-titleBlock p {
-    font-size: 17px;
+  .components-contact-content-whereBlock,
+  .components-contact-content-freeBlock {
+    max-width: none;
   }
 
-  .components-contact-content-infoList {
+  .components-contact-content-whatsappButton {
     width: 100%;
-    padding: 28px 20px 88px;
+    justify-content: center;
   }
 
-  .components-contact-content-bull {
-    right: -72px;
-    width: 300px;
+  .components-contact-content-partnerBand {
+    padding: 48px 0;
   }
 
-  .components-contact-content-infoItem p {
-    font-size: 14px;
+  .components-contact-content-partnerIntro {
+    width: min(330px, calc(100% - 32px));
   }
 
-  .components-contact-content-formRow {
+  .components-contact-content-partnerIntro h2 {
+    font-size: 26px;
+    line-height: 34px;
+  }
+
+  .components-contact-content-partnerGrid {
+    width: min(330px, calc(100% - 32px));
     grid-template-columns: 1fr;
-    gap: 20px;
+    max-width: none;
   }
 
-  .components-contact-content-form button {
-    width: 100%;
-  }
-
-  .components-contact-content-planPanel {
-    padding: 32px 0 0;
-    border: none;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  .components-contact-content-planTabs,
-  .components-contact-content-planCardDesktop {
-    display: none;
-  }
-
-  .components-contact-content-planCarousel {
-    display: flex;
-    gap: 16px;
-    margin: 0;
-    padding: 0 0 8px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .components-contact-content-planCarousel .components-contact-content-planCard {
-    flex: 0 0 min(85%, 320px);
-    scroll-snap-align: center;
-  }
-
-  .components-contact-content-planCard {
-    padding: 32px 24px;
-  }
-
-  .components-contact-content-planCard li {
-    font-size: 15px;
-    line-height: 26px;
+  .components-contact-content-partnerCard {
+    padding: 28px 24px;
   }
 }
 
