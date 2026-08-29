@@ -3,16 +3,28 @@ import { getDb } from "@/db";
 
 export type RosterCategory = "futsal" | "campo";
 
+export type SocialLink = {
+  platform: string;
+  url: string;
+};
+
 export type RosterPlayer = {
   id: string;
+  slug: string;
   name: string;
   nickname: string;
   number: string;
   position: string;
+  category: RosterCategory;
+  birthday: string | null;
+  dominantFoot: string | null;
+  quote: string;
+  socialLinks: SocialLink[];
 };
 
 export type RosterPlayerCard = {
   id: string;
+  slug: string;
   name: string;
   nickname: string;
   number: string;
@@ -38,6 +50,11 @@ type PlayerRow = {
   nickname: string;
   number: string | null;
   position: string | null;
+  modality: RosterCategory;
+  birthday: string | Date | null;
+  dominant_foot: string | null;
+  quote: string | null;
+  social_media: SocialLink[] | null;
 };
 
 type StaffRow = {
@@ -76,32 +93,93 @@ function normalizePosition(raw: string | null): string | null {
   return null;
 }
 
+function slugify(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function formatBirthday(value: string | Date | null): string | null {
+  if (!value) return null;
+  const date = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  return `${day}/${month}/${date.getUTCFullYear()}`;
+}
+
+function capitalize(value: string): string {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
 export function categoryLabel(category: RosterCategory) {
   return categoryLabels[category];
 }
 
-export const getPlayersByCategory = cache(async (category: RosterCategory): Promise<RosterPlayer[]> => {
+export function dominantFootLabel(dominantFoot: string | null): string | null {
+  return dominantFoot ? capitalize(dominantFoot) : null;
+}
+
+export function positionLabelFor(position: string): string {
+  const id = normalizePosition(position);
+  return positionGroupOrder.find((group) => group.id === id)?.cardLabel ?? "Outros";
+}
+
+export function positionGroupLabelFor(position: string): string {
+  const id = normalizePosition(position);
+  return positionGroupOrder.find((group) => group.id === id)?.label ?? "Outros";
+}
+
+const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
   try {
     const sql = getDb();
     const rows = (await sql`
-      SELECT id, name, nickname, number, position
+      SELECT id, name, nickname, number, position, modality, birthday, dominant_foot, quote, social_media
       FROM players
-      WHERE modality = ${category}
       ORDER BY trim(name)
     `) as unknown as PlayerRow[];
 
-    return rows.map((row) => ({
-      id: row.id,
-      name: row.name.trim(),
-      nickname: row.nickname.trim(),
-      number: row.number ?? "-",
-      position: row.position ?? "",
-    }));
+    const seenSlugs = new Set<string>();
+
+    return rows.map((row) => {
+      const base = slugify(row.nickname) || row.id;
+      const slug = seenSlugs.has(base) ? `${base}-${row.id.slice(0, 4)}` : base;
+      seenSlugs.add(slug);
+
+      return {
+        id: row.id,
+        slug,
+        name: row.name.trim(),
+        nickname: row.nickname.trim(),
+        number: row.number ?? "-",
+        position: row.position ?? "",
+        category: row.modality,
+        birthday: formatBirthday(row.birthday),
+        dominantFoot: dominantFootLabel(row.dominant_foot),
+        quote: row.quote?.trim() ?? "",
+        socialLinks: (row.social_media ?? []).filter((link) => link.platform && link.url),
+      };
+    });
   } catch (error) {
     console.error("Failed to fetch players from database", error);
     return [];
   }
 });
+
+export async function getPlayersByCategory(category: RosterCategory): Promise<RosterPlayer[]> {
+  const players = await getAllPlayers();
+  return players.filter((player) => player.category === category);
+}
+
+export async function getPlayerBySlug(slug: string): Promise<RosterPlayer | null> {
+  const players = await getAllPlayers();
+  return players.find((player) => player.slug === slug) ?? null;
+}
 
 export function groupPlayersByPosition(players: RosterPlayer[]): RosterPositionGroup[] {
   const matchedIds = new Set<string>();
@@ -115,6 +193,7 @@ export function groupPlayersByPosition(players: RosterPlayer[]): RosterPositionG
       label: group.label,
       players: groupPlayers.map((player) => ({
         id: player.id,
+        slug: player.slug,
         name: player.name,
         nickname: player.nickname,
         number: player.number,
@@ -130,6 +209,7 @@ export function groupPlayersByPosition(players: RosterPlayer[]): RosterPositionG
       label: "Outros",
       players: unmatched.map((player) => ({
         id: player.id,
+        slug: player.slug,
         name: player.name,
         nickname: player.nickname,
         number: player.number,
