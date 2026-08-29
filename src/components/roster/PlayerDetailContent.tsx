@@ -107,6 +107,9 @@ function positionLabel(position: Athlete["position"]) {
     defensor: "Defensor",
     "meio-campo": "Meio-campo",
     atacante: "Atacante",
+    fixo: "Fixo",
+    ala: "Ala",
+    pivo: "Pivô",
   };
 
   return labels[position];
@@ -118,6 +121,9 @@ function positionGroupTitle(position: Athlete["position"]) {
     defensor: "zagueiros",
     "meio-campo": "meio-campistas",
     atacante: "atacantes",
+    fixo: "fixos",
+    ala: "alas",
+    pivo: "pivôs",
   };
 
   return labels[position];

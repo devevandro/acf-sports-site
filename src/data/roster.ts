@@ -1,4 +1,4 @@
-export type RosterPosition = "todos" | "goleiro" | "defensor" | "meio-campo" | "atacante";
+export type RosterPosition = "todos" | "goleiro" | "defensor" | "meio-campo" | "atacante" | "fixo" | "ala" | "pivo";
 
 export type RosterCategory = "campo" | "futsal";
 
@@ -101,12 +101,16 @@ const positions: Exclude<RosterPosition, "todos">[] = [
   "atacante",
 ];
 
+const futsalPositions: Exclude<RosterPosition, "todos">[] = ["goleiro", "fixo", "ala", "ala", "pivo"];
+
 function createAthletes(category: RosterCategory, startNumber: number): Athlete[] {
   return Array.from({ length: 20 }, (_, index) => {
     const number = startNumber + index;
     const isFieldCategory = category === "campo";
     const name = isFieldCategory ? fieldAthleteNames[index] : `Futsal ACF ${String(index + 1).padStart(2, "0")}`;
     const nickname = isFieldCategory ? name.split(" ")[0] : `Futsal ${index + 1}`;
+    const categoryPositions = isFieldCategory ? positions : futsalPositions;
+    const position = categoryPositions[index % categoryPositions.length];
 
     return {
       id: `${category}-${number}`,
@@ -114,7 +118,7 @@ function createAthletes(category: RosterCategory, startNumber: number): Athlete[
       name,
       nickname,
       number,
-      position: positions[index % positions.length],
+      position,
       category,
       image: isFieldCategory ? fieldAthleteImages[index] : athleteImages[(index + 2) % athleteImages.length],
       birthDate: `${String((index % 27) + 1).padStart(2, "0")}/0${(index % 9) + 1}/199${index % 10}`,
@@ -125,7 +129,7 @@ function createAthletes(category: RosterCategory, startNumber: number): Athlete[
       joinedAt: `20${18 + (index % 7)}`,
       stats: {
         games: 8 + index * 2,
-        goals: positions[index % positions.length] === "goleiro" ? 0 : index + 1,
+        goals: position === "goleiro" ? 0 : index + 1,
         assists: index % 9,
       },
     };

@@ -91,4 +91,7 @@ const positionLabels: Record<Athlete["position"], string> = {
   defensor: "Defensor",
   "meio-campo": "Meio-campo",
   atacante: "Atacante",
+  fixo: "Fixo",
+  ala: "Ala",
+  pivo: "Pivô",
 };
