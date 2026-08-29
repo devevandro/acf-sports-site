@@ -1,29 +1,12 @@
 import Link from "next/link";
-import { newsItems, type NewsItem } from "@/data/news";
+import type { CSSProperties } from "react";
+import { getLatestNews } from "@/data/news";
 import { ArrowUpRight } from "lucide-react";
 
-function NewsImage({ item }: { item: NewsItem }) {
-  if (item.image.type === "layered") {
-    return (
-      <div className="components-news-grid-layeredImage">
-        <img className="components-news-grid-layeredBackground" src={item.image.background} alt="" />
-        <img className="components-news-grid-layeredPlayers" src={item.image.foreground} alt={item.image.alt} />
-      </div>
-    );
-  }
+export async function NewsGrid() {
+  const newsItems = await getLatestNews(6);
+  const gridColumns = Math.max(1, Math.min(newsItems.length, 3));
 
-  if (item.image.type === "mascot") {
-    return (
-      <div className="components-news-grid-mascotImage">
-        <img src={item.image.src} alt={item.image.alt} />
-      </div>
-    );
-  }
-
-  return <img className="components-news-grid-cardImage" src={item.image.src} alt={item.image.alt} />;
-}
-
-export function NewsGrid() {
   return (
     <section
       className="components-news-grid-section"
@@ -35,13 +18,16 @@ export function NewsGrid() {
         notícias<span>.</span>
       </h2>
 
-      <div className="components-news-grid-grid">
+      <div
+        className="components-news-grid-grid"
+        style={{ "--news-grid-columns": gridColumns } as CSSProperties}
+      >
         {newsItems.map((item) => (
-          <Link className="components-news-grid-card" href={`/noticias/${item.slug}`} key={item.slug}>
-            <NewsImage item={item} />
+          <Link className="components-news-grid-card" href={`/noticias/${item.id}`} key={item.id}>
+            <img className="components-news-grid-cardImage" src={item.image} alt={item.title} />
             <div className="components-news-grid-copy">
               <h3>{item.title}</h3>
-              <p>{item.description}</p>
+              <p>{item.subtitle}</p>
             </div>
           </Link>
         ))}

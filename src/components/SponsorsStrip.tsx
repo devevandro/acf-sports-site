@@ -10,7 +10,13 @@ const sponsorList = [
   "ACF Sports",
 ];
 
+const SPONSORS_STRIP_ENABLED = false;
+
 export function SponsorsStrip() {
+  if (!SPONSORS_STRIP_ENABLED) {
+    return null;
+  }
+
   return (
     <section
       className="components-sponsors-strip-strip"

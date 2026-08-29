@@ -1,37 +1,39 @@
 import Link from "next/link";
 import { ChevronRight, ChevronsRight } from "lucide-react";
-import { getRelatedNews, type NewsItem } from "@/data/news";
+import { formatNewsDate, getRelatedNews, type NewsItem } from "@/data/news";
 
-export function NewsDetail({ news }: { news: NewsItem }) {
-  const relatedNews = getRelatedNews(news.slug);
+const RELATED_PER_PAGE = 4;
+
+export async function NewsDetail({ news, page = 1 }: { news: NewsItem; page?: number }) {
+  const allRelatedNews = await getRelatedNews(news.id);
+  const totalPages = Math.max(1, Math.ceil(allRelatedNews.length / RELATED_PER_PAGE));
+  const currentPage = Math.min(Math.max(page, 1), totalPages);
+  const relatedNews = allRelatedNews.slice(
+    (currentPage - 1) * RELATED_PER_PAGE,
+    currentPage * RELATED_PER_PAGE
+  );
 
   return (
     <article className="components-news-detail-article" data-node-id="1564:11705" data-name="detalhe-noticia">
       <div className="components-news-detail-inner">
         <header className="components-news-detail-articleHeader">
-          <p>{news.category}</p>
+          <p>{news.tag}</p>
           <h2>{news.title}</h2>
-          <span>{news.description}</span>
+          <span>{news.subtitle}</span>
         </header>
 
-        <NewsImage item={news} variant="hero" />
+        <img className="components-news-detail-heroImage" src={news.image} alt={news.title} />
 
         <div className="components-news-detail-caption">
-          <span>{news.caption}</span>
-          <span>{news.date}</span>
+          <span>Por {news.author}</span>
+          <span>{formatNewsDate(news.createdAt)}</span>
         </div>
 
         <div className="components-news-detail-body">
-          {news.body.slice(0, 3).map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-          {news.quote ? <blockquote>{news.quote}</blockquote> : null}
-          {news.body.slice(3).map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+          <div className="components-news-detail-content" dangerouslySetInnerHTML={{ __html: news.content }} />
           <footer>
             <span>Escrito por {news.author}</span>
-            <span>{news.date}</span>
+            <span>{formatNewsDate(news.createdAt)}</span>
           </footer>
         </div>
 
@@ -39,61 +41,54 @@ export function NewsDetail({ news }: { news: NewsItem }) {
           <h2 id="related-title">Mais notícias sobre o ACF</h2>
           <div className="components-news-detail-relatedList">
             {relatedNews.map((item) => (
-              <Link className="components-news-detail-relatedCard" href={`/noticias/${item.slug}`} key={item.slug}>
-                <NewsImage item={item} variant="related" />
+              <Link className="components-news-detail-relatedCard" href={`/noticias/${item.id}`} key={item.id}>
+                <img className="components-news-detail-relatedImage" src={item.image} alt={item.title} />
                 <div className="components-news-detail-relatedCopy">
-                  <p>{item.category}</p>
+                  <p>{item.tag}</p>
                   <h3>{item.title}</h3>
-                  <span>{item.description}</span>
+                  <span>{item.subtitle}</span>
                   <div>
                     <small>Por {item.author}</small>
-                    <small>{item.date}</small>
+                    <small>{formatNewsDate(item.createdAt)}</small>
                   </div>
                 </div>
               </Link>
             ))}
           </div>
 
-          <nav className="components-news-detail-pagination" aria-label="Paginação de notícias relacionadas">
-            {[1, 2, 3, 4, 5, 6].map((page) => (
-              <Link className={page === 1 ? "components-news-detail-currentPage" : ""} href="/noticias" key={page}>
-                {page}
-              </Link>
-            ))}
-            <span>...</span>
-            <Link className="components-news-detail-iconPage inline-flex items-center justify-center" href="/noticias" aria-label="Próxima página">
-              <ChevronRight size={18} />
-            </Link>
-            <Link className="components-news-detail-iconPage inline-flex items-center justify-center" href="/noticias" aria-label="Última página">
-              <ChevronsRight size={18} />
-            </Link>
-          </nav>
+          {allRelatedNews.length > RELATED_PER_PAGE && (
+            <nav className="components-news-detail-pagination" aria-label="Paginação de notícias relacionadas">
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+                <Link
+                  className={pageNumber === currentPage ? "components-news-detail-currentPage" : ""}
+                  href={`/noticias/${news.id}?page=${pageNumber}`}
+                  key={pageNumber}
+                >
+                  {pageNumber}
+                </Link>
+              ))}
+              {currentPage < totalPages && (
+                <Link
+                  className="components-news-detail-iconPage inline-flex items-center justify-center"
+                  href={`/noticias/${news.id}?page=${currentPage + 1}`}
+                  aria-label="Próxima página"
+                >
+                  <ChevronRight size={18} />
+                </Link>
+              )}
+              {currentPage < totalPages && (
+                <Link
+                  className="components-news-detail-iconPage inline-flex items-center justify-center"
+                  href={`/noticias/${news.id}?page=${totalPages}`}
+                  aria-label="Última página"
+                >
+                  <ChevronsRight size={18} />
+                </Link>
+              )}
+            </nav>
+          )}
         </section>
       </div>
     </article>
   );
 }
-
-function NewsImage({ item, variant }: { item: NewsItem; variant: "hero" | "related" }) {
-  const className = variant === "hero" ? "components-news-detail-heroImage" : "components-news-detail-relatedImage";
-
-  if (item.image.type === "layered") {
-    return (
-      <div className={`${className} components-news-detail-layeredImage`}>
-        <img className="components-news-detail-layeredBackground" src={item.image.background} alt="" />
-        <img className="components-news-detail-layeredPlayers" src={item.image.foreground} alt={item.image.alt} />
-      </div>
-    );
-  }
-
-  if (item.image.type === "mascot") {
-    return (
-      <div className={`${className} components-news-detail-mascotImage`}>
-        <img src={item.image.src} alt={item.image.alt} />
-      </div>
-    );
-  }
-
-  return <img className={className} src={item.image.src} alt={item.image.alt} />;
-}
-

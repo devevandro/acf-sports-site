@@ -1,14 +1,19 @@
 import { ContactContent } from "@/components/ContactContent";
-import { MainMenu } from "@/components/MainMenu";
+import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
+import { getTeamInfo } from "@/data/teamInfo";
 
-export default function ContactPage() {
+export const revalidate = 60;
+
+export default async function ContactPage() {
+  const teamInfo = await getTeamInfo();
+
   return (
     <main className="app-contato-page-page">
       <TopCf />
-      <MainMenu active="contact" />
+      <SiteHeader active="contact" />
       <header className="app-contato-page-heading">
         <div>
           <p>social</p>
@@ -17,7 +22,7 @@ export default function ContactPage() {
           </h1>
         </div>
       </header>
-      <ContactContent />
+      <ContactContent teamInfo={teamInfo} />
       <SponsorsStrip />
       <SiteFooter />
     </main>

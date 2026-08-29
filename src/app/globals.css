@@ -42,6 +42,8 @@ body {
   font-family: var(--font-rubik), Arial, Helvetica, sans-serif;
 }
 
+@layer components {
+
 a {
   color: inherit;
   text-decoration: none;
@@ -52,9 +54,6 @@ button {
   color: inherit;
   font: inherit;
 }
-
-@layer components {
-
 
 .app-clube-competicoes-page-page {
   min-height: 100vh;
@@ -335,8 +334,8 @@ button {
   }
 
   .app-clube-patrocinadores-page-heading h1 {
-    font-size: 42px;
-    line-height: 52px;
+    font-size: 34px;
+    line-height: 42px;
   }
 }
 
@@ -384,7 +383,7 @@ button {
 
 @media (max-width: 768px) {
   .app-contato-page-heading {
-    min-height: 144px;
+    min-height: 110px;
   }
 
   .app-contato-page-heading > div {
@@ -527,7 +526,7 @@ button {
   display: grid;
   grid-template-columns: minmax(0, 1070px) 290px;
   gap: 80px;
-  align-items: start;
+  align-items: stretch;
   width: min(1440px, calc(100% - 40px));
   margin: 0 auto;
 }
@@ -621,6 +620,21 @@ button {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.components-competitions-content-noMatch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 124px;
+  padding: 20px 80px;
+  border-radius: 8px;
+  background: #fdfdfd;
+  box-shadow: 0 0 2px 2px rgba(167, 165, 165, 0.26);
+  color: var(--cinza-medio);
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
 .components-competitions-content-matchTeams {
   display: flex;
   align-items: center;
@@ -649,6 +663,23 @@ button {
   width: 56px;
   height: 56px;
   object-fit: contain;
+}
+
+.components-competitions-content-teamLogo {
+  display: inline-flex;
+}
+
+.components-competitions-content-teamLogoHome {
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  background: var(--azul-preto);
+}
+
+.components-competitions-content-teamLogoHome img {
+  width: 44px;
+  height: 44px;
 }
 
 .components-competitions-content-team span {
@@ -779,6 +810,14 @@ button {
 
 .components-competitions-content-previousMeta .components-competitions-content-details:hover {
   color: #ff3203;
+}
+
+.components-competitions-content-tableBlock {
+  min-width: 0;
+  padding: 24px;
+  border: 2px solid var(--cinza-claro);
+  border-radius: 8px;
+  background: #e7e7e7;
 }
 
 .components-competitions-content-tableHeaderWrap {
@@ -927,6 +966,127 @@ button {
 
 .components-competitions-content-relegatedDot {
   background: #d41111;
+}
+
+@media (max-width: 768px) {
+  .components-competitions-content-section {
+    padding: 48px 0 64px;
+  }
+
+  .components-competitions-content-inner {
+    width: min(330px, calc(100% - 32px));
+  }
+
+  .components-competitions-content-inner h2,
+  .components-competitions-content-previous h2 {
+    text-align: center;
+  }
+
+  .components-competitions-content-nextMatch {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 20px;
+    min-height: 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .components-competitions-content-separator {
+    width: 100%;
+    height: 2px;
+  }
+
+  .components-competitions-content-matchTeams {
+    flex-wrap: nowrap;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .components-competitions-content-matchTeams strong {
+    flex: 0 0 auto;
+    font-size: 24px;
+  }
+
+  .components-competitions-content-team {
+    min-width: 0;
+    max-width: 120px;
+    flex: 1 1 0;
+  }
+
+  .components-competitions-content-team img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .components-competitions-content-team span {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .components-competitions-content-matchMeta {
+    align-items: center;
+    text-align: center;
+  }
+
+  .components-competitions-content-matchMeta .components-competitions-content-details {
+    justify-content: center;
+  }
+
+  .components-competitions-content-contentGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .components-competitions-content-previous,
+  .components-competitions-content-tableBlock {
+    min-width: 0;
+  }
+
+  .components-competitions-content-previousCard {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 12px;
+    min-height: 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .components-competitions-content-cardSeparator {
+    display: block;
+    width: 100%;
+    height: 2px;
+  }
+
+  .components-competitions-content-previousMeta {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+
+  .components-competitions-content-previousMeta .components-competitions-content-details {
+    justify-content: center;
+  }
+
+  .components-competitions-content-tableBlock {
+    padding: 16px;
+  }
+
+  .components-competitions-content-tableTitle {
+    font-size: 18px;
+  }
+
+  .components-competitions-content-tableWrap {
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+
+  .components-competitions-content-legend {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 /* Modal Styling */
@@ -1107,74 +1267,31 @@ button {
   .components-competitions-content-previousCard {
     grid-template-columns: 88px auto 88px;
   }
+}
 
+@media (min-width: 769px) and (max-width: 1200px) {
   .components-competitions-content-previousCard .components-competitions-content-cardSeparator,
   .components-competitions-content-previousMeta {
     display: none;
   }
 }
 
-@media (max-width: 768px) {
-  .components-competitions-content-section {
-    padding: 56px 0 72px;
-  }
-
-  .components-competitions-content-inner {
-    width: min(330px, calc(100% - 32px));
-  }
-
-  .components-competitions-content-nextMatch {
-    padding: 20px;
-  }
-
-  .components-competitions-content-matchTeams {
-    gap: 12px;
-  }
-
-  .components-competitions-content-previousCard {
-    grid-template-columns: 76px auto 76px;
-    gap: 10px;
-    padding: 12px;
-  }
-
-  .components-competitions-content-previousCard > strong {
-    font-size: 24px;
-  }
-
-  .components-competitions-content-legend {
-    flex-direction: column;
-    gap: 8px;
-  }
-}
-
 .components-contact-content-section {
   background: #f5f5f5;
   color: #121212;
-  padding: 64px 0 96px;
+  padding: 80px 0 96px;
 }
 
 .components-contact-content-inner {
-  display: grid;
-  grid-template-columns: 540px 1fr;
-  gap: 64px;
-  width: min(1160px, calc(100% - 40px));
-  margin: 0 auto;
-  align-items: start;
-}
-
-.components-contact-content-leftColumn {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto;
 }
 
-.components-contact-content-titleBlock {
-  margin-bottom: 24px;
-}
-
-.components-contact-content-titleBlock h2 {
-  margin: 0 0 6px;
-  color: #121212;
+.components-contact-content-intro h2 {
+  margin: 0;
+  color: #000000;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 32px;
   font-weight: 700;
@@ -1182,420 +1299,341 @@ button {
   text-transform: uppercase;
 }
 
-.components-contact-content-titleBlock p {
-  margin: 0;
-  color: #ff3203;
+.components-contact-content-intro p {
+  margin: 4px 0 0;
+  color: #4e4e4e;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
-  font-weight: 500;
-  line-height: 24px;
-}
-
-.components-contact-content-infoCard {
-  position: relative;
-  min-height: 480px;
-  overflow: hidden;
-  border-radius: 12px;
-  background: #051829;
-  box-shadow: 0 8px 32px rgba(5, 24, 41, 0.15);
-}
-
-.components-contact-content-bull {
-  position: absolute;
-  right: 0;
-  bottom: 30px;
-  width: 360px;
-  height: auto;
-  opacity: 0.25;
-  pointer-events: none;
-}
-
-.components-contact-content-infoList {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  padding: 40px 40px 100px;
-}
-
-.components-contact-content-infoItem {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
-
-.components-contact-content-infoItem > img {
-  width: 48px;
-  height: 48px;
-  flex: 0 0 auto;
-}
-
-.components-contact-content-infoItem h3 {
-  margin: 0 0 4px;
-  color: #ffffff;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
-}
-
-.components-contact-content-infoItem p {
-  margin: 0;
-  color: #b0c4de;
-  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 15px;
   font-weight: 400;
-  line-height: 22px;
-  white-space: pre-line;
+  line-height: 28px;
 }
 
-.components-contact-content-socials {
-  position: absolute;
-  bottom: 32px;
-  left: 40px;
-  z-index: 1;
-  display: flex;
-  gap: 24px;
-  align-items: center;
+.components-contact-content-whereBlock {
+  margin-top: 40px;
+  max-width: 760px;
 }
 
-.components-contact-content-socials img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.components-contact-content-socials a:hover img {
-  transform: translateY(-2px);
-  opacity: 0.85;
-}
-
-.components-contact-content-formBlock {
-  width: 100%;
-}
-
-.components-contact-content-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.components-contact-content-formRow {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.components-contact-content-form input,
-.components-contact-content-form textarea {
-  width: 100%;
-  border: 1px solid #cfcfcf;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #121212;
-  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 15px;
-  line-height: 24px;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.components-contact-content-form input {
-  height: 48px;
-  padding: 0 16px;
-}
-
-.components-contact-content-form textarea {
-  min-height: 150px;
-  padding: 16px;
-  resize: vertical;
-}
-
-.components-contact-content-form input:focus,
-.components-contact-content-form textarea:focus {
-  border-color: #ff3203;
-  box-shadow: 0 0 0 3px rgba(255, 50, 3, 0.15);
-}
-
-.components-contact-content-form input::placeholder,
-.components-contact-content-form textarea::placeholder {
-  color: #959595;
-}
-
-.components-contact-content-form button {
-  width: max-content;
-  padding: 16px 36px;
-  margin-top: 12px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
-  color: #ffffff;
-  cursor: pointer;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-  text-transform: uppercase;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.components-contact-content-form button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(245, 99, 69, 0.3);
-}
-
-.components-contact-content-success {
-  padding: 24px;
-  border-radius: 8px;
-  background: #051829;
-  border: 1px solid #ff3203;
-  color: #f5f5f5;
-  font-family: var(--font-montserrat), sans-serif;
-  font-weight: 600;
-}
-
-.components-contact-content-planPanel {
-  padding: 48px 40px;
-  border-radius: 12px;
-  background: #fdfdfd;
-  border: 1px solid #cfcfcf;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-}
-
-.components-contact-content-planPanel > h2 {
-  margin: 0 0 24px;
-  color: #121212;
+.components-contact-content-whereBlock h3,
+.components-contact-content-freeBlock h3 {
+  margin: 0;
+  color: #000000;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
 }
 
-.components-contact-content-planTabs {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
+.components-contact-content-whereBlock p,
+.components-contact-content-freeBlock > p {
+  margin: 8px 0 0;
+  color: #4e4e4e;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
 }
 
-.components-contact-content-planTab {
+.components-contact-content-infoCards {
+  display: flex;
+  gap: 40px;
+  margin-top: 24px;
+}
+
+.components-contact-content-infoCard {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 24px;
+  border-radius: 8px;
+  background: #fdfdfd;
+  box-shadow: -1px -1px 4px rgba(160, 158, 158, 0.32), 1px 1px 4px rgba(160, 158, 158, 0.32);
+}
+
+.components-contact-content-infoCardHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.components-contact-content-infoCardHead svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  color: #ff3203;
+}
+
+.components-contact-content-infoCardHead h4 {
+  margin: 0;
+  color: #000000;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.components-contact-content-infoCard > p {
+  margin: 8px 0 0;
+  color: #4e4e4e;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  white-space: pre-line;
+}
+
+.components-contact-content-divider {
+  height: 2px;
+  margin: 40px 0;
+  border: none;
+  background: #cfcfcf;
+}
+
+.components-contact-content-freeBlock {
+  max-width: 760px;
+}
+
+.components-contact-content-freeCallout {
+  margin: 24px 0 0;
+  color: #000000;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.components-contact-content-whatsappButton {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
-  border-radius: 999px;
-  border: 1px solid #cfcfcf;
-  background: #ffffff;
-  color: #4e4e4e;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.components-contact-content-planTab:hover {
-  border-color: #ff3203;
-  color: #ff3203;
-}
-
-.components-contact-content-planTab.active {
-  background: rgba(255, 50, 3, 0.08);
-  border-color: #ff3203;
-  color: #ff3203;
-  font-weight: 600;
-}
-
-.components-contact-content-radioIcon {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 1.5px solid #959595;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-  transition: border-color 0.2s ease;
-}
-
-.components-contact-content-planTab.active .components-contact-content-radioIcon {
-  border-color: #ff3203;
-}
-
-.components-contact-content-radioDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: transparent;
-  transition: background-color 0.2s ease;
-}
-
-.components-contact-content-planTab.active .components-contact-content-radioDot {
-  background: #ff3203;
-}
-
-.components-contact-content-planCard {
-  width: 100%;
-  padding: 40px 36px;
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-  border: 1px solid #cfcfcf;
-}
-
-.components-contact-content-planCard h3 {
-  margin: 0 0 24px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #cfcfcf;
-  color: #121212;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 36px;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.components-contact-content-planCard ul {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  margin: 0 0 32px;
-  padding: 0;
-  list-style: none;
-}
-
-.components-contact-content-planCard li {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  color: #4e4e4e;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 15px;
-  line-height: 24px;
-}
-
-.components-contact-content-bullet {
-  flex-shrink: 0;
-  margin-top: 6px;
-  display: inline-flex;
-  align-items: center;
-}
-
-.components-contact-content-price {
-  margin: 0 0 24px;
-  color: #1d598f;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 32px;
-}
-
-.components-contact-content-planCard a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 52px;
-  border-radius: 8px;
+  margin-top: 24px;
+  padding: 14px 32px;
+  border-radius: 10px;
   background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
   color: #ffffff;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 24px;
-  text-align: center;
-  text-transform: uppercase;
   text-decoration: none;
+  text-transform: uppercase;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.components-contact-content-planCard a:hover {
+.components-contact-content-whatsappButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.components-contact-content-whatsappButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(245, 99, 69, 0.3);
 }
 
-@media (max-width: 1200px) {
-  .components-contact-content-inner {
-    grid-template-columns: 1fr;
+.components-contact-content-partnerBand {
+  background: var(--azul-preto);
+  padding: 80px 0;
+}
+
+.components-contact-content-partnerIntro {
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.components-contact-content-partnerIntro h2 {
+  margin: 0;
+  color: #f5f5f5;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.components-contact-content-partnerIntro p {
+  margin: 8px 0 0;
+  color: #b3b3b3;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  max-width: 760px;
+}
+
+.components-contact-content-partnerGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  width: min(1440px, calc(100% - 40px));
+  margin: 40px auto 0;
+}
+
+.components-contact-content-partnerCard {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 40px;
+  border-radius: 8px;
+  background: #fdfdfd;
+  color: #4e4e4e;
+  box-shadow: 0 0 2px rgba(102, 102, 102, 0.16);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.components-contact-content-partnerCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 34px -18px rgba(245, 99, 69, 0.4), 0 0 18px -4px rgba(37, 114, 184, 0.3);
+}
+
+.components-contact-content-partnerCard h3 {
+  margin: 0 0 16px;
+  color: #661400;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.components-contact-content-partnerDivider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: 0 0 32px;
+  background: #e7e7e7;
+}
+
+.components-contact-content-partnerCard ul {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.components-contact-content-partnerCard li {
+  position: relative;
+  padding-left: 24px;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.components-contact-content-partnerCard li::before {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #f56345;
+  border-radius: 50%;
+  content: "";
+}
+
+.components-contact-content-partnerPrice {
+  margin: 28px 0 24px;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  line-height: 32px;
+}
+
+.components-contact-content-partnerPriceAmount {
+  color: #1d598f;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.components-contact-content-partnerPricePeriod {
+  color: #4e4e4e;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.components-contact-content-partnerCard a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 20px;
+  border-radius: 10px;
+  background: linear-gradient(165deg, #ff7a5c 0%, #8f1d00 100%);
+  color: #f5f5f5;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 992px) {
+  .components-contact-content-infoCards {
+    flex-direction: column;
   }
 
-  .components-contact-content-planPanel {
-    min-height: 0;
+  .components-contact-content-partnerGrid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
   }
 }
 
 @media (max-width: 768px) {
   .components-contact-content-section {
-    padding: 56px 0 72px;
+    padding: 48px 0 72px;
   }
 
   .components-contact-content-inner {
     width: min(330px, calc(100% - 32px));
   }
 
-  .components-contact-content-leftColumn {
-    gap: 56px;
+  .components-contact-content-intro h2 {
+    font-size: 26px;
+    line-height: 34px;
   }
 
-  .components-contact-content-titleBlock h2 {
-    font-size: 28px;
-    line-height: 36px;
+  .components-contact-content-intro p {
+    font-size: 16px;
+    line-height: 24px;
   }
 
-  .components-contact-content-titleBlock p {
-    font-size: 17px;
+  .components-contact-content-whereBlock,
+  .components-contact-content-freeBlock {
+    max-width: none;
   }
 
-  .components-contact-content-infoList {
+  .components-contact-content-whatsappButton {
     width: 100%;
-    padding: 28px 20px 88px;
+    justify-content: center;
   }
 
-  .components-contact-content-bull {
-    right: -72px;
-    width: 300px;
+  .components-contact-content-partnerBand {
+    padding: 48px 0;
   }
 
-  .components-contact-content-infoItem p {
-    font-size: 14px;
+  .components-contact-content-partnerIntro {
+    width: min(330px, calc(100% - 32px));
   }
 
-  .components-contact-content-formRow {
+  .components-contact-content-partnerIntro h2 {
+    font-size: 26px;
+    line-height: 34px;
+  }
+
+  .components-contact-content-partnerGrid {
+    width: min(330px, calc(100% - 32px));
     grid-template-columns: 1fr;
-    gap: 20px;
+    max-width: none;
   }
 
-  .components-contact-content-form button {
-    width: 100%;
-  }
-
-  .components-contact-content-planPanel {
-    padding: 32px 20px;
-  }
-
-  .components-contact-content-planTabs {
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 40px;
-  }
-
-  .components-contact-content-planCard {
-    padding: 32px 24px;
-  }
-
-  .components-contact-content-planCard li {
-    font-size: 15px;
-    line-height: 26px;
+  .components-contact-content-partnerCard {
+    padding: 28px 24px;
   }
 }
 
 
 .components-games-panel-panel {
+  position: relative;
   width: 290px;
   color: var(--tom-preto);
 }
@@ -1606,6 +1644,23 @@ button {
   justify-content: space-between;
   height: 48px;
   margin-bottom: 40px;
+}
+
+.components-games-panel-more {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  color: var(--cinza-medio);
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.16px;
+  text-transform: lowercase;
 }
 
 .components-games-panel-header h2 {
@@ -1620,25 +1675,6 @@ button {
 
 .components-games-panel-header h2 span {
   color: #ff3203;
-}
-
-.components-games-panel-header a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 14px;
-  color: var(--cinza-medio);
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 16px;
-  letter-spacing: 0.16px;
-  text-transform: lowercase;
-}
-
-.components-games-panel-header a img {
-  width: 16px;
-  height: 16px;
 }
 
 .components-games-panel-blocks {
@@ -1684,7 +1720,7 @@ button {
 
 .components-games-panel-matchCard {
   position: relative;
-  height: 116px;
+  height: 140px;
   overflow: hidden;
   border-radius: 8px;
   background: var(--azul-preto);
@@ -1692,7 +1728,7 @@ button {
 }
 
 .components-games-panel-upcomingCard {
-  height: 136px;
+  height: 160px;
   background: var(--azul-ceu-fechado-tom-1);
 }
 
@@ -1702,6 +1738,7 @@ button {
   left: 0;
   max-width: 100%;
   padding: 4px 8px;
+  overflow: hidden;
   border-bottom-right-radius: 8px;
   border-top-left-radius: 8px;
   background: var(--laranja);
@@ -1712,6 +1749,7 @@ button {
   line-height: 20px;
   text-transform: capitalize;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .components-games-panel-upcomingDate {
@@ -1724,15 +1762,40 @@ button {
   top: 36px;
   left: 50%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 4px;
+  gap: 8px;
+  width: 100%;
   transform: translateX(-50%);
 }
 
 .components-games-panel-upcomingCard .components-games-panel-matchBody {
   top: 44px;
+}
+
+.components-games-panel-matchTeams {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.components-games-panel-upcomingCard .components-games-panel-matchTeams {
   gap: 15px;
+}
+
+.components-games-panel-matchLocation {
+  max-width: calc(100% - 24px);
+  overflow: hidden;
+  color: #b3b3b3;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  text-transform: capitalize;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .components-games-panel-team {
@@ -1741,6 +1804,7 @@ button {
   align-items: center;
   gap: 4px;
   width: 95px;
+  min-width: 0;
   color: #f5f5f5;
   text-align: center;
 }
@@ -1757,12 +1821,16 @@ button {
 }
 
 .components-games-panel-team span {
+  display: block;
+  width: 100%;
+  overflow: hidden;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 12px;
   font-weight: 600;
   line-height: 20px;
   text-transform: capitalize;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .components-games-panel-score {
@@ -1800,8 +1868,41 @@ button {
     max-width: 100%;
   }
 
+  .components-games-panel-more {
+    position: static;
+    justify-content: flex-end;
+    margin-top: 24px;
+  }
+
   .components-games-panel-matchCard {
     width: 100%;
+    height: 152px;
+  }
+
+  .components-games-panel-upcomingCard {
+    height: 172px;
+  }
+
+  .components-games-panel-team img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .components-games-panel-upcomingCard .components-games-panel-team img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .components-games-panel-team span {
+    font-size: 14px;
+  }
+
+  .components-games-panel-score {
+    font-size: 36px;
+  }
+
+  .components-games-panel-matchLocation {
+    font-size: 12px;
   }
 }
 
@@ -1883,21 +1984,27 @@ button {
   object-position: center;
 }
 
+.components-hero-news-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
 .components-hero-news-storyCard {
   position: absolute;
-  right: 32px;
-  bottom: 16px;
-  left: 32px;
-  max-width: min(720px, calc(100% - 500px));
-  min-height: 140px;
-  padding: 24px 28px;
-  border-radius: 16px;
-  background: linear-gradient(
-    183deg,
-    rgba(255, 255, 255, 0) 14%,
-    rgba(166, 207, 245, 0.6) 89%
-  );
-  backdrop-filter: blur(6px);
+  right: max(32px, calc((100% - 1440px) / 2));
+  bottom: 80px;
+  left: max(32px, calc((100% - 1440px) / 2));
+  max-width: min(760px, calc(100% - 480px));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
   animation: heroCopyFade 520ms ease both;
 }
 
@@ -1913,40 +2020,53 @@ button {
   }
 }
 
-.components-hero-news-category {
-  width: min(883px, 100%);
-  margin: 0 0 4px;
-  color: var(--laranja-branco-medio);
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 22px;
-  font-weight: 500;
-  letter-spacing: 0.16px;
-  line-height: 26px;
-  text-transform: capitalize;
-}
-
 .components-hero-news-title {
-  width: min(883px, 100%);
-  margin: 0 0 6px;
-  color: var(--tom-preto);
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 26px;
-  font-weight: 600;
-  line-height: 32px;
+  margin: 0;
+  color: #ffffff;
+  text-align: left;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  font-family: var(--font-rubik), Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 38px;
+  text-transform: uppercase;
 }
 
-.components-hero-news-summary {
-  margin: 0;
-  color: var(--cinza-claro);
-  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 24px;
+@media (min-width: 993px) {
+  .components-hero-news-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}
+
+.components-hero-news-ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
+  color: #ffffff;
+  font-family: var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(143, 48, 29, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.components-hero-news-ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(143, 48, 29, 0.45);
 }
 
 .components-hero-news-thumbnails {
   position: absolute;
-  right: 32px;
+  right: max(32px, calc((100% - 1440px) / 2));
   bottom: 0;
   display: flex;
   align-items: center;
@@ -2056,20 +2176,20 @@ button {
   .components-hero-news-storyCard {
     right: 20px;
     left: 20px;
-    max-width: 100%;
-    min-height: 150px;
-    padding: 20px;
+    bottom: 20px;
+    max-width: min(480px, calc(100% - 340px));
+    gap: 14px;
   }
 
-  .components-hero-news-category,
   .components-hero-news-title {
-    font-size: 22px;
-    line-height: 28px;
+    font-size: 20px;
+    line-height: 26px;
   }
 
-  .components-hero-news-summary {
-    font-size: 16px;
-    line-height: 22px;
+  .components-hero-news-ctaButton {
+    padding: 12px 24px;
+    font-size: 15px;
+    line-height: 18px;
   }
 
   .components-hero-news-thumbnails {
@@ -2093,19 +2213,22 @@ button {
   }
 
   .components-hero-news-storyCard {
-    min-height: 140px;
-    padding: 16px;
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+    max-width: 100%;
+    gap: 12px;
   }
 
-  .components-hero-news-category,
   .components-hero-news-title {
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 20px;
+    line-height: 26px;
   }
 
-  .components-hero-news-summary {
+  .components-hero-news-ctaButton {
+    padding: 10px 20px;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 18px;
   }
 
   .components-hero-news-thumbnails {
@@ -2192,21 +2315,22 @@ button {
 .components-history-content-articleText {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   margin-top: 36px;
-  color: #333333;
+  color: #4e4e4e;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 400;
-  line-height: 36px;
+  line-height: 40px;
+  text-align: left;
 }
 
 .components-history-content-articleText p {
   margin: 0;
-  text-indent: 32px;
 }
 
-.components-history-content-emphasis {
+.components-history-content-emphasis,
+.components-history-content-mascot .components-history-content-articleText p:last-child {
   color: #121212;
   font-weight: 600;
 }
@@ -2352,10 +2476,6 @@ button {
     line-height: 28px;
   }
 
-  .components-history-content-articleText p {
-    text-indent: 16px;
-  }
-
   .components-history-content-symbols,
   .components-history-content-mascot {
     margin-top: 56px;
@@ -2389,7 +2509,7 @@ button {
   justify-content: space-between;
   width: 100%;
   height: var(--main-menu-height);
-  padding: 16px clamp(24px, 13.75vw, 220px);
+  padding: 16px max(20px, calc((100% - 1160px) / 2));
   background: var(--azul-ceu-fechado-tom-1);
 }
 
@@ -2402,8 +2522,8 @@ button {
 }
 
 .components-main-menu-logo {
-  width: 50px;
-  height: 64px;
+  width: 70px;
+  height: 90px;
   object-fit: contain;
 }
 
@@ -2617,8 +2737,8 @@ button {
     align-items: center;
     column-gap: 16px;
     height: auto;
-    min-height: 72px;
-    padding-inline: 20px;
+    min-height: 64px;
+    padding: 8px max(16px, calc((100% - 330px) / 2));
   }
 
   .components-main-menu-toggle,
@@ -2631,8 +2751,8 @@ button {
   }
 
   .components-main-menu-logo {
-    width: 40px;
-    height: 52px;
+    width: 44px;
+    height: 58px;
   }
 
   .components-main-menu-links {
@@ -2722,11 +2842,13 @@ button {
   .components-main-menu-clubMenu:hover .components-main-menu-dropdown,
   .components-main-menu-clubMenu:focus-within .components-main-menu-dropdown {
     max-height: 0;
+    transform: none;
   }
 
   .components-main-menu-clubMenu:hover .components-main-menu-dropdownOpen,
   .components-main-menu-clubMenu:focus-within .components-main-menu-dropdownOpen {
     max-height: 320px;
+    transform: none;
   }
 
   .components-main-menu-dropdownLink {
@@ -2827,21 +2949,29 @@ button {
 }
 
 .components-news-archive-copy h2 {
+  display: -webkit-box;
+  overflow: hidden;
   margin: 0;
   color: #121212;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .components-news-archive-copy p {
+  display: -webkit-box;
+  overflow: hidden;
   margin: 0;
   color: #777777;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .components-news-archive-pagination {
@@ -3000,7 +3130,26 @@ button {
 
 .components-news-detail-body p {
   margin: 0;
-  text-indent: 48px;
+}
+
+.components-news-detail-content > * + * {
+  margin-top: 16px;
+}
+
+.components-news-detail-clubName {
+  color: #e0673f;
+  font-weight: 400;
+}
+
+.components-news-detail-content a {
+  color: var(--laranja);
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.components-news-detail-content a:hover {
+  color: #8f301d;
 }
 
 .components-news-detail-body blockquote {
@@ -3250,10 +3399,6 @@ button {
     line-height: 30px;
   }
 
-  .components-news-detail-body p {
-    text-indent: 24px;
-  }
-
   .components-news-detail-body footer {
     font-size: 15px;
     line-height: 24px;
@@ -3278,7 +3423,10 @@ button {
 
 .components-news-grid-section {
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  height: 100%;
   min-height: auto;
   margin: 0;
   color: var(--tom-preto);
@@ -3300,7 +3448,10 @@ button {
 
 .components-news-grid-grid {
   display: grid;
-  grid-template-columns: repeat(3, 330px);
+  grid-template-columns: repeat(
+    var(--news-grid-columns, 3),
+    min(330px, calc((100% - (var(--news-grid-columns, 3) - 1) * 40px) / var(--news-grid-columns, 3)))
+  );
   gap: 80px 40px;
 }
 
@@ -3308,13 +3459,13 @@ button {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 330px;
+  width: 100%;
 }
 
 .components-news-grid-cardImage,
 .components-news-grid-layeredImage,
 .components-news-grid-mascotImage {
-  width: 330px;
+  width: 100%;
   height: 240px;
   overflow: hidden;
   border-radius: 8px;
@@ -3367,29 +3518,37 @@ button {
 }
 
 .components-news-grid-copy h3 {
+  display: -webkit-box;
+  overflow: hidden;
   margin: 0;
   color: #121212;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .components-news-grid-copy p {
+  display: -webkit-box;
+  overflow: hidden;
   margin: 0;
   color: #777777;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .components-news-grid-action {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   width: 100%;
-  margin-top: 72px;
-  padding-right: 116px;
+  margin-top: auto;
+  padding-top: 72px;
 }
 
 .components-news-grid-moreButton {
@@ -3430,11 +3589,7 @@ button {
   }
 
   .components-news-grid-grid {
-    grid-template-columns: repeat(2, 330px);
-  }
-
-  .components-news-grid-action {
-    padding-right: 0;
+    grid-template-columns: repeat(min(var(--news-grid-columns, 2), 2), 330px);
   }
 }
 
@@ -3444,8 +3599,8 @@ button {
   }
 
   .components-news-grid-title {
-    font-size: 44px;
-    line-height: 52px;
+    font-size: 32px;
+    line-height: 40px;
   }
 
   .components-news-grid-grid {
@@ -3461,8 +3616,8 @@ button {
   }
 
   .components-news-grid-action {
-    margin-top: 56px;
-    padding-right: 0;
+    margin-top: 0;
+    padding-top: 56px;
   }
 
   .components-news-grid-moreButton {
@@ -3571,7 +3726,7 @@ button {
 }
 
 .components-plans-section-featuredCard h3 {
-  color: #7a210f;
+  color: #661400;
   font-size: 32px;
   line-height: 48px;
 }
@@ -3591,7 +3746,7 @@ button {
 }
 
 .components-plans-section-featuredCard .components-plans-section-price strong {
-  color: #7a210f;
+  color: #661400;
   line-height: 48px;
 }
 
@@ -3664,7 +3819,7 @@ button {
 
 .components-plans-section-featuredButton {
   width: 200px;
-  background: linear-gradient(168deg, #ff3203 0%, #8f301d 99%);
+  background: linear-gradient(168deg, #ff7a5c 0%, #8f1d00 99%);
 }
 
 .components-plans-section-button svg {
@@ -3698,10 +3853,36 @@ button {
     line-height: 52px;
   }
 
+  .components-plans-section-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  .components-plans-section-cards::-webkit-scrollbar {
+    display: none;
+  }
+
   .components-plans-section-card,
   .components-plans-section-featuredCard {
+    flex: 0 0 100%;
+    width: 100%;
     min-height: 0;
     padding: 22px 16px 28px;
+    margin-right: 16px;
+    scroll-snap-align: start;
+  }
+
+  .components-plans-section-card:last-child,
+  .components-plans-section-featuredCard:last-child {
+    margin-right: 0;
   }
 
   .components-plans-section-featuredCard h3 {
@@ -3713,7 +3894,6 @@ button {
 
 .components-roster-section-section {
   position: relative;
-  min-height: 1048px;
   overflow: hidden;
   background: #121212;
   color: #f5f5f5;
@@ -3755,7 +3935,7 @@ button {
   position: relative;
   width: min(1440px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 80px 0 64px;
+  padding: 80px 0 40px;
 }
 
 .components-roster-section-title {
@@ -3779,10 +3959,18 @@ button {
   gap: 40px;
 }
 
+.components-roster-section-slide {
+  display: contents;
+}
+
+.components-roster-section-dots {
+  display: none;
+}
+
 .components-roster-section-athlete {
   position: relative;
-  width: 256px;
-  height: 448px;
+  width: min(256px, calc((100% - 160px) / 5));
+  aspect-ratio: 256 / 448;
   flex: 0 0 auto;
   transition: transform 220ms ease;
 }
@@ -3916,13 +4104,10 @@ button {
 }
 
 @media (max-width: 768px) {
-  .components-roster-section-section {
-    min-height: 760px;
-  }
-
   .components-roster-section-inner {
     width: min(330px, calc(100% - 32px));
     padding-top: 56px;
+    padding-bottom: 32px;
   }
 
   .components-roster-section-title {
@@ -3932,21 +4117,69 @@ button {
   }
 
   .components-roster-section-athletes {
-    gap: 20px;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 0;
+    padding-bottom: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .components-roster-section-slide {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    flex: 0 0 100%;
+    justify-items: center;
+    align-items: center;
+    gap: 16px 12px;
+    scroll-snap-align: start;
+  }
+
+  .components-roster-section-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .components-roster-section-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(245, 245, 245, 0.32);
+  }
+
+  .components-roster-section-dotActive {
+    background: #ff3203;
   }
 
   .components-roster-section-athlete {
-    width: 210px;
-    height: 368px;
+    width: 100%;
+    height: auto;
+    max-width: 210px;
+    aspect-ratio: 256 / 448;
   }
 
   .components-roster-section-athlete2,
+  .components-roster-section-athlete3,
   .components-roster-section-athlete4 {
-    transform: translateY(-12px);
+    transform: none;
   }
 
-  .components-roster-section-athlete3 {
-    transform: translateY(-24px);
+  .components-roster-section-athlete2:hover,
+  .components-roster-section-athlete3:hover,
+  .components-roster-section-athlete4:hover {
+    transform: translateY(-6px);
+  }
+
+  .components-roster-section-athleteName {
+    font-size: 24px;
+  }
+
+  .components-roster-section-athleteNumber {
+    font-size: 20px;
   }
 
   .components-roster-section-centerBull {
@@ -3988,14 +4221,14 @@ button {
   gap: 204px;
   width: min(1160px, calc(100% - 40px));
   margin: 0 auto;
-  padding-top: calc(120px + var(--main-menu-height));
+  padding-top: 120px;
 }
 
 .components-site-footer-column,
 .components-site-footer-contact {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 14px;
 }
 
 .components-site-footer-column h2,
@@ -4084,7 +4317,7 @@ button {
   align-items: center;
   gap: 16px;
   width: 313px;
-  margin: 145px auto 0;
+  margin: 155px auto 0;
 }
 
 .components-site-footer-brandImages {
@@ -4124,7 +4357,7 @@ button {
 
 .components-site-footer-backTop {
   position: absolute;
-  right: calc((100% - min(1160px, calc(100% - 40px))) / 2);
+  right: max(20px, calc((100% - 1160px) / 2));
   bottom: 80px;
   z-index: 2;
   display: flex;
@@ -4174,9 +4407,24 @@ button {
 
   .components-site-footer-columns {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 14px;
     width: min(330px, calc(100% - 32px));
-    padding-top: calc(64px + var(--main-menu-height));
+    padding-top: 40px;
+  }
+
+  .components-site-footer-column:first-child {
+    display: none;
+  }
+
+  .components-site-footer-address,
+  .components-site-footer-addressDivider {
+    display: none;
+  }
+
+  .components-site-footer-menu a,
+  .components-site-footer-acfTv,
+  .components-site-footer-contact p {
+    font-size: 16px;
   }
 
   .components-site-footer-brand {
@@ -4288,38 +4536,60 @@ button {
 
 .components-sponsors-page-content-planGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 340px 400px 340px;
   gap: 40px;
-  align-items: start;
+  justify-content: center;
+  align-items: center;
 }
 
 .components-sponsors-page-content-planCard {
   display: flex;
-  min-height: 666px;
+  min-height: 566px;
   flex-direction: column;
   padding: 32px 40px;
   border-radius: 8px;
   background: #fdfdfd;
   color: #4e4e4e;
   box-shadow: 0 0 2px rgba(102, 102, 102, 0.16);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.components-sponsors-page-content-planCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 34px -18px rgba(245, 99, 69, 0.4), 0 0 18px -4px rgba(37, 114, 184, 0.3);
+}
+
+.components-sponsors-page-content-featuredPlanCard {
+  min-height: 720px;
+  padding: 40px 48px;
 }
 
 .components-sponsors-page-content-planCard h3 {
-  margin: 0 0 64px;
-  color: #4e4e4e;
+  margin: 0 0 16px;
+  color: #661400;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 32px;
   text-align: center;
   text-transform: uppercase;
+}
+
+.components-sponsors-page-content-planDivider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: 0 0 32px;
+  background: #e7e7e7;
 }
 
 .components-sponsors-page-content-planCard ul {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -4327,44 +4597,58 @@ button {
 
 .components-sponsors-page-content-planCard li {
   position: relative;
-  padding-left: 20px;
+  padding-left: 24px;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
-  line-height: 28px;
+  line-height: 26px;
 }
 
 .components-sponsors-page-content-planCard li::before {
   position: absolute;
-  top: 0;
+  top: 8px;
   left: 0;
-  color: #ff3203;
-  content: "•";
+  width: 10px;
+  height: 10px;
+  border: 2px solid #f56345;
+  border-radius: 50%;
+  content: "";
 }
 
-.components-sponsors-page-content-planCard p {
+.components-sponsors-page-content-planPrice {
   margin: 28px 0 24px;
-  color: #1d598f;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 20px;
-  font-weight: 600;
   line-height: 32px;
+}
+
+.components-sponsors-page-content-planPriceAmount {
+  color: #1d598f;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.components-sponsors-page-content-planPricePeriod {
+  color: #4e4e4e;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .components-sponsors-page-content-planCard a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 56px;
-  border-radius: 8px;
-  background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
+  min-height: 40px;
+  padding: 8px 20px;
+  border-radius: 10px;
+  background: linear-gradient(165deg, #ff7a5c 0%, #8f1d00 100%);
   color: #f5f5f5;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
   text-align: center;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .components-sponsors-page-content-logoSection {
@@ -4465,12 +4749,29 @@ button {
     padding: 56px 0 64px;
   }
 
+  .components-sponsors-page-content-planGrid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: min(85%, 320px);
+    justify-items: stretch;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .components-sponsors-page-content-planCard {
+    width: 100%;
+    scroll-snap-align: center;
     padding: 28px 24px;
   }
 
   .components-sponsors-page-content-planCard h3 {
-    margin-bottom: 40px;
+    margin-bottom: 16px;
+  }
+
+  .components-sponsors-page-content-planDivider {
+    margin-bottom: 24px;
   }
 
   .components-sponsors-page-content-planCard li {
@@ -4725,9 +5026,10 @@ button {
 }
 
 .components-standings-panel-tableCard {
+  position: relative;
   width: 290px;
-  height: 316px;
-  overflow: hidden;
+  overflow: visible;
+  padding: 0 12px;
   border: 2px solid var(--cinza-claro);
   border-radius: 8px;
   background: #e7e7e7;
@@ -4739,7 +5041,7 @@ button {
   justify-content: space-between;
   width: 100%;
   height: 38px;
-  padding: 8px;
+  padding: 8px 0;
   border-bottom: 2px solid var(--cinza-claro);
   background: transparent;
   color: #292929;
@@ -4751,13 +5053,66 @@ button {
   text-align: left;
 }
 
+.components-standings-panel-selectButton:disabled {
+  cursor: default;
+}
+
 .components-standings-panel-selectButton img {
   width: 24px;
   height: 24px;
 }
 
+.components-standings-panel-dropdownMenu {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.components-standings-panel-dropdownItem {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.components-standings-panel-dropdownItem:hover,
+.components-standings-panel-dropdownItem.active {
+  background: #f1f5f9;
+  color: #ff3203;
+  font-weight: 600;
+}
+
+.components-standings-panel-empty {
+  padding: 16px;
+  color: #4e4e4e;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 14px;
+}
+
+.components-standings-panel-tableScroll {
+  max-height: 280px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .components-standings-panel-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   color: #4e4e4e;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
@@ -4766,17 +5121,24 @@ button {
 }
 
 .components-standings-panel-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   height: 40px;
+  padding: 0 2px;
   color: #292929;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   text-align: center;
   text-transform: capitalize;
+  background: #e7e7e7;
+  white-space: nowrap;
 }
 
 .components-standings-panel-table td {
   height: 40px;
+  padding: 0 2px;
   text-align: center;
 }
 
@@ -4784,10 +5146,17 @@ button {
   border-bottom: 1px solid rgba(179, 179, 179, 0.6);
 }
 
+.components-standings-panel-table th:not(.components-standings-panel-clubColumn),
+.components-standings-panel-table td:not(.components-standings-panel-clubColumn) {
+  width: 12%;
+}
+
 .components-standings-panel-clubColumn {
-  width: 118px;
+  width: 40%;
   padding-left: 8px;
+  overflow: hidden;
   text-align: left !important;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -4805,7 +5174,10 @@ button {
 }
 
 @media (max-width: 768px) {
-  .components-standings-panel-panel,
+  .components-standings-panel-panel {
+    display: none;
+  }
+
   .components-standings-panel-tableCard {
     width: 100%;
   }
@@ -4958,7 +5330,7 @@ button {
   width: 457px;
   height: 56px;
   border-radius: 8px;
-  background: linear-gradient(162deg, #ff3203 0%, #8f301d 99%);
+  background: linear-gradient(162deg, #ff7a5c 0%, #8f1d00 99%);
   color: #f5f5f5;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
@@ -5045,6 +5417,59 @@ button {
   }
 }
 
+@media (max-width: 768px) {
+  .components-youtube-section-section {
+    height: auto;
+    padding: 40px 0;
+  }
+
+  .components-youtube-section-card {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: min(680px, calc(100% - 32px));
+    height: auto;
+    min-height: 0;
+    margin: 0 auto;
+    padding: 32px 20px 32px;
+    transform: none;
+  }
+
+  .components-youtube-section-ctaBlock {
+    margin-top: 32px;
+  }
+
+  .components-youtube-section-intro h2 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .components-youtube-section-ctaBlock h3 {
+    font-size: 24px;
+  }
+
+  .components-youtube-section-intro p,
+  .components-youtube-section-ctaBlock p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .components-youtube-section-button {
+    height: auto;
+    min-height: 52px;
+    padding: 12px 20px;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+  }
+
+  .components-youtube-section-button img,
+  .components-youtube-section-button svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 
 .components-roster-athlete-card-card {
   --border-gap: 8px;
@@ -5106,6 +5531,31 @@ button {
   transform: scale(1.04);
 }
 
+.components-roster-athlete-card-card::after {
+  position: absolute;
+  z-index: 1;
+  inset: var(--border-gap);
+  background: linear-gradient(
+    to top,
+    rgba(2, 12, 20, 0.94) 0%,
+    rgba(2, 12, 20, 0.6) 42%,
+    rgba(2, 12, 20, 0) 100%
+  );
+  clip-path: path(
+    "M 136 0 L 232 0 Q 240 0 240 8 L 240 280 Q 240 285 236 288 L 211 300 Q 207 304 201 304 L 8 304 Q 0 304 0 296 L 0 88 Q 0 83 4 80 L 128 4 Q 132 0 136 0 Z"
+  );
+  content: "";
+  opacity: 0;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+}
+
+.components-roster-athlete-card-card:hover::after,
+.components-roster-athlete-card-card:focus-visible::after,
+.components-roster-athlete-card-card:active::after {
+  opacity: 1;
+}
+
 .components-roster-athlete-card-info {
   position: relative;
   z-index: 2;
@@ -5114,6 +5564,15 @@ button {
   gap: 10px;
   min-width: 0;
   padding: 0 2px 4px;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+}
+
+.components-roster-athlete-card-card:hover .components-roster-athlete-card-info,
+.components-roster-athlete-card-card:focus-visible .components-roster-athlete-card-info,
+.components-roster-athlete-card-card:active .components-roster-athlete-card-info {
+  opacity: 1;
 }
 
 .components-roster-athlete-card-label {
@@ -5130,6 +5589,13 @@ button {
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0;
+}
+
+.components-roster-athlete-card-staffIcon {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 
 .components-roster-athlete-card-title {
@@ -5168,7 +5634,6 @@ button {
 
 .components-roster-player-detail-content-section {
   background: #f5f5f5;
-  color: #f5f5f5;
   padding: 80px 0 112px;
 }
 
@@ -5177,485 +5642,260 @@ button {
   margin: 0 auto;
 }
 
+.components-roster-player-detail-content-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 40px;
+}
+
+.components-roster-player-detail-content-toolbar h2 {
+  margin: 0;
+  color: #121212;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+}
+
+.components-roster-player-detail-content-toolbar a {
+  color: #959595;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
 .components-roster-player-detail-content-profileCard {
   position: relative;
-  min-height: 1000px;
+  width: min(1160px, 100%);
+  margin: 0 auto;
+  aspect-ratio: 1461 / 861;
   overflow: hidden;
+  border-radius: 24px;
 }
 
 .components-roster-player-detail-content-frameAsset {
   position: absolute;
-  inset: 18px;
+  inset: 0;
   z-index: 0;
-  width: calc(100% - 36px);
-  height: calc(100% - 72px);
+  width: 100%;
+  height: 100%;
   object-fit: fill;
-  pointer-events: none;
-}
-
-.components-roster-player-detail-content-decoAsset {
-  position: absolute;
-  z-index: 1;
-  left: 76px;
-  bottom: 192px;
-  width: 860px;
-  max-width: 62%;
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-.components-roster-player-detail-content-acfAsset {
-  position: absolute;
-  z-index: 1;
-  right: 86px;
-  top: 128px;
-  width: 330px;
-  opacity: 0.22;
-  pointer-events: none;
-}
-
-.components-roster-player-detail-content-crestAsset {
-  position: absolute;
-  z-index: 3;
-  top: 46px;
-  left: 50%;
-  width: 40px;
-  height: 48px;
-  transform: translateX(-50%);
   pointer-events: none;
 }
 
 .components-roster-player-detail-content-identity {
   position: absolute;
-  z-index: 3;
-  top: 160px;
-  left: 140px;
-  width: 658px;
+  z-index: 1;
+  top: 17.7%;
+  left: 8.3%;
+  width: 46%;
 }
 
-.components-roster-player-detail-content-firstName {
+.components-roster-player-detail-content-apelidoLabel {
   margin: 0;
-  color: transparent;
+  color: #ff3203;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 56px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  -webkit-text-stroke: 1px #ff3203;
 }
 
 .components-roster-player-detail-content-identity h2 {
-  margin: 0;
+  margin: 4px 0 0;
   color: #f5f5f5;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: clamp(72px, 6.8vw, 128px);
-  font-weight: 800;
-  line-height: 1;
+  font-size: clamp(32px, 7vw, 76px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
 .components-roster-player-detail-content-profileList {
   display: grid;
-  grid-template-columns: 174px 211px 156px;
-  gap: 40px;
-  margin: 24px 0 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 40px;
+  margin: 32px 0 0;
 }
 
 .components-roster-player-detail-content-profileList dt {
+  margin: 0;
   color: #ff3203;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 24px;
 }
 
 .components-roster-player-detail-content-profileList dd {
-  margin: 0;
-  color: #b3b3b3;
-  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 18px;
-  line-height: 32px;
-  text-transform: capitalize;
-}
-
-.components-roster-player-detail-content-quote {
-  position: absolute;
-  z-index: 3;
-  top: 424px;
-  left: 220px;
-  width: 525px;
-  margin: 0;
+  margin: 4px 0 0;
   color: #f5f5f5;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 40px;
-  font-style: italic;
-  font-weight: 700;
-  line-height: 56px;
-  text-align: center;
-  text-transform: lowercase;
-}
-
-.components-roster-player-detail-content-related {
-  position: absolute;
-  z-index: 4;
-  left: 140px;
-  bottom: 146px;
-  width: 658px;
-}
-
-.components-roster-player-detail-content-relatedHeader {
-  display: flex;
-  gap: 8px;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.components-roster-player-detail-content-relatedHeader h3 {
-  margin: 0 0 4px;
-  color: #ff3203;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 24px;
-  font-style: italic;
-  font-weight: 700;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
   line-height: 32px;
-  text-transform: uppercase;
 }
 
-.components-roster-player-detail-content-relatedHeader span {
-  display: block;
-  width: 451px;
-  height: 2px;
-  background: #ff3203;
-}
-
-.components-roster-player-detail-content-relatedHeader a {
-  display: inline-flex;
-  min-height: 40px;
+.components-roster-player-detail-content-socialsList {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 8px 14px;
-  border: 1px solid #b3b3b3;
-  border-radius: 8px;
-  background: #020c14;
-  color: #b3b3b3;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-  text-transform: capitalize;
+  gap: 20px;
+  margin: 26px 0 0;
 }
 
-.components-roster-player-detail-content-relatedGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 144px);
-  gap: 112px;
-  height: 206px;
-  overflow: hidden;
-}
-
-.components-roster-player-detail-content-miniCard {
-  position: relative;
-  display: block;
-  width: 144px;
-  height: 206px;
-  overflow: hidden;
-  border-radius: 8px;
-  background: #061d31;
-}
-
-.components-roster-player-detail-content-miniCard::after {
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(245, 99, 69, 0.6);
-  border-radius: inherit;
-  content: "";
-  opacity: 0;
-  transition: opacity 160ms ease;
-}
-
-.components-roster-player-detail-content-miniCard:hover::after {
-  opacity: 1;
-}
-
-.components-roster-player-detail-content-miniCard img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  filter: grayscale(1);
+.components-roster-player-detail-content-socialsList img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .components-roster-player-detail-content-playerFigure {
   position: absolute;
-  z-index: 3;
-  top: 150px;
-  right: 260px;
-  width: 380px;
-  height: 560px;
+  z-index: 1;
+  top: 12.9%;
+  left: 56.8%;
+  width: 29%;
+  height: 70.3%;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .components-roster-player-detail-content-playerFigure img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  object-position: center;
-  filter: drop-shadow(0 0 18px rgba(245, 99, 69, 0.55));
+  object-position: bottom center;
 }
 
 .components-roster-player-detail-content-number {
   position: absolute;
-  z-index: 4;
-  right: 250px;
-  bottom: 178px;
+  z-index: 1;
+  right: 17.6%;
+  bottom: 16.8%;
   margin: 0;
-  color: rgba(2, 12, 20, 0.1);
+  color: transparent;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 152px;
-  font-style: italic;
+  font-size: 90px;
   font-weight: 800;
-  line-height: 160px;
+  line-height: 1;
   letter-spacing: 0;
-  -webkit-text-stroke: 2px #b3b3b3;
+  -webkit-text-stroke: 2px rgba(245, 245, 245, 0.5);
 }
 
-.components-roster-player-detail-content-footerMarks {
-  position: absolute;
-  z-index: 4;
-  left: 362px;
-  right: 370px;
-  bottom: 106px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  opacity: 0.85;
-}
-
-.components-roster-player-detail-content-signature {
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  color: #ff3203;
-  letter-spacing: 1.5px;
-}
-
-.components-roster-player-detail-content-socialsList {
-  display: flex;
-  gap: 20px;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 12px;
+.components-roster-player-detail-content-quote {
+  max-width: 800px;
+  margin: 40px auto 0;
+  color: #121212;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-style: italic;
   font-weight: 600;
-  color: #b3b3b3;
-  letter-spacing: 1.5px;
+  line-height: 1.4;
+  text-align: center;
 }
 
 @media (max-width: 1200px) {
-  .components-roster-player-detail-content-profileCard {
-    min-height: 920px;
-  }
-
   .components-roster-player-detail-content-identity {
-    left: 96px;
-  }
-
-  .components-roster-player-detail-content-quote {
-    left: 132px;
-  }
-
-  .components-roster-player-detail-content-related {
-    left: 96px;
-  }
-
-  .components-roster-player-detail-content-playerFigure {
-    right: 150px;
-    width: 340px;
-    height: 500px;
+    width: 50%;
   }
 
   .components-roster-player-detail-content-number {
-    right: 156px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .components-roster-player-detail-content-profileCard {
-    display: flex;
-    min-height: 0;
-    flex-direction: column;
-    gap: 32px;
-    padding: 56px 32px;
-    border: 2px solid #ff3203;
-    border-radius: 24px;
-    background: #020c14;
-  }
-
-  .components-roster-player-detail-content-frameAsset,
-  .components-roster-player-detail-content-crestAsset {
-    display: none;
-  }
-
-  .components-roster-player-detail-content-decoAsset,
-  .components-roster-player-detail-content-acfAsset {
-    opacity: 0.18;
-  }
-
-  .components-roster-player-detail-content-identity,
-  .components-roster-player-detail-content-quote,
-  .components-roster-player-detail-content-related,
-  .components-roster-player-detail-content-playerFigure,
-  .components-roster-player-detail-content-number,
-  .components-roster-player-detail-content-footerMarks {
-    position: relative;
-    inset: auto;
-    width: 100%;
-  }
-
-  .components-roster-player-detail-content-identity {
-    order: 1;
-  }
-
-  .components-roster-player-detail-content-playerFigure {
-    order: 2;
-    height: 540px;
-  }
-
-  .components-roster-player-detail-content-number {
-    order: 3;
-    font-size: 104px;
-    line-height: 112px;
-    text-align: right;
-  }
-
-  .components-roster-player-detail-content-quote {
-    order: 4;
-    max-width: 620px;
-    font-size: 32px;
-    line-height: 46px;
-    text-align: left;
-  }
-
-  .components-roster-player-detail-content-related {
-    order: 5;
-  }
-
-  .components-roster-player-detail-content-footerMarks {
-    order: 6;
-  }
-
-  .components-roster-player-detail-content-profileList {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .components-roster-player-detail-content-relatedHeader span {
-    width: 320px;
-  }
-
-  .components-roster-player-detail-content-relatedGrid {
-    gap: 32px;
+    font-size: 64px;
   }
 }
 
 @media (max-width: 768px) {
   .components-roster-player-detail-content-section {
-    padding: 40px 0 72px;
+    padding: 56px 0 72px;
   }
 
   .components-roster-player-detail-content-inner {
     width: min(330px, calc(100% - 32px));
   }
 
-  .components-roster-player-detail-content-profileCard {
-    padding: 40px 20px;
-    border-radius: 16px;
-  }
-
-  .components-roster-player-detail-content-identity h2 {
-    font-size: 44px;
-    line-height: 52px;
-  }
-
-  .components-roster-player-detail-content-firstName {
+  .components-roster-player-detail-content-toolbar h2 {
     font-size: 24px;
     line-height: 32px;
   }
 
+  .components-roster-player-detail-content-profileCard {
+    aspect-ratio: 381 / 607;
+    border-radius: 16px;
+  }
+
+  .components-roster-player-detail-content-identity {
+    top: 7.6%;
+    left: 10.5%;
+    width: 60%;
+  }
+
+  .components-roster-player-detail-content-apelidoLabel {
+    font-size: 13px;
+  }
+
+  .components-roster-player-detail-content-identity h2 {
+    margin-top: 2px;
+    font-size: 32px;
+    line-height: 40px;
+  }
+
   .components-roster-player-detail-content-profileList {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 8px;
+    max-width: 100%;
+    margin-top: 16px;
+  }
+
+  .components-roster-player-detail-content-profileList dt {
+    font-size: 14px;
+  }
+
+  .components-roster-player-detail-content-profileList dd {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .components-roster-player-detail-content-socialsList {
+    gap: 16px;
+    margin-top: 60px;
+  }
+
+  .components-roster-player-detail-content-socialsList img {
+    width: 22px;
+    height: 22px;
   }
 
   .components-roster-player-detail-content-playerFigure {
-    height: 380px;
+    top: auto;
+    left: auto;
+    right: 2.6%;
+    bottom: 11.9%;
+    width: 56.7%;
+    height: 52.1%;
   }
 
   .components-roster-player-detail-content-number {
-    font-size: 72px;
-    line-height: 80px;
+    right: 8%;
+    bottom: 11.9%;
+    font-size: 48px;
   }
 
   .components-roster-player-detail-content-quote {
-    font-size: 26px;
-    line-height: 38px;
-  }
-
-  .components-roster-player-detail-content-relatedHeader {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .components-roster-player-detail-content-relatedHeader span {
-    width: 100%;
-  }
-
-  .components-roster-player-detail-content-relatedGrid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    height: auto;
-  }
-
-  .components-roster-player-detail-content-miniCard {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 144 / 206;
-  }
-
-  .components-roster-player-detail-content-footerMarks {
-    gap: 24px;
-    flex-direction: column;
-    align-items: flex-start;
+    margin-top: 24px;
+    font-size: 18px;
+    line-height: 1.5;
   }
 }
 
-
-.components-roster-player-main-card-image-cardImage {
-  display: block;
-  width: min(468px, 100%);
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 18px 34px rgba(2, 12, 20, 0.28);
-}
-
-
-.components-roster-roster-filters-filters {
-  display: flex;
-  width: 878px;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.components-roster-roster-filters-categoryGroup,
-.components-roster-roster-filters-positionGroup {
-  display: flex;
-  align-items: center;
-}
 
 .components-roster-roster-filters-categoryGroup {
+  display: flex;
+  align-items: center;
   gap: 16px;
-}
-
-.components-roster-roster-filters-positionGroup {
-  gap: 8px;
 }
 
 .components-roster-roster-filters-categoryGroup a {
@@ -5690,41 +5930,8 @@ button {
   background: #ff3203;
 }
 
-.components-roster-roster-filters-positionGroup a {
-  display: inline-flex;
-  min-height: 32px;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 8px;
-  color: #959595;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: 0.32px;
-}
-
-.components-roster-roster-filters-positionGroup .components-roster-roster-filters-active {
-  color: #ff3203;
-  font-weight: 600;
-  letter-spacing: 0;
-}
-
-@media (max-width: 1200px) {
-  .components-roster-roster-filters-filters {
-    width: 100%;
-  }
-}
-
 @media (max-width: 768px) {
-  .components-roster-roster-filters-filters {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .components-roster-roster-filters-categoryGroup,
-  .components-roster-roster-filters-positionGroup {
+  .components-roster-roster-filters-categoryGroup {
     flex-wrap: wrap;
   }
 }
@@ -5743,8 +5950,8 @@ button {
 
 .components-roster-roster-page-content-toolbar {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
   width: min(1160px, 100%);
   margin: 0 auto 40px;
 }
@@ -5764,6 +5971,49 @@ button {
   grid-template-columns: repeat(5, 256px);
   gap: 40px;
   justify-content: center;
+}
+
+.components-roster-roster-page-content-positionGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: min(1160px, 100%);
+  margin: 0 auto;
+}
+
+.components-roster-roster-page-content-positionGroup > h3 {
+  margin: 0 0 24px;
+  color: #ff3203;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+.components-roster-roster-page-content-positionRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 40px;
+}
+
+.components-roster-roster-page-content-positionDivider {
+  width: 100%;
+  height: 2px;
+  margin: 0;
+  border: 0;
+  border-radius: 2px;
+  background: #cfcfcf;
+}
+
+.components-roster-roster-page-content-empty {
+  width: min(1160px, 100%);
+  margin: 0 auto;
+  padding: 48px 0;
+  color: #555555;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 18px;
+  line-height: 28px;
 }
 
 .components-roster-roster-page-content-inner > hr {
@@ -5786,7 +6036,7 @@ button {
   margin: 0 auto;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1480px) {
   .components-roster-roster-page-content-grid {
     grid-template-columns: repeat(4, 256px);
   }
@@ -5826,6 +6076,20 @@ button {
 
   .components-roster-roster-page-content-grid {
     grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .components-roster-roster-page-content-positionGroups {
+    gap: 32px;
+  }
+
+  .components-roster-roster-page-content-positionGroup > h3 {
+    margin: 0 0 16px;
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .components-roster-roster-page-content-positionRow {
     gap: 24px;
   }
 
