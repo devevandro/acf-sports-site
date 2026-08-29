@@ -1,270 +1,169 @@
 
-"use client";
-
-import { useState, FormEvent } from "react";
+import { Fragment } from "react";
+import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { TeamInfo } from "@/data/teamInfo";
-
-const assets = {
-  bull: "/contact/bull.png",
-  phone: "/contact/phone.png",
-  email: "/contact/email.png",
-  location: "/contact/local.png",
-  clock: "/contact/time.png",
-  instagram: "/contact/insta.png",
-  facebook: "/contact/face.png",
-  youtube: "/contact/youtube.png",
-  whatsapp: "/contact/whatsapp.png",
-};
 
 function toWhatsappNumber(phone: string): string {
   const digits = phone.replace(/\D/g, "");
   return digits.length === 11 ? `55${digits}` : digits;
 }
 
-type PlanType = "master" | "monthly" | "oneOff";
-
-interface PlanData {
-  id: PlanType;
-  label: string;
+type SponsorPlan = {
   name: string;
   price: string;
-  whatsappMessage: string;
+  message: string;
   benefits: string[];
-}
+};
 
-const plansData: Record<PlanType, PlanData> = {
-  master: {
-    id: "master",
-    label: "Master",
-    name: "MASTER",
+const sponsorPlans: SponsorPlan[] = [
+  {
+    name: "pontual",
+    price: "R$ 180,00 / Mês",
+    message: "Olá boa tarde, gostaria de saber mais sobre o plano pontual do ACF Sports...",
+    benefits: [
+      "Logo de tamanho médio em partes do uniforme",
+      "1 Post dedicado no dia do jogo",
+      "2 Stories no dia do evento",
+      "Destaque nas artes de resultados e de dia de jogo em tamanho médio",
+      "Logo na seção parceiros do site",
+    ],
+  },
+  {
+    name: "master",
     price: "R$ 500,00 / Mês",
-    whatsappMessage:
-      "https://wa.me/5543991802793?text=Ol%C3%A1%20boa%20tarde%2C%20gostaria%20de%20saber%20mais%20sobre%2C%20o%20plano%20master...",
+    message: "Olá boa tarde, gostaria de saber mais sobre o plano master do ACF Sports...",
     benefits: [
       "Post fixado no Instagram",
       "Destaque central no uniforme",
       "Logo em destaque nas artes de todos os jogos",
       "Banner de destaque na home do site",
-      "Pagina exclusiva no site sobre a marca do patrocinador",
+      "Página exclusiva no site sobre a sua marca",
     ],
   },
-  monthly: {
-    id: "monthly",
-    label: "Mensal",
-    name: "MENSAL",
+  {
+    name: "mensal",
     price: "R$ 250,00 / Mês",
-    whatsappMessage:
-      "https://wa.me/5543991802793?text=Ol%C3%A1%20boa%20tarde%2C%20gostaria%20de%20saber%20mais%20sobre%2C%20o%20plano%20mensal...",
+    message: "Olá boa tarde, gostaria de saber mais sobre o plano mensal do ACF Sports...",
     benefits: [
-      "Logo em partes secundárias no uniforme",
-      "1 post dedicado por mês",
-      "Menções nas artes de dias de jogo",
+      "Logo em partes secundárias no uniforme junto ao calção",
+      "Post dedicado por mês",
+      "Menções em todas as artes de dias de jogos",
       "Logo em tamanho médio nas artes de jogos",
       "Link no site e logo na home",
     ],
   },
-  oneOff: {
-    id: "oneOff",
-    label: "Pontual",
-    name: "PONTUAL",
-    price: "R$ 180,00 / Mês",
-    whatsappMessage:
-      "https://wa.me/5543991802793?text=Ol%C3%A1%20boa%20tarde%2C%20gostaria%20de%20saber%20mais%20sobre%2C%20o%20plano%20pontual...",
-    benefits: [
-      "Logo de tamanho médio exposto no uniforme",
-      "1 post dedicado no dia do jogo",
-      "2 stories no dia do jogo",
-      "Destaque nas artes de resultados e de dia do jogo em tamanho médio",
-      "Logo na seção parceiros do site",
-    ],
-  },
-};
+];
 
 export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
-  const [activePlan, setActivePlan] = useState<PlanType>("master");
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: "", phone: "", email: "", message: "" });
-
-  const currentPlan = plansData[activePlan];
   const whatsappNumber = toWhatsappNumber(teamInfo.phone);
 
-  const contactItems = [
-    { icon: assets.phone, title: "Telefone", value: teamInfo.phone },
-    { icon: assets.email, title: "E-Mail", value: teamInfo.email },
-    { icon: assets.location, title: "Endereço", value: teamInfo.address },
-    { icon: assets.clock, title: "Atendimento", value: "08 às 18hr de seg à dom" },
+  const infoCards = [
+    {
+      icon: MapPin,
+      title: "Nossa sede.",
+      body: teamInfo.address,
+    },
+    {
+      icon: Phone,
+      title: "Nossos canais.",
+      body: `WhatsApp: ${teamInfo.phone}\nE-mail: ${teamInfo.email}`,
+    },
+    {
+      icon: Clock,
+      title: "Horario de atendimento.",
+      body: "Segunda a sexta: 08h às 18h\nSábado: 08h às 16h",
+    },
   ];
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: "", phone: "", email: "", message: "" });
-    }, 4000);
-  };
-
   return (
-    <section className="components-contact-content-section" data-node-id="2392:9111" data-name="contato">
+    <Fragment>
+      <section className="components-contact-content-section" data-node-id="2392:9111" data-name="contato">
       <div className="components-contact-content-inner">
-        <div className="components-contact-content-titleBlock">
-          <h2>contate - nos</h2>
-          <p>Ou entre em contato através de um de nossos canais</p>
+        <div className="components-contact-content-intro">
+          <h2>fale com o acf</h2>
+          <p>Tire suas dúvidas, envie sua mensagem e fique ligado em tudo que acontece no ACF.</p>
         </div>
 
-        <div className="components-contact-content-leftColumn">
-          <section className="components-contact-content-infoCard" aria-label="Informações de contato">
-            <img className="components-contact-content-bull" src={assets.bull} alt="" aria-hidden="true" />
-            <div className="components-contact-content-infoList">
-              {contactItems.map((item) => (
-                <article className="components-contact-content-infoItem" key={item.title}>
-                  <img src={item.icon} alt="" />
-                  <div>
-                    <h3>{item.title}</h3>
-                    <p>{item.value}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            <div className="components-contact-content-socials">
-              <a href={teamInfo.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
-                <img src={assets.instagram} alt="Instagram" />
-              </a>
-              <a href={teamInfo.facebook} target="_blank" rel="noreferrer" aria-label="Facebook">
-                <img src={assets.facebook} alt="Facebook" />
-              </a>
-              <a href={teamInfo.youtube} target="_blank" rel="noreferrer" aria-label="YouTube">
-                <img src={assets.youtube} alt="YouTube" />
-              </a>
-              <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer" aria-label="WhatsApp">
-                <img src={assets.whatsapp} alt="WhatsApp" />
-              </a>
-            </div>
-          </section>
+        <div className="components-contact-content-whereBlock">
+          <h3>Onde estamos ?</h3>
+          <p>
+            Quer falar com a equipe do ACF ou conhecer melhor o nosso projeto? Aqui você encontra
+            nossos principais canais de contato e o endereço da nossa sede.
+          </p>
         </div>
 
-        <aside className="components-contact-content-planPanel" aria-label="Plano de patrocínio">
-          <h2>Nossos Planos</h2>
-          <div className="components-contact-content-planTabs" role="tablist" aria-label="Tipos de plano">
-            {(Object.keys(plansData) as PlanType[]).map((planKey) => {
-              const plan = plansData[planKey];
-              const isActive = activePlan === planKey;
-              return (
-                <button
-                  key={planKey}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  className={`components-contact-content-planTab ${isActive ? "active" : ""}`}
-                  onClick={() => setActivePlan(planKey)}
-                >
-                  <span className="components-contact-content-radioIcon" aria-hidden="true">
-                    <span className="components-contact-content-radioDot" />
-                  </span>
-                  {plan.label}
-                </button>
-              );
-            })}
-          </div>
-
-          <article className="components-contact-content-planCard components-contact-content-planCardDesktop">
-            <h3>{currentPlan.name}</h3>
-            <ul>
-              {currentPlan.benefits.map((benefit) => (
-                <li key={benefit}>
-                  <span className="components-contact-content-bullet" aria-hidden="true">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="6" cy="6" r="4.5" stroke="#FF3203" strokeWidth="2" />
-                    </svg>
-                  </span>
-                  <span>{benefit}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="components-contact-content-price">{currentPlan.price}</p>
-            <a href={currentPlan.whatsappMessage} target="_blank" rel="noreferrer">
-              enviar direct no whatsapp
-            </a>
-          </article>
-
-          <div className="components-contact-content-planCarousel">
-            {(Object.keys(plansData) as PlanType[]).map((planKey) => {
-              const plan = plansData[planKey];
-              return (
-                <article className="components-contact-content-planCard" key={plan.id}>
-                  <h3>{plan.name}</h3>
-                  <ul>
-                    {plan.benefits.map((benefit) => (
-                      <li key={benefit}>
-                        <span className="components-contact-content-bullet" aria-hidden="true">
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="6" cy="6" r="4.5" stroke="#FF3203" strokeWidth="2" />
-                          </svg>
-                        </span>
-                        <span>{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="components-contact-content-price">{plan.price}</p>
-                  <a href={plan.whatsappMessage} target="_blank" rel="noreferrer">
-                    enviar direct no whatsapp
-                  </a>
-                </article>
-              );
-            })}
-          </div>
-        </aside>
-
-        <section className="components-contact-content-formBlock" aria-labelledby="contact-form-title">
-          <div className="components-contact-content-titleBlock">
-            <h2 id="contact-form-title">vamos conversar?</h2>
-            <p>Responderemos em até 24 horas</p>
-          </div>
-
-          {submitted ? (
-            <div className="components-contact-content-success">
-              <p>Mensagem enviada com sucesso! Entraremos em contato em breve.</p>
-            </div>
-          ) : (
-            <form className="components-contact-content-form" onSubmit={handleSubmit}>
-              <div className="components-contact-content-formRow">
-                <input
-                  aria-label="Nome"
-                  placeholder="Digite seu nome"
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                />
-                <input
-                  aria-label="Telefone"
-                  placeholder="(43) 9 9999 - 9999"
-                  type="tel"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                />
+        <div className="components-contact-content-infoCards">
+          {infoCards.map((card) => (
+            <article className="components-contact-content-infoCard" key={card.title}>
+              <div className="components-contact-content-infoCardHead">
+                <card.icon aria-hidden="true" />
+                <h4>{card.title}</h4>
               </div>
-              <input
-                aria-label="E-mail"
-                placeholder="contato@gmail.com"
-                type="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              />
-              <textarea
-                aria-label="Mensagem"
-                placeholder="Digite sua mensagem aqui!"
-                required
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              />
-              <button type="submit">enviar mensagem</button>
-            </form>
-          )}
-        </section>
+              <p>{card.body}</p>
+            </article>
+          ))}
+        </div>
+
+        <hr className="components-contact-content-divider" />
+
+        <div className="components-contact-content-freeBlock">
+          <h3>Fique à vontade !</h3>
+          <p>
+            Fale com nossa equipe, seja para saber mais sobre o crube, tirar dúvidas sobre
+            patrocínios, se candidatar a ser um atleta do soberano, ou saber mais sobre o projeto e
+            ficar mais perto da nossa equipe ou então veio apenas pela resenha, será um prazer falar
+            com você. &ldquo;fique a vontade mas não meche em nada&rdquo;.
+          </p>
+          <p className="components-contact-content-freeCallout">É só chamar a gente pelo whatsapp.</p>
+          <a
+            className="components-contact-content-whatsappButton"
+            href={`https://wa.me/${whatsappNumber}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            whatsapp
+            <MessageCircle aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </section>
+
+      <section className="components-contact-content-partnerBand" aria-labelledby="contact-partner-title">
+        <div className="components-contact-content-partnerIntro">
+          <h2 id="contact-partner-title">Seja um parceiro do ACF</h2>
+          <p>
+            Entre em contato com nossa equipe para conhecer nossos planos e encontrar a melhor forma
+            de sua empresa fazer parte do projeto ACF.
+          </p>
+        </div>
+
+        <div className="components-contact-content-partnerGrid">
+          {sponsorPlans.map((plan) => {
+            const whatsAppUrl = `https://wa.me/5543991802793?text=${encodeURIComponent(plan.message)}`;
+            const [priceAmount, pricePeriod] = plan.price.split(" / ");
+            return (
+              <article className="components-contact-content-partnerCard" key={plan.name}>
+                <h3>{plan.name}</h3>
+                <span className="components-contact-content-partnerDivider" aria-hidden="true" />
+                <ul>
+                  {plan.benefits.map((benefit) => (
+                    <li key={benefit}>{benefit}</li>
+                  ))}
+                </ul>
+                <p className="components-contact-content-partnerPrice">
+                  <span className="components-contact-content-partnerPriceAmount">{priceAmount}</span>
+                  {pricePeriod ? (
+                    <span className="components-contact-content-partnerPricePeriod"> / {pricePeriod}</span>
+                  ) : null}
+                </p>
+                <a href={whatsAppUrl} target="_blank" rel="noreferrer">
+                  enviar direct no whatsapp
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    </Fragment>
   );
 }
