@@ -11,7 +11,7 @@ const playerPhotoAsset = "/squad/player-placeholder.png";
 
 const socialIcons: Record<string, string> = {
   facebook: "/footer/facebook.png",
-  instagram: "/footer/instagram.png",
+  instagram: "/squad/insta-azul.png",
   youtube: "/footer/youtube.png",
 };
 
@@ -31,7 +31,7 @@ export function PlayerDetailContent({ player }: PlayerDetailContentProps) {
           </picture>
 
           <div className="components-roster-player-detail-content-identity">
-            <p className="components-roster-player-detail-content-apelidoLabel">Apelido</p>
+            <img src="/squad/apelido.png" alt="" aria-hidden="true" />
             <h2>{player.nickname}</h2>
 
             <dl className="components-roster-player-detail-content-profileList">
@@ -72,8 +72,8 @@ export function PlayerDetailContent({ player }: PlayerDetailContentProps) {
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt>{label}</dt>
-      <dd>{value}</dd>
+      <dt className="text-[#ffffff]">{label}</dt>
+      <dd className="text-[#FF7A5C]">{value}</dd>
     </div>
   );
 }
