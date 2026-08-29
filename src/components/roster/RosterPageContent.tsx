@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import {
   categoryLabel,
   getPlayersByCategory,
@@ -30,15 +31,18 @@ export async function RosterPageContent({ category }: RosterPageContentProps) {
           </p>
         ) : (
           <div className="components-roster-roster-page-content-positionGroups">
-            {positionGroups.map((group) => (
-              <section className="components-roster-roster-page-content-positionGroup" key={group.id}>
-                <h3>{group.label}</h3>
-                <div className="components-roster-roster-page-content-positionRow">
-                  {group.players.map((player) => (
-                    <AthleteCard person={player} key={player.id} />
-                  ))}
-                </div>
-              </section>
+            {positionGroups.map((group, index) => (
+              <Fragment key={group.id}>
+                {index > 0 ? <hr className="components-roster-roster-page-content-positionDivider" /> : null}
+                <section className="components-roster-roster-page-content-positionGroup">
+                  <h3>{group.label}</h3>
+                  <div className="components-roster-roster-page-content-positionRow">
+                    {group.players.map((player) => (
+                      <AthleteCard person={player} key={player.id} />
+                    ))}
+                  </div>
+                </section>
+              </Fragment>
             ))}
           </div>
         )}

@@ -6,6 +6,7 @@ export type RosterCategory = "futsal" | "campo";
 export type RosterPlayer = {
   id: string;
   name: string;
+  nickname: string;
   number: string;
   position: string;
 };
@@ -13,6 +14,7 @@ export type RosterPlayer = {
 export type RosterPlayerCard = {
   id: string;
   name: string;
+  nickname: string;
   number: string;
   positionLabel: string;
 };
@@ -20,6 +22,7 @@ export type RosterPlayerCard = {
 export type RosterStaffMember = {
   id: string;
   name: string;
+  nickname: string;
   role: string;
 };
 
@@ -32,6 +35,7 @@ export type RosterPositionGroup = {
 type PlayerRow = {
   id: string;
   name: string;
+  nickname: string;
   number: string | null;
   position: string | null;
 };
@@ -39,6 +43,7 @@ type PlayerRow = {
 type StaffRow = {
   id: string;
   name: string;
+  nickname: string;
   function: string;
 };
 
@@ -47,11 +52,11 @@ const categoryLabels: Record<RosterCategory, string> = {
   campo: "futebol de campo",
 };
 
-const positionGroupOrder: { id: string; label: string }[] = [
-  { id: "goleiro", label: "Goleiros" },
-  { id: "fixo", label: "Fixos" },
-  { id: "ala", label: "Alas - Esq / Dir" },
-  { id: "pivo", label: "Pivôs" },
+const positionGroupOrder: { id: string; label: string; cardLabel: string }[] = [
+  { id: "goleiro", label: "Goleiros", cardLabel: "Goleiro" },
+  { id: "fixo", label: "Fixos", cardLabel: "Fixo" },
+  { id: "ala", label: "Alas", cardLabel: "Ala" },
+  { id: "pivo", label: "Pivôs", cardLabel: "Pivô" },
 ];
 
 function normalizePosition(raw: string | null): string | null {
@@ -79,7 +84,7 @@ export const getPlayersByCategory = cache(async (category: RosterCategory): Prom
   try {
     const sql = getDb();
     const rows = (await sql`
-      SELECT id, name, number, position
+      SELECT id, name, nickname, number, position
       FROM players
       WHERE modality = ${category}
       ORDER BY trim(name)
@@ -88,6 +93,7 @@ export const getPlayersByCategory = cache(async (category: RosterCategory): Prom
     return rows.map((row) => ({
       id: row.id,
       name: row.name.trim(),
+      nickname: row.nickname.trim(),
       number: row.number ?? "-",
       position: row.position ?? "",
     }));
@@ -110,8 +116,9 @@ export function groupPlayersByPosition(players: RosterPlayer[]): RosterPositionG
       players: groupPlayers.map((player) => ({
         id: player.id,
         name: player.name,
+        nickname: player.nickname,
         number: player.number,
-        positionLabel: group.label,
+        positionLabel: group.cardLabel,
       })),
     };
   });
@@ -124,6 +131,7 @@ export function groupPlayersByPosition(players: RosterPlayer[]): RosterPositionG
       players: unmatched.map((player) => ({
         id: player.id,
         name: player.name,
+        nickname: player.nickname,
         number: player.number,
         positionLabel: "Outros",
       })),
@@ -137,12 +145,17 @@ export const getStaffMembers = cache(async (): Promise<RosterStaffMember[]> => {
   try {
     const sql = getDb();
     const rows = (await sql`
-      SELECT id, name, function
+      SELECT id, name, nickname, function
       FROM staff_members
       ORDER BY created_at
     `) as unknown as StaffRow[];
 
-    return rows.map((row) => ({ id: row.id, name: row.name.trim(), role: row.function }));
+    return rows.map((row) => ({
+      id: row.id,
+      name: row.name.trim(),
+      nickname: row.nickname.trim(),
+      role: row.function,
+    }));
   } catch (error) {
     console.error("Failed to fetch staff members from database", error);
     return [];
