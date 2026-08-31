@@ -44,7 +44,7 @@ const CLUB_NAME = "ACF Sports/Vila Mercado";
 function TeamBadge({ logo, name, home }: { logo: string; name: string; home?: boolean }) {
   return (
     <div className="components-competitions-content-team">
-      <span className={`components-competitions-content-teamLogo ${home ? "components-competitions-content-teamLogoHome" : ""}`}>
+      <span className={`components-competitions-content-teamLogo`}>
         <img src={logo} alt={name} />
       </span>
       <span>{name}</span>
@@ -115,7 +115,7 @@ export function CompetitionsContent({
         {nextMatchData ? (
           <article className="components-competitions-content-nextMatch">
             <div className="components-competitions-content-matchTeams">
-              <TeamBadge logo={nextMatchData.homeTeam.logo} name={nextMatchData.homeTeam.name} home />
+              <TeamBadge logo="/squad/simble-black.png" name={nextMatchData.homeTeam.name} home />
               <strong>x</strong>
               <TeamBadge logo={nextMatchData.awayTeam.logo} name={nextMatchData.awayTeam.name} />
             </div>
@@ -249,8 +249,6 @@ export function CompetitionsContent({
                         <th>Vit</th>
                         <th>Emp</th>
                         <th>Der</th>
-                        <th>Gm</th>
-                        <th>Gc</th>
                         <th>Sg</th>
                       </tr>
                     </thead>
@@ -279,8 +277,6 @@ export function CompetitionsContent({
                             <td>{entry.wins || "00"}</td>
                             <td>{entry.draws || "00"}</td>
                             <td>{entry.losses || "00"}</td>
-                            <td>{entry.goalsScored || "00"}</td>
-                            <td>{entry.goalsConceded || "00"}</td>
                             <td>{entry.goalDifference || "00"}</td>
                           </tr>
                         );

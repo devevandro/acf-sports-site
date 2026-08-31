@@ -1,27 +1,25 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-const athleteCards = [
-  { id: 1, name: "Carlos", number: "01" },
-  { id: 2, name: "David", number: "06" },
-  { id: 3, name: "Rafael", number: "10" },
-  { id: 4, name: "Marcos", number: "18" },
-  { id: 5, name: "Felipe", number: "23" },
-];
+export type HomeRosterAthlete = {
+  id: string;
+  name: string;
+  number: string;
+};
 
-type Athlete = (typeof athleteCards)[number];
-
-const athleteSlides = athleteCards.reduce<Athlete[][]>((slides, athlete, index) => {
-  if (index % 2 === 0) {
-    slides.push([athlete]);
-  } else {
-    slides[slides.length - 1].push(athlete);
-  }
-  return slides;
-}, []);
+function buildSlides(athletes: HomeRosterAthlete[]): HomeRosterAthlete[][] {
+  return athletes.reduce<HomeRosterAthlete[][]>((slides, athlete, index) => {
+    if (index % 2 === 0) {
+      slides.push([athlete]);
+    } else {
+      slides[slides.length - 1].push(athlete);
+    }
+    return slides;
+  }, []);
+}
 
 const cardPath = `M8 1
   H248
@@ -41,10 +39,10 @@ const cardPath = `M8 1
   Q1 1 8 1
   Z`;
 
-function AthleteCard({ athlete }: { athlete: (typeof athleteCards)[number] }) {
+function AthleteCard({ athlete, position }: { athlete: HomeRosterAthlete; position: number }) {
   return (
     <article
-      className={`components-roster-section-athlete ${`components-roster-section-athlete${athlete.id}`}`}
+      className={`components-roster-section-athlete components-roster-section-athlete${position}`}
     >
       <svg
         className="components-roster-section-athleteCard"
@@ -85,9 +83,21 @@ function AthleteCard({ athlete }: { athlete: (typeof athleteCards)[number] }) {
   );
 }
 
-export function RosterSection() {
+export function RosterSection({ athletes }: { athletes: HomeRosterAthlete[] }) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 768px)");
+    const update = () => setIsMobile(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
+
+  const visibleAthletes = isMobile ? athletes.slice(0, 4) : athletes;
+  const athleteSlides = buildSlides(visibleAthletes);
 
   const handleScroll = () => {
     const viewport = viewportRef.current;
@@ -128,10 +138,14 @@ export function RosterSection() {
           ref={viewportRef}
           onScroll={handleScroll}
         >
-          {athleteSlides.map((slide, index) => (
-            <div className="components-roster-section-slide" key={`slide-${index}`}>
-              {slide.map((athlete) => (
-                <AthleteCard athlete={athlete} key={athlete.id} />
+          {athleteSlides.map((slide, slideIndex) => (
+            <div className="components-roster-section-slide" key={`slide-${slideIndex}`}>
+              {slide.map((athlete, athleteIndex) => (
+                <AthleteCard
+                  athlete={athlete}
+                  position={slideIndex * 2 + athleteIndex + 1}
+                  key={athlete.id}
+                />
               ))}
             </div>
           ))}
