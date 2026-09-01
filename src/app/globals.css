@@ -3723,7 +3723,7 @@ button {
 
 .components-plans-section-cards {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 40px;
 }
@@ -3732,10 +3732,10 @@ button {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 340px;
-  height: 440px;
-  padding: 24px 16px 32px;
-  border-radius: 8px;
+  width: 560px;
+  min-height: 480px;
+  padding: 32px 40px;
+  border-radius: 16px;
   background: #07243d;
   box-shadow: 0 0 16px -4px rgba(37, 114, 184, 0.32);
   transition:
@@ -3749,12 +3749,15 @@ button {
 }
 
 .components-plans-section-featuredCard {
-  width: 400px;
-  height: 516px;
-  padding: 28px 16px 40px;
-  background: #e1ebf5;
-  color: #121212;
-  box-shadow: 0 0 16px -4px rgba(81, 77, 76, 0.32);
+  min-height: 524px;
+  margin-top: -22px;
+  background: #07243d;
+  color: #f5f5f5;
+  box-shadow: 0 0 16px -4px rgba(255, 122, 92, 0.32);
+}
+
+.components-plans-section-featuredCard:hover {
+  transform: translateY(-32px);
 }
 
 .components-plans-section-cardHeader {
@@ -3762,23 +3765,21 @@ button {
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 
 .components-plans-section-card h3 {
   margin: 0;
-  color: #b3b3b3;
+  color: var(--cinza-medio);
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 600;
-  line-height: 32px;
+  line-height: 48px;
   text-transform: uppercase;
 }
 
 .components-plans-section-featuredCard h3 {
-  color: #661400;
-  font-size: 32px;
-  line-height: 48px;
+  color: #ff7a5c;
 }
 
 .components-plans-section-price {
@@ -3795,29 +3796,27 @@ button {
   line-height: 40px;
 }
 
-.components-plans-section-featuredCard .components-plans-section-price strong {
-  color: #661400;
-  line-height: 48px;
-}
-
 .components-plans-section-price span {
   margin-top: -8px;
-  color: #b3b3b3;
+  color: var(--cinza-medio);
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.16px;
 }
 
-.components-plans-section-featuredCard .components-plans-section-price span {
-  color: #4e4e4e;
+.components-plans-section-divider {
+  height: 1px;
+  margin: 0 0 24px;
+  border: 0;
+  background: rgba(245, 245, 245, 0.14);
 }
 
 .components-plans-section-benefits {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 14px;
+  gap: 20px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -3825,9 +3824,9 @@ button {
 
 .components-plans-section-benefits li {
   position: relative;
-  padding-left: 18px;
+  padding-left: 22px;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 24px;
 }
@@ -3836,18 +3835,18 @@ button {
   position: absolute;
   top: 0;
   left: 0;
-  color: #ff3203;
+  color: #ff7a5c;
   content: "✓";
 }
 
 .components-plans-section-button {
   display: inline-flex;
+  align-self: flex-start;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: 200px;
-  height: 56px;
-  margin-top: auto;
+  margin-top: 24px;
+  padding: 16px 32px;
   border-radius: 8px;
   background: #777777;
   color: #f5f5f5 !important;
@@ -3856,6 +3855,7 @@ button {
   font-weight: 600;
   line-height: 24px;
   text-transform: uppercase;
+  white-space: nowrap;
   transition:
     transform 180ms ease,
     background 180ms ease,
@@ -3868,7 +3868,6 @@ button {
 }
 
 .components-plans-section-featuredButton {
-  width: 200px;
   background: linear-gradient(168deg, #ff7a5c 0%, #8f1d00 99%);
 }
 
@@ -3882,13 +3881,18 @@ button {
 @media (max-width: 1200px) {
   .components-plans-section-cards {
     flex-direction: column;
+    align-items: center;
   }
 
   .components-plans-section-card,
   .components-plans-section-featuredCard {
-    width: min(400px, 100%);
-    height: auto;
-    min-height: 440px;
+    width: min(560px, 100%);
+    min-height: 0;
+    margin-top: 0;
+  }
+
+  .components-plans-section-featuredCard:hover {
+    transform: translateY(-10px);
   }
 }
 
