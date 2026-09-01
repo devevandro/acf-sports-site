@@ -2,7 +2,7 @@
 const sponsorList = [
   "Parceiro Oficial 1",
   "Soberano Store",
-  "Patrocinador Master",
+  "Patrocinadores Master",
   "Academia Fit",
   "DM Tech",
   "EBC Cons",

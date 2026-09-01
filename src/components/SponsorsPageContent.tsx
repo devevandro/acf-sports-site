@@ -11,7 +11,7 @@ type Logo = {
 const reasons = [
   {
     title: "Viabilidade Financeira e Estrutura",
-    text: "O apoio financeiro garante o básico para o jogo acontecer: uniformes completos, materiais de treino (bolas, cones, coletes) e o pagamento de taxas de inscrição em torneios e arbitragem. Sem isso, o custo recai sobre os atletas, o que muitas vezes inviabiliza a permanência de bons jogadores.",
+    text: "O apoio financeiro garante o básico para o jogo acontecer: uniformes completos, materiais de treino (bolas, cones, coletes) e o pagamento de taxas de inscrição em torneios e arbitragem.",
   },
   {
     title: "Fortalecimento da Identidade e Profissionalismo",
@@ -73,7 +73,7 @@ export async function SponsorsPageContent() {
       <section className="components-sponsors-page-content-logoSection" aria-label="Lista de patrocinadores">
         {masterSponsors.length > 0 && (
           <div className="components-sponsors-page-content-logoGroup">
-            <h2>Patrocinador Master</h2>
+            <h2>Patrocinadores Master</h2>
             <div className="components-sponsors-page-content-logoGrid components-sponsors-page-content-masterGrid">
               {masterSponsors.map((sponsor) => (
                 <SponsorLogoCard key={sponsor.id} sponsor={sponsor} />
