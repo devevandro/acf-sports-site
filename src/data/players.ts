@@ -195,6 +195,8 @@ const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
       const slug = seenSlugs.has(base) ? `${base}-${row.id.slice(0, 4)}` : base;
       seenSlugs.add(slug);
 
+      const positionFutsal = row.position_futsal?.trim() ?? "";
+      const positionCampo = row.position_campo?.trim() ?? "";
       const categories = row.modality ?? [];
 
       return {
@@ -203,8 +205,8 @@ const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
         name: row.name.trim(),
         nickname: row.nickname.trim(),
         number: row.number ?? "-",
-        positionFutsal: row.position_futsal ?? "",
-        positionCampo: row.position_campo ?? "",
+        positionFutsal,
+        positionCampo,
         category: categories[0] ?? "futsal",
         categories,
         birthday: formatBirthday(row.birthday),
