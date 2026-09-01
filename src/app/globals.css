@@ -55,6 +55,25 @@ button {
   font: inherit;
 }
 
+.components-scroll-reveal-section {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1), transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.components-scroll-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .components-scroll-reveal-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .app-clube-competicoes-page-page {
   min-height: 100vh;
   background: var(--azul-preto);
@@ -914,10 +933,13 @@ button {
 
 .components-competitions-content-tableWrap td:first-child {
   width: 165px;
+  max-width: 165px;
+  overflow: hidden;
   color: #050505;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-weight: 500;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .components-competitions-content-tableWrap td:first-child span {
@@ -1018,12 +1040,17 @@ button {
     height: 44px;
   }
 
-  .components-competitions-content-team span {
+  .components-competitions-content-team span:not(.components-competitions-content-teamLogo) {
     display: block;
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+
+  .components-competitions-content-teamLogo {
+    justify-content: center;
+    width: 100%;
   }
 
   .components-competitions-content-matchMeta {
@@ -1081,6 +1108,25 @@ button {
   .components-competitions-content-tableWrap {
     margin: 0 -16px;
     padding: 0 16px;
+  }
+
+  .components-competitions-content-tableWrap table {
+    min-width: 0;
+    font-size: 12px;
+  }
+
+  .components-competitions-content-tableWrap th,
+  .components-competitions-content-tableWrap td {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .components-competitions-content-tableWrap td:first-child {
+    width: auto;
+    max-width: 92px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .components-competitions-content-legend {
@@ -1354,7 +1400,18 @@ button {
   gap: 8px;
 }
 
-.components-contact-content-infoCardHead svg {
+.components-contact-content-infoCardIcon {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  background: rgba(255, 50, 3, 0.1);
+}
+
+.components-contact-content-infoCardIcon svg {
   width: 20px;
   height: 20px;
   flex: 0 0 auto;
@@ -1374,9 +1431,9 @@ button {
   margin: 8px 0 0;
   color: #4e4e4e;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 22px;
+  line-height: 24px;
   white-space: pre-line;
 }
 
@@ -1391,6 +1448,11 @@ button {
   max-width: 760px;
 }
 
+.components-contact-content-freeBlock h3 {
+  font-weight: 600;
+  line-height: 24px;
+}
+
 .components-contact-content-freeCallout {
   margin: 24px 0 0;
   color: #000000;
@@ -1398,6 +1460,7 @@ button {
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
+  text-transform: uppercase;
 }
 
 .components-contact-content-whatsappButton {
@@ -1406,8 +1469,8 @@ button {
   gap: 8px;
   margin-top: 24px;
   padding: 14px 32px;
-  border-radius: 10px;
-  background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
+  border-radius: 8px;
+  background: linear-gradient(165deg, #ff7a5c 0%, #8f1d00 99%);
   color: #ffffff;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
@@ -1418,9 +1481,15 @@ button {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.components-contact-content-whatsappButton svg {
+.components-contact-content-whatsappButton svg,
+.components-contact-content-whatsappButton img {
   width: 20px;
   height: 20px;
+  object-fit: contain;
+}
+
+.components-contact-content-whatsappButton img {
+  filter: brightness(0) invert(1);
 }
 
 .components-contact-content-whatsappButton:hover {
@@ -2187,6 +2256,7 @@ button {
   }
 
   .components-hero-news-ctaButton {
+    margin-bottom: 60px;
     padding: 12px 24px;
     font-size: 15px;
     line-height: 18px;
@@ -3673,7 +3743,7 @@ button {
 
 .components-plans-section-cards {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 40px;
 }
@@ -3682,10 +3752,10 @@ button {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 340px;
-  height: 440px;
-  padding: 24px 16px 32px;
-  border-radius: 8px;
+  width: 560px;
+  min-height: 480px;
+  padding: 32px 40px;
+  border-radius: 16px;
   background: #07243d;
   box-shadow: 0 0 16px -4px rgba(37, 114, 184, 0.32);
   transition:
@@ -3699,12 +3769,15 @@ button {
 }
 
 .components-plans-section-featuredCard {
-  width: 400px;
-  height: 516px;
-  padding: 28px 16px 40px;
-  background: #e1ebf5;
-  color: #121212;
-  box-shadow: 0 0 16px -4px rgba(81, 77, 76, 0.32);
+  min-height: 524px;
+  margin-top: -22px;
+  background: #07243d;
+  color: #f5f5f5;
+  box-shadow: 0 0 16px -4px rgba(255, 122, 92, 0.32);
+}
+
+.components-plans-section-featuredCard:hover {
+  transform: translateY(-32px);
 }
 
 .components-plans-section-cardHeader {
@@ -3712,23 +3785,21 @@ button {
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 
 .components-plans-section-card h3 {
   margin: 0;
-  color: #b3b3b3;
+  color: var(--cinza-medio);
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 600;
-  line-height: 32px;
+  line-height: 48px;
   text-transform: uppercase;
 }
 
 .components-plans-section-featuredCard h3 {
-  color: #661400;
-  font-size: 32px;
-  line-height: 48px;
+  color: #ff7a5c;
 }
 
 .components-plans-section-price {
@@ -3745,29 +3816,27 @@ button {
   line-height: 40px;
 }
 
-.components-plans-section-featuredCard .components-plans-section-price strong {
-  color: #661400;
-  line-height: 48px;
-}
-
 .components-plans-section-price span {
   margin-top: -8px;
-  color: #b3b3b3;
+  color: var(--cinza-medio);
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.16px;
 }
 
-.components-plans-section-featuredCard .components-plans-section-price span {
-  color: #4e4e4e;
+.components-plans-section-divider {
+  height: 1px;
+  margin: 0 0 24px;
+  border: 0;
+  background: rgba(245, 245, 245, 0.14);
 }
 
 .components-plans-section-benefits {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 14px;
+  gap: 20px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -3775,29 +3844,38 @@ button {
 
 .components-plans-section-benefits li {
   position: relative;
-  padding-left: 18px;
+  padding-left: 22px;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 24px;
 }
 
 .components-plans-section-benefits li::before {
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 0;
-  color: #ff3203;
-  content: "✓";
+  width: 14px;
+  height: 18px;
+  background-image: url("/sponsor/bull-gray-icon.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+}
+
+.components-plans-section-featuredCard .components-plans-section-benefits li::before {
+  background-image: url("/sponsor/bull-orange-icon.svg");
 }
 
 .components-plans-section-button {
   display: inline-flex;
+  align-self: flex-start;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: 200px;
-  height: 56px;
-  margin-top: auto;
+  margin-top: 24px;
+  padding: 16px 32px;
   border-radius: 8px;
   background: #777777;
   color: #f5f5f5 !important;
@@ -3806,6 +3884,7 @@ button {
   font-weight: 600;
   line-height: 24px;
   text-transform: uppercase;
+  white-space: nowrap;
   transition:
     transform 180ms ease,
     background 180ms ease,
@@ -3818,7 +3897,6 @@ button {
 }
 
 .components-plans-section-featuredButton {
-  width: 200px;
   background: linear-gradient(168deg, #ff7a5c 0%, #8f1d00 99%);
 }
 
@@ -3832,13 +3910,18 @@ button {
 @media (max-width: 1200px) {
   .components-plans-section-cards {
     flex-direction: column;
+    align-items: center;
   }
 
   .components-plans-section-card,
   .components-plans-section-featuredCard {
-    width: min(400px, 100%);
-    height: auto;
-    min-height: 440px;
+    width: min(560px, 100%);
+    min-height: 0;
+    margin-top: 0;
+  }
+
+  .components-plans-section-featuredCard:hover {
+    transform: translateY(-10px);
   }
 }
 
@@ -3854,35 +3937,15 @@ button {
   }
 
   .components-plans-section-cards {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 0;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    padding-bottom: 4px;
-  }
-
-  .components-plans-section-cards::-webkit-scrollbar {
-    display: none;
+    flex-direction: column;
+    gap: 24px;
   }
 
   .components-plans-section-card,
   .components-plans-section-featuredCard {
-    flex: 0 0 100%;
     width: 100%;
     min-height: 0;
     padding: 22px 16px 28px;
-    margin-right: 16px;
-    scroll-snap-align: start;
-  }
-
-  .components-plans-section-card:last-child,
-  .components-plans-section-featuredCard:last-child {
-    margin-right: 0;
   }
 
   .components-plans-section-featuredCard h3 {
@@ -4535,22 +4598,23 @@ button {
 }
 
 .components-sponsors-page-content-planGrid {
-  display: grid;
-  grid-template-columns: 340px 400px 340px;
-  gap: 40px;
+  display: flex;
+  align-items: flex-start;
   justify-content: center;
-  align-items: center;
+  gap: 40px;
 }
 
 .components-sponsors-page-content-planCard {
+  position: relative;
   display: flex;
-  min-height: 566px;
+  width: 560px;
+  min-height: 480px;
   flex-direction: column;
   padding: 32px 40px;
-  border-radius: 8px;
-  background: #fdfdfd;
-  color: #4e4e4e;
-  box-shadow: 0 0 2px rgba(102, 102, 102, 0.16);
+  border-radius: 16px;
+  background: #07243d;
+  color: #f5f5f5;
+  box-shadow: 0 0 16px -4px rgba(37, 114, 184, 0.32);
   transition:
     transform 220ms ease,
     box-shadow 220ms ease;
@@ -4562,34 +4626,49 @@ button {
 }
 
 .components-sponsors-page-content-featuredPlanCard {
-  min-height: 720px;
-  padding: 40px 48px;
+  min-height: 524px;
+  margin-top: -22px;
+  box-shadow: 0 0 16px -4px rgba(255, 122, 92, 0.32);
+}
+
+.components-sponsors-page-content-featuredPlanCard:hover {
+  transform: translateY(-32px);
+}
+
+.components-sponsors-page-content-planCardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .components-sponsors-page-content-planCard h3 {
-  margin: 0 0 16px;
-  color: #661400;
+  margin: 0;
+  color: var(--cinza-medio);
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 600;
-  line-height: 32px;
-  text-align: center;
+  line-height: 48px;
   text-transform: uppercase;
+}
+
+.components-sponsors-page-content-featuredPlanCard h3 {
+  color: #ff7a5c;
 }
 
 .components-sponsors-page-content-planDivider {
   display: block;
   width: 100%;
   height: 1px;
-  margin: 0 0 32px;
-  background: #e7e7e7;
+  margin: 24px 0;
+  background: rgba(245, 245, 245, 0.14);
 }
 
 .components-sponsors-page-content-planCard ul {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -4597,58 +4676,82 @@ button {
 
 .components-sponsors-page-content-planCard li {
   position: relative;
-  padding-left: 24px;
+  padding-left: 22px;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
-  font-weight: 400;
-  line-height: 26px;
+  font-weight: 500;
+  line-height: 24px;
 }
 
 .components-sponsors-page-content-planCard li::before {
   position: absolute;
-  top: 8px;
+  top: 2px;
   left: 0;
-  width: 10px;
-  height: 10px;
-  border: 2px solid #f56345;
-  border-radius: 50%;
+  width: 14px;
+  height: 18px;
+  background-image: url("/sponsor/bull-gray-icon.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
   content: "";
 }
 
+.components-sponsors-page-content-featuredPlanCard li::before {
+  background-image: url("/sponsor/bull-orange-icon.svg");
+}
+
 .components-sponsors-page-content-planPrice {
-  margin: 28px 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  line-height: 32px;
 }
 
 .components-sponsors-page-content-planPriceAmount {
-  color: #1d598f;
-  font-size: 24px;
-  font-weight: 700;
+  color: #fdfdfd;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
 }
 
 .components-sponsors-page-content-planPricePeriod {
-  color: #4e4e4e;
+  margin-top: -8px;
+  color: var(--cinza-medio);
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
-  font-weight: 400;
+  line-height: 24px;
 }
 
 .components-sponsors-page-content-planCard a {
   display: inline-flex;
+  align-self: flex-start;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
-  padding: 8px 20px;
-  border-radius: 10px;
-  background: linear-gradient(165deg, #ff7a5c 0%, #8f1d00 100%);
+  gap: 8px;
+  margin-top: 24px;
+  padding: 16px 32px;
+  border-radius: 8px;
+  background: #777777;
   color: #f5f5f5;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
-  line-height: 20px;
+  line-height: 24px;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.components-sponsors-page-content-planCard a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.22);
+}
+
+.components-sponsors-page-content-featuredPlanCard a {
+  background: linear-gradient(168deg, #ff7a5c 0%, #8f1d00 99%);
 }
 
 .components-sponsors-page-content-logoSection {
@@ -4723,13 +4826,19 @@ button {
 
 @media (max-width: 1200px) {
   .components-sponsors-page-content-planGrid {
-    grid-template-columns: 1fr;
-    justify-items: center;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .components-sponsors-page-content-planCard {
-    width: min(448px, 100%);
+  .components-sponsors-page-content-planCard,
+  .components-sponsors-page-content-featuredPlanCard {
+    width: min(560px, 100%);
     min-height: 0;
+    margin-top: 0;
+  }
+
+  .components-sponsors-page-content-featuredPlanCard:hover {
+    transform: translateY(-10px);
   }
 }
 
@@ -4750,33 +4859,15 @@ button {
   }
 
   .components-sponsors-page-content-planGrid {
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: min(85%, 320px);
-    justify-items: stretch;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 8px;
-    -webkit-overflow-scrolling: touch;
+    flex-direction: column;
+    gap: 24px;
   }
 
-  .components-sponsors-page-content-planCard {
+  .components-sponsors-page-content-planCard,
+  .components-sponsors-page-content-featuredPlanCard {
     width: 100%;
-    scroll-snap-align: center;
-    padding: 28px 24px;
-  }
-
-  .components-sponsors-page-content-planCard h3 {
-    margin-bottom: 16px;
-  }
-
-  .components-sponsors-page-content-planDivider {
-    margin-bottom: 24px;
-  }
-
-  .components-sponsors-page-content-planCard li {
-    font-size: 16px;
-    line-height: 26px;
+    min-height: 0;
+    padding: 22px 16px 28px;
   }
 
   .components-sponsors-page-content-logoSection {
@@ -5488,6 +5579,13 @@ button {
   clip-path: path(
     "M 136 0 L 248 0 Q 256 0 256 8 L 256 288 Q 256 293 252 296 L 220 316 Q 214 320 207 320 L 8 320 Q 0 320 0 312 L 0 88 Q 0 83 4 80 L 128 4 Q 132 0 136 0 Z"
   );
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.components-roster-athlete-card-card:hover,
+.components-roster-athlete-card-card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
 }
 
 .components-roster-athlete-card-linkCard {
@@ -5523,12 +5621,12 @@ button {
   clip-path: path(
     "M 136 0 L 232 0 Q 240 0 240 8 L 240 280 Q 240 285 236 288 L 211 300 Q 207 304 201 304 L 8 304 Q 0 304 0 296 L 0 88 Q 0 83 4 80 L 128 4 Q 132 0 136 0 Z"
   );
-  transition: transform 180ms ease;
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .components-roster-athlete-card-card:hover .components-roster-athlete-card-image,
 .components-roster-athlete-card-card:focus-visible .components-roster-athlete-card-image {
-  transform: scale(1.04);
+  transform: scale(1.06);
 }
 
 .components-roster-athlete-card-card::after {
@@ -5546,7 +5644,8 @@ button {
   );
   content: "";
   opacity: 0;
-  transition: opacity 200ms ease;
+  backdrop-filter: blur(0px);
+  transition: opacity 380ms cubic-bezier(0.22, 1, 0.36, 1), backdrop-filter 380ms cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
 }
 
@@ -5554,6 +5653,7 @@ button {
 .components-roster-athlete-card-card:focus-visible::after,
 .components-roster-athlete-card-card:active::after {
   opacity: 1;
+  backdrop-filter: blur(3px);
 }
 
 .components-roster-athlete-card-info {
@@ -5561,11 +5661,12 @@ button {
   z-index: 2;
   display: flex;
   align-items: flex-end;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
   padding: 0 2px 4px;
   opacity: 0;
-  transition: opacity 200ms ease;
+  transform: translateY(10px);
+  transition: opacity 380ms cubic-bezier(0.22, 1, 0.36, 1), transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
 }
 
@@ -5573,6 +5674,7 @@ button {
 .components-roster-athlete-card-card:focus-visible .components-roster-athlete-card-info,
 .components-roster-athlete-card-card:active .components-roster-athlete-card-info {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .components-roster-athlete-card-label {
@@ -5582,9 +5684,11 @@ button {
   align-items: center;
   justify-content: center;
   padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #dfe7f3;
+  border-radius: 8px;
+  border: 1px solid rgba(245, 245, 245, 0.24);
+  background: #484747;
+  color: #f5f5f5;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
@@ -5605,8 +5709,8 @@ button {
   color: #f4f5f7;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
-  font-weight: 700;
-  line-height: 1.15;
+  font-weight: 500;
+  line-height: 32px;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -5614,10 +5718,13 @@ button {
 .components-roster-athlete-card-text {
   display: -webkit-box;
   overflow: hidden;
-  margin: 2px 0 0;
+  margin: 0;
   color: #a9b3c1;
-  font-size: 14px;
-  line-height: 1.5;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.015em;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 }

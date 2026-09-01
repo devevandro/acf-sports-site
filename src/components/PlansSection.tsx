@@ -32,17 +32,6 @@ const plans: Plan[] = [
       "Pagina exclusiva no site sobre a marca do patrocinador",
       "Cobertura regional"
     ]
-  },
-  {
-    name: "mensal",
-    price: "R$ 250",
-    benefits: [
-      "logo em partes segundarias no uniforme",
-      "1 post dedicated por mês",
-      "menções nas artes de dias de jogo",
-      "logo em tamanho médio nas artes de jogos",
-      "link no site e logo na home"
-    ]
   }
 ];
 
@@ -56,6 +45,8 @@ function PlanCard({ plan }: { plan: Plan }) {
           <span>mensal</span>
         </div>
       </header>
+
+      <hr className="components-plans-section-divider" />
 
       <ul className="components-plans-section-benefits">
         {plan.benefits.map((benefit) => (

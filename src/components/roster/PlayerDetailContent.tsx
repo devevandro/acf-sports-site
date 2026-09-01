@@ -31,7 +31,7 @@ export function PlayerDetailContent({ player }: PlayerDetailContentProps) {
           </picture>
 
           <div className="components-roster-player-detail-content-identity">
-            <img src="/squad/apelido.png" alt="" aria-hidden="true" />
+            <img src="/squad/nick-name.png" alt="" aria-hidden="true" />
             <h2>{player.nickname}</h2>
 
             <dl className="components-roster-player-detail-content-profileList">

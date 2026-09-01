@@ -1,6 +1,6 @@
 
 import { Fragment } from "react";
-import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, MapPin, Phone } from "lucide-react";
 import type { TeamInfo } from "@/data/teamInfo";
 
 function toWhatsappNumber(phone: string): string {
@@ -96,7 +96,9 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
           {infoCards.map((card) => (
             <article className="components-contact-content-infoCard" key={card.title}>
               <div className="components-contact-content-infoCardHead">
-                <card.icon aria-hidden="true" />
+                <span className="components-contact-content-infoCardIcon">
+                  <card.icon aria-hidden="true" />
+                </span>
                 <h4>{card.title}</h4>
               </div>
               <p>{card.body}</p>
@@ -122,7 +124,7 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
             rel="noreferrer"
           >
             whatsapp
-            <MessageCircle aria-hidden="true" />
+            <img src="/contact/whatsapp.png" alt="" aria-hidden="true" />
           </a>
         </div>
       </div>

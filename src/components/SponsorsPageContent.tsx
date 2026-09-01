@@ -1,7 +1,9 @@
+import { ArrowUpRight } from "lucide-react";
 
 type Plan = {
   name: string;
   price: string;
+  ctaLabel: string;
   message: string;
   benefits: string[];
   featured?: boolean;
@@ -17,6 +19,7 @@ const plans: Plan[] = [
   {
     name: "pontual",
     price: "R$ 180,00 / Mês",
+    ctaLabel: "aderir",
     message: "Olá boa tarde, gostaria de saber mais sobre o plano pontual do ACF Sports...",
     benefits: [
       "Logo de tamanho médio em partes do uniforme",
@@ -29,6 +32,7 @@ const plans: Plan[] = [
   {
     name: "master",
     price: "R$ 500,00 / Mês",
+    ctaLabel: "ver mais",
     message: "Olá boa tarde, gostaria de saber mais sobre o plano master do ACF Sports...",
     featured: true,
     benefits: [
@@ -37,18 +41,6 @@ const plans: Plan[] = [
       "Logo em destaque nas artes de todos os jogos",
       "Banner de destaque na home do site",
       "Página exclusiva no site sobre a sua marca",
-    ],
-  },
-  {
-    name: "mensal",
-    price: "R$ 250,00 / Mês",
-    message: "Olá boa tarde, gostaria de saber mais sobre o plano mensal do ACF Sports...",
-    benefits: [
-      "Logo em partes secundárias no uniforme junto ao calção",
-      "Post dedicado por mês",
-      "Menções em todas as artes de dias de jogos",
-      "Logo em tamanho médio nas artes de jogos",
-      "Link no site e logo na home",
     ],
   },
 ];
@@ -137,19 +129,25 @@ function PlanCard({ plan }: { plan: Plan }) {
         plan.featured ? "components-sponsors-page-content-featuredPlanCard" : ""
       }`}
     >
-      <h3>{plan.name}</h3>
+      <header className="components-sponsors-page-content-planCardHeader">
+        <h3>{plan.name}</h3>
+        <p className="components-sponsors-page-content-planPrice">
+          <span className="components-sponsors-page-content-planPriceAmount">{priceAmount}</span>
+          {pricePeriod ? <span className="components-sponsors-page-content-planPricePeriod">{pricePeriod}</span> : null}
+        </p>
+      </header>
+
       <span className="components-sponsors-page-content-planDivider" aria-hidden="true" />
+
       <ul>
         {plan.benefits.map((benefit) => (
           <li key={benefit}>{benefit}</li>
         ))}
       </ul>
-      <p className="components-sponsors-page-content-planPrice">
-        <span className="components-sponsors-page-content-planPriceAmount">{priceAmount}</span>
-        {pricePeriod ? <span className="components-sponsors-page-content-planPricePeriod"> / {pricePeriod}</span> : null}
-      </p>
+
       <a href={whatsAppUrl} target="_blank" rel="noreferrer">
-        enviar direct no whatsapp
+        {plan.ctaLabel}
+        <ArrowUpRight size={18} aria-hidden="true" />
       </a>
     </article>
   );
