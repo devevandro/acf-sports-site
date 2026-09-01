@@ -27,7 +27,7 @@ export async function RosterPageContent({ category }: RosterPageContentProps) {
 
         {positionGroups.length === 0 ? (
           <p className="components-roster-roster-page-content-empty">
-            Elenco de {categoryLabel(category)} ainda sendo montado. Em breve, mais novidades por aqui.
+            Elenco de {categoryLabel(category)} ainda está sendo montado. Em breve, mais novidades por aqui.
           </p>
         ) : (
           <div className="components-roster-roster-page-content-positionGroups">

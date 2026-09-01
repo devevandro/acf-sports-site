@@ -26,7 +26,7 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
     },
     {
       icon: Clock,
-      title: "Horario de atendimento.",
+      title: "Horário de atendimento.",
       body: "Segunda a sexta: 08h às 18h\nSábado: 08h às 16h",
     },
   ];
@@ -70,7 +70,7 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
             Fale com nossa equipe, seja para saber mais sobre o clube, tirar dúvidas sobre
             patrocínios, se candidatar a ser um atleta do soberano, ou saber mais sobre o projeto e
             ficar mais perto da nossa equipe ou então veio apenas pela resenha, será um prazer falar
-            com você. &ldquo;fique a vontade mas não meche em nada&rdquo;.
+            com você. &ldquo;fique à vontade mas não mexa em nada&rdquo;.
           </p>
           <p className="components-contact-content-freeCallout">É só chamar a gente pelo whatsapp.</p>
           <a

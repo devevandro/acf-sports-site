@@ -18,7 +18,7 @@ export default async function HistoryPage() {
         <div>
           <p>clube</p>
           <h1>
-            nossa historia<span>.</span>
+            nossa história<span>.</span>
           </h1>
         </div>
       </header>
