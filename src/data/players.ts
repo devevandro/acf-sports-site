@@ -16,6 +16,7 @@ export type RosterPlayer = {
   number: string;
   position: string;
   category: RosterCategory;
+  categories: RosterCategory[];
   birthday: string | null;
   dominantFoot: string | null;
   quote: string;
@@ -50,7 +51,7 @@ type PlayerRow = {
   nickname: string;
   number: string | null;
   position: string | null;
-  modality: RosterCategory;
+  modality: RosterCategory[];
   birthday: string | Date | null;
   dominant_foot: string | null;
   quote: string | null;
@@ -151,6 +152,8 @@ const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
       const slug = seenSlugs.has(base) ? `${base}-${row.id.slice(0, 4)}` : base;
       seenSlugs.add(slug);
 
+      const categories = row.modality ?? [];
+
       return {
         id: row.id,
         slug,
@@ -158,7 +161,8 @@ const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
         nickname: row.nickname.trim(),
         number: row.number ?? "-",
         position: row.position ?? "",
-        category: row.modality,
+        category: categories[0] ?? "futsal",
+        categories,
         birthday: formatBirthday(row.birthday),
         dominantFoot: dominantFootLabel(row.dominant_foot),
         quote: row.quote?.trim() ?? "",
@@ -173,7 +177,7 @@ const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
 
 export async function getPlayersByCategory(category: RosterCategory): Promise<RosterPlayer[]> {
   const players = await getAllPlayers();
-  return players.filter((player) => player.category === category);
+  return players.filter((player) => player.categories.includes(category));
 }
 
 export async function getPlayerBySlug(slug: string): Promise<RosterPlayer | null> {
