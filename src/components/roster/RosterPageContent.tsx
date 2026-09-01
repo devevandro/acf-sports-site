@@ -15,7 +15,7 @@ type RosterPageContentProps = {
 
 export async function RosterPageContent({ category }: RosterPageContentProps) {
   const [players, staffMembers] = await Promise.all([getPlayersByCategory(category), getStaffMembers()]);
-  const positionGroups = groupPlayersByPosition(players);
+  const positionGroups = groupPlayersByPosition(players, category);
 
   return (
     <section className="components-roster-roster-page-content-section" data-node-id="1027:2345" data-name="elenco_principal_campo">

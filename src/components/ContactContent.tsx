@@ -96,7 +96,9 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
           {infoCards.map((card) => (
             <article className="components-contact-content-infoCard" key={card.title}>
               <div className="components-contact-content-infoCardHead">
-                <card.icon aria-hidden="true" />
+                <span className="components-contact-content-infoCardIcon">
+                  <card.icon aria-hidden="true" />
+                </span>
                 <h4>{card.title}</h4>
               </div>
               <p>{card.body}</p>

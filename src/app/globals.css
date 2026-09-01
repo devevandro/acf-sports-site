@@ -933,10 +933,13 @@ button {
 
 .components-competitions-content-tableWrap td:first-child {
   width: 165px;
+  max-width: 165px;
+  overflow: hidden;
   color: #050505;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-weight: 500;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .components-competitions-content-tableWrap td:first-child span {
@@ -1397,7 +1400,18 @@ button {
   gap: 8px;
 }
 
-.components-contact-content-infoCardHead svg {
+.components-contact-content-infoCardIcon {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  background: rgba(255, 50, 3, 0.1);
+}
+
+.components-contact-content-infoCardIcon svg {
   width: 20px;
   height: 20px;
   flex: 0 0 auto;
@@ -1417,9 +1431,9 @@ button {
   margin: 8px 0 0;
   color: #4e4e4e;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 22px;
+  line-height: 24px;
   white-space: pre-line;
 }
 
@@ -1434,6 +1448,11 @@ button {
   max-width: 760px;
 }
 
+.components-contact-content-freeBlock h3 {
+  font-weight: 600;
+  line-height: 24px;
+}
+
 .components-contact-content-freeCallout {
   margin: 24px 0 0;
   color: #000000;
@@ -1441,6 +1460,7 @@ button {
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
+  text-transform: uppercase;
 }
 
 .components-contact-content-whatsappButton {
@@ -1449,8 +1469,8 @@ button {
   gap: 8px;
   margin-top: 24px;
   padding: 14px 32px;
-  border-radius: 10px;
-  background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
+  border-radius: 8px;
+  background: linear-gradient(165deg, #ff7a5c 0%, #8f1d00 99%);
   color: #ffffff;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
@@ -3833,10 +3853,19 @@ button {
 
 .components-plans-section-benefits li::before {
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 0;
-  color: #ff7a5c;
-  content: "✓";
+  width: 14px;
+  height: 18px;
+  background-image: url("/sponsor/bull-gray-icon.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+}
+
+.components-plans-section-featuredCard .components-plans-section-benefits li::before {
+  background-image: url("/sponsor/bull-orange-icon.svg");
 }
 
 .components-plans-section-button {
@@ -4656,10 +4685,19 @@ button {
 
 .components-sponsors-page-content-planCard li::before {
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 0;
-  color: #ff7a5c;
-  content: "✓";
+  width: 14px;
+  height: 18px;
+  background-image: url("/sponsor/bull-gray-icon.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+}
+
+.components-sponsors-page-content-featuredPlanCard li::before {
+  background-image: url("/sponsor/bull-orange-icon.svg");
 }
 
 .components-sponsors-page-content-planPrice {
@@ -5541,6 +5579,13 @@ button {
   clip-path: path(
     "M 136 0 L 248 0 Q 256 0 256 8 L 256 288 Q 256 293 252 296 L 220 316 Q 214 320 207 320 L 8 320 Q 0 320 0 312 L 0 88 Q 0 83 4 80 L 128 4 Q 132 0 136 0 Z"
   );
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.components-roster-athlete-card-card:hover,
+.components-roster-athlete-card-card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
 }
 
 .components-roster-athlete-card-linkCard {
@@ -5576,12 +5621,12 @@ button {
   clip-path: path(
     "M 136 0 L 232 0 Q 240 0 240 8 L 240 280 Q 240 285 236 288 L 211 300 Q 207 304 201 304 L 8 304 Q 0 304 0 296 L 0 88 Q 0 83 4 80 L 128 4 Q 132 0 136 0 Z"
   );
-  transition: transform 180ms ease;
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .components-roster-athlete-card-card:hover .components-roster-athlete-card-image,
 .components-roster-athlete-card-card:focus-visible .components-roster-athlete-card-image {
-  transform: scale(1.04);
+  transform: scale(1.06);
 }
 
 .components-roster-athlete-card-card::after {
@@ -5599,7 +5644,8 @@ button {
   );
   content: "";
   opacity: 0;
-  transition: opacity 200ms ease;
+  backdrop-filter: blur(0px);
+  transition: opacity 380ms cubic-bezier(0.22, 1, 0.36, 1), backdrop-filter 380ms cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
 }
 
@@ -5607,6 +5653,7 @@ button {
 .components-roster-athlete-card-card:focus-visible::after,
 .components-roster-athlete-card-card:active::after {
   opacity: 1;
+  backdrop-filter: blur(3px);
 }
 
 .components-roster-athlete-card-info {
@@ -5614,11 +5661,12 @@ button {
   z-index: 2;
   display: flex;
   align-items: flex-end;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
   padding: 0 2px 4px;
   opacity: 0;
-  transition: opacity 200ms ease;
+  transform: translateY(10px);
+  transition: opacity 380ms cubic-bezier(0.22, 1, 0.36, 1), transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
 }
 
@@ -5626,6 +5674,7 @@ button {
 .components-roster-athlete-card-card:focus-visible .components-roster-athlete-card-info,
 .components-roster-athlete-card-card:active .components-roster-athlete-card-info {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .components-roster-athlete-card-label {
@@ -5635,9 +5684,10 @@ button {
   align-items: center;
   justify-content: center;
   padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #dfe7f3;
+  border-radius: 8px;
+  border: 1px solid rgba(245, 245, 245, 0.24);
+  background: #484747;
+  color: #f5f5f5;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 12px;
   font-weight: 700;
@@ -5659,8 +5709,8 @@ button {
   color: #f4f5f7;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
-  font-weight: 700;
-  line-height: 1.15;
+  font-weight: 500;
+  line-height: 32px;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -5668,11 +5718,13 @@ button {
 .components-roster-athlete-card-text {
   display: -webkit-box;
   overflow: hidden;
-  margin: 2px 0 0;
+  margin: 0;
   color: #a9b3c1;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.015em;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 }

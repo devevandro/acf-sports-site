@@ -17,10 +17,19 @@ export const revalidate = 60;
 
 const HOME_ROSTER_COUNT = 5;
 
+function pickRandom<T>(items: T[], count: number): T[] {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, count);
+}
+
 export default async function Home() {
   const [allNews, futsalPlayers] = await Promise.all([getAllNews(), getPlayersByCategory("futsal")]);
 
-  const rosterAthletes = futsalPlayers.slice(0, HOME_ROSTER_COUNT).map((player) => ({
+  const rosterAthletes = pickRandom(futsalPlayers, HOME_ROSTER_COUNT).map((player) => ({
     id: player.id,
     name: player.nickname,
     number: player.number,
