@@ -4,7 +4,9 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
 
-export default function SponsorsPage() {
+export const revalidate = 60;
+
+export default async function SponsorsPage() {
   return (
     <main className="app-clube-patrocinadores-page-page">
       <TopCf />
