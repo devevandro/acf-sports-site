@@ -67,7 +67,7 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
         <div className="components-contact-content-freeBlock">
           <h3>Fique à vontade !</h3>
           <p>
-            Fale com nossa equipe, seja para saber mais sobre o crube, tirar dúvidas sobre
+            Fale com nossa equipe, seja para saber mais sobre o clube, tirar dúvidas sobre
             patrocínios, se candidatar a ser um atleta do soberano, ou saber mais sobre o projeto e
             ficar mais perto da nossa equipe ou então veio apenas pela resenha, será um prazer falar
             com você. &ldquo;fique a vontade mas não meche em nada&rdquo;.

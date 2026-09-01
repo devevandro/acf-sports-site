@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export type HomeRosterAthlete = {
   id: string;
+  slug: string;
   name: string;
   number: string;
 };
@@ -41,8 +42,10 @@ const cardPath = `M8 1
 
 function AthleteCard({ athlete, position }: { athlete: HomeRosterAthlete; position: number }) {
   return (
-    <article
+    <Link
+      href={`/clube/elenco/${athlete.slug}`}
       className={`components-roster-section-athlete components-roster-section-athlete${position}`}
+      aria-label={`Ver perfil de ${athlete.name}`}
     >
       <svg
         className="components-roster-section-athleteCard"
@@ -79,7 +82,7 @@ function AthleteCard({ athlete, position }: { athlete: HomeRosterAthlete; positi
         <span className="components-roster-section-athleteName">{athlete.name}</span>
         <span className="components-roster-section-athleteNumber">{athlete.number}</span>
       </div>
-    </article>
+    </Link>
   );
 }
 

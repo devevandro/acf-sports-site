@@ -31,6 +31,7 @@ export default async function Home() {
 
   const rosterAthletes = pickRandom(futsalPlayers, HOME_ROSTER_COUNT).map((player) => ({
     id: player.id,
+    slug: player.slug,
     name: player.nickname,
     number: player.number,
   }));

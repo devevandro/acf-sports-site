@@ -57,13 +57,15 @@ button {
 
 .components-scroll-reveal-section {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1), transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translate3d(0, 16px, 0);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  transition: opacity 900ms cubic-bezier(0.16, 1, 0.3, 1), transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .components-scroll-reveal-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -899,25 +901,18 @@ button {
 
 .components-competitions-content-tableWrap {
   overflow-x: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--cinza-claro) transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.components-competitions-content-tableWrap.components-competitions-content-tableWrapDragging {
+  cursor: grabbing;
 }
 
 .components-competitions-content-tableWrap::-webkit-scrollbar {
-  height: 6px;
-}
-
-.components-competitions-content-tableWrap::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.components-competitions-content-tableWrap::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  background: var(--cinza-claro);
-}
-
-.components-competitions-content-tableWrap::-webkit-scrollbar-thumb:hover {
-  background: #777777;
+  display: none;
 }
 
 .components-competitions-content-tableWrap table {
@@ -1476,10 +1471,9 @@ button {
   margin: 24px 0 0;
   color: #000000;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 600;
   line-height: 24px;
-  text-transform: uppercase;
 }
 
 .components-contact-content-whatsappButton {
@@ -3947,10 +3941,14 @@ button {
 
 .components-roster-section-athlete {
   position: relative;
+  display: block;
   width: min(256px, calc((100% - 160px) / 5));
   aspect-ratio: 256 / 448;
   flex: 0 0 auto;
-  transition: transform 220ms ease;
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .components-roster-section-athleteCard {
@@ -3960,7 +3958,7 @@ button {
 }
 
 .components-roster-section-athleteStroke {
-  transition: stroke 180ms ease, stroke-width 180ms ease;
+  transition: stroke 320ms cubic-bezier(0.22, 1, 0.36, 1), stroke-width 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .components-roster-section-athleteInfo {
@@ -3968,7 +3966,7 @@ button {
   inset: 0;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 180ms ease;
+  transition: opacity 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .components-roster-section-athleteName {
@@ -4000,16 +3998,19 @@ button {
   text-align: center;
 }
 
-.components-roster-section-athlete:hover {
+.components-roster-section-athlete:hover,
+.components-roster-section-athlete:active {
   transform: translateY(-6px);
 }
 
-.components-roster-section-athlete:hover .components-roster-section-athleteStroke {
+.components-roster-section-athlete:hover .components-roster-section-athleteStroke,
+.components-roster-section-athlete:active .components-roster-section-athleteStroke {
   stroke: #f5f5f5;
   stroke-width: 3;
 }
 
-.components-roster-section-athlete:hover .components-roster-section-athleteInfo {
+.components-roster-section-athlete:hover .components-roster-section-athleteInfo,
+.components-roster-section-athlete:active .components-roster-section-athleteInfo {
   opacity: 1;
 }
 
@@ -4027,11 +4028,14 @@ button {
 }
 
 .components-roster-section-athlete2:hover,
-.components-roster-section-athlete4:hover {
+.components-roster-section-athlete4:hover,
+.components-roster-section-athlete2:active,
+.components-roster-section-athlete4:active {
   transform: translateY(-22px);
 }
 
-.components-roster-section-athlete3:hover {
+.components-roster-section-athlete3:hover,
+.components-roster-section-athlete3:active {
   transform: translateY(-38px);
 }
 
@@ -4148,7 +4152,10 @@ button {
 
   .components-roster-section-athlete2:hover,
   .components-roster-section-athlete3:hover,
-  .components-roster-section-athlete4:hover {
+  .components-roster-section-athlete4:hover,
+  .components-roster-section-athlete2:active,
+  .components-roster-section-athlete3:active,
+  .components-roster-section-athlete4:active {
     transform: translateY(-6px);
   }
 
@@ -5883,6 +5890,7 @@ button {
     top: 7.6%;
     left: 10.5%;
     width: 60%;
+    margin-left: 12px;
   }
 
   .components-roster-player-detail-content-apelidoLabel {

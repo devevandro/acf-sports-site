@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState, type MouseEvent } from "react";
 import { Calendar, ChevronDown, Clock, MapPin, Trophy, X } from "lucide-react";
 import type { HomeCompetition } from "@/data/competitions";
 
@@ -67,6 +67,27 @@ export function CompetitionsContent({
   const [selectedCompId, setSelectedCompId] = useState<string | undefined>(competitions[0]?.id);
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [activeModalMatch, setActiveModalMatch] = useState<MatchDetail | null>(null);
+  const [isDraggingTable, setIsDraggingTable] = useState(false);
+  const tableWrapRef = useRef<HTMLDivElement>(null);
+  const dragStateRef = useRef({ startX: 0, startScrollLeft: 0 });
+
+  const handleTableDragStart = (event: MouseEvent<HTMLDivElement>) => {
+    const wrap = tableWrapRef.current;
+    if (!wrap) return;
+    dragStateRef.current = { startX: event.pageX, startScrollLeft: wrap.scrollLeft };
+    setIsDraggingTable(true);
+  };
+
+  const handleTableDragMove = (event: MouseEvent<HTMLDivElement>) => {
+    const wrap = tableWrapRef.current;
+    if (!wrap || !isDraggingTable) return;
+    const delta = event.pageX - dragStateRef.current.startX;
+    wrap.scrollLeft = dragStateRef.current.startScrollLeft - delta;
+  };
+
+  const handleTableDragEnd = () => {
+    setIsDraggingTable(false);
+  };
 
   const selectedComp = competitions.find((c) => c.id === selectedCompId) ?? competitions[0];
   const currentStandings = selectedComp?.standings ?? [];
@@ -239,7 +260,16 @@ export function CompetitionsContent({
                   )}
                 </div>
 
-                <div className="components-competitions-content-tableWrap">
+                <div
+                  className={`components-competitions-content-tableWrap ${
+                    isDraggingTable ? "components-competitions-content-tableWrapDragging" : ""
+                  }`}
+                  ref={tableWrapRef}
+                  onMouseDown={handleTableDragStart}
+                  onMouseMove={handleTableDragMove}
+                  onMouseUp={handleTableDragEnd}
+                  onMouseLeave={handleTableDragEnd}
+                >
                   <table>
                     <thead>
                       <tr>
