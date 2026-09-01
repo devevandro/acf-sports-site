@@ -3908,35 +3908,15 @@ button {
   }
 
   .components-plans-section-cards {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 0;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    padding-bottom: 4px;
-  }
-
-  .components-plans-section-cards::-webkit-scrollbar {
-    display: none;
+    flex-direction: column;
+    gap: 24px;
   }
 
   .components-plans-section-card,
   .components-plans-section-featuredCard {
-    flex: 0 0 100%;
     width: 100%;
     min-height: 0;
     padding: 22px 16px 28px;
-    margin-right: 16px;
-    scroll-snap-align: start;
-  }
-
-  .components-plans-section-card:last-child,
-  .components-plans-section-featuredCard:last-child {
-    margin-right: 0;
   }
 
   .components-plans-section-featuredCard h3 {
@@ -4841,34 +4821,15 @@ button {
   }
 
   .components-sponsors-page-content-planGrid {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 0;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    padding-bottom: 4px;
-  }
-
-  .components-sponsors-page-content-planGrid::-webkit-scrollbar {
-    display: none;
+    flex-direction: column;
+    gap: 24px;
   }
 
   .components-sponsors-page-content-planCard,
   .components-sponsors-page-content-featuredPlanCard {
-    flex: 0 0 100%;
     width: 100%;
     min-height: 0;
     padding: 22px 16px 28px;
-    margin-right: 16px;
-    scroll-snap-align: start;
-  }
-
-  .components-sponsors-page-content-planCard:last-child,
-  .components-sponsors-page-content-featuredPlanCard:last-child {
-    margin-right: 0;
   }
 
   .components-sponsors-page-content-logoSection {
