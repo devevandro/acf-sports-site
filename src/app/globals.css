@@ -5809,7 +5809,11 @@ button {
   display: flex;
   align-items: center;
   gap: 20px;
-  margin: 16px 0 0;
+  position: absolute;
+  z-index: 1;
+  left: 8.3%;
+  bottom: 16.8%;
+  margin: 0;
 }
 
 .components-roster-player-detail-content-socialsList img {
@@ -5852,6 +5856,11 @@ button {
   -webkit-text-stroke: 2px #a6cff5;
 }
 
+.components-roster-player-detail-content-hashtag {
+  font-size: 0.5em;
+  -webkit-text-stroke: 1.5px #a6cff5;
+}
+
 .components-roster-player-detail-content-quote {
   max-width: 800px;
   margin: 40px auto 0;
@@ -5888,10 +5897,6 @@ button {
     line-height: 20px;
     margin-top: 2px;
   }
-
-  .components-roster-player-detail-content-socialsList {
-    margin-top: 10px;
-  }
 }
 
 @media (max-width: 768px) {
@@ -5916,7 +5921,7 @@ button {
   .components-roster-player-detail-content-identity {
     top: 7.6%;
     left: 10.5%;
-    width: 60%;
+    width: 44%;
     margin-left: 12px;
   }
 
@@ -5924,12 +5929,12 @@ button {
     font-size: 13px;
   }
 
-  .components-roster-player-detail-content-nickNameBadge {
-    width: 120px;
+  .components-roster-player-detail-content-identity > img {
+    display: none;
   }
 
   .components-roster-player-detail-content-identity h2 {
-    margin-top: 2px;
+    margin-top: 0;
     font-size: 32px;
     line-height: 40px;
   }
@@ -5952,7 +5957,9 @@ button {
 
   .components-roster-player-detail-content-socialsList {
     gap: 16px;
-    margin-top: 20px;
+    left: 10.5%;
+    bottom: 11.9%;
+    margin-left: 12px;
   }
 
   .components-roster-player-detail-content-socialsList img {
@@ -5963,14 +5970,14 @@ button {
   .components-roster-player-detail-content-playerFigure {
     top: auto;
     left: auto;
-    right: 2.6%;
+    right: 4%;
     bottom: 11.9%;
-    width: 56.7%;
+    width: 34%;
     height: 52.1%;
   }
 
   .components-roster-player-detail-content-number {
-    right: 8%;
+    right: 20%;
     bottom: 11.9%;
     font-size: 48px;
   }
