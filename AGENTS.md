@@ -495,3 +495,9 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 - **`/contato`**: the "É só chamar a gente pelo whatsapp." text became an `<h3>` (was a `<p>`), dropping the trailing period; the "Seja um parceiro do ACF" band background (`.partnerBand`) switched to the solid color `#051829` instead of the `var(--azul-preto)` token.
 - Build (`npm run build`) validated.
 - Build (`npm run build`) validated.
+
+## Recent Changes ("Perfil do Atleta" number: `#` icon positioned next to the digits, stroke color matched to Figma)
+- The user had already added `<img src="/squad/hash_tag.svg">` inside the number `<p>` (`PlayerDetailContent.tsx`), but it rendered tiny/misaligned with no styling of its own. `.components-roster-player-detail-content-number` became `inline-flex` (`align-items: center`, `gap: 0.06em`) and gained a dedicated `.components-roster-player-detail-content-number img` rule, sized in `em` so it tracks the number's `font-size` at every breakpoint (130px desktop, 64px `≤1200px`, 48px `≤768px`).
+- **Icon size correction**: the first pass sized the icon by width (`width: 0.56em`), which produced a height ~68% shorter than the digits (measured live via `canvas.measureText`: "24" at 130px has `actualBoundingBoxAscent` ≈ 97.4px ≈ 0.75em). Compared against the user's Figma reference screenshot (where the `#` is nearly the same height as the digits), switched to sizing by height instead (`height: 0.74em; width: auto`), matching the digits' visual weight.
+- Digit stroke color (`-webkit-text-stroke`) changed from `rgba(245, 245, 245, 0.5)` to `#A6CFF5` per user request — matches `hash_tag.svg`'s own fill color, so "#24" reads as one cohesive mark.
+- Verified live via Claude in Chrome at 1440px and 1100px (130px/64px font-size); build (`npm run build`) validated.
