@@ -6,12 +6,15 @@ type AthleteCardProps = {
   variant?: "athlete" | "staff";
 };
 
+const fallbackPhoto = "/squad/player-placeholder.png";
+
 export function AthleteCard({ person, variant = "athlete" }: AthleteCardProps) {
   const isPlayer = "number" in person;
+  const photo = person.image || fallbackPhoto;
 
   const content = (
     <>
-      <img className="components-roster-athlete-card-image" src="/squad/player-placeholder.png" alt={person.name} />
+      <img className="components-roster-athlete-card-image" src={photo} alt={person.name} />
       <div className="components-roster-athlete-card-info">
         {isPlayer ? (
           <span className="components-roster-athlete-card-label">{person.number}</span>

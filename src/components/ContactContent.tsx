@@ -72,7 +72,7 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
             ficar mais perto da nossa equipe ou então veio apenas pela resenha, será um prazer falar
             com você. &ldquo;fique à vontade mas não mexa em nada&rdquo;.
           </p>
-          <p className="components-contact-content-freeCallout">É só chamar a gente pelo whatsapp.</p>
+          <h3 className="components-contact-content-freeCallout mt-4">É só chamar a gente pelo whatsapp</h3>
           <a
             className="components-contact-content-whatsappButton"
             href={`https://wa.me/${whatsappNumber}`}

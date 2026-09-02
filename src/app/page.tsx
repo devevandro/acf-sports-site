@@ -34,6 +34,7 @@ export default async function Home() {
     slug: player.slug,
     name: player.nickname,
     number: player.number,
+    image: player.image,
   }));
 
   return (

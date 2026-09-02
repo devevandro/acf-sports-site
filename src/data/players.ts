@@ -22,6 +22,7 @@ export type RosterPlayer = {
   dominantFoot: string | null;
   quote: string;
   socialLinks: SocialLink[];
+  image: string;
 };
 
 export type RosterPlayerCard = {
@@ -31,6 +32,7 @@ export type RosterPlayerCard = {
   nickname: string;
   number: string;
   positionLabel: string;
+  image: string;
 };
 
 export type RosterStaffMember = {
@@ -38,6 +40,7 @@ export type RosterStaffMember = {
   name: string;
   nickname: string;
   role: string;
+  image: string;
 };
 
 export type RosterPositionGroup = {
@@ -53,11 +56,12 @@ type PlayerRow = {
   number: string | null;
   position_futsal: string | null;
   position_campo: string | null;
-  modality: RosterCategory[];
+  modality: RosterCategory[] | string | null;
   birthday: string | Date | null;
   dominant_foot: string | null;
   quote: string | null;
   social_media: SocialLink[] | null;
+  image: string | null;
 };
 
 type StaffRow = {
@@ -65,6 +69,7 @@ type StaffRow = {
   name: string;
   nickname: string;
   function: string;
+  image: string | null;
 };
 
 const categoryLabels: Record<RosterCategory, string> = {
@@ -179,11 +184,25 @@ export function positionGroupLabelFor(position: string, category: RosterCategory
   return positionGroupOrderFor(category).find((group) => group.id === id)?.label ?? "Outros";
 }
 
+function parseModality(raw: RosterCategory[] | string | null): RosterCategory[] {
+  if (Array.isArray(raw)) return raw;
+  if (!raw) return [];
+
+  // The Neon serverless driver returns Postgres array columns of custom
+  // enum types as a literal string (e.g. "{futsal,campo}") instead of a
+  // parsed JS array, so unwrap it manually.
+  return raw
+    .replace(/^{|}$/g, "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter((value): value is RosterCategory => value === "futsal" || value === "campo");
+}
+
 const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
   try {
     const sql = getDb();
     const rows = (await sql`
-      SELECT id, name, nickname, number, position_futsal, position_campo, modality, birthday, dominant_foot, quote, social_media
+      SELECT id, name, nickname, number, position_futsal, position_campo, modality, birthday, dominant_foot, quote, social_media, image
       FROM players
       ORDER BY trim(name)
     `) as unknown as PlayerRow[];
@@ -197,7 +216,7 @@ const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
 
       const positionFutsal = row.position_futsal?.trim() ?? "";
       const positionCampo = row.position_campo?.trim() ?? "";
-      const categories = row.modality ?? [];
+      const categories = parseModality(row.modality);
 
       return {
         id: row.id,
@@ -213,6 +232,7 @@ const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
         dominantFoot: dominantFootLabel(row.dominant_foot),
         quote: row.quote?.trim() ?? "",
         socialLinks: (row.social_media ?? []).filter((link) => link.platform && link.url),
+        image: row.image?.trim() ?? "",
       };
     });
   } catch (error) {
@@ -252,6 +272,7 @@ export function groupPlayersByPosition(players: RosterPlayer[], category: Roster
         nickname: player.nickname,
         number: player.number,
         positionLabel: group.cardLabel,
+        image: player.image,
       })),
     };
   });
@@ -268,6 +289,7 @@ export function groupPlayersByPosition(players: RosterPlayer[], category: Roster
         nickname: player.nickname,
         number: player.number,
         positionLabel: "Outros",
+        image: player.image,
       })),
     });
   }
@@ -279,7 +301,7 @@ export const getStaffMembers = cache(async (): Promise<RosterStaffMember[]> => {
   try {
     const sql = getDb();
     const rows = (await sql`
-      SELECT id, name, nickname, function
+      SELECT id, name, nickname, function, image
       FROM staff_members
       ORDER BY created_at
     `) as unknown as StaffRow[];
@@ -289,6 +311,7 @@ export const getStaffMembers = cache(async (): Promise<RosterStaffMember[]> => {
       name: row.name.trim(),
       nickname: row.nickname.trim(),
       role: row.function,
+      image: row.image?.trim() ?? "",
     }));
   } catch (error) {
     console.error("Failed to fetch staff members from database", error);

@@ -9,6 +9,7 @@ export type HomeRosterAthlete = {
   slug: string;
   name: string;
   number: string;
+  image: string;
 };
 
 function buildSlides(athletes: HomeRosterAthlete[]): HomeRosterAthlete[][] {
@@ -62,7 +63,7 @@ function AthleteCard({ athlete, position }: { athlete: HomeRosterAthlete; positi
         <path d={cardPath} fill="#01121F" />
 
         <image
-          href="/squad/player.png"
+          href={athlete.image || "/squad/player.png"}
           width="256"
           height="448"
           preserveAspectRatio="xMidYMid slice"
