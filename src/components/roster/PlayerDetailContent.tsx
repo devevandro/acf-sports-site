@@ -7,7 +7,8 @@ type PlayerDetailContentProps = {
 
 const frameAsset = "/squad/player-profile.png";
 const frameAssetMobile = "/squad/player-profile-mob.png";
-const playerPhotoAsset = "/squad/jogador.jpg";
+const playerPhotoFallback = "/squad/player-line.png";
+const goalkeeperPhotoFallback = "/squad/goalkeeper.png";
 
 const socialIcons: Record<string, string> = {
   facebook: "/squad/facebook-azul.svg",
@@ -17,6 +18,11 @@ const socialIcons: Record<string, string> = {
 };
 
 export function PlayerDetailContent({ player }: PlayerDetailContentProps) {
+  const isGoalkeeper =
+    positionLabelFor(player.positionFutsal, "futsal") === "Goleiro" ||
+    positionLabelFor(player.positionCampo, "campo") === "Goleiro";
+  const playerPhotoAsset = player.image || (isGoalkeeper ? goalkeeperPhotoFallback : playerPhotoFallback);
+
   return (
     <section className="components-roster-player-detail-content-section" data-node-id="2394:20847" data-name="elenco-perfil-jogador">
       <div className="components-roster-player-detail-content-inner">
