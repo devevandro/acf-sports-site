@@ -7,13 +7,18 @@ import type { RosterPlayerCard, RosterStaffMember } from "@/data/players";
 type AthleteCardProps = {
   person: RosterPlayerCard | RosterStaffMember;
   variant?: "athlete" | "staff";
+  instagramUrl?: string;
 };
 
-const fallbackPhoto = "/squad/player-placeholder.png";
+const fallbackPlayerPhoto = "/squad/player-line.png";
+const fallbackGoalkeeperPhoto = "/squad/goalkeeper.png";
+const fallbackStaffPhoto = "/squad/player-placeholder.png";
 const REVEAL_TIMEOUT_MS = 2500;
 
-export function AthleteCard({ person, variant = "athlete" }: AthleteCardProps) {
+export function AthleteCard({ person, variant = "athlete", instagramUrl }: AthleteCardProps) {
   const isPlayer = "number" in person;
+  const isGoalkeeper = isPlayer && person.positionLabel === "Goleiro";
+  const fallbackPhoto = isPlayer ? (isGoalkeeper ? fallbackGoalkeeperPhoto : fallbackPlayerPhoto) : fallbackStaffPhoto;
   const photo = person.image || fallbackPhoto;
   const [revealed, setRevealed] = useState(false);
   const collapseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -43,7 +48,7 @@ export function AthleteCard({ person, variant = "athlete" }: AthleteCardProps) {
         {isPlayer ? (
           <span className="components-roster-athlete-card-label">{formatNumber(person.number)}</span>
         ) : (
-          <img className="components-roster-athlete-card-staffIcon" src="/header/symbol.png" alt="" aria-hidden="true" />
+          <img className="components-roster-athlete-card-staffIcon" src="/youtube-section/bull-logo.png" alt="" aria-hidden="true" />
         )}
         <div>
           <h3 className="components-roster-athlete-card-title">{person.nickname}</h3>
@@ -64,6 +69,23 @@ export function AthleteCard({ person, variant = "athlete" }: AthleteCardProps) {
       >
         {content}
       </Link>
+    );
+  }
+
+  if (instagramUrl) {
+    return (
+      <a
+        className={`components-roster-athlete-card-card components-roster-athlete-card-linkCard components-roster-athlete-card-staff${
+          revealed ? " components-roster-athlete-card-revealed" : ""
+        }`}
+        href={instagramUrl}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`Ver Instagram de ${person.name}`}
+        onClick={handleClick}
+      >
+        {content}
+      </a>
     );
   }
 
