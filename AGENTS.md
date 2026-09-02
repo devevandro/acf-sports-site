@@ -501,3 +501,8 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 - **Icon size correction**: the first pass sized the icon by width (`width: 0.56em`), which produced a height ~68% shorter than the digits (measured live via `canvas.measureText`: "24" at 130px has `actualBoundingBoxAscent` ≈ 97.4px ≈ 0.75em). Compared against the user's Figma reference screenshot (where the `#` is nearly the same height as the digits), switched to sizing by height instead (`height: 0.74em; width: auto`), matching the digits' visual weight.
 - Digit stroke color (`-webkit-text-stroke`) changed from `rgba(245, 245, 245, 0.5)` to `#A6CFF5` per user request — matches `hash_tag.svg`'s own fill color, so "#24" reads as one cohesive mark.
 - Verified live via Claude in Chrome at 1440px and 1100px (130px/64px font-size); build (`npm run build`) validated.
+
+## Recent Changes ("Perfil do Atleta" number: reverted from the `hash_tag.svg` image back to a CSS/text `#`)
+- The user found the `hash_tag.svg` icon (previous entry) too large/heavy compared to the Figma reference. `PlayerDetailContent.tsx` went back to rendering `#{formatNumber(player.number)}` as plain text inside the `<p>` (instead of `<img src="/squad/hash_tag.svg">` + text), so the `#` automatically shares the digits' font, size, and `-webkit-text-stroke` outline — no per-breakpoint sizing needed.
+- `globals.css`: removed the now-unused `.components-roster-player-detail-content-number img` rule and the `display:inline-flex`/`gap` on `.components-roster-player-detail-content-number` (not needed for plain text); kept the `#A6CFF5` stroke color.
+- Build (`npm run build`) validated.

@@ -505,3 +505,8 @@ npm run build
   - **Ajuste de tamanho do ícone**: a primeira tentativa dimensionava o ícone pela largura (`width: 0.56em`), o que resultava numa altura ~68% menor que a dos dígitos (medido via `canvas.measureText` no navegador: dígitos "24" a 130px têm `actualBoundingBoxAscent` ≈ 97.4px ≈ 0.75em). Comparando com a referência do Figma (print do usuário, onde o `#` tem praticamente a mesma altura dos números), trocado para dimensionar pela altura (`height: 0.74em; width: auto`), deixando o ícone com porte visual equivalente aos dígitos.
   - Cor da borda dos dígitos (`-webkit-text-stroke`) trocada de `rgba(245, 245, 245, 0.5)` para `#A6CFF5` (a pedido do usuário — coincide com a cor de preenchimento do próprio `hash_tag.svg`, deixando "#24" visualmente coeso).
   - Verificado ao vivo via Claude in Chrome em 1440px e 1100px (font-size 130px/64px); build (`npm run build`) validado.
+
+- **Número do "Perfil do Atleta": revertido de imagem (`hash_tag.svg`) para o `#` feito por texto/CSS**:
+  - O usuário achou o resultado do ícone `hash_tag.svg` (item anterior) grande/pesado demais comparado à referência do Figma. `PlayerDetailContent.tsx` voltou a renderizar `#{formatNumber(player.number)}` como texto simples dentro do `<p>` (em vez do `<img src="/squad/hash_tag.svg">` + texto), então o `#` usa a mesma fonte/tamanho/`-webkit-text-stroke` outline dos dígitos automaticamente, sem precisar de dimensionamento manual por breakpoint.
+  - `globals.css`: removida a regra `.components-roster-player-detail-content-number img` (não usada mais) e o `display:inline-flex`/`gap` de `.components-roster-player-detail-content-number` (não necessário pra texto simples); a cor `#A6CFF5` do `-webkit-text-stroke` foi mantida.
+  - Build (`npm run build`) validado.

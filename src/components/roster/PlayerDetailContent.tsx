@@ -70,10 +70,7 @@ export function PlayerDetailContent({ player }: PlayerDetailContentProps) {
             <img src={playerPhotoAsset} alt={player.name} />
           </div>
 
-          <p className="components-roster-player-detail-content-number">
-            <img src="/squad/hash_tag.svg" alt="Número" />
-            {formatNumber(player.number)}
-          </p>
+          <p className="components-roster-player-detail-content-number">#{formatNumber(player.number)}</p>
         </article>
 
         {player.quote ? <blockquote className="components-roster-player-detail-content-quote">“{player.quote}”</blockquote> : null}

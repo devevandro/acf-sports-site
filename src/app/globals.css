@@ -5837,9 +5837,6 @@ button {
 }
 
 .components-roster-player-detail-content-number {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.06em;
   position: absolute;
   z-index: 1;
   right: 17.6%;
@@ -5853,12 +5850,6 @@ button {
   line-height: 1;
   letter-spacing: 0;
   -webkit-text-stroke: 2px #a6cff5;
-}
-
-.components-roster-player-detail-content-number img {
-  display: block;
-  width: auto;
-  height: 0.74em;
 }
 
 .components-roster-player-detail-content-quote {
