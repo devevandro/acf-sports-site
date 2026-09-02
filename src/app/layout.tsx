@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Outfit, Poppins, Rampart_One, Roboto, Rubik } from "next/font/google";
+import { Montserrat, News_Cycle, Outfit, Poppins, Rampart_One, Roboto, Rubik } from "next/font/google";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -38,6 +38,12 @@ const rampartOne = Rampart_One({
   variable: "--font-rampart-one",
 });
 
+const newsCycle = News_Cycle({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-news-cycle",
+});
+
 export const metadata: Metadata = {
   title: "ACF Sports | Site Oficial",
   description: "Site Oficial do ACF Sports. Acompanhe as notícias, jogos, tabelas, elenco de campo e futsal, planos de patrocínio e história do clube de Cornélio Procópio.",
@@ -59,7 +65,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${montserrat.variable} ${outfit.variable} ${rubik.variable} ${roboto.variable} ${poppins.variable} ${rampartOne.variable}`}
+      className={`${montserrat.variable} ${outfit.variable} ${rubik.variable} ${roboto.variable} ${poppins.variable} ${rampartOne.variable} ${newsCycle.variable}`}
     >
       <body>{children}</body>
     </html>
