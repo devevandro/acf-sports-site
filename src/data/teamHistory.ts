@@ -26,7 +26,7 @@ const FALLBACK_TEAM_HISTORY: TeamHistory = {
   content: `
     <p>Fundado no dia 16 de janeiro de 2002, inicialmente como equipe de futsal apenas, com o nome de Juventus Futsal, 3 garotos que tinham o sonho de ter a sua própria equipe e assim poder disputar campeonatos.</p>
     <p>No ano de 2004 surgiu também a equipe de campo, mas como já existia uma equipe com o nome de Juventus na cidade resolveram colocar o nome do time de futebol de campo de ACF, no mesmo ano por sempre serem confundidos com a equipe do Juventus, resolveram mudar o nome da equipe para Ajax, porém logo foi mudado para ACF também e a partir deste ano passamos a se chamar ACF tanto no futsal quanto no futebol de campo.</p>
-    <p>A letras ACF nada mais é que uma homenagem que fizemos ao grande Tonhão do Cascavel (Antônio Carlos Ferreira), dai o nome da equipe.</p>
+    <p>As letras ACF nada mais são que uma homenagem que fizemos ao grande Tonhão do Cascavel (Antônio Carlos Ferreira), daí o nome da equipe.</p>
   `,
   symbol: "",
   mascot: "",

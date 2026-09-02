@@ -55,6 +55,27 @@ button {
   font: inherit;
 }
 
+.components-scroll-reveal-section {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  transition: opacity 900ms cubic-bezier(0.16, 1, 0.3, 1), transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.components-scroll-reveal-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .components-scroll-reveal-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .app-clube-competicoes-page-page {
   min-height: 100vh;
   background: var(--azul-preto);
@@ -880,6 +901,18 @@ button {
 
 .components-competitions-content-tableWrap {
   overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.components-competitions-content-tableWrap.components-competitions-content-tableWrapDragging {
+  cursor: grabbing;
+}
+
+.components-competitions-content-tableWrap::-webkit-scrollbar {
+  display: none;
 }
 
 .components-competitions-content-tableWrap table {
@@ -914,10 +947,13 @@ button {
 
 .components-competitions-content-tableWrap td:first-child {
   width: 165px;
+  max-width: 165px;
+  overflow: hidden;
   color: #050505;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-weight: 500;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .components-competitions-content-tableWrap td:first-child span {
@@ -1018,12 +1054,17 @@ button {
     height: 44px;
   }
 
-  .components-competitions-content-team span {
+  .components-competitions-content-team span:not(.components-competitions-content-teamLogo) {
     display: block;
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+
+  .components-competitions-content-teamLogo {
+    justify-content: center;
+    width: 100%;
   }
 
   .components-competitions-content-matchMeta {
@@ -1081,6 +1122,25 @@ button {
   .components-competitions-content-tableWrap {
     margin: 0 -16px;
     padding: 0 16px;
+  }
+
+  .components-competitions-content-tableWrap table {
+    min-width: 0;
+    font-size: 12px;
+  }
+
+  .components-competitions-content-tableWrap th,
+  .components-competitions-content-tableWrap td {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .components-competitions-content-tableWrap td:first-child {
+    width: auto;
+    max-width: 92px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .components-competitions-content-legend {
@@ -1354,7 +1414,18 @@ button {
   gap: 8px;
 }
 
-.components-contact-content-infoCardHead svg {
+.components-contact-content-infoCardIcon {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  background: rgba(255, 50, 3, 0.1);
+}
+
+.components-contact-content-infoCardIcon svg {
   width: 20px;
   height: 20px;
   flex: 0 0 auto;
@@ -1374,9 +1445,9 @@ button {
   margin: 8px 0 0;
   color: #4e4e4e;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 22px;
+  line-height: 24px;
   white-space: pre-line;
 }
 
@@ -1391,11 +1462,16 @@ button {
   max-width: 760px;
 }
 
+.components-contact-content-freeBlock h3 {
+  font-weight: 600;
+  line-height: 24px;
+}
+
 .components-contact-content-freeCallout {
   margin: 24px 0 0;
   color: #000000;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 600;
   line-height: 24px;
 }
@@ -1406,8 +1482,8 @@ button {
   gap: 8px;
   margin-top: 24px;
   padding: 14px 32px;
-  border-radius: 10px;
-  background: linear-gradient(165deg, #ff3203 0%, #8f301d 99%);
+  border-radius: 8px;
+  background: linear-gradient(165deg, #ff7a5c 0%, #8f1d00 99%);
   color: #ffffff;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
@@ -1418,9 +1494,15 @@ button {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.components-contact-content-whatsappButton svg {
+.components-contact-content-whatsappButton svg,
+.components-contact-content-whatsappButton img {
   width: 20px;
   height: 20px;
+  object-fit: contain;
+}
+
+.components-contact-content-whatsappButton img {
+  filter: brightness(0) invert(1);
 }
 
 .components-contact-content-whatsappButton:hover {
@@ -1429,7 +1511,7 @@ button {
 }
 
 .components-contact-content-partnerBand {
-  background: var(--azul-preto);
+  background: #051829;
   padding: 80px 0;
 }
 
@@ -1445,6 +1527,7 @@ button {
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;
+  text-transform: uppercase;
 }
 
 .components-contact-content-partnerIntro p {
@@ -1458,113 +1541,12 @@ button {
 }
 
 .components-contact-content-partnerGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px;
-  width: min(1440px, calc(100% - 40px));
-  margin: 40px auto 0;
-}
-
-.components-contact-content-partnerCard {
   display: flex;
-  flex-direction: column;
-  padding: 32px 40px;
-  border-radius: 8px;
-  background: #fdfdfd;
-  color: #4e4e4e;
-  box-shadow: 0 0 2px rgba(102, 102, 102, 0.16);
-  transition: transform 220ms ease, box-shadow 220ms ease;
-}
-
-.components-contact-content-partnerCard:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 18px 34px -18px rgba(245, 99, 69, 0.4), 0 0 18px -4px rgba(37, 114, 184, 0.3);
-}
-
-.components-contact-content-partnerCard h3 {
-  margin: 0 0 16px;
-  color: #661400;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 32px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.components-contact-content-partnerDivider {
-  display: block;
-  width: 100%;
-  height: 1px;
-  margin: 0 0 32px;
-  background: #e7e7e7;
-}
-
-.components-contact-content-partnerCard ul {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 24px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.components-contact-content-partnerCard li {
-  position: relative;
-  padding-left: 24px;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 26px;
-}
-
-.components-contact-content-partnerCard li::before {
-  position: absolute;
-  top: 8px;
-  left: 0;
-  width: 10px;
-  height: 10px;
-  border: 2px solid #f56345;
-  border-radius: 50%;
-  content: "";
-}
-
-.components-contact-content-partnerPrice {
-  margin: 28px 0 24px;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  line-height: 32px;
-}
-
-.components-contact-content-partnerPriceAmount {
-  color: #1d598f;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.components-contact-content-partnerPricePeriod {
-  color: #4e4e4e;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.components-contact-content-partnerCard a {
-  display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  min-height: 40px;
-  padding: 8px 20px;
-  border-radius: 10px;
-  background: linear-gradient(165deg, #ff7a5c 0%, #8f1d00 100%);
-  color: #f5f5f5;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  white-space: nowrap;
+  gap: 40px;
+  width: min(1160px, calc(100% - 40px));
+  margin: 40px auto 0;
 }
 
 @media (max-width: 992px) {
@@ -1573,8 +1555,8 @@ button {
   }
 
   .components-contact-content-partnerGrid {
-    grid-template-columns: 1fr;
-    max-width: 480px;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -1622,12 +1604,8 @@ button {
 
   .components-contact-content-partnerGrid {
     width: min(330px, calc(100% - 32px));
-    grid-template-columns: 1fr;
-    max-width: none;
-  }
-
-  .components-contact-content-partnerCard {
-    padding: 28px 24px;
+    flex-direction: column;
+    gap: 24px;
   }
 }
 
@@ -2187,6 +2165,7 @@ button {
   }
 
   .components-hero-news-ctaButton {
+    margin-bottom: 60px;
     padding: 12px 24px;
     font-size: 15px;
     line-height: 18px;
@@ -3673,7 +3652,7 @@ button {
 
 .components-plans-section-cards {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 40px;
 }
@@ -3682,10 +3661,10 @@ button {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 340px;
-  height: 440px;
-  padding: 24px 16px 32px;
-  border-radius: 8px;
+  width: 560px;
+  min-height: 480px;
+  padding: 32px 40px;
+  border-radius: 16px;
   background: #07243d;
   box-shadow: 0 0 16px -4px rgba(37, 114, 184, 0.32);
   transition:
@@ -3699,12 +3678,15 @@ button {
 }
 
 .components-plans-section-featuredCard {
-  width: 400px;
-  height: 516px;
-  padding: 28px 16px 40px;
-  background: #e1ebf5;
-  color: #121212;
-  box-shadow: 0 0 16px -4px rgba(81, 77, 76, 0.32);
+  min-height: 524px;
+  margin-top: -22px;
+  background: #07243d;
+  color: #f5f5f5;
+  box-shadow: 0 0 16px -4px rgba(255, 122, 92, 0.32);
+}
+
+.components-plans-section-featuredCard:hover {
+  transform: translateY(-32px);
 }
 
 .components-plans-section-cardHeader {
@@ -3712,23 +3694,21 @@ button {
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 
 .components-plans-section-card h3 {
   margin: 0;
-  color: #b3b3b3;
+  color: var(--cinza-medio);
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 600;
-  line-height: 32px;
+  line-height: 48px;
   text-transform: uppercase;
 }
 
 .components-plans-section-featuredCard h3 {
-  color: #661400;
-  font-size: 32px;
-  line-height: 48px;
+  color: #ff7a5c;
 }
 
 .components-plans-section-price {
@@ -3745,29 +3725,27 @@ button {
   line-height: 40px;
 }
 
-.components-plans-section-featuredCard .components-plans-section-price strong {
-  color: #661400;
-  line-height: 48px;
-}
-
 .components-plans-section-price span {
   margin-top: -8px;
-  color: #b3b3b3;
+  color: var(--cinza-medio);
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.16px;
 }
 
-.components-plans-section-featuredCard .components-plans-section-price span {
-  color: #4e4e4e;
+.components-plans-section-divider {
+  height: 1px;
+  margin: 0 0 24px;
+  border: 0;
+  background: rgba(245, 245, 245, 0.14);
 }
 
 .components-plans-section-benefits {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 14px;
+  gap: 20px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -3775,29 +3753,38 @@ button {
 
 .components-plans-section-benefits li {
   position: relative;
-  padding-left: 18px;
+  padding-left: 22px;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 24px;
 }
 
 .components-plans-section-benefits li::before {
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 0;
-  color: #ff3203;
-  content: "✓";
+  width: 14px;
+  height: 18px;
+  background-image: url("/sponsor/bull-gray-icon.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+}
+
+.components-plans-section-featuredCard .components-plans-section-benefits li::before {
+  background-image: url("/sponsor/bull-orange-icon.svg");
 }
 
 .components-plans-section-button {
   display: inline-flex;
+  align-self: flex-start;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: 200px;
-  height: 56px;
-  margin-top: auto;
+  margin-top: 24px;
+  padding: 16px 32px;
   border-radius: 8px;
   background: #777777;
   color: #f5f5f5 !important;
@@ -3806,6 +3793,7 @@ button {
   font-weight: 600;
   line-height: 24px;
   text-transform: uppercase;
+  white-space: nowrap;
   transition:
     transform 180ms ease,
     background 180ms ease,
@@ -3818,7 +3806,6 @@ button {
 }
 
 .components-plans-section-featuredButton {
-  width: 200px;
   background: linear-gradient(168deg, #ff7a5c 0%, #8f1d00 99%);
 }
 
@@ -3832,13 +3819,18 @@ button {
 @media (max-width: 1200px) {
   .components-plans-section-cards {
     flex-direction: column;
+    align-items: center;
   }
 
   .components-plans-section-card,
   .components-plans-section-featuredCard {
-    width: min(400px, 100%);
-    height: auto;
-    min-height: 440px;
+    width: min(560px, 100%);
+    min-height: 0;
+    margin-top: 0;
+  }
+
+  .components-plans-section-featuredCard:hover {
+    transform: translateY(-10px);
   }
 }
 
@@ -3854,35 +3846,15 @@ button {
   }
 
   .components-plans-section-cards {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 0;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    padding-bottom: 4px;
-  }
-
-  .components-plans-section-cards::-webkit-scrollbar {
-    display: none;
+    flex-direction: column;
+    gap: 24px;
   }
 
   .components-plans-section-card,
   .components-plans-section-featuredCard {
-    flex: 0 0 100%;
     width: 100%;
     min-height: 0;
     padding: 22px 16px 28px;
-    margin-right: 16px;
-    scroll-snap-align: start;
-  }
-
-  .components-plans-section-card:last-child,
-  .components-plans-section-featuredCard:last-child {
-    margin-right: 0;
   }
 
   .components-plans-section-featuredCard h3 {
@@ -3969,10 +3941,14 @@ button {
 
 .components-roster-section-athlete {
   position: relative;
+  display: block;
   width: min(256px, calc((100% - 160px) / 5));
   aspect-ratio: 256 / 448;
   flex: 0 0 auto;
-  transition: transform 220ms ease;
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .components-roster-section-athleteCard {
@@ -3982,7 +3958,7 @@ button {
 }
 
 .components-roster-section-athleteStroke {
-  transition: stroke 180ms ease, stroke-width 180ms ease;
+  transition: stroke 460ms cubic-bezier(0.22, 1, 0.36, 1), stroke-width 460ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .components-roster-section-athleteInfo {
@@ -3990,49 +3966,64 @@ button {
   inset: 0;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 180ms ease;
+  transform: scale(0.8);
+  transform-origin: center;
+  transition: opacity 460ms cubic-bezier(0.22, 1, 0.36, 1), transform 460ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .components-roster-section-athleteName {
   position: absolute;
-  top: 20px;
-  left: 22px;
+  top: 16px;
+  left: 16px;
   color: #f5f5f5;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 40px;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 52.39px;
   font-weight: 500;
-  line-height: 1;
+  line-height: 57px;
+  letter-spacing: 0.08em;
+  -webkit-text-stroke: 1.31px rgba(255, 50, 3, 0.13);
   writing-mode: vertical-rl;
   transform: rotate(180deg);
 }
 
 .components-roster-section-athleteNumber {
   position: absolute;
-  top: 24px;
-  right: 10px;
-  min-width: 52px;
-  padding: 4px 6px;
-  border-radius: 4px;
+  top: 0;
+  right: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 80px;
+  border-radius: 0 0 0 16px;
   background: #f5f5f5;
-  color: #01121f;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 36px;
-  font-weight: 800;
-  line-height: 1;
+  color: #020c14;
+  font-family: var(--font-oleo-script), var(--font-news-cycle), var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 48px;
+  letter-spacing: 0;
   text-align: center;
 }
 
-.components-roster-section-athlete:hover {
+.components-roster-section-athlete:hover,
+.components-roster-section-athlete:active,
+.components-roster-section-athlete.components-roster-section-athleteRevealed {
   transform: translateY(-6px);
 }
 
-.components-roster-section-athlete:hover .components-roster-section-athleteStroke {
-  stroke: #f5f5f5;
+.components-roster-section-athlete:hover .components-roster-section-athleteStroke,
+.components-roster-section-athlete:active .components-roster-section-athleteStroke,
+.components-roster-section-athlete.components-roster-section-athleteRevealed .components-roster-section-athleteStroke {
+  stroke: #ffbdad;
   stroke-width: 3;
 }
 
-.components-roster-section-athlete:hover .components-roster-section-athleteInfo {
+.components-roster-section-athlete:hover .components-roster-section-athleteInfo,
+.components-roster-section-athlete:active .components-roster-section-athleteInfo,
+.components-roster-section-athlete.components-roster-section-athleteRevealed .components-roster-section-athleteInfo {
   opacity: 1;
+  transform: scale(1);
 }
 
 .components-roster-section-athleteCard image {
@@ -4049,11 +4040,14 @@ button {
 }
 
 .components-roster-section-athlete2:hover,
-.components-roster-section-athlete4:hover {
+.components-roster-section-athlete4:hover,
+.components-roster-section-athlete2:active,
+.components-roster-section-athlete4:active {
   transform: translateY(-22px);
 }
 
-.components-roster-section-athlete3:hover {
+.components-roster-section-athlete3:hover,
+.components-roster-section-athlete3:active {
   transform: translateY(-38px);
 }
 
@@ -4094,6 +4088,7 @@ button {
   .components-roster-section-athletes {
     justify-content: flex-start;
     overflow-x: auto;
+    padding-top: 40px;
     padding-bottom: 12px;
   }
 
@@ -4170,7 +4165,10 @@ button {
 
   .components-roster-section-athlete2:hover,
   .components-roster-section-athlete3:hover,
-  .components-roster-section-athlete4:hover {
+  .components-roster-section-athlete4:hover,
+  .components-roster-section-athlete2:active,
+  .components-roster-section-athlete3:active,
+  .components-roster-section-athlete4:active {
     transform: translateY(-6px);
   }
 
@@ -4535,120 +4533,160 @@ button {
 }
 
 .components-sponsors-page-content-planGrid {
-  display: grid;
-  grid-template-columns: 340px 400px 340px;
-  gap: 40px;
+  display: flex;
+  align-items: flex-start;
   justify-content: center;
-  align-items: center;
+  gap: 40px;
 }
 
-.components-sponsors-page-content-planCard {
+.components-sponsor-plan-card-card {
+  position: relative;
   display: flex;
-  min-height: 566px;
+  width: 560px;
+  min-height: 480px;
   flex-direction: column;
   padding: 32px 40px;
-  border-radius: 8px;
-  background: #fdfdfd;
-  color: #4e4e4e;
-  box-shadow: 0 0 2px rgba(102, 102, 102, 0.16);
+  border-radius: 16px;
+  background: #07243d;
+  color: #f5f5f5;
+  box-shadow: 0 0 16px -4px rgba(37, 114, 184, 0.32);
   transition:
     transform 220ms ease,
     box-shadow 220ms ease;
 }
 
-.components-sponsors-page-content-planCard:hover {
+.components-sponsor-plan-card-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 18px 34px -18px rgba(245, 99, 69, 0.4), 0 0 18px -4px rgba(37, 114, 184, 0.3);
 }
 
-.components-sponsors-page-content-featuredPlanCard {
-  min-height: 720px;
-  padding: 40px 48px;
+.components-sponsor-plan-card-featured {
+  min-height: 524px;
+  margin-top: -22px;
+  box-shadow: 0 0 16px -4px rgba(255, 122, 92, 0.32);
 }
 
-.components-sponsors-page-content-planCard h3 {
-  margin: 0 0 16px;
-  color: #661400;
+.components-sponsor-plan-card-featured:hover {
+  transform: translateY(-32px);
+}
+
+.components-sponsor-plan-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.components-sponsor-plan-card-card h3 {
+  margin: 0;
+  color: var(--cinza-medio);
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 600;
-  line-height: 32px;
-  text-align: center;
+  line-height: 48px;
   text-transform: uppercase;
 }
 
-.components-sponsors-page-content-planDivider {
+.components-sponsor-plan-card-featured h3 {
+  color: #ff7a5c;
+}
+
+.components-sponsor-plan-card-divider {
   display: block;
   width: 100%;
   height: 1px;
-  margin: 0 0 32px;
-  background: #e7e7e7;
+  margin: 24px 0;
+  background: rgba(245, 245, 245, 0.14);
 }
 
-.components-sponsors-page-content-planCard ul {
+.components-sponsor-plan-card-card ul {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.components-sponsors-page-content-planCard li {
+.components-sponsor-plan-card-card li {
   position: relative;
-  padding-left: 24px;
+  padding-left: 22px;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 18px;
-  font-weight: 400;
-  line-height: 26px;
+  font-weight: 500;
+  line-height: 24px;
 }
 
-.components-sponsors-page-content-planCard li::before {
+.components-sponsor-plan-card-card li::before {
   position: absolute;
-  top: 8px;
+  top: 2px;
   left: 0;
-  width: 10px;
-  height: 10px;
-  border: 2px solid #f56345;
-  border-radius: 50%;
+  width: 14px;
+  height: 18px;
+  background-image: url("/sponsor/bull-gray-icon.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
   content: "";
 }
 
-.components-sponsors-page-content-planPrice {
-  margin: 28px 0 24px;
+.components-sponsor-plan-card-featured li::before {
+  background-image: url("/sponsor/bull-orange-icon.svg");
+}
+
+.components-sponsor-plan-card-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  line-height: 32px;
 }
 
-.components-sponsors-page-content-planPriceAmount {
-  color: #1d598f;
-  font-size: 24px;
-  font-weight: 700;
+.components-sponsor-plan-card-priceAmount {
+  color: #fdfdfd;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
 }
 
-.components-sponsors-page-content-planPricePeriod {
-  color: #4e4e4e;
+.components-sponsor-plan-card-pricePeriod {
+  margin-top: -8px;
+  color: var(--cinza-medio);
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 16px;
-  font-weight: 400;
+  line-height: 24px;
 }
 
-.components-sponsors-page-content-planCard a {
+.components-sponsor-plan-card-card a {
   display: inline-flex;
+  align-self: flex-start;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
-  padding: 8px 20px;
-  border-radius: 10px;
-  background: linear-gradient(165deg, #ff7a5c 0%, #8f1d00 100%);
+  gap: 8px;
+  margin-top: 24px;
+  padding: 16px 32px;
+  border-radius: 8px;
+  background: #777777;
   color: #f5f5f5;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
-  line-height: 20px;
+  line-height: 24px;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.components-sponsor-plan-card-card a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.22);
+}
+
+.components-sponsor-plan-card-featured a {
+  background: linear-gradient(168deg, #ff7a5c 0%, #8f1d00 99%);
 }
 
 .components-sponsors-page-content-logoSection {
@@ -4715,6 +4753,16 @@ button {
   object-fit: cover;
 }
 
+.components-sponsors-page-content-masterLogoCard {
+  padding: 24px;
+}
+
+.components-sponsors-page-content-masterLogoCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .components-sponsors-page-content-darkLogo img {
   width: 90%;
   height: 98%;
@@ -4723,13 +4771,19 @@ button {
 
 @media (max-width: 1200px) {
   .components-sponsors-page-content-planGrid {
-    grid-template-columns: 1fr;
-    justify-items: center;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .components-sponsors-page-content-planCard {
-    width: min(448px, 100%);
+  .components-sponsor-plan-card-card,
+  .components-sponsor-plan-card-featured {
+    width: min(560px, 100%);
     min-height: 0;
+    margin-top: 0;
+  }
+
+  .components-sponsor-plan-card-featured:hover {
+    transform: translateY(-10px);
   }
 }
 
@@ -4750,33 +4804,15 @@ button {
   }
 
   .components-sponsors-page-content-planGrid {
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: min(85%, 320px);
-    justify-items: stretch;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 8px;
-    -webkit-overflow-scrolling: touch;
+    flex-direction: column;
+    gap: 24px;
   }
 
-  .components-sponsors-page-content-planCard {
+  .components-sponsor-plan-card-card,
+  .components-sponsor-plan-card-featured {
     width: 100%;
-    scroll-snap-align: center;
-    padding: 28px 24px;
-  }
-
-  .components-sponsors-page-content-planCard h3 {
-    margin-bottom: 16px;
-  }
-
-  .components-sponsors-page-content-planDivider {
-    margin-bottom: 24px;
-  }
-
-  .components-sponsors-page-content-planCard li {
-    font-size: 16px;
-    line-height: 26px;
+    min-height: 0;
+    padding: 22px 16px 28px;
   }
 
   .components-sponsors-page-content-logoSection {
@@ -5108,6 +5144,25 @@ button {
   max-height: 280px;
   overflow-y: auto;
   overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cinza-claro) transparent;
+}
+
+.components-standings-panel-tableScroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.components-standings-panel-tableScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.components-standings-panel-tableScroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--cinza-claro);
+}
+
+.components-standings-panel-tableScroll::-webkit-scrollbar-thumb:hover {
+  background: #777777;
 }
 
 .components-standings-panel-table {
@@ -5488,6 +5543,14 @@ button {
   clip-path: path(
     "M 136 0 L 248 0 Q 256 0 256 8 L 256 288 Q 256 293 252 296 L 220 316 Q 214 320 207 320 L 8 320 Q 0 320 0 312 L 0 88 Q 0 83 4 80 L 128 4 Q 132 0 136 0 Z"
   );
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.components-roster-athlete-card-card:hover,
+.components-roster-athlete-card-card:focus-visible,
+.components-roster-athlete-card-card.components-roster-athlete-card-revealed {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
 }
 
 .components-roster-athlete-card-linkCard {
@@ -5512,23 +5575,29 @@ button {
   z-index: 1;
 }
 
-.components-roster-athlete-card-image {
+.components-roster-athlete-card-imageWrap {
   position: absolute;
   z-index: 1;
   inset: var(--border-gap);
-  width: calc(100% - (var(--border-gap) * 2));
-  height: calc(100% - (var(--border-gap) * 2));
-  object-fit: cover;
-  object-position: center;
+  overflow: hidden;
   clip-path: path(
     "M 136 0 L 232 0 Q 240 0 240 8 L 240 280 Q 240 285 236 288 L 211 300 Q 207 304 201 304 L 8 304 Q 0 304 0 296 L 0 88 Q 0 83 4 80 L 128 4 Q 132 0 136 0 Z"
   );
-  transition: transform 180ms ease;
+}
+
+.components-roster-athlete-card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .components-roster-athlete-card-card:hover .components-roster-athlete-card-image,
-.components-roster-athlete-card-card:focus-visible .components-roster-athlete-card-image {
-  transform: scale(1.04);
+.components-roster-athlete-card-card:focus-visible .components-roster-athlete-card-image,
+.components-roster-athlete-card-card.components-roster-athlete-card-revealed .components-roster-athlete-card-image {
+  transform: scale(1.06);
 }
 
 .components-roster-athlete-card-card::after {
@@ -5537,22 +5606,23 @@ button {
   inset: var(--border-gap);
   background: linear-gradient(
     to top,
-    rgba(2, 12, 20, 0.94) 0%,
-    rgba(2, 12, 20, 0.6) 42%,
-    rgba(2, 12, 20, 0) 100%
+    rgba(255, 50, 3, 0.94) 0%,
+    rgba(255, 50, 3, 0.6) 42%,
+    rgba(255, 50, 3, 0) 100%
   );
   clip-path: path(
     "M 136 0 L 232 0 Q 240 0 240 8 L 240 280 Q 240 285 236 288 L 211 300 Q 207 304 201 304 L 8 304 Q 0 304 0 296 L 0 88 Q 0 83 4 80 L 128 4 Q 132 0 136 0 Z"
   );
   content: "";
   opacity: 0;
-  transition: opacity 200ms ease;
+  transition: opacity 380ms cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
 }
 
 .components-roster-athlete-card-card:hover::after,
 .components-roster-athlete-card-card:focus-visible::after,
-.components-roster-athlete-card-card:active::after {
+.components-roster-athlete-card-card:active::after,
+.components-roster-athlete-card-card.components-roster-athlete-card-revealed::after {
   opacity: 1;
 }
 
@@ -5561,34 +5631,36 @@ button {
   z-index: 2;
   display: flex;
   align-items: flex-end;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
   padding: 0 2px 4px;
   opacity: 0;
-  transition: opacity 200ms ease;
+  transform: translateY(10px);
+  transition: opacity 380ms cubic-bezier(0.22, 1, 0.36, 1), transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
 }
 
 .components-roster-athlete-card-card:hover .components-roster-athlete-card-info,
 .components-roster-athlete-card-card:focus-visible .components-roster-athlete-card-info,
-.components-roster-athlete-card-card:active .components-roster-athlete-card-info {
+.components-roster-athlete-card-card:active .components-roster-athlete-card-info,
+.components-roster-athlete-card-card.components-roster-athlete-card-revealed .components-roster-athlete-card-info {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .components-roster-athlete-card-label {
   display: flex;
   width: fit-content;
   flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #dfe7f3;
-  font-size: 12px;
+  align-items: flex-end;
+  color: transparent;
+  font-family: var(--font-news-cycle), var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 64px;
   font-weight: 700;
+  font-style: italic;
   line-height: 1;
   letter-spacing: 0;
+  -webkit-text-stroke: 2px #f5f5f5;
 }
 
 .components-roster-athlete-card-staffIcon {
@@ -5602,11 +5674,11 @@ button {
   display: -webkit-box;
   overflow: hidden;
   margin: 0;
-  color: #f4f5f7;
+  color: #f5f5f5;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
   font-size: 24px;
-  font-weight: 700;
-  line-height: 1.15;
+  font-weight: 500;
+  line-height: 32px;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -5614,10 +5686,13 @@ button {
 .components-roster-athlete-card-text {
   display: -webkit-box;
   overflow: hidden;
-  margin: 2px 0 0;
-  color: #a9b3c1;
-  font-size: 14px;
-  line-height: 1.5;
+  margin: 0;
+  color: #777777;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.015em;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 }
@@ -5646,7 +5721,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 0 40px;
+  width: min(1160px, 100%);
+  margin: 0 auto 40px;
 }
 
 .components-roster-player-detail-content-toolbar h2 {
@@ -5704,6 +5780,12 @@ button {
   text-transform: uppercase;
 }
 
+.components-roster-player-detail-content-nickNameBadge {
+  display: block;
+  width: 244px;
+  height: auto;
+}
+
 .components-roster-player-detail-content-identity h2 {
   margin: 4px 0 0;
   color: #f5f5f5;
@@ -5718,33 +5800,37 @@ button {
 .components-roster-player-detail-content-profileList {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 32px 40px;
-  margin: 32px 0 0;
+  gap: 16px 32px;
+  margin: 24px 0 0;
 }
 
 .components-roster-player-detail-content-profileList dt {
   margin: 0;
   color: #ff3203;
   font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 20px;
 }
 
 .components-roster-player-detail-content-profileList dd {
   margin: 4px 0 0;
   color: #f5f5f5;
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
-  line-height: 32px;
+  line-height: 24px;
 }
 
 .components-roster-player-detail-content-socialsList {
   display: flex;
   align-items: center;
   gap: 20px;
-  margin: 26px 0 0;
+  position: absolute;
+  z-index: 1;
+  left: 8.3%;
+  bottom: 16.8%;
+  margin: 0;
 }
 
 .components-roster-player-detail-content-socialsList img {
@@ -5778,12 +5864,18 @@ button {
   bottom: 16.8%;
   margin: 0;
   color: transparent;
-  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
-  font-size: 90px;
-  font-weight: 800;
+  font-family: var(--font-news-cycle), var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 130px;
+  font-weight: 700;
+  font-style: italic;
   line-height: 1;
   letter-spacing: 0;
-  -webkit-text-stroke: 2px rgba(245, 245, 245, 0.5);
+  -webkit-text-stroke: 2px #a6cff5;
+}
+
+.components-roster-player-detail-content-hashtag {
+  font-size: 0.5em;
+  -webkit-text-stroke: 1.5px #a6cff5;
 }
 
 .components-roster-player-detail-content-quote {
@@ -5806,6 +5898,22 @@ button {
   .components-roster-player-detail-content-number {
     font-size: 64px;
   }
+
+  .components-roster-player-detail-content-profileList {
+    gap: 10px 20px;
+    margin-top: 16px;
+  }
+
+  .components-roster-player-detail-content-profileList dt {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .components-roster-player-detail-content-profileList dd {
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 2px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -5823,22 +5931,27 @@ button {
   }
 
   .components-roster-player-detail-content-profileCard {
-    aspect-ratio: 381 / 607;
+    aspect-ratio: 381 / 720;
     border-radius: 16px;
   }
 
   .components-roster-player-detail-content-identity {
     top: 7.6%;
     left: 10.5%;
-    width: 60%;
+    width: 44%;
+    margin-left: 12px;
   }
 
   .components-roster-player-detail-content-apelidoLabel {
     font-size: 13px;
   }
 
+  .components-roster-player-detail-content-identity > img {
+    display: none;
+  }
+
   .components-roster-player-detail-content-identity h2 {
-    margin-top: 2px;
+    margin-top: 0;
     font-size: 32px;
     line-height: 40px;
   }
@@ -5856,12 +5969,14 @@ button {
 
   .components-roster-player-detail-content-profileList dd {
     font-size: 16px;
-    line-height: 24px;
+    line-height: 22px;
   }
 
   .components-roster-player-detail-content-socialsList {
     gap: 16px;
-    margin-top: 60px;
+    left: 10.5%;
+    bottom: 11.9%;
+    margin-left: 12px;
   }
 
   .components-roster-player-detail-content-socialsList img {
@@ -5872,14 +5987,14 @@ button {
   .components-roster-player-detail-content-playerFigure {
     top: auto;
     left: auto;
-    right: 2.6%;
+    right: 4%;
     bottom: 11.9%;
-    width: 56.7%;
+    width: 34%;
     height: 52.1%;
   }
 
   .components-roster-player-detail-content-number {
-    right: 8%;
+    right: 20%;
     bottom: 11.9%;
     font-size: 48px;
   }

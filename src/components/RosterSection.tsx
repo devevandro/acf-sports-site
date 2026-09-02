@@ -1,27 +1,33 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-const athleteCards = [
-  { id: 1, name: "Carlos", number: "01" },
-  { id: 2, name: "David", number: "06" },
-  { id: 3, name: "Rafael", number: "10" },
-  { id: 4, name: "Marcos", number: "18" },
-  { id: 5, name: "Felipe", number: "23" },
-];
+export type HomeRosterAthlete = {
+  id: string;
+  slug: string;
+  name: string;
+  number: string;
+  image: string;
+  isGoalkeeper: boolean;
+};
 
-type Athlete = (typeof athleteCards)[number];
+const fallbackPlayerPhoto = "/squad/player-line.png";
+const fallbackGoalkeeperPhoto = "/squad/goalkeeper.png";
 
-const athleteSlides = athleteCards.reduce<Athlete[][]>((slides, athlete, index) => {
-  if (index % 2 === 0) {
-    slides.push([athlete]);
-  } else {
-    slides[slides.length - 1].push(athlete);
-  }
-  return slides;
-}, []);
+const REVEAL_TIMEOUT_MS = 2500;
+
+function buildSlides(athletes: HomeRosterAthlete[]): HomeRosterAthlete[][] {
+  return athletes.reduce<HomeRosterAthlete[][]>((slides, athlete, index) => {
+    if (index % 2 === 0) {
+      slides.push([athlete]);
+    } else {
+      slides[slides.length - 1].push(athlete);
+    }
+    return slides;
+  }, []);
+}
 
 const cardPath = `M8 1
   H248
@@ -41,10 +47,36 @@ const cardPath = `M8 1
   Q1 1 8 1
   Z`;
 
-function AthleteCard({ athlete }: { athlete: (typeof athleteCards)[number] }) {
+function AthleteCard({ athlete, position }: { athlete: HomeRosterAthlete; position: number }) {
+  const [revealed, setRevealed] = useState(false);
+  const collapseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (collapseTimer.current) clearTimeout(collapseTimer.current);
+    };
+  }, []);
+
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const isTouchDevice = typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
+    if (!isTouchDevice || revealed) return;
+
+    event.preventDefault();
+    setRevealed(true);
+    if (collapseTimer.current) clearTimeout(collapseTimer.current);
+    collapseTimer.current = setTimeout(() => setRevealed(false), REVEAL_TIMEOUT_MS);
+  };
+
+  const fallbackPhoto = athlete.isGoalkeeper ? fallbackGoalkeeperPhoto : fallbackPlayerPhoto;
+
   return (
-    <article
-      className={`components-roster-section-athlete ${`components-roster-section-athlete${athlete.id}`}`}
+    <Link
+      href={`/clube/elenco/${athlete.slug}`}
+      className={`components-roster-section-athlete components-roster-section-athlete${position}${
+        revealed ? " components-roster-section-athleteRevealed" : ""
+      }`}
+      aria-label={`Ver perfil de ${athlete.name}`}
+      onClick={handleClick}
     >
       <svg
         className="components-roster-section-athleteCard"
@@ -61,7 +93,7 @@ function AthleteCard({ athlete }: { athlete: (typeof athleteCards)[number] }) {
         <path d={cardPath} fill="#01121F" />
 
         <image
-          href="/squad/player.png"
+          href={athlete.image || fallbackPhoto}
           width="256"
           height="448"
           preserveAspectRatio="xMidYMid slice"
@@ -81,13 +113,25 @@ function AthleteCard({ athlete }: { athlete: (typeof athleteCards)[number] }) {
         <span className="components-roster-section-athleteName">{athlete.name}</span>
         <span className="components-roster-section-athleteNumber">{athlete.number}</span>
       </div>
-    </article>
+    </Link>
   );
 }
 
-export function RosterSection() {
+export function RosterSection({ athletes }: { athletes: HomeRosterAthlete[] }) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 768px)");
+    const update = () => setIsMobile(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
+
+  const visibleAthletes = isMobile ? athletes.slice(0, 4) : athletes;
+  const athleteSlides = buildSlides(visibleAthletes);
 
   const handleScroll = () => {
     const viewport = viewportRef.current;
@@ -128,10 +172,14 @@ export function RosterSection() {
           ref={viewportRef}
           onScroll={handleScroll}
         >
-          {athleteSlides.map((slide, index) => (
-            <div className="components-roster-section-slide" key={`slide-${index}`}>
-              {slide.map((athlete) => (
-                <AthleteCard athlete={athlete} key={athlete.id} />
+          {athleteSlides.map((slide, slideIndex) => (
+            <div className="components-roster-section-slide" key={`slide-${slideIndex}`}>
+              {slide.map((athlete, athleteIndex) => (
+                <AthleteCard
+                  athlete={athlete}
+                  position={slideIndex * 2 + athleteIndex + 1}
+                  key={athlete.id}
+                />
               ))}
             </div>
           ))}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState, type MouseEvent } from "react";
 import { Calendar, ChevronDown, Clock, MapPin, Trophy, X } from "lucide-react";
 import type { HomeCompetition } from "@/data/competitions";
 
@@ -44,7 +44,7 @@ const CLUB_NAME = "ACF Sports/Vila Mercado";
 function TeamBadge({ logo, name, home }: { logo: string; name: string; home?: boolean }) {
   return (
     <div className="components-competitions-content-team">
-      <span className={`components-competitions-content-teamLogo ${home ? "components-competitions-content-teamLogoHome" : ""}`}>
+      <span className={`components-competitions-content-teamLogo`}>
         <img src={logo} alt={name} />
       </span>
       <span>{name}</span>
@@ -67,6 +67,27 @@ export function CompetitionsContent({
   const [selectedCompId, setSelectedCompId] = useState<string | undefined>(competitions[0]?.id);
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [activeModalMatch, setActiveModalMatch] = useState<MatchDetail | null>(null);
+  const [isDraggingTable, setIsDraggingTable] = useState(false);
+  const tableWrapRef = useRef<HTMLDivElement>(null);
+  const dragStateRef = useRef({ startX: 0, startScrollLeft: 0 });
+
+  const handleTableDragStart = (event: MouseEvent<HTMLDivElement>) => {
+    const wrap = tableWrapRef.current;
+    if (!wrap) return;
+    dragStateRef.current = { startX: event.pageX, startScrollLeft: wrap.scrollLeft };
+    setIsDraggingTable(true);
+  };
+
+  const handleTableDragMove = (event: MouseEvent<HTMLDivElement>) => {
+    const wrap = tableWrapRef.current;
+    if (!wrap || !isDraggingTable) return;
+    const delta = event.pageX - dragStateRef.current.startX;
+    wrap.scrollLeft = dragStateRef.current.startScrollLeft - delta;
+  };
+
+  const handleTableDragEnd = () => {
+    setIsDraggingTable(false);
+  };
 
   const selectedComp = competitions.find((c) => c.id === selectedCompId) ?? competitions[0];
   const currentStandings = selectedComp?.standings ?? [];
@@ -115,7 +136,7 @@ export function CompetitionsContent({
         {nextMatchData ? (
           <article className="components-competitions-content-nextMatch">
             <div className="components-competitions-content-matchTeams">
-              <TeamBadge logo={nextMatchData.homeTeam.logo} name={nextMatchData.homeTeam.name} home />
+              <TeamBadge logo="/squad/simble-black.png" name={nextMatchData.homeTeam.name} home />
               <strong>x</strong>
               <TeamBadge logo={nextMatchData.awayTeam.logo} name={nextMatchData.awayTeam.name} />
             </div>
@@ -239,7 +260,16 @@ export function CompetitionsContent({
                   )}
                 </div>
 
-                <div className="components-competitions-content-tableWrap">
+                <div
+                  className={`components-competitions-content-tableWrap ${
+                    isDraggingTable ? "components-competitions-content-tableWrapDragging" : ""
+                  }`}
+                  ref={tableWrapRef}
+                  onMouseDown={handleTableDragStart}
+                  onMouseMove={handleTableDragMove}
+                  onMouseUp={handleTableDragEnd}
+                  onMouseLeave={handleTableDragEnd}
+                >
                   <table>
                     <thead>
                       <tr>
@@ -249,8 +279,6 @@ export function CompetitionsContent({
                         <th>Vit</th>
                         <th>Emp</th>
                         <th>Der</th>
-                        <th>Gm</th>
-                        <th>Gc</th>
                         <th>Sg</th>
                       </tr>
                     </thead>
@@ -279,8 +307,6 @@ export function CompetitionsContent({
                             <td>{entry.wins || "00"}</td>
                             <td>{entry.draws || "00"}</td>
                             <td>{entry.losses || "00"}</td>
-                            <td>{entry.goalsScored || "00"}</td>
-                            <td>{entry.goalsConceded || "00"}</td>
                             <td>{entry.goalDifference || "00"}</td>
                           </tr>
                         );

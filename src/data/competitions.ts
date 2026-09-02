@@ -29,8 +29,14 @@ type CompetitionRow = {
   table: StandingEntry[] | null;
 };
 
-function sortByPosition(entries: StandingEntry[]): StandingEntry[] {
-  return [...entries].sort((a, b) => Number(a.position) - Number(b.position));
+function rankStandings(entries: StandingEntry[]): StandingEntry[] {
+  return [...entries]
+    .sort((a, b) => {
+      const pointsDiff = Number(b.points || 0) - Number(a.points || 0);
+      if (pointsDiff !== 0) return pointsDiff;
+      return Number(b.goalDifference || 0) - Number(a.goalDifference || 0);
+    })
+    .map((entry, index) => ({ ...entry, position: String(index + 1) }));
 }
 
 function mapRow(row: CompetitionRow): HomeCompetition {
@@ -38,7 +44,7 @@ function mapRow(row: CompetitionRow): HomeCompetition {
     id: row.id,
     title: row.title,
     group: row.group,
-    standings: sortByPosition(row.table ?? []),
+    standings: rankStandings(row.table ?? []),
   };
 }
 

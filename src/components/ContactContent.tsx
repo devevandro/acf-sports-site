@@ -1,58 +1,14 @@
 
 import { Fragment } from "react";
-import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, MapPin, Phone } from "lucide-react";
+import { SponsorPlanCard } from "@/components/SponsorPlanCard";
+import { sponsorPlans } from "@/data/sponsorPlans";
 import type { TeamInfo } from "@/data/teamInfo";
 
 function toWhatsappNumber(phone: string): string {
   const digits = phone.replace(/\D/g, "");
   return digits.length === 11 ? `55${digits}` : digits;
 }
-
-type SponsorPlan = {
-  name: string;
-  price: string;
-  message: string;
-  benefits: string[];
-};
-
-const sponsorPlans: SponsorPlan[] = [
-  {
-    name: "pontual",
-    price: "R$ 180,00 / Mês",
-    message: "Olá boa tarde, gostaria de saber mais sobre o plano pontual do ACF Sports...",
-    benefits: [
-      "Logo de tamanho médio em partes do uniforme",
-      "1 Post dedicado no dia do jogo",
-      "2 Stories no dia do evento",
-      "Destaque nas artes de resultados e de dia de jogo em tamanho médio",
-      "Logo na seção parceiros do site",
-    ],
-  },
-  {
-    name: "master",
-    price: "R$ 500,00 / Mês",
-    message: "Olá boa tarde, gostaria de saber mais sobre o plano master do ACF Sports...",
-    benefits: [
-      "Post fixado no Instagram",
-      "Destaque central no uniforme",
-      "Logo em destaque nas artes de todos os jogos",
-      "Banner de destaque na home do site",
-      "Página exclusiva no site sobre a sua marca",
-    ],
-  },
-  {
-    name: "mensal",
-    price: "R$ 250,00 / Mês",
-    message: "Olá boa tarde, gostaria de saber mais sobre o plano mensal do ACF Sports...",
-    benefits: [
-      "Logo em partes secundárias no uniforme junto ao calção",
-      "Post dedicado por mês",
-      "Menções em todas as artes de dias de jogos",
-      "Logo em tamanho médio nas artes de jogos",
-      "Link no site e logo na home",
-    ],
-  },
-];
 
 export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
   const whatsappNumber = toWhatsappNumber(teamInfo.phone);
@@ -70,7 +26,7 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
     },
     {
       icon: Clock,
-      title: "Horario de atendimento.",
+      title: "Horário de atendimento.",
       body: "Segunda a sexta: 08h às 18h\nSábado: 08h às 16h",
     },
   ];
@@ -96,7 +52,9 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
           {infoCards.map((card) => (
             <article className="components-contact-content-infoCard" key={card.title}>
               <div className="components-contact-content-infoCardHead">
-                <card.icon aria-hidden="true" />
+                <span className="components-contact-content-infoCardIcon">
+                  <card.icon aria-hidden="true" />
+                </span>
                 <h4>{card.title}</h4>
               </div>
               <p>{card.body}</p>
@@ -109,12 +67,12 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
         <div className="components-contact-content-freeBlock">
           <h3>Fique à vontade !</h3>
           <p>
-            Fale com nossa equipe, seja para saber mais sobre o crube, tirar dúvidas sobre
+            Fale com nossa equipe, seja para saber mais sobre o clube, tirar dúvidas sobre
             patrocínios, se candidatar a ser um atleta do soberano, ou saber mais sobre o projeto e
             ficar mais perto da nossa equipe ou então veio apenas pela resenha, será um prazer falar
-            com você. &ldquo;fique a vontade mas não meche em nada&rdquo;.
+            com você. &ldquo;fique à vontade mas não mexa em nada&rdquo;.
           </p>
-          <p className="components-contact-content-freeCallout">É só chamar a gente pelo whatsapp.</p>
+          <h3 className="components-contact-content-freeCallout mt-4">É só chamar a gente pelo whatsapp</h3>
           <a
             className="components-contact-content-whatsappButton"
             href={`https://wa.me/${whatsappNumber}`}
@@ -122,7 +80,7 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
             rel="noreferrer"
           >
             whatsapp
-            <MessageCircle aria-hidden="true" />
+            <img src="/contact/whatsapp.png" alt="" aria-hidden="true" />
           </a>
         </div>
       </div>
@@ -138,30 +96,9 @@ export function ContactContent({ teamInfo }: { teamInfo: TeamInfo }) {
         </div>
 
         <div className="components-contact-content-partnerGrid">
-          {sponsorPlans.map((plan) => {
-            const whatsAppUrl = `https://wa.me/5543991802793?text=${encodeURIComponent(plan.message)}`;
-            const [priceAmount, pricePeriod] = plan.price.split(" / ");
-            return (
-              <article className="components-contact-content-partnerCard" key={plan.name}>
-                <h3>{plan.name}</h3>
-                <span className="components-contact-content-partnerDivider" aria-hidden="true" />
-                <ul>
-                  {plan.benefits.map((benefit) => (
-                    <li key={benefit}>{benefit}</li>
-                  ))}
-                </ul>
-                <p className="components-contact-content-partnerPrice">
-                  <span className="components-contact-content-partnerPriceAmount">{priceAmount}</span>
-                  {pricePeriod ? (
-                    <span className="components-contact-content-partnerPricePeriod"> / {pricePeriod}</span>
-                  ) : null}
-                </p>
-                <a href={whatsAppUrl} target="_blank" rel="noreferrer">
-                  enviar direct no whatsapp
-                </a>
-              </article>
-            );
-          })}
+          {sponsorPlans.map((plan) => (
+            <SponsorPlanCard key={plan.slug} plan={plan} />
+          ))}
         </div>
       </section>
     </Fragment>

@@ -6,6 +6,7 @@ import {
   groupPlayersByPosition,
   type RosterCategory,
 } from "@/data/players";
+import { getTeamInfo } from "@/data/teamInfo";
 import { AthleteCard } from "./AthleteCard";
 import { RosterFilters } from "./RosterFilters";
 
@@ -14,8 +15,12 @@ type RosterPageContentProps = {
 };
 
 export async function RosterPageContent({ category }: RosterPageContentProps) {
-  const [players, staffMembers] = await Promise.all([getPlayersByCategory(category), getStaffMembers()]);
-  const positionGroups = groupPlayersByPosition(players);
+  const [players, staffMembers, teamInfo] = await Promise.all([
+    getPlayersByCategory(category),
+    getStaffMembers(),
+    getTeamInfo(),
+  ]);
+  const positionGroups = groupPlayersByPosition(players, category);
 
   return (
     <section className="components-roster-roster-page-content-section" data-node-id="1027:2345" data-name="elenco_principal_campo">
@@ -27,7 +32,7 @@ export async function RosterPageContent({ category }: RosterPageContentProps) {
 
         {positionGroups.length === 0 ? (
           <p className="components-roster-roster-page-content-empty">
-            Elenco de {categoryLabel(category)} ainda sendo montado. Em breve, mais novidades por aqui.
+            Elenco de {categoryLabel(category)} ainda está sendo montado. Em breve, mais novidades por aqui.
           </p>
         ) : (
           <div className="components-roster-roster-page-content-positionGroups">
@@ -54,7 +59,7 @@ export async function RosterPageContent({ category }: RosterPageContentProps) {
               <h2 id="staff-title">comissão técnica / staff</h2>
               <div className="components-roster-roster-page-content-grid">
                 {staffMembers.map((member) => (
-                  <AthleteCard person={member} variant="staff" key={member.id} />
+                  <AthleteCard person={member} variant="staff" instagramUrl={teamInfo.instagram} key={member.id} />
                 ))}
               </div>
             </section>

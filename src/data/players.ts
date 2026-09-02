@@ -14,12 +14,15 @@ export type RosterPlayer = {
   name: string;
   nickname: string;
   number: string;
-  position: string;
+  positionFutsal: string;
+  positionCampo: string;
   category: RosterCategory;
+  categories: RosterCategory[];
   birthday: string | null;
   dominantFoot: string | null;
   quote: string;
   socialLinks: SocialLink[];
+  image: string;
 };
 
 export type RosterPlayerCard = {
@@ -29,6 +32,7 @@ export type RosterPlayerCard = {
   nickname: string;
   number: string;
   positionLabel: string;
+  image: string;
 };
 
 export type RosterStaffMember = {
@@ -36,6 +40,7 @@ export type RosterStaffMember = {
   name: string;
   nickname: string;
   role: string;
+  image: string;
 };
 
 export type RosterPositionGroup = {
@@ -49,12 +54,14 @@ type PlayerRow = {
   name: string;
   nickname: string;
   number: string | null;
-  position: string | null;
-  modality: RosterCategory;
+  position_futsal: string | null;
+  position_campo: string | null;
+  modality: RosterCategory[] | string | null;
   birthday: string | Date | null;
   dominant_foot: string | null;
   quote: string | null;
   social_media: SocialLink[] | null;
+  image: string | null;
 };
 
 type StaffRow = {
@@ -62,6 +69,7 @@ type StaffRow = {
   name: string;
   nickname: string;
   function: string;
+  image: string | null;
 };
 
 const categoryLabels: Record<RosterCategory, string> = {
@@ -69,14 +77,42 @@ const categoryLabels: Record<RosterCategory, string> = {
   campo: "futebol de campo",
 };
 
-const positionGroupOrder: { id: string; label: string; cardLabel: string }[] = [
+type PositionGroupDef = { id: string; label: string; cardLabel: string };
+
+const futsalPositionGroupOrder: PositionGroupDef[] = [
   { id: "goleiro", label: "Goleiros", cardLabel: "Goleiro" },
   { id: "fixo", label: "Fixos", cardLabel: "Fixo" },
   { id: "ala", label: "Alas", cardLabel: "Ala" },
   { id: "pivo", label: "Pivôs", cardLabel: "Pivô" },
 ];
 
-function normalizePosition(raw: string | null): string | null {
+const campoPositionGroupOrder: PositionGroupDef[] = [
+  { id: "goleiro", label: "Goleiros", cardLabel: "Goleiro" },
+  { id: "zagueiro", label: "Zagueiros", cardLabel: "Zagueiro" },
+  { id: "lateral", label: "Laterais", cardLabel: "Lateral" },
+  { id: "volante", label: "Volantes", cardLabel: "Volante" },
+  { id: "meia", label: "Meias", cardLabel: "Meia" },
+  { id: "ponta", label: "Pontas", cardLabel: "Ponta" },
+  { id: "centroavante", label: "Centroavantes", cardLabel: "Centroavante" },
+];
+
+function positionGroupOrderFor(category: RosterCategory): PositionGroupDef[] {
+  return category === "campo" ? campoPositionGroupOrder : futsalPositionGroupOrder;
+}
+
+// `players.position_campo` exists as its own column but is still populated with
+// futsal-vocabulary values today (Goleiro/Fixo/Ala/Pivô) rather than real
+// field-soccer positions. Until campo-specific values are entered, map that
+// value onto its closest field-soccer equivalent so the roster still groups
+// sensibly under the requested campo section headings.
+const futsalToCampoFallback: Record<string, string> = {
+  goleiro: "goleiro",
+  fixo: "volante",
+  ala: "ponta",
+  pivo: "centroavante",
+};
+
+function normalizePosition(raw: string | null, category: RosterCategory = "futsal"): string | null {
   if (!raw) return null;
 
   const primary = raw.split("/")[0] ?? raw;
@@ -85,6 +121,19 @@ function normalizePosition(raw: string | null): string | null {
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase()
     .trim();
+
+  if (category === "campo") {
+    if (normalized.includes("gol")) return "goleiro";
+    if (normalized.includes("zagu")) return "zagueiro";
+    if (normalized.includes("lateral")) return "lateral";
+    if (normalized.includes("volante")) return "volante";
+    if (normalized.includes("mei")) return "meia";
+    if (normalized.includes("ponta")) return "ponta";
+    if (normalized.includes("centroavante") || normalized.includes("atacante")) return "centroavante";
+
+    const futsalId = normalizePosition(raw, "futsal");
+    return futsalId ? futsalToCampoFallback[futsalId] ?? null : null;
+  }
 
   if (normalized.includes("gol")) return "goleiro";
   if (normalized.includes("piv")) return "pivo";
@@ -125,21 +174,35 @@ export function dominantFootLabel(dominantFoot: string | null): string | null {
   return dominantFoot ? capitalize(dominantFoot) : null;
 }
 
-export function positionLabelFor(position: string): string {
-  const id = normalizePosition(position);
-  return positionGroupOrder.find((group) => group.id === id)?.cardLabel ?? "Outros";
+export function positionLabelFor(position: string, category: RosterCategory = "futsal"): string {
+  const id = normalizePosition(position, category);
+  return positionGroupOrderFor(category).find((group) => group.id === id)?.cardLabel ?? "Outros";
 }
 
-export function positionGroupLabelFor(position: string): string {
-  const id = normalizePosition(position);
-  return positionGroupOrder.find((group) => group.id === id)?.label ?? "Outros";
+export function positionGroupLabelFor(position: string, category: RosterCategory = "futsal"): string {
+  const id = normalizePosition(position, category);
+  return positionGroupOrderFor(category).find((group) => group.id === id)?.label ?? "Outros";
+}
+
+function parseModality(raw: RosterCategory[] | string | null): RosterCategory[] {
+  if (Array.isArray(raw)) return raw;
+  if (!raw) return [];
+
+  // The Neon serverless driver returns Postgres array columns of custom
+  // enum types as a literal string (e.g. "{futsal,campo}") instead of a
+  // parsed JS array, so unwrap it manually.
+  return raw
+    .replace(/^{|}$/g, "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter((value): value is RosterCategory => value === "futsal" || value === "campo");
 }
 
 const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
   try {
     const sql = getDb();
     const rows = (await sql`
-      SELECT id, name, nickname, number, position, modality, birthday, dominant_foot, quote, social_media
+      SELECT id, name, nickname, number, position_futsal, position_campo, modality, birthday, dominant_foot, quote, social_media, image
       FROM players
       ORDER BY trim(name)
     `) as unknown as PlayerRow[];
@@ -151,18 +214,25 @@ const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
       const slug = seenSlugs.has(base) ? `${base}-${row.id.slice(0, 4)}` : base;
       seenSlugs.add(slug);
 
+      const positionFutsal = row.position_futsal?.trim() ?? "";
+      const positionCampo = row.position_campo?.trim() ?? "";
+      const categories = parseModality(row.modality);
+
       return {
         id: row.id,
         slug,
         name: row.name.trim(),
         nickname: row.nickname.trim(),
         number: row.number ?? "-",
-        position: row.position ?? "",
-        category: row.modality,
+        positionFutsal,
+        positionCampo,
+        category: categories[0] ?? "futsal",
+        categories,
         birthday: formatBirthday(row.birthday),
         dominantFoot: dominantFootLabel(row.dominant_foot),
         quote: row.quote?.trim() ?? "",
         socialLinks: (row.social_media ?? []).filter((link) => link.platform && link.url),
+        image: row.image?.trim() ?? "",
       };
     });
   } catch (error) {
@@ -173,7 +243,7 @@ const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
 
 export async function getPlayersByCategory(category: RosterCategory): Promise<RosterPlayer[]> {
   const players = await getAllPlayers();
-  return players.filter((player) => player.category === category);
+  return players.filter((player) => player.categories.includes(category));
 }
 
 export async function getPlayerBySlug(slug: string): Promise<RosterPlayer | null> {
@@ -181,11 +251,15 @@ export async function getPlayerBySlug(slug: string): Promise<RosterPlayer | null
   return players.find((player) => player.slug === slug) ?? null;
 }
 
-export function groupPlayersByPosition(players: RosterPlayer[]): RosterPositionGroup[] {
+export function groupPlayersByPosition(players: RosterPlayer[], category: RosterCategory): RosterPositionGroup[] {
   const matchedIds = new Set<string>();
+  const order = positionGroupOrderFor(category);
 
-  const groups = positionGroupOrder.map((group) => {
-    const groupPlayers = players.filter((player) => normalizePosition(player.position) === group.id);
+  const groups = order.map((group) => {
+    const groupPlayers = players.filter((player) => {
+      const rawPosition = category === "campo" ? player.positionCampo : player.positionFutsal;
+      return normalizePosition(rawPosition, category) === group.id;
+    });
     groupPlayers.forEach((player) => matchedIds.add(player.id));
 
     return {
@@ -198,6 +272,7 @@ export function groupPlayersByPosition(players: RosterPlayer[]): RosterPositionG
         nickname: player.nickname,
         number: player.number,
         positionLabel: group.cardLabel,
+        image: player.image,
       })),
     };
   });
@@ -214,6 +289,7 @@ export function groupPlayersByPosition(players: RosterPlayer[]): RosterPositionG
         nickname: player.nickname,
         number: player.number,
         positionLabel: "Outros",
+        image: player.image,
       })),
     });
   }
@@ -225,7 +301,7 @@ export const getStaffMembers = cache(async (): Promise<RosterStaffMember[]> => {
   try {
     const sql = getDb();
     const rows = (await sql`
-      SELECT id, name, nickname, function
+      SELECT id, name, nickname, function, image
       FROM staff_members
       ORDER BY created_at
     `) as unknown as StaffRow[];
@@ -235,6 +311,7 @@ export const getStaffMembers = cache(async (): Promise<RosterStaffMember[]> => {
       name: row.name.trim(),
       nickname: row.nickname.trim(),
       role: row.function,
+      image: row.image?.trim() ?? "",
     }));
   } catch (error) {
     console.error("Failed to fetch staff members from database", error);

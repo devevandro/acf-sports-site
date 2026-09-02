@@ -1,11 +1,6 @@
-
-type Plan = {
-  name: string;
-  price: string;
-  message: string;
-  benefits: string[];
-  featured?: boolean;
-};
+import { SponsorPlanCard } from "@/components/SponsorPlanCard";
+import { sponsorPlans } from "@/data/sponsorPlans";
+import { getMasterSponsors, type SponsorRecord } from "@/data/sponsors";
 
 type Logo = {
   name: string;
@@ -13,50 +8,10 @@ type Logo = {
   dark?: boolean;
 };
 
-const plans: Plan[] = [
-  {
-    name: "pontual",
-    price: "R$ 180,00 / Mês",
-    message: "Olá boa tarde, gostaria de saber mais sobre o plano pontual do ACF Sports...",
-    benefits: [
-      "Logo de tamanho médio em partes do uniforme",
-      "1 Post dedicado no dia do jogo",
-      "2 Stories no dia do evento",
-      "Destaque nas artes de resultados e de dia de jogo em tamanho médio",
-      "Logo na seção parceiros do site",
-    ],
-  },
-  {
-    name: "master",
-    price: "R$ 500,00 / Mês",
-    message: "Olá boa tarde, gostaria de saber mais sobre o plano master do ACF Sports...",
-    featured: true,
-    benefits: [
-      "Post fixado no Instagram",
-      "Destaque central no uniforme",
-      "Logo em destaque nas artes de todos os jogos",
-      "Banner de destaque na home do site",
-      "Página exclusiva no site sobre a sua marca",
-    ],
-  },
-  {
-    name: "mensal",
-    price: "R$ 250,00 / Mês",
-    message: "Olá boa tarde, gostaria de saber mais sobre o plano mensal do ACF Sports...",
-    benefits: [
-      "Logo em partes secundárias no uniforme junto ao calção",
-      "Post dedicado por mês",
-      "Menções em todas as artes de dias de jogos",
-      "Logo em tamanho médio nas artes de jogos",
-      "Link no site e logo na home",
-    ],
-  },
-];
-
 const reasons = [
   {
     title: "Viabilidade Financeira e Estrutura",
-    text: "O apoio financeiro garante o básico para o jogo acontecer: uniformes completos, materiais de treino (bolas, cones, coletes) e o pagamento de taxas de inscrição em torneios e arbitragem. Sem isso, o custo recai sobre os atletas, o que muitas vezes inviabiliza a permanência de bons jogadores.",
+    text: "O apoio financeiro garante o básico para o jogo acontecer: uniformes completos, materiais de treino (bolas, cones, coletes) e o pagamento de taxas de inscrição em torneios e arbitragem.",
   },
   {
     title: "Fortalecimento da Identidade e Profissionalismo",
@@ -66,11 +21,6 @@ const reasons = [
     title: "Conexão com o Público",
     text: "O patrocínio cria um ciclo de ganha-ganha. Para a equipe: estabilidade para focar apenas no desempenho em campo. Para o patrocinador: visibilidade direta com um público fiel e engajado, associando a marca ao bem-estar e ao esporte.",
   },
-];
-
-const masterLogos: Logo[] = [
-  { name: "Auto Vidros", subtitle: "Patrocinador Master" },
-  { name: "Innova Dev", subtitle: "Soluções Tecnológicas" },
 ];
 
 const partnerLogos: Logo[] = [
@@ -91,7 +41,9 @@ const oneOffLogos: Logo[] = [
 const SHOW_PARTNERS = false;
 const SHOW_ONE_OFFS = false;
 
-export function SponsorsPageContent() {
+export async function SponsorsPageContent() {
+  const masterSponsors = await getMasterSponsors();
+
   return (
     <section className="components-sponsors-page-content-section" data-node-id="2372:9111" data-name="patrocinadores">
       <div className="components-sponsors-page-content-reasons">
@@ -111,15 +63,24 @@ export function SponsorsPageContent() {
         <div className="components-sponsors-page-content-plansInner">
           <h2 id="sponsor-plans-title">Nossos Planos</h2>
           <div className="components-sponsors-page-content-planGrid">
-            {plans.map((plan) => (
-              <PlanCard key={plan.name} plan={plan} />
+            {sponsorPlans.map((plan) => (
+              <SponsorPlanCard key={plan.slug} plan={plan} />
             ))}
           </div>
         </div>
       </section>
 
       <section className="components-sponsors-page-content-logoSection" aria-label="Lista de patrocinadores">
-        <SponsorGroup title="Patrocinador Master" logos={masterLogos} variant="master" />
+        {masterSponsors.length > 0 && (
+          <div className="components-sponsors-page-content-logoGroup">
+            <h2>Patrocinadores Master</h2>
+            <div className="components-sponsors-page-content-logoGrid components-sponsors-page-content-masterGrid">
+              {masterSponsors.map((sponsor) => (
+                <SponsorLogoCard key={sponsor.id} sponsor={sponsor} />
+              ))}
+            </div>
+          </div>
+        )}
         {SHOW_PARTNERS && <SponsorGroup title="Parceiros" logos={partnerLogos} />}
         {SHOW_ONE_OFFS && <SponsorGroup title="Pontuais" logos={oneOffLogos} />}
       </section>
@@ -127,30 +88,25 @@ export function SponsorsPageContent() {
   );
 }
 
-function PlanCard({ plan }: { plan: Plan }) {
-  const whatsAppUrl = `https://wa.me/5543991802793?text=${encodeURIComponent(plan.message)}`;
-  const [priceAmount, pricePeriod] = plan.price.split(" / ");
+function SponsorLogoCard({ sponsor }: { sponsor: SponsorRecord }) {
+  const image = <img src={sponsor.image} alt={sponsor.name} />;
+
+  if (sponsor.url) {
+    return (
+      <a
+        className="components-sponsors-page-content-logoCard components-sponsors-page-content-masterLogoCard"
+        href={sponsor.url}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {image}
+      </a>
+    );
+  }
 
   return (
-    <article
-      className={`components-sponsors-page-content-planCard ${
-        plan.featured ? "components-sponsors-page-content-featuredPlanCard" : ""
-      }`}
-    >
-      <h3>{plan.name}</h3>
-      <span className="components-sponsors-page-content-planDivider" aria-hidden="true" />
-      <ul>
-        {plan.benefits.map((benefit) => (
-          <li key={benefit}>{benefit}</li>
-        ))}
-      </ul>
-      <p className="components-sponsors-page-content-planPrice">
-        <span className="components-sponsors-page-content-planPriceAmount">{priceAmount}</span>
-        {pricePeriod ? <span className="components-sponsors-page-content-planPricePeriod"> / {pricePeriod}</span> : null}
-      </p>
-      <a href={whatsAppUrl} target="_blank" rel="noreferrer">
-        enviar direct no whatsapp
-      </a>
+    <article className="components-sponsors-page-content-logoCard components-sponsors-page-content-masterLogoCard">
+      {image}
     </article>
   );
 }
