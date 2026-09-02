@@ -10,7 +10,13 @@ export type HomeRosterAthlete = {
   name: string;
   number: string;
   image: string;
+  isGoalkeeper: boolean;
 };
+
+const fallbackPlayerPhoto = "/squad/player-line.png";
+const fallbackGoalkeeperPhoto = "/squad/goalkeeper.png";
+
+const REVEAL_TIMEOUT_MS = 2500;
 
 function buildSlides(athletes: HomeRosterAthlete[]): HomeRosterAthlete[][] {
   return athletes.reduce<HomeRosterAthlete[][]>((slides, athlete, index) => {
@@ -42,11 +48,35 @@ const cardPath = `M8 1
   Z`;
 
 function AthleteCard({ athlete, position }: { athlete: HomeRosterAthlete; position: number }) {
+  const [revealed, setRevealed] = useState(false);
+  const collapseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (collapseTimer.current) clearTimeout(collapseTimer.current);
+    };
+  }, []);
+
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const isTouchDevice = typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
+    if (!isTouchDevice || revealed) return;
+
+    event.preventDefault();
+    setRevealed(true);
+    if (collapseTimer.current) clearTimeout(collapseTimer.current);
+    collapseTimer.current = setTimeout(() => setRevealed(false), REVEAL_TIMEOUT_MS);
+  };
+
+  const fallbackPhoto = athlete.isGoalkeeper ? fallbackGoalkeeperPhoto : fallbackPlayerPhoto;
+
   return (
     <Link
       href={`/clube/elenco/${athlete.slug}`}
-      className={`components-roster-section-athlete components-roster-section-athlete${position}`}
+      className={`components-roster-section-athlete components-roster-section-athlete${position}${
+        revealed ? " components-roster-section-athleteRevealed" : ""
+      }`}
       aria-label={`Ver perfil de ${athlete.name}`}
+      onClick={handleClick}
     >
       <svg
         className="components-roster-section-athleteCard"
@@ -63,7 +93,7 @@ function AthleteCard({ athlete, position }: { athlete: HomeRosterAthlete; positi
         <path d={cardPath} fill="#01121F" />
 
         <image
-          href={athlete.image || "/squad/player.png"}
+          href={athlete.image || fallbackPhoto}
           width="256"
           height="448"
           preserveAspectRatio="xMidYMid slice"
