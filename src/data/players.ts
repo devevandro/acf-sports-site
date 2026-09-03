@@ -179,11 +179,6 @@ export function positionLabelFor(position: string, category: RosterCategory = "f
   return positionGroupOrderFor(category).find((group) => group.id === id)?.cardLabel ?? "Outros";
 }
 
-export function positionGroupLabelFor(position: string, category: RosterCategory = "futsal"): string {
-  const id = normalizePosition(position, category);
-  return positionGroupOrderFor(category).find((group) => group.id === id)?.label ?? "Outros";
-}
-
 function parseModality(raw: RosterCategory[] | string | null): RosterCategory[] {
   if (Array.isArray(raw)) return raw;
   if (!raw) return [];

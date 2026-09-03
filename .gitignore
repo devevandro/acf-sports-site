@@ -6,3 +6,4 @@ improvements.md
 .env*
 !.env.example
 designs
+.DS_Store
