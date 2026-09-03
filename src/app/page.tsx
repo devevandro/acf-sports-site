@@ -5,6 +5,7 @@ import { GamesPanel } from "@/components/GamesPanel";
 import { SiteHeader } from "@/components/SiteHeader";
 import { NewsGrid } from "@/components/NewsGrid";
 import { PlansSection } from "@/components/PlansSection";
+import { SponsorFloatButton } from "@/components/SponsorFloatButton";
 import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { StandingsPanel } from "@/components/StandingsPanel";
 import { TopCf } from "@/components/TopCf";
@@ -54,6 +55,7 @@ export default async function Home() {
           </div>
         </section>
       </ScrollReveal>
+      <SponsorFloatButton />
       <ScrollReveal>
         <PlansSection />
       </ScrollReveal>

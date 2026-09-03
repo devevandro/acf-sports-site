@@ -88,6 +88,17 @@ function AthleteCard({ athlete, position }: { athlete: HomeRosterAthlete; positi
           <clipPath id={`roster-card-shape-${athlete.id}`}>
             <path d={cardPath} />
           </clipPath>
+          <linearGradient
+            id={`roster-card-hover-gradient-${athlete.id}`}
+            x1="0"
+            y1="448"
+            x2="0"
+            y2="0"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ff3203" />
+            <stop offset="100%" stopColor="#020c14" />
+          </linearGradient>
         </defs>
 
         <path d={cardPath} fill="#01121F" />
@@ -98,6 +109,12 @@ function AthleteCard({ athlete, position }: { athlete: HomeRosterAthlete; positi
           height="448"
           preserveAspectRatio="xMidYMid slice"
           clipPath={`url(#roster-card-shape-${athlete.id})`}
+        />
+
+        <path
+          className="components-roster-section-athleteOverlay"
+          d={cardPath}
+          fill={`url(#roster-card-hover-gradient-${athlete.id})`}
         />
 
         <path

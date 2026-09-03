@@ -13,9 +13,9 @@ export default async function SponsorsPage() {
       <SiteHeader active="sponsors" />
       <header className="app-clube-patrocinadores-page-heading">
         <div>
-          <p>nossos parceiros</p>
+          <p>faça parte do ACF</p>
           <h1>
-            patrocinadores<span>.</span>
+            seja um parceiro<span>.</span>
           </h1>
         </div>
       </header>
