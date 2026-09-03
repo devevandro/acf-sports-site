@@ -62,7 +62,7 @@ export async function SponsorsPageContent() {
         <div className="components-sponsors-page-content-intro">
           <p className="components-sponsors-page-content-eyebrow">Patrocínio</p>
           <h2>Porque sua empresa deveria estar com o ACF?</h2>
-          <p>O esporte cresce quando equipes amadoras e parceiros, caminham juntos.</p>
+          <p className="text-[#959595]">O esporte cresce quando equipes amadoras e parceiros, caminham juntos.</p>
         </div>
 
         {reasons.map((reason, index) => (
@@ -84,7 +84,7 @@ export async function SponsorsPageContent() {
       <div className="components-sponsors-page-content-noPlan">
         <div className="components-sponsors-page-content-intro">
           <h2>Quer apoiar o acf sem contratar um plano?</h2>
-          <p>Sem problemas. Você também pode contribuir de outras maneiras e fazer parte do crescimento do projeto.</p>
+          <p className="text-[#959595]">Sem problemas. Você também pode contribuir de outras maneiras e fazer parte do crescimento do projeto.</p>
         </div>
 
         <article className="components-sponsors-page-content-reason">
