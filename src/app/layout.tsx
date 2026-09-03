@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Montserrat, News_Cycle, Oleo_Script, Outfit, Poppins, Rampart_One, Roboto, Rubik } from "next/font/google";
 import "./globals.css";
+
+const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID;
+const isProduction = process.env.NODE_ENV  === "production";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -73,7 +77,25 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${montserrat.variable} ${outfit.variable} ${rubik.variable} ${roboto.variable} ${poppins.variable} ${rampartOne.variable} ${newsCycle.variable} ${oleoScript.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        {isProduction && GA_MEASUREMENT_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}');
+              `}
+            </Script>
+          </>
+        )}
+      </body>
     </html>
   );
 }
