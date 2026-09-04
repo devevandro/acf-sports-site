@@ -12,6 +12,7 @@ export type NewsItem = {
   newsImage: string;
   createdAt: string;
   highlight: boolean;
+  draft: boolean;
 };
 
 const FALLBACK_IMAGE = "/home-news/news-03.png";
@@ -37,6 +38,7 @@ type NewsRow = {
   author: string | null;
   created_at: string;
   highlight: boolean | null;
+  draft: boolean | null;
 };
 
 function mapRow(row: NewsRow): NewsItem {
@@ -51,6 +53,7 @@ function mapRow(row: NewsRow): NewsItem {
     newsImage: row.news_image || row.image || FALLBACK_IMAGE,
     createdAt: new Date(row.created_at).toISOString(),
     highlight: row.highlight ?? false,
+    draft: row.draft ?? false,
   };
 }
 
@@ -58,7 +61,13 @@ export const getAllNews = cache(async (): Promise<NewsItem[]> => {
   try {
     const sql = getDb();
     const rows = (await sql`SELECT * FROM news ORDER BY created_at DESC`) as unknown as NewsRow[];
-    return rows.map(mapRow);
+    const news = rows.map(mapRow);
+    // VERCEL_ENV (not NODE_ENV) distinguishes prod from stage: `next build` always
+    // sets NODE_ENV=production for every deploy, including stage's preview build.
+    if (process.env.VERCEL_ENV === "production") {
+      return news.filter((item) => !item.draft);
+    }
+    return news;
   } catch (error) {
     console.error("Failed to fetch news from database", error);
     return [];
