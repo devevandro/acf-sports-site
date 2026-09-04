@@ -9,6 +9,7 @@ export type NewsItem = {
   content: string;
   author: string;
   image: string;
+  newsImage: string;
   createdAt: string;
   highlight: boolean;
 };
@@ -31,6 +32,7 @@ type NewsRow = {
   subtitle: string | null;
   content: string | null;
   image: string | null;
+  news_image: string | null;
   tag: string | null;
   author: string | null;
   created_at: string;
@@ -46,6 +48,7 @@ function mapRow(row: NewsRow): NewsItem {
     content: row.content ? highlightClubName(row.content) : "",
     author: row.author ?? "ACF Sports",
     image: row.image || FALLBACK_IMAGE,
+    newsImage: row.news_image || row.image || FALLBACK_IMAGE,
     createdAt: new Date(row.created_at).toISOString(),
     highlight: row.highlight ?? false,
   };
