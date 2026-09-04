@@ -27,6 +27,15 @@ function highlightClubName(html: string): string {
   );
 }
 
+const MATCH_LABEL_WORDS = ["titulares", "reservas", "gols"];
+
+function highlightMatchLabels(html: string): string {
+  const pattern = new RegExp(`(<[^>]*>)|\\b(${MATCH_LABEL_WORDS.join("|")})\\b`, "gi");
+  return html.replace(pattern, (match, tag, word) =>
+    tag ? tag : `<span class="components-news-detail-matchLabel">${word}</span>`
+  );
+}
+
 type NewsRow = {
   id: string;
   title: string | null;
@@ -47,7 +56,7 @@ function mapRow(row: NewsRow): NewsItem {
     tag: row.tag ?? "",
     title: row.title ?? "",
     subtitle: row.subtitle ?? "",
-    content: row.content ? highlightClubName(row.content) : "",
+    content: row.content ? highlightMatchLabels(highlightClubName(row.content)) : "",
     author: row.author ?? "ACF Sports",
     image: row.image || FALLBACK_IMAGE,
     newsImage: row.news_image || row.image || FALLBACK_IMAGE,

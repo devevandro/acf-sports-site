@@ -831,8 +831,8 @@ button {
 
 .components-competitions-content-contentGrid {
   display: grid;
-  grid-template-columns: 560px 1fr;
-  gap: 80px;
+  grid-template-columns: 660px 1fr;
+  gap: 40px;
   align-items: start;
 }
 
@@ -844,11 +844,11 @@ button {
 
 .components-competitions-content-previousCard {
   display: grid;
-  grid-template-columns: 88px auto 88px 2px 1fr;
+  grid-template-columns: 95px auto 95px 2px 1fr;
   align-items: center;
   gap: 16px;
   min-height: 88px;
-  padding: 12px 20px;
+  padding: 8px 16px;
   border-radius: 8px;
   background: var(--azul-preto);
   color: #f5f5f5;
@@ -859,6 +859,10 @@ button {
 .components-competitions-content-previousCard:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.components-competitions-content-previousCard .components-competitions-content-team {
+  min-width: 95px;
 }
 
 .components-competitions-content-previousCard .components-competitions-content-team img {
@@ -897,6 +901,12 @@ button {
 
 .components-competitions-content-previousMeta .components-competitions-content-details:hover {
   color: #ff3203;
+}
+
+.components-competitions-content-tableColumn {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .components-competitions-content-tableBlock {
@@ -1387,17 +1397,6 @@ button {
   }
 
   .components-competitions-content-separator {
-    display: none;
-  }
-
-  .components-competitions-content-previousCard {
-    grid-template-columns: 88px auto 88px;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1200px) {
-  .components-competitions-content-previousCard .components-competitions-content-cardSeparator,
-  .components-competitions-content-previousMeta {
     display: none;
   }
 }
@@ -3184,6 +3183,11 @@ button {
 .components-news-detail-clubName {
   color: #e0673f;
   font-weight: 400;
+}
+
+.components-news-detail-matchLabel {
+  color: var(--laranja);
+  font-weight: 700;
 }
 
 .components-news-detail-content a {
