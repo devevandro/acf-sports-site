@@ -558,10 +558,35 @@ button {
   color: #f5f5f5;
   text-decoration: none;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
-  transition: transform 220ms ease, box-shadow 220ms ease;
+  transition: transform 220ms ease, box-shadow 220ms ease, opacity 220ms ease;
 }
 
 .components-sponsor-float-button-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.32);
+}
+
+.components-sponsor-float-button-hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.components-sponsor-float-button-docked {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 64px;
+  padding: 8px 24px;
+  border-radius: 8px;
+  background: #ff6a47;
+  color: #f5f5f5;
+  text-decoration: none;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.components-sponsor-float-button-docked:hover {
   transform: translateY(-2px);
   box-shadow: 0 16px 28px rgba(0, 0, 0, 0.32);
 }
@@ -4526,11 +4551,18 @@ button {
   color: var(--cinza-claro);
 }
 
-.components-site-footer-backTop {
+.components-site-footer-bottomActions {
   position: absolute;
   right: max(20px, calc((100% - 1160px) / 2));
-  bottom: 80px;
+  bottom: 24px;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.components-site-footer-backTop {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4573,7 +4605,7 @@ button {
 @media (max-width: 768px) {
   .components-site-footer-footer {
     min-height: auto;
-    padding-bottom: 48px;
+    padding-bottom: 180px;
   }
 
   .components-site-footer-columns {
@@ -4608,6 +4640,11 @@ button {
     white-space: normal;
   }
 
+  .components-site-footer-brand .components-site-footer-copyright {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
   .components-site-footer-brand .components-site-footer-credit {
     font-size: 12px;
     white-space: normal;
@@ -4618,10 +4655,21 @@ button {
     height: auto;
   }
 
+  .components-site-footer-bottomActions {
+    right: 16px;
+    bottom: 16px;
+    gap: 12px;
+  }
+
   .components-site-footer-backTop {
     width: 64px;
     height: 64px;
-    right: 16px;
+  }
+
+  .components-sponsor-float-button-docked {
+    height: 56px;
+    padding: 6px 16px;
+    gap: 6px;
   }
 }
 
