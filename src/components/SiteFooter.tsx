@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { getTeamInfo } from "@/data/teamInfo";
+import { SponsorDockedButton } from "@/components/SponsorFloatButton";
 
 const hiddenButton = true;
 const menuLinks = [
@@ -12,6 +13,7 @@ const menuLinks = [
 
 export async function SiteFooter() {
   const teamInfo = await getTeamInfo();
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="components-site-footer-footer">
@@ -97,18 +99,32 @@ export async function SiteFooter() {
         <div className="components-site-footer-brandImages">
           <img src="/footer/acf-footer-logo.png" alt="ACF Sports" />
         </div>
-        <p>© ACF Sports — Alguns direitos reservados</p>
+        <p className="components-site-footer-copyright">© {currentYear} ACF Sports — Alguns direitos reservados</p>
+        <p className="components-site-footer-credit">
+          Desenvolvido por{" "}
+          <a
+            href="https://www.linkedin.com/in/evandro-dev/"
+            target="_blank"
+            rel="noreferrer"
+            className="components-site-footer-creditLink"
+          >
+            Evandro C. Ferreira
+          </a>
+        </p>
       </div>
 
-      {hiddenButton && (
-        <a
-          className="components-site-footer-backTop"
-          href="#"
-          aria-label="Voltar ao topo"
-        >
-          <img src="/footer/top-arrow.png" alt="" />
-        </a>
-      )}
+      <div className="components-site-footer-bottomActions">
+        <SponsorDockedButton />
+        {hiddenButton && (
+          <a
+            className="components-site-footer-backTop"
+            href="#"
+            aria-label="Voltar ao topo"
+          >
+            <img src="/footer/top-arrow.png" alt="" />
+          </a>
+        )}
+      </div>
     </footer>
   );
 }

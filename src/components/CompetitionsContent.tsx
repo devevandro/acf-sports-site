@@ -176,9 +176,11 @@ export function CompetitionsContent({
                     className="components-competitions-content-previousCard"
                     key={match.id}
                   >
-                    <TeamBadge logo={match.homeTeam.logo} name={match.homeTeam.name} home />
-                    <strong>{match.result}</strong>
-                    <TeamBadge logo={match.awayTeam.logo} name={match.awayTeam.name} />
+                    <div className="components-competitions-content-matchTeams">
+                      <TeamBadge logo={match.homeTeam.logo} name={match.homeTeam.name} home />
+                      <strong>{match.result}</strong>
+                      <TeamBadge logo={match.awayTeam.logo} name={match.awayTeam.name} />
+                    </div>
 
                     <div className="components-competitions-content-cardSeparator" />
 

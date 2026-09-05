@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Montserrat, News_Cycle, Oleo_Script, Outfit, Poppins, Rampart_One, Roboto, Rubik } from "next/font/google";
+import { SponsorFloatButton } from "@/components/SponsorFloatButton";
 import "./globals.css";
 
 const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID;
@@ -79,6 +80,7 @@ export default function RootLayout({
     >
       <body>
         {children}
+        <SponsorFloatButton />
         {isProduction && GA_MEASUREMENT_ID && (
           <>
             <Script
