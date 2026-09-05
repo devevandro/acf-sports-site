@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronRight, ChevronsRight } from "lucide-react";
 import { formatNewsDate, getRelatedNews, type NewsItem } from "@/data/news";
+import { NewsHeroImage } from "@/components/NewsHeroImage";
 
 const RELATED_PER_PAGE = 4;
 
@@ -22,7 +23,7 @@ export async function NewsDetail({ news, page = 1 }: { news: NewsItem; page?: nu
           <span>{news.subtitle}</span>
         </header>
 
-        <img className="components-news-detail-heroImage" src={news.newsImage} alt={news.title} />
+        <NewsHeroImage src={news.newsImage} alt={news.title} />
 
         <div className="components-news-detail-caption">
           <span>Por {news.author}</span>

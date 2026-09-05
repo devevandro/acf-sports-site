@@ -176,9 +176,11 @@ export function CompetitionsContent({
                     className="components-competitions-content-previousCard"
                     key={match.id}
                   >
-                    <TeamBadge logo={match.homeTeam.logo} name={match.homeTeam.name} home />
-                    <strong>{match.result}</strong>
-                    <TeamBadge logo={match.awayTeam.logo} name={match.awayTeam.name} />
+                    <div className="components-competitions-content-matchTeams">
+                      <TeamBadge logo={match.homeTeam.logo} name={match.homeTeam.name} home />
+                      <strong>{match.result}</strong>
+                      <TeamBadge logo={match.awayTeam.logo} name={match.awayTeam.name} />
+                    </div>
 
                     <div className="components-competitions-content-cardSeparator" />
 
@@ -205,61 +207,63 @@ export function CompetitionsContent({
           </section>
 
           {/* Tabela de Classificação */}
-          <section
-            className="components-competitions-content-tableBlock"
-            aria-labelledby="standings-title"
-          >
-            {selectedComp ? (
-              <>
-                <div className="components-competitions-content-tableHeaderWrap">
-                  <button
-                    className="components-competitions-content-tableTitle"
-                    type="button"
-                    id="standings-title"
-                    aria-expanded={dropdownOpen}
-                    aria-haspopup="listbox"
-                    onClick={() => setDropdownOpen((prev) => !prev)}
-                    disabled={competitions.length <= 1}
-                  >
-                    <span>{selectedComp.title}</span>
-                    {competitions.length > 1 && (
-                      <ChevronDown
-                        size={24}
-                        className={`transition-transform duration-200 ${
-                          dropdownOpen ? "rotate-180" : ""
-                        }`}
-                        aria-hidden="true"
-                      />
-                    )}
-                  </button>
-
-                  {dropdownOpen && competitions.length > 1 && (
-                    <div
-                      className="components-competitions-content-dropdownMenu"
-                      role="listbox"
-                      aria-label="Selecione a competição"
-                    >
-                      {competitions.map((option) => (
-                        <button
-                          key={option.id}
-                          type="button"
-                          role="option"
-                          aria-selected={option.id === selectedComp.id}
-                          className={`components-competitions-content-dropdownItem ${
-                            option.id === selectedComp.id ? "active" : ""
-                          }`}
-                          onClick={() => {
-                            setSelectedCompId(option.id);
-                            setDropdownOpen(false);
-                          }}
-                        >
-                          {option.title}
-                        </button>
-                      ))}
-                    </div>
+          <div className="components-competitions-content-tableColumn">
+            {selectedComp && (
+              <div className="components-competitions-content-tableHeaderWrap">
+                <button
+                  className="components-competitions-content-tableTitle"
+                  type="button"
+                  id="standings-title"
+                  aria-expanded={dropdownOpen}
+                  aria-haspopup="listbox"
+                  onClick={() => setDropdownOpen((prev) => !prev)}
+                  disabled={competitions.length <= 1}
+                >
+                  <span>{selectedComp.title}</span>
+                  {competitions.length > 1 && (
+                    <ChevronDown
+                      size={24}
+                      className={`transition-transform duration-200 ${
+                        dropdownOpen ? "rotate-180" : ""
+                      }`}
+                      aria-hidden="true"
+                    />
                   )}
-                </div>
+                </button>
 
+                {dropdownOpen && competitions.length > 1 && (
+                  <div
+                    className="components-competitions-content-dropdownMenu"
+                    role="listbox"
+                    aria-label="Selecione a competição"
+                  >
+                    {competitions.map((option) => (
+                      <button
+                        key={option.id}
+                        type="button"
+                        role="option"
+                        aria-selected={option.id === selectedComp.id}
+                        className={`components-competitions-content-dropdownItem ${
+                          option.id === selectedComp.id ? "active" : ""
+                        }`}
+                        onClick={() => {
+                          setSelectedCompId(option.id);
+                          setDropdownOpen(false);
+                        }}
+                      >
+                        {option.title}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            <section
+              className="components-competitions-content-tableBlock"
+              aria-labelledby="standings-title"
+            >
+              {selectedComp ? (
                 <div
                   className={`components-competitions-content-tableWrap ${
                     isDraggingTable ? "components-competitions-content-tableWrapDragging" : ""
@@ -314,14 +318,13 @@ export function CompetitionsContent({
                     </tbody>
                   </table>
                 </div>
-
-              </>
-            ) : (
-              <p className="components-competitions-content-noMatch">
-                Nenhuma tabela disponível no momento.
-              </p>
-            )}
-          </section>
+              ) : (
+                <p className="components-competitions-content-noMatch">
+                  Nenhuma tabela disponível no momento.
+                </p>
+              )}
+            </section>
+          </div>
         </div>
       </div>
 
