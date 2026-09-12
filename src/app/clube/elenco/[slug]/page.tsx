@@ -6,6 +6,8 @@ import { TopCf } from "@/components/TopCf";
 import { getPlayerBySlug } from "@/data/players";
 import { notFound } from "next/navigation";
 
+export const revalidate = 60;
+
 export default async function PlayerDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const player = await getPlayerBySlug(slug);
