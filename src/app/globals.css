@@ -4443,6 +4443,24 @@ button {
   height: 7px;
 }
 
+.components-site-footer-sponsors {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.components-site-footer-sponsorLogos {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+}
+
+.components-site-footer-sponsorLogos img {
+  width: auto;
+  max-width: 83px;
+  object-fit: contain;
+}
+
 .components-site-footer-socials {
   display: flex;
   align-items: center;
