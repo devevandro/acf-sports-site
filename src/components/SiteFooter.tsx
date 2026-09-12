@@ -42,6 +42,14 @@ export async function SiteFooter() {
               </Link>
             ))}
           </nav>
+
+          <div className="components-site-footer-sponsors">
+            <h2>Patrocinadores</h2>
+            <div className="components-site-footer-sponsorLogos">
+              <img src="/footer/logo-footer-02.png" alt="Vil9" />
+              <img src="/footer/logo-footer-01.png" alt="Carol Ferreira Unhas" />
+            </div>
+          </div>
         </section>
 
         <section className="components-site-footer-column text-acf-gray">

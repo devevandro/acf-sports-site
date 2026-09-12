@@ -5,6 +5,8 @@ import { SponsorsStrip } from "@/components/SponsorsStrip";
 import { TopCf } from "@/components/TopCf";
 import type { RosterCategory } from "@/data/players";
 
+export const revalidate = 60;
+
 type PageProps = {
   searchParams: Promise<Record<string, string | undefined>>;
 };
