@@ -58,9 +58,17 @@ export async function RosterPageContent({ category }: RosterPageContentProps) {
             <section className="components-roster-roster-page-content-staff" aria-labelledby="staff-title">
               <h2 id="staff-title">comissão técnica / staff</h2>
               <div className="components-roster-roster-page-content-grid">
-                {staffMembers.map((member) => (
-                  <AthleteCard person={member} variant="staff" instagramUrl={teamInfo.instagram} key={member.id} />
-                ))}
+                {staffMembers.map((member) => {
+                  const memberInstagram = member.socialLinks.find((link) => link.platform === "instagram")?.url;
+                  return (
+                    <AthleteCard
+                      person={member}
+                      variant="staff"
+                      instagramUrl={memberInstagram || teamInfo.instagram}
+                      key={member.id}
+                    />
+                  );
+                })}
               </div>
             </section>
           </>

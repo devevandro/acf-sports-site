@@ -4633,7 +4633,8 @@ button {
     padding-top: 40px;
   }
 
-  .components-site-footer-column:first-child {
+  .components-site-footer-column:first-child > h2:first-child,
+  .components-site-footer-column:first-child > .components-site-footer-menu {
     display: none;
   }
 

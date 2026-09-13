@@ -41,6 +41,7 @@ export type RosterStaffMember = {
   nickname: string;
   role: string;
   image: string;
+  socialLinks: SocialLink[];
 };
 
 export type RosterPositionGroup = {
@@ -70,6 +71,7 @@ type StaffRow = {
   nickname: string;
   function: string;
   image: string | null;
+  social_media: SocialLink[] | null;
 };
 
 const categoryLabels: Record<RosterCategory, string> = {
@@ -296,7 +298,7 @@ export const getStaffMembers = cache(async (): Promise<RosterStaffMember[]> => {
   try {
     const sql = getDb();
     const rows = (await sql`
-      SELECT id, name, nickname, function, image
+      SELECT id, name, nickname, function, image, social_media
       FROM staff_members
       ORDER BY created_at
     `) as unknown as StaffRow[];
@@ -307,6 +309,7 @@ export const getStaffMembers = cache(async (): Promise<RosterStaffMember[]> => {
       nickname: row.nickname.trim(),
       role: row.function,
       image: row.image?.trim() ?? "",
+      socialLinks: (row.social_media ?? []).filter((link) => link.platform && link.url),
     }));
   } catch (error) {
     console.error("Failed to fetch staff members from database", error);
