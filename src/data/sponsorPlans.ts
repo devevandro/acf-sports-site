@@ -16,7 +16,7 @@ export const sponsorPlans: SponsorPlan[] = [
   {
     slug: "pontual",
     name: "pontual",
-    priceAmount: "R$ 180",
+    priceAmount: "R$ 90",
     pricePeriod: "por campeonato",
     whatsappMessage: "Olá boa tarde, gostaria de saber mais sobre o plano pontual do ACF Sports...",
     benefits: [
@@ -30,7 +30,7 @@ export const sponsorPlans: SponsorPlan[] = [
   {
     slug: "master",
     name: "master",
-    priceAmount: "R$ 300",
+    priceAmount: "R$ 180",
     pricePeriod: "mensal",
     featured: true,
     whatsappMessage: "Olá boa tarde, gostaria de saber mais sobre o plano master do ACF Sports...",
