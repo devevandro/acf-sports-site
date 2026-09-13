@@ -4638,6 +4638,18 @@ button {
     display: none;
   }
 
+  .components-site-footer-column:first-child {
+    order: 3;
+  }
+
+  .components-site-footer-column:nth-child(2) {
+    order: 1;
+  }
+
+  .components-site-footer-contact {
+    order: 2;
+  }
+
   .components-site-footer-address,
   .components-site-footer-addressDivider {
     display: none;

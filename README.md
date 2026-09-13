@@ -97,6 +97,9 @@ npm run build
   - Corrigido no `globals.css`: adicionado `min-width: 0` em `.components-games-panel-team` (permite encolher de fato para 95px) e `display: block; width: 100%; overflow: hidden; text-overflow: ellipsis;` em `.components-games-panel-team span`, valendo tanto para "partida finalizada" quanto "próxima partida" (estilos compartilhados).
   - `MatchCard` em `GamesPanel.tsx` agora também define `title` com o nome completo em cada span de time, para ficar disponível ao passar o mouse mesmo com o texto truncado.
 
+- **Rodapé Mobile: Ordem de "Patrocinadores"**:
+  - No breakpoint `768px`, `.components-site-footer-column:first-child` (bloco visível "Patrocinadores") recebeu `order: 3`, `.components-site-footer-column:nth-child(2)` ("Mídias Sociais") `order: 1`, e `.components-site-footer-contact` `order: 2` em `globals.css`, então "Patrocinadores" agora aparece abaixo de "Contato" no mobile em vez de acima de "Mídias Sociais". Desktop (`SiteFooter.tsx` DOM order e layout ≥768px) não foi alterado.
+
 - **Painel "jogos" da Home: Nome Correto do Clube**:
   - `GamesPanel.tsx` tinha "ACF Sport Club" fixo como nome do time da casa — resquício do mock estático original, divergente do nome real do clube usado no restante do código (`ACF Sports/Vila Mercado`, ex.: `CLUB_NAME` em `src/data/news.ts` e os itens `team` dentro de `competitions.table`).
   - Adicionada a constante `CLUB_NAME = "ACF Sports/Vila Mercado"` em `GamesPanel.tsx`, usada no nome do time da casa nos dois cards.
