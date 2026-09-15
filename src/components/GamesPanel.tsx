@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { formatGameDate, getLatestFinishedGame, getNextUpcomingGame } from "@/data/games";
+import { formatGameDate, getLatestFinishedGame, getUpcomingGames } from "@/data/games";
 import { getTeamInfo } from "@/data/teamInfo";
+import { GamesUpcomingCarousel } from "@/components/GamesUpcomingCarousel";
 
 const CLUB_NAME = "ACF Sports/Vila Mercado";
 const fallbackOpponentLogo = "/header/symbol.png";
@@ -62,9 +63,9 @@ function DividerTitle({ children, accent = false }: { children: React.ReactNode;
 }
 
 export async function GamesPanel() {
-  const [finishedGame, upcomingGame, teamInfo] = await Promise.all([
+  const [finishedGame, upcomingGames, teamInfo] = await Promise.all([
     getLatestFinishedGame(),
-    getNextUpcomingGame(),
+    getUpcomingGames(2),
     getTeamInfo(),
   ]);
   const acfLogo = teamInfo.symbol;
@@ -91,15 +92,18 @@ export async function GamesPanel() {
           </section>
         )}
 
-        {upcomingGame && (
+        {upcomingGames.length > 0 && (
           <section className="components-games-panel-block" aria-label="Próxima partida">
             <DividerTitle accent>próxima partida</DividerTitle>
-            <MatchCard
-              date={formatGameDate(upcomingGame)}
-              home={{ name: CLUB_NAME, logo: acfLogo }}
-              away={{ name: upcomingGame.opponent, logo: upcomingGame.opponentLogo ?? fallbackOpponentLogo }}
-              upcoming
-              location={upcomingGame.location}
+            <GamesUpcomingCarousel
+              acfLogo={acfLogo}
+              games={upcomingGames.map((game) => ({
+                id: game.id,
+                opponent: game.opponent,
+                opponentLogo: game.opponentLogo,
+                location: game.location,
+                formattedDate: formatGameDate(game),
+              }))}
             />
           </section>
         )}
