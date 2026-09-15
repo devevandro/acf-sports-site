@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type MouseEvent } from "react";
-import { Calendar, ChevronDown, Clock, MapPin, Trophy, X } from "lucide-react";
+import { Calendar, ChevronDown, ChevronLeft, ChevronRight, Clock, MapPin, Trophy, X } from "lucide-react";
 import type { HomeCompetition } from "@/data/competitions";
 
 const fallbackAcfLogo = "/header/symbol.png";
@@ -20,13 +20,14 @@ type MatchDetail = {
 };
 
 export type NextGameData = {
+  id: string;
   competition: string;
   date: string;
   time: string;
   location: string;
   opponentName: string;
   opponentLogo: string;
-} | null;
+};
 
 export type PreviousMatchData = Array<{
   id: string;
@@ -53,12 +54,12 @@ function TeamBadge({ logo, name, home }: { logo: string; name: string; home?: bo
 }
 
 export function CompetitionsContent({
-  nextGame,
+  nextGames,
   competitions,
   previousMatches,
   clubLogo
 }: {
-  nextGame: NextGameData;
+  nextGames: NextGameData[];
   competitions: HomeCompetition[];
   previousMatches: PreviousMatchData;
   clubLogo?: string;
@@ -68,6 +69,7 @@ export function CompetitionsContent({
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [activeModalMatch, setActiveModalMatch] = useState<MatchDetail | null>(null);
   const [isDraggingTable, setIsDraggingTable] = useState(false);
+  const [nextMatchIndex, setNextMatchIndex] = useState(0);
   const tableWrapRef = useRef<HTMLDivElement>(null);
   const dragStateRef = useRef({ startX: 0, startScrollLeft: 0 });
 
@@ -92,18 +94,18 @@ export function CompetitionsContent({
   const selectedComp = competitions.find((c) => c.id === selectedCompId) ?? competitions[0];
   const currentStandings = selectedComp?.standings ?? [];
 
-  const nextMatchData: MatchDetail | null = nextGame
-    ? {
-        id: "next-db",
-        competition: nextGame.competition,
-        date: nextGame.date,
-        time: nextGame.time,
-        location: nextGame.location,
-        homeTeam: { name: CLUB_NAME, logo: acfLogo },
-        awayTeam: { name: nextGame.opponentName, logo: nextGame.opponentLogo },
-        status: "upcoming"
-      }
-    : null;
+  const nextMatchesData: MatchDetail[] = nextGames.map((nextGame) => ({
+    id: nextGame.id,
+    competition: nextGame.competition,
+    date: nextGame.date,
+    time: nextGame.time,
+    location: nextGame.location,
+    homeTeam: { name: CLUB_NAME, logo: acfLogo },
+    awayTeam: { name: nextGame.opponentName, logo: nextGame.opponentLogo },
+    status: "upcoming"
+  }));
+
+  const currentNextMatch = nextMatchesData[nextMatchIndex] ?? null;
 
   const previousMatchDetails: MatchDetail[] = previousMatches.map((match) => ({
     id: match.id,
@@ -131,24 +133,48 @@ export function CompetitionsContent({
       />
 
       <div className="components-competitions-content-inner">
-        <h2>Próxima Partida</h2>
+        <div className="components-competitions-content-nextMatchHeader">
+          <h2>Próxima Partida</h2>
+          {nextMatchesData.length > 1 && (
+            <div className="components-competitions-content-nextMatchNav">
+              <button
+                type="button"
+                onClick={() => setNextMatchIndex((prev) => Math.max(prev - 1, 0))}
+                disabled={nextMatchIndex === 0}
+                aria-label="Partida anterior"
+              >
+                <ChevronLeft size={20} aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  setNextMatchIndex((prev) => Math.min(prev + 1, nextMatchesData.length - 1))
+                }
+                disabled={nextMatchIndex === nextMatchesData.length - 1}
+                aria-label="Próxima partida"
+              >
+                <ChevronRight size={20} aria-hidden="true" />
+              </button>
+            </div>
+          )}
+        </div>
 
-        {nextMatchData ? (
+        {currentNextMatch ? (
           <article className="components-competitions-content-nextMatch">
             <div className="components-competitions-content-matchTeams">
-              <TeamBadge logo="/squad/simble-black.png" name={nextMatchData.homeTeam.name} home />
+              <TeamBadge logo="/squad/simble-black.png" name={currentNextMatch.homeTeam.name} home />
               <strong>x</strong>
-              <TeamBadge logo={nextMatchData.awayTeam.logo} name={nextMatchData.awayTeam.name} />
+              <TeamBadge logo={currentNextMatch.awayTeam.logo} name={currentNextMatch.awayTeam.name} />
             </div>
 
             <div className="components-competitions-content-separator" />
 
             <div className="components-competitions-content-matchMeta">
-              <p>{nextMatchData.competition}</p>
+              <p>{currentNextMatch.competition}</p>
               <button
                 type="button"
                 className="components-competitions-content-details"
-                onClick={() => setActiveModalMatch(nextMatchData)}
+                onClick={() => setActiveModalMatch(currentNextMatch)}
                 aria-label="Ver mais detalhes da próxima partida"
               >
                 <Calendar size={18} aria-hidden="true" />
