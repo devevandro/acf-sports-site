@@ -80,10 +80,10 @@ export async function getLatestFinishedGame(): Promise<GameItem | null> {
   return finished[0] ?? null;
 }
 
-export async function getNextUpcomingGame(): Promise<GameItem | null> {
+export async function getUpcomingGames(limit = 2): Promise<GameItem[]> {
   const upcoming = (await getAllGames()).filter((game) => !isFinished(game));
   upcoming.sort((a, b) => gameDateTime(a).localeCompare(gameDateTime(b)));
-  return upcoming[0] ?? null;
+  return upcoming.slice(0, limit);
 }
 
 export async function getPreviousGames(): Promise<GameItem[]> {

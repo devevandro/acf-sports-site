@@ -714,6 +714,48 @@ button {
   text-transform: capitalize;
 }
 
+.components-competitions-content-nextMatchHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 32px;
+}
+
+.components-competitions-content-nextMatchHeader h2 {
+  margin: 0;
+}
+
+.components-competitions-content-nextMatchNav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.components-competitions-content-nextMatchNav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: #f1f1f1;
+  color: #121212;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.components-competitions-content-nextMatchNav button:hover:not(:disabled) {
+  background: #ff3203;
+  color: #fdfdfd;
+}
+
+.components-competitions-content-nextMatchNav button:disabled {
+  color: #cfcfcf;
+  cursor: not-allowed;
+}
+
 .components-competitions-content-nextMatch {
   display: grid;
   grid-template-columns: 1fr 2px 273px;
@@ -1783,6 +1825,43 @@ button {
 
 .components-games-panel-dividerTitle .components-games-panel-accentTitle {
   color: var(--laranja);
+}
+
+.components-games-panel-upcomingCarousel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.components-games-panel-upcomingNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.components-games-panel-upcomingNav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: #f1f1f1;
+  color: #121212;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.components-games-panel-upcomingNav button:hover:not(:disabled) {
+  background: var(--laranja);
+  color: #fdfdfd;
+}
+
+.components-games-panel-upcomingNav button:disabled {
+  color: #cfcfcf;
+  cursor: not-allowed;
 }
 
 .components-games-panel-matchCard {
