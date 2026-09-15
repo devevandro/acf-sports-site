@@ -20,6 +20,26 @@ const CLUB_NAME = "ACF Sports/Vila Mercado";
 
 export const PINNED_CAROUSEL_NEWS_ID = "cd288794-2014-4f37-8163-cb5082cd0b47";
 
+function decodeHtmlEntities(text: string): string {
+  return text
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&");
+}
+
+// News content is sometimes pasted from an AI chat that renders inline HTML as a
+// syntax-highlighted code block (a <response-element>/<code-block> widget) instead of
+// plain markup. This unwraps that widget back into the real HTML it represents so the
+// page mounts it as live elements rather than showing the escaped/highlighted source.
+function unwrapEmbeddedHtmlCodeBlocks(html: string): string {
+  return html.replace(
+    /<response-element[^>]*>[\s\S]*?<code[^>]*data-test-id="code-content"[^>]*>([\s\S]*?)<\/code>[\s\S]*?<\/response-element>/g,
+    (_match, codeInner: string) => decodeHtmlEntities(codeInner.replace(/<[^>]+>/g, ""))
+  );
+}
+
 function highlightClubName(html: string): string {
   const pattern = new RegExp(`(<[^>]*>)|(${CLUB_NAME.replace(/[/]/g, "\\/")})`, "g");
   return html.replace(pattern, (match, tag, name) =>
@@ -56,7 +76,9 @@ function mapRow(row: NewsRow): NewsItem {
     tag: row.tag ?? "",
     title: row.title ?? "",
     subtitle: row.subtitle ?? "",
-    content: row.content ? highlightMatchLabels(highlightClubName(row.content)) : "",
+    content: row.content
+      ? highlightMatchLabels(highlightClubName(unwrapEmbeddedHtmlCodeBlocks(row.content)))
+      : "",
     author: row.author ?? "ACF Sports",
     image: row.image || FALLBACK_IMAGE,
     newsImage: row.news_image || row.image || FALLBACK_IMAGE,
