@@ -108,7 +108,7 @@ export async function SiteFooter() {
           <img src="/footer/acf-footer-logo.png" alt="ACF Sports" />
         </div>
         <p className="components-site-footer-copyright">© {currentYear} ACF Sports — Alguns direitos reservados</p>
-        <p className="components-site-footer-credit">
+        <p className="components-site-footer-credit mb-5">
           Desenvolvido por{" "}
           <a
             href="https://www.linkedin.com/in/evandro-dev/"
