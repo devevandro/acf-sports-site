@@ -7042,8 +7042,205 @@ button {
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.22);
 }
 
+.components-media-kit-content-instagramPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 48px 40px;
+  border-radius: 20px;
+  background: #ffffff;
+}
+
+.components-media-kit-content-instagramIntro {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 640px;
+}
+
+.components-media-kit-content-instagramEyebrow {
+  margin: 0;
+  color: var(--laranja);
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.components-media-kit-content-instagramIntro h3 {
+  margin: 0;
+  color: var(--azul-preto);
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 38px;
+}
+
+.components-media-kit-content-instagramIntro p {
+  margin: 0;
+  color: #4b5966;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.components-media-kit-content-instagramPeriodBadge {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 8px 16px;
+  border: 1px solid rgba(7, 36, 61, 0.16);
+  border-radius: 999px;
+  color: #07243d;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.components-media-kit-content-instagramGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.components-media-kit-content-instagramCard {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px 26px;
+  border-radius: 16px;
+  background: #07243d;
+  color: #f5f5f5;
+  box-shadow: 0 12px 24px -16px rgba(7, 36, 61, 0.5);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.components-media-kit-content-instagramCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 34px -18px rgba(255, 50, 3, 0.4), 0 0 18px -4px rgba(37, 114, 184, 0.3);
+}
+
+.components-media-kit-content-instagramCardEyebrow {
+  margin: 0;
+  color: var(--cinza-medio);
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.components-media-kit-content-instagramCardValue {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  color: #f5f5f5;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.components-media-kit-content-instagramCardValue span {
+  color: var(--cinza-medio);
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.components-media-kit-content-instagramCardSub {
+  margin: 0;
+  color: var(--cinza-medio);
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.components-media-kit-content-instagramCardArgument {
+  margin: 0;
+  color: #f5f5f5;
+  font-family: var(--font-rubik), Arial, sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.components-media-kit-content-instagramTopContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px 26px;
+  border-radius: 16px;
+  background: #07243d;
+}
+
+.components-media-kit-content-instagramTopContentTitle {
+  margin: 0;
+  color: #f5f5f5;
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.components-media-kit-content-instagramTopContentList {
+  display: flex;
+  flex-direction: column;
+}
+
+.components-media-kit-content-instagramTopContentRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(245, 245, 245, 0.1);
+}
+
+.components-media-kit-content-instagramTopContentRow:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.components-media-kit-content-instagramTopContentRank {
+  color: var(--laranja);
+  font-family: var(--font-montserrat), var(--font-rubik), Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.components-media-kit-content-instagramTopContentLabel {
+  color: #f5f5f5;
+  font-family: var(--font-rubik), Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.components-media-kit-content-instagramTopContentViews {
+  color: var(--cinza-medio);
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.components-media-kit-content-instagramUpdatedAt {
+  margin: 0;
+  color: #4b5966;
+  font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
+  font-size: 13px;
+}
+
 @media (max-width: 992px) {
   .components-media-kit-content-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .components-media-kit-content-instagramGrid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -7073,6 +7270,19 @@ button {
 
   .components-media-kit-content-secondaryGrid {
     grid-template-columns: 1fr;
+  }
+
+  .components-media-kit-content-instagramPanel {
+    padding: 32px 24px;
+  }
+
+  .components-media-kit-content-instagramGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .components-media-kit-content-instagramIntro h3 {
+    font-size: 24px;
+    line-height: 32px;
   }
 
   .components-media-kit-content-growthBars {
