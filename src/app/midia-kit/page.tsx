@@ -33,6 +33,7 @@ export default async function MediaKitPage() {
         </div>
       </header>
       <MediaKitContent />
+      <div className="bg-[#ff3203] w-full h-0.5" />
       <SiteFooter />
     </main>
   );

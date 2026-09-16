@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { SPONSOR_WHATSAPP_NUMBER } from "@/data/sponsorPlans";
 import { getMediaKit, type MediaKit } from "@/data/mediaKit";
+import { INSTAGRAM_KIT, type InstagramKit } from "@/data/instagramKit";
 
 const WHATSAPP_MESSAGE = "Olá! Vi o mídia kit do ACF Sports e gostaria de conversar sobre patrocínio.";
 const whatsAppUrl = `https://wa.me/${SPONSOR_WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
@@ -40,9 +41,44 @@ function buildStatCards(data: MediaKit) {
   ];
 }
 
+// Dados do Instagram vêm de um print manual do painel (ver src/data/instagramKit.ts),
+// sem sincronização automática como o GA4.
+function buildInstagramStatCards(data: InstagramKit) {
+  return [
+    {
+      eyebrow: "Alcance no Instagram",
+      value: data.stats.views.toLocaleString("pt-BR"),
+      unit: "visualizações",
+      sub: `${data.stats.reach} contas alcançadas no período`,
+      argument: "Audiência crescente no perfil oficial do clube.",
+    },
+    {
+      eyebrow: "Seguidores",
+      value: String(data.stats.followers),
+      unit: "seguidores",
+      sub: `+${data.stats.newFollowers} novos no período (+${data.stats.followersGrowthPct.toString().replace(".", ",")}%)`,
+      argument: "Comunidade em expansão constante mês a mês.",
+    },
+    {
+      eyebrow: "Engajamento por formato",
+      value: "1,3 mil",
+      unit: "views em stories",
+      sub: `${data.stats.postsViews} em posts · ${data.stats.reelsViews} em reels`,
+      argument: "Stories é o formato mais consumido pelos torcedores.",
+    },
+    {
+      eyebrow: "Perfil do público",
+      value: data.stats.topAgeRange,
+      sub: `${data.stats.audienceMalePct.toString().replace(".", ",")}% homens · ${data.stats.brazilPct.toString().replace(".", ",")}% no Brasil`,
+      argument: "Público jovem, majoritariamente masculino e nacional.",
+    },
+  ];
+}
+
 export async function MediaKitContent() {
   const data = await getMediaKit();
   const statCards = buildStatCards(data);
+  const instagramStatCards = buildInstagramStatCards(INSTAGRAM_KIT);
   const maxDailyVisitors = Math.max(1, ...data.dailyAudience.map((day) => day.visitors));
   const peakDay = data.dailyAudience.reduce(
     (peak, day) => (day.visitors > peak.visitors ? day : peak),
@@ -144,6 +180,44 @@ export async function MediaKitContent() {
       </div>
 
       <p className="components-media-kit-content-updatedAt">{data.period.updatedAt}</p>
+
+      <section className="components-media-kit-content-instagramPanel">
+        <div className="components-media-kit-content-instagramIntro">
+          <p className="components-media-kit-content-instagramEyebrow">Dados do Instagram</p>
+          <h3>Nosso alcance nas redes sociais</h3>
+          <p>Resumo do desempenho do perfil @acfsports nos últimos 30 dias.</p>
+          <span className="components-media-kit-content-instagramPeriodBadge">{INSTAGRAM_KIT.period.label}</span>
+        </div>
+
+        <div className="components-media-kit-content-instagramGrid">
+          {instagramStatCards.map((stat) => (
+            <article className="components-media-kit-content-instagramCard" key={stat.eyebrow}>
+              <p className="components-media-kit-content-instagramCardEyebrow">{stat.eyebrow}</p>
+              <p className="components-media-kit-content-instagramCardValue">
+                {stat.value}
+                {stat.unit ? <span>{stat.unit}</span> : null}
+              </p>
+              {stat.sub ? <p className="components-media-kit-content-instagramCardSub">{stat.sub}</p> : null}
+              <p className="components-media-kit-content-instagramCardArgument">{stat.argument}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="components-media-kit-content-instagramTopContent">
+          <p className="components-media-kit-content-instagramTopContentTitle">Conteúdo mais visualizado</p>
+          <div className="components-media-kit-content-instagramTopContentList">
+            {INSTAGRAM_KIT.topContent.map((item, index) => (
+              <div className="components-media-kit-content-instagramTopContentRow" key={item.title}>
+                <span className="components-media-kit-content-instagramTopContentRank">{String(index + 1).padStart(2, "0")}</span>
+                <span className="components-media-kit-content-instagramTopContentLabel">{item.title}</span>
+                <span className="components-media-kit-content-instagramTopContentViews num">{item.views}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p className="components-media-kit-content-instagramUpdatedAt">{INSTAGRAM_KIT.period.updatedAt}</p>
+      </section>
 
       <a className="components-media-kit-content-whatsappButton" href={whatsAppUrl} target="_blank" rel="noreferrer">
         falar sobre patrocínio
