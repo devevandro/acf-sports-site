@@ -6903,6 +6903,10 @@ button {
 
 .components-media-kit-content-growthLabels span {
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   color: var(--cinza-medio);
   font-family: var(--font-outfit), var(--font-rubik), Arial, sans-serif;
   font-size: 11px;
