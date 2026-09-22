@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { categoryLabel, positionLabelFor, type RosterPlayer } from "@/data/players";
+import { categoryLabel, numberFor, positionLabelFor, type RosterPlayer } from "@/data/players";
 
 type PlayerDetailContentProps = {
   player: RosterPlayer;
@@ -78,7 +78,7 @@ export function PlayerDetailContent({ player }: PlayerDetailContentProps) {
 
           <p className="components-roster-player-detail-content-number">
             <span className="components-roster-player-detail-content-hashtag">#</span>
-            {formatNumber(player.number)}
+            {formatNumber(numberFor(player, player.category))}
           </p>
         </article>
 

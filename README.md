@@ -690,3 +690,8 @@ npm run build
   - Verificado responsivo no viewport mobile (~500px de largura, abaixo do breakpoint `768px`): painel do Instagram vira 1 coluna, sem overflow horizontal, textos sem corte. Novas regras `@media (max-width: 768px)` para `.components-media-kit-content-instagramPanel/-instagramGrid`.
   - **`page.tsx`**: pequeno separador visual (`<div className="bg-[#ff3203] w-full h-0.5" />`) entre o conteúdo do mídia kit e o `SiteFooter`, na cor laranja da marca (`--laranja`/`#ff3203`).
   - **`SiteFooter.tsx`**: ajuste de espaçamento (`mb-5` na linha "Desenvolvido por"), sitewide.
+
+- **Elenco: numeração separada por modalidade + tabelas só de competições finalizadas**: o banco passou a ter `players.number_campo` / `players.number_futsal` no lugar de `players.number`, e a query antiga quebrava (a coluna não existe mais), fazendo `/clube/elenco?modalidade=futsal` mostrar "Elenco de futsal ainda está sendo montado".
+  - **`src/data/players.ts`**: `RosterPlayer` agora tem `numberCampo`/`numberFutsal` (fallback `"-"`), e o novo helper `numberFor(player, category)` escolhe o número certo. Os cards do elenco (`groupPlayersByPosition`) usam o número da modalidade filtrada; a home usa o de futsal; o perfil do jogador usa o da modalidade principal (`player.category`).
+  - **`src/data/competitions.ts`**: `getHomeCompetitions()` (painel "tabelas." da home) filtra `home_page = true AND finished = true`. A página `/clube/competicoes` continua listando todas.
+  - Build (`npm run build`) validado; conferido via `next start` que o elenco de futsal voltou a aparecer com os números certos.

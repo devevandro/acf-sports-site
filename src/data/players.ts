@@ -13,7 +13,8 @@ export type RosterPlayer = {
   slug: string;
   name: string;
   nickname: string;
-  number: string;
+  numberCampo: string;
+  numberFutsal: string;
   positionFutsal: string;
   positionCampo: string;
   category: RosterCategory;
@@ -54,7 +55,8 @@ type PlayerRow = {
   id: string;
   name: string;
   nickname: string;
-  number: string | null;
+  number_campo: string | null;
+  number_futsal: string | null;
   position_futsal: string | null;
   position_campo: string | null;
   modality: RosterCategory[] | string | null;
@@ -176,6 +178,10 @@ export function dominantFootLabel(dominantFoot: string | null): string | null {
   return dominantFoot ? capitalize(dominantFoot) : null;
 }
 
+export function numberFor(player: RosterPlayer, category: RosterCategory): string {
+  return category === "campo" ? player.numberCampo : player.numberFutsal;
+}
+
 export function positionLabelFor(position: string, category: RosterCategory = "futsal"): string {
   const id = normalizePosition(position, category);
   return positionGroupOrderFor(category).find((group) => group.id === id)?.cardLabel ?? "Outros";
@@ -199,7 +205,7 @@ const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
   try {
     const sql = getDb();
     const rows = (await sql`
-      SELECT id, name, nickname, number, position_futsal, position_campo, modality, birthday, dominant_foot, quote, social_media, image
+      SELECT id, name, nickname, number_campo, number_futsal, position_futsal, position_campo, modality, birthday, dominant_foot, quote, social_media, image
       FROM players
       ORDER BY trim(name)
     `) as unknown as PlayerRow[];
@@ -220,7 +226,8 @@ const getAllPlayers = cache(async (): Promise<RosterPlayer[]> => {
         slug,
         name: row.name.trim(),
         nickname: row.nickname.trim(),
-        number: row.number ?? "-",
+        numberCampo: row.number_campo?.trim() || "-",
+        numberFutsal: row.number_futsal?.trim() || "-",
         positionFutsal,
         positionCampo,
         category: categories[0] ?? "futsal",
@@ -267,7 +274,7 @@ export function groupPlayersByPosition(players: RosterPlayer[], category: Roster
         slug: player.slug,
         name: player.name,
         nickname: player.nickname,
-        number: player.number,
+        number: numberFor(player, category),
         positionLabel: group.cardLabel,
         image: player.image,
       })),
@@ -284,7 +291,7 @@ export function groupPlayersByPosition(players: RosterPlayer[], category: Roster
         slug: player.slug,
         name: player.name,
         nickname: player.nickname,
-        number: player.number,
+        number: numberFor(player, category),
         positionLabel: "Outros",
         image: player.image,
       })),

@@ -54,7 +54,7 @@ export const getHomeCompetitions = cache(async (): Promise<HomeCompetition[]> =>
     const rows = (await sql`
       SELECT id, title, "group", "table"
       FROM competitions
-      WHERE home_page = true
+      WHERE home_page = true AND finished = true
       ORDER BY updated_at DESC
     `) as unknown as CompetitionRow[];
 
