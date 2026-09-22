@@ -10,7 +10,7 @@ import { StandingsPanel } from "@/components/StandingsPanel";
 import { TopCf } from "@/components/TopCf";
 import { YoutubeSection } from "@/components/YoutubeSection";
 import { getAllNews } from "@/data/news";
-import { getPlayersByCategory, positionLabelFor } from "@/data/players";
+import { getPlayersByCategory, numberFor, positionLabelFor } from "@/data/players";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const revalidate = 60;
@@ -33,7 +33,7 @@ export default async function Home() {
     id: player.id,
     slug: player.slug,
     name: player.nickname,
-    number: player.number,
+    number: numberFor(player, "futsal"),
     image: player.image,
     isGoalkeeper: positionLabelFor(player.positionFutsal, "futsal") === "Goleiro",
   }));
