@@ -716,3 +716,9 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 - Verified responsive behavior at a ~500px mobile viewport (below the `768px` breakpoint): the Instagram panel collapses to 1 column, no horizontal overflow, no clipped text. New `@media (max-width: 768px)` rules for `.components-media-kit-content-instagramPanel/-instagramGrid`.
 - `page.tsx`: added a small visual divider (`<div className="bg-[#ff3203] w-full h-0.5" />`) between the media kit content and `SiteFooter`, using the brand orange (`--laranja`/`#ff3203`).
 - `SiteFooter.tsx`: spacing tweak (`mb-5` on the "Desenvolvido por" line), sitewide.
+
+## Recent Changes (roster numbers split per modality + standings only for finished competitions)
+- The DB replaced `players.number` with `players.number_campo` / `players.number_futsal`; the old query referenced the dropped column, failed, and the roster fell back to the empty state ("Elenco de futsal ainda está sendo montado").
+- `src/data/players.ts`: `RosterPlayer` now has `numberCampo`/`numberFutsal` (fallback `"-"`), plus a `numberFor(player, category)` helper. Roster cards (`groupPlayersByPosition`) use the filtered modality's number; the home roster uses futsal; the player detail page uses the primary modality (`player.category`).
+- `src/data/competitions.ts`: `getHomeCompetitions()` (home "tabelas." panel) now filters `home_page = true AND finished = true`. `/clube/competicoes` still lists every competition.
+- `npm run build` validated; checked via `next start` that the futsal roster renders again with the right numbers.
