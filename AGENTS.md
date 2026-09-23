@@ -727,3 +727,8 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 - `noticias/c045a404-d280-431a-96e6-27474a17284d` ("21ª Copa Cornélio de Futsal: Grupos da categoria Masculino Adulto são definidos") had its groups table pasted from Gemini as `<pre _ngcontent-...>` with escaped HTML source, a variant `unwrapEmbeddedHtmlCodeBlocks()` did not cover, so the table showed up as code text.
 - `unwrapEmbeddedHtmlCodeBlocks()` in `src/data/news.ts` now also unwraps `<pre ... _ngcontent ...>` blocks whose text starts with escaped markup (`&lt;`), decoding them back into live HTML.
 - Added `scopeEmbeddedStyles()` (runs in `mapRow()` right after the unwrap): prefixes every selector inside embedded `<style>` blocks with `.components-news-detail-content`, so bare selectors from pasted snippets (`table`, `td`, `tr:hover`, `.container`) no longer leak to the rest of the page. Build (`npm run build`) validated.
+
+## Recent Changes (standings only for ongoing competitions + "A definir" game dates)
+- `src/data/competitions.ts`: `getHomeCompetitions()` now filters `home_page = true AND finished = false` (reverses the previous `finished = true`), and `getAllCompetitions()` (`/clube/competicoes` table dropdown) now filters `finished = false`.
+- `src/data/games.ts`: reads `games.date_to_be_defined` into `GameItem.dateToBeDefined`. `formatGameDate()` shows "A definir" in place of the date when it is `true` (affects the home "próxima partida" carousel and the `/clube/competicoes` next-game card/modal). `getUpcomingGames()` puts games with an undefined date after the scheduled ones.
+- `npm run build` validated.

@@ -697,3 +697,8 @@ npm run build
   - Build (`npm run build`) validado; conferido via `next start` que o elenco de futsal voltou a aparecer com os números certos.
 
 - **Fix: tabela de grupos colada do Gemini como `<pre>` aparecia como código**: a notícia `noticias/c045a404-d280-431a-96e6-27474a17284d` ("21ª Copa Cornélio de Futsal: Grupos da categoria Masculino Adulto são definidos") tinha o HTML da tabela salvo como `<pre _ngcontent-...>` com as tags escapadas, uma variante que `unwrapEmbeddedHtmlCodeBlocks()` não cobria. A função em `src/data/news.ts` agora também desembrulha esses `<pre>` (texto começando com `&lt;`). Adicionada também `scopeEmbeddedStyles()`, que prefixa os seletores dos `<style>` embutidos no conteúdo com `.components-news-detail-content`, evitando que CSS colado (`table`, `td`, `tr:hover`, `.container`) vaze para o resto do site. Build (`npm run build`) validado.
+
+- **Tabelas só de competições em andamento + data "A definir" nos próximos jogos**:
+  - **`src/data/competitions.ts`**: `getHomeCompetitions()` (painel "tabelas." da home) agora filtra `home_page = true AND finished = false` (invertendo o filtro anterior), e `getAllCompetitions()` (tabelas de `/clube/competicoes`) passa a filtrar `finished = false`.
+  - **`src/data/games.ts`**: lê `games.date_to_be_defined` em `GameItem.dateToBeDefined`; quando `true`, `formatGameDate()` mostra "A definir" no lugar da data (carrossel "próxima partida" da home e card/modal de próximo jogo em `/clube/competicoes`). `getUpcomingGames()` ordena jogos sem data definida depois dos agendados.
+  - Build (`npm run build`) validado.
