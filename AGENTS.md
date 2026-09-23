@@ -722,3 +722,8 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 - `src/data/players.ts`: `RosterPlayer` now has `numberCampo`/`numberFutsal` (fallback `"-"`), plus a `numberFor(player, category)` helper. Roster cards (`groupPlayersByPosition`) use the filtered modality's number; the home roster uses futsal; the player detail page uses the primary modality (`player.category`).
 - `src/data/competitions.ts`: `getHomeCompetitions()` (home "tabelas." panel) now filters `home_page = true AND finished = true`. `/clube/competicoes` still lists every competition.
 - `npm run build` validated; checked via `next start` that the futsal roster renders again with the right numbers.
+
+## Recent Changes (fix: news content with AI-pasted HTML inside an Angular `<pre>` rendered as code)
+- `noticias/c045a404-d280-431a-96e6-27474a17284d` ("21ª Copa Cornélio de Futsal: Grupos da categoria Masculino Adulto são definidos") had its groups table pasted from Gemini as `<pre _ngcontent-...>` with escaped HTML source, a variant `unwrapEmbeddedHtmlCodeBlocks()` did not cover, so the table showed up as code text.
+- `unwrapEmbeddedHtmlCodeBlocks()` in `src/data/news.ts` now also unwraps `<pre ... _ngcontent ...>` blocks whose text starts with escaped markup (`&lt;`), decoding them back into live HTML.
+- Added `scopeEmbeddedStyles()` (runs in `mapRow()` right after the unwrap): prefixes every selector inside embedded `<style>` blocks with `.components-news-detail-content`, so bare selectors from pasted snippets (`table`, `td`, `tr:hover`, `.container`) no longer leak to the rest of the page. Build (`npm run build`) validated.
