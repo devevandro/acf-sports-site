@@ -10,6 +10,7 @@ export type GameItem = {
   time: string | null;
   location: string;
   competitionTitle: string | null;
+  dateToBeDefined: boolean;
 };
 
 type CompetitionTeamEntry = {
@@ -26,6 +27,7 @@ type GameRow = {
   location: string | null;
   competition_title: string | null;
   competition_table: CompetitionTeamEntry[] | null;
+  date_to_be_defined: boolean | null;
 };
 
 function findOpponentLogo(opponent: string, table: CompetitionTeamEntry[] | null): string | null {
@@ -44,6 +46,7 @@ function mapRow(row: GameRow): GameItem {
     time: row.time,
     location: row.location ?? "",
     competitionTitle: row.competition_title,
+    dateToBeDefined: row.date_to_be_defined === true,
   };
 }
 
@@ -51,7 +54,7 @@ export const getAllGames = cache(async (): Promise<GameItem[]> => {
   try {
     const sql = getDb();
     const rows = (await sql`
-      SELECT g.id, g.opponent, g.result, g.date, g.time, g.location, c.title AS competition_title, c."table" AS competition_table
+      SELECT g.id, g.opponent, g.result, g.date, g.time, g.location, g.date_to_be_defined, c.title AS competition_title, c."table" AS competition_table
       FROM games g
       LEFT JOIN competitions c ON c.id = g.competition_id
     `) as unknown as GameRow[];
@@ -82,7 +85,12 @@ export async function getLatestFinishedGame(): Promise<GameItem | null> {
 
 export async function getUpcomingGames(limit = 2): Promise<GameItem[]> {
   const upcoming = (await getAllGames()).filter((game) => !isFinished(game));
-  upcoming.sort((a, b) => gameDateTime(a).localeCompare(gameDateTime(b)));
+  // Games with an undefined date go after the scheduled ones.
+  upcoming.sort(
+    (a, b) =>
+      Number(a.dateToBeDefined) - Number(b.dateToBeDefined) ||
+      gameDateTime(a).localeCompare(gameDateTime(b)),
+  );
   return upcoming.slice(0, limit);
 }
 
@@ -98,7 +106,11 @@ export function formatGameDate(game: GameItem): string {
   // (which treats it as UTC midnight and can shift it a day when
   // formatted in a negative-UTC timezone).
   const [year, month, day] = game.date.split("-");
-  const datePart = year && month && day ? `${day}/${month}/${year}` : game.date;
+  const datePart = game.dateToBeDefined
+    ? "A definir"
+    : year && month && day
+      ? `${day}/${month}/${year}`
+      : game.date;
   return game.competitionTitle ? `${datePart} - ${game.competitionTitle}` : datePart;
 }
 

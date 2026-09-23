@@ -34,10 +34,34 @@ function decodeHtmlEntities(text: string): string {
 // plain markup. This unwraps that widget back into the real HTML it represents so the
 // page mounts it as live elements rather than showing the escaped/highlighted source.
 function unwrapEmbeddedHtmlCodeBlocks(html: string): string {
-  return html.replace(
-    /<response-element[^>]*>[\s\S]*?<code[^>]*data-test-id="code-content"[^>]*>([\s\S]*?)<\/code>[\s\S]*?<\/response-element>/g,
-    (_match, codeInner: string) => decodeHtmlEntities(codeInner.replace(/<[^>]+>/g, ""))
-  );
+  return html
+    .replace(
+      /<response-element[^>]*>[\s\S]*?<code[^>]*data-test-id="code-content"[^>]*>([\s\S]*?)<\/code>[\s\S]*?<\/response-element>/g,
+      (_match, codeInner: string) => decodeHtmlEntities(codeInner.replace(/<[^>]+>/g, ""))
+    )
+    // Same idea for the Angular-rendered variant: a <pre _ngcontent-...> whose text is
+    // escaped HTML source (starts with "&lt;").
+    .replace(
+      /<pre[^>]*_ngcontent[^>]*>\s*(&lt;[\s\S]*?)<\/pre>/g,
+      (_match, preInner: string) => decodeHtmlEntities(preInner.replace(/<[^>]+>/g, ""))
+    );
+}
+
+const CONTENT_SCOPE = ".components-news-detail-content";
+
+// Embedded <style> blocks come with bare selectors (table, td, .container...) that
+// would leak to the whole page, so every rule is prefixed with the article scope.
+function scopeEmbeddedStyles(html: string): string {
+  return html.replace(/<style([^>]*)>([\s\S]*?)<\/style>/gi, (_match, attrs: string, css: string) => {
+    const scoped = css.replace(/(^|[{}])(\s*)([^{}@]+?)(\s*)\{/g, (_rule, before, space, selectors: string, gap) => {
+      const prefixed = selectors
+        .split(",")
+        .map((selector) => `${CONTENT_SCOPE} ${selector.trim()}`)
+        .join(", ");
+      return `${before}${space}${prefixed}${gap}{`;
+    });
+    return `<style${attrs}>${scoped}</style>`;
+  });
 }
 
 function highlightClubName(html: string): string {
@@ -77,7 +101,9 @@ function mapRow(row: NewsRow): NewsItem {
     title: row.title ?? "",
     subtitle: row.subtitle ?? "",
     content: row.content
-      ? highlightMatchLabels(highlightClubName(unwrapEmbeddedHtmlCodeBlocks(row.content)))
+      ? highlightMatchLabels(
+          highlightClubName(scopeEmbeddedStyles(unwrapEmbeddedHtmlCodeBlocks(row.content)))
+        )
       : "",
     author: row.author ?? "ACF Sports",
     image: row.image || FALLBACK_IMAGE,
