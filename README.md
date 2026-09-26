@@ -702,3 +702,5 @@ npm run build
   - **`src/data/competitions.ts`**: `getHomeCompetitions()` (painel "tabelas." da home) agora filtra `home_page = true AND finished = false` (invertendo o filtro anterior), e `getAllCompetitions()` (tabelas de `/clube/competicoes`) passa a filtrar `finished = false`.
   - **`src/data/games.ts`**: lê `games.date_to_be_defined` em `GameItem.dateToBeDefined`; quando `true`, `formatGameDate()` mostra "A definir" no lugar da data (carrossel "próxima partida" da home e card/modal de próximo jogo em `/clube/competicoes`). `getUpcomingGames()` ordena jogos sem data definida depois dos agendados.
   - Build (`npm run build`) validado.
+
+- **Elenco da home com futsal + campo**: `src/app/page.tsx` sorteia os 5 atletas entre jogadores de futsal e de campo (sem duplicar quem joga nas duas; a modalidade exibida — camisa e posição/goleiro — é sorteada nesse caso).
