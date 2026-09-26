@@ -10,7 +10,7 @@ import { StandingsPanel } from "@/components/StandingsPanel";
 import { TopCf } from "@/components/TopCf";
 import { YoutubeSection } from "@/components/YoutubeSection";
 import { getAllNews } from "@/data/news";
-import { getPlayersByCategory, numberFor, positionLabelFor } from "@/data/players";
+import { getPlayersByCategory, numberFor, positionLabelFor, type RosterCategory, type RosterPlayer } from "@/data/players";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const revalidate = 60;
@@ -27,16 +27,33 @@ function pickRandom<T>(items: T[], count: number): T[] {
 }
 
 export default async function Home() {
-  const [allNews, futsalPlayers] = await Promise.all([getAllNews(), getPlayersByCategory("futsal")]);
+  const [allNews, futsalPlayers, fieldPlayers] = await Promise.all([
+    getAllNews(),
+    getPlayersByCategory("futsal"),
+    getPlayersByCategory("campo"),
+  ]);
 
-  const rosterAthletes = pickRandom(futsalPlayers, HOME_ROSTER_COUNT).map((player) => ({
-    id: player.id,
-    slug: player.slug,
-    name: player.nickname,
-    number: numberFor(player, "futsal"),
-    image: player.image,
-    isGoalkeeper: positionLabelFor(player.positionFutsal, "futsal") === "Goleiro",
-  }));
+  const uniquePlayers = new Map<string, { player: RosterPlayer; categories: RosterCategory[] }>();
+  for (const [category, players] of [["futsal", futsalPlayers], ["campo", fieldPlayers]] as const) {
+    for (const player of players) {
+      const entry = uniquePlayers.get(player.id);
+      if (entry) entry.categories.push(category);
+      else uniquePlayers.set(player.id, { player, categories: [category] });
+    }
+  }
+
+  const rosterAthletes = pickRandom([...uniquePlayers.values()], HOME_ROSTER_COUNT).map(({ player, categories }) => {
+    const category = pickRandom(categories, 1)[0];
+    const position = category === "campo" ? player.positionCampo : player.positionFutsal;
+    return {
+      id: player.id,
+      slug: player.slug,
+      name: player.nickname,
+      number: numberFor(player, category),
+      image: player.image,
+      isGoalkeeper: positionLabelFor(position, category) === "Goleiro",
+    };
+  });
 
   return (
     <main className="app-page-page">

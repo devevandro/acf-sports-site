@@ -732,3 +732,6 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 - `src/data/competitions.ts`: `getHomeCompetitions()` now filters `home_page = true AND finished = false` (reverses the previous `finished = true`), and `getAllCompetitions()` (`/clube/competicoes` table dropdown) now filters `finished = false`.
 - `src/data/games.ts`: reads `games.date_to_be_defined` into `GameItem.dateToBeDefined`. `formatGameDate()` shows "A definir" in place of the date when it is `true` (affects the home "próxima partida" carousel and the `/clube/competicoes` next-game card/modal). `getUpcomingGames()` puts games with an undefined date after the scheduled ones.
 - `npm run build` validated.
+
+## Recent Changes (home roster: futsal + campo)
+- `src/app/page.tsx`: the random home roster pick now draws from both futsal and campo players (deduped by id; for players in both, the shown category is random, driving jersey number and goalkeeper detection).
