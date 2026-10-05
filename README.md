@@ -704,3 +704,5 @@ npm run build
   - Build (`npm run build`) validado.
 
 - **Elenco da home com futsal + campo**: `src/app/page.tsx` sorteia os 5 atletas entre jogadores de futsal e de campo (sem duplicar quem joga nas duas; a modalidade exibida — camisa e posição/goleiro — é sorteada nesse caso).
+
+- **Competições: "Partidas Anteriores" paginadas de 2 em 2**: `CompetitionsContent.tsx` mostra 2 cards por vez com botões voltar/avançar ao lado do título (reaproveitam o estilo de `nextMatchNav`; só aparecem com mais de 2 partidas). Em `globals.css`, a grade passou a `align-items: stretch` e a lista de cards preenche a altura da coluna, alinhando o card de baixo com a base da tabela de classificação. Build (`npm run build`) validado.
