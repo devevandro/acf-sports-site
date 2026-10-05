@@ -41,6 +41,7 @@ export type PreviousMatchData = Array<{
 }>;
 
 const CLUB_NAME = "ACF Sports/Vila Mercado";
+const PREVIOUS_PAGE_SIZE = 2;
 
 function TeamBadge({ logo, name, home }: { logo: string; name: string; home?: boolean }) {
   return (
@@ -70,6 +71,7 @@ export function CompetitionsContent({
   const [activeModalMatch, setActiveModalMatch] = useState<MatchDetail | null>(null);
   const [isDraggingTable, setIsDraggingTable] = useState(false);
   const [nextMatchIndex, setNextMatchIndex] = useState(0);
+  const [previousPage, setPreviousPage] = useState(0);
   const tableWrapRef = useRef<HTMLDivElement>(null);
   const dragStateRef = useRef({ startX: 0, startScrollLeft: 0 });
 
@@ -118,6 +120,13 @@ export function CompetitionsContent({
     status: "finished",
     result: match.result
   }));
+
+  const previousPageCount = Math.max(Math.ceil(previousMatchDetails.length / PREVIOUS_PAGE_SIZE), 1);
+  const currentPreviousPage = Math.min(previousPage, previousPageCount - 1);
+  const visiblePreviousMatches = previousMatchDetails.slice(
+    currentPreviousPage * PREVIOUS_PAGE_SIZE,
+    (currentPreviousPage + 1) * PREVIOUS_PAGE_SIZE
+  );
 
   return (
     <section
@@ -194,10 +203,34 @@ export function CompetitionsContent({
             className="components-competitions-content-previous"
             aria-labelledby="previous-title"
           >
-            <h2 id="previous-title">Partidas Anteriores</h2>
+            <div className="components-competitions-content-previousHeader">
+              <h2 id="previous-title">Partidas Anteriores</h2>
+              {previousPageCount > 1 && (
+                <div className="components-competitions-content-nextMatchNav">
+                  <button
+                    type="button"
+                    onClick={() => setPreviousPage(Math.max(currentPreviousPage - 1, 0))}
+                    disabled={currentPreviousPage === 0}
+                    aria-label="Partidas anteriores mais recentes"
+                  >
+                    <ChevronLeft size={20} aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setPreviousPage(Math.min(currentPreviousPage + 1, previousPageCount - 1))
+                    }
+                    disabled={currentPreviousPage === previousPageCount - 1}
+                    aria-label="Partidas anteriores mais antigas"
+                  >
+                    <ChevronRight size={20} aria-hidden="true" />
+                  </button>
+                </div>
+              )}
+            </div>
             {previousMatchDetails.length > 0 ? (
               <div className="components-competitions-content-previousList">
-                {previousMatchDetails.map((match) => (
+                {visiblePreviousMatches.map((match) => (
                   <article
                     className="components-competitions-content-previousCard"
                     key={match.id}
