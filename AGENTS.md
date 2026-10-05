@@ -735,3 +735,8 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 
 ## Recent Changes (home roster: futsal + campo)
 - `src/app/page.tsx`: the random home roster pick now draws from both futsal and campo players (deduped by id; for players in both, the shown category is random, driving jersey number and goalkeeper detection).
+
+## Recent Changes (competitions: previous matches paginated 2 at a time)
+- `src/components/CompetitionsContent.tsx`: "Partidas Anteriores" shows 2 cards per page (`PREVIOUS_PAGE_SIZE`) with prev/next buttons beside the title (reusing the `nextMatchNav` styles; shown only when there are more than 2 matches).
+- `src/app/globals.css`: `contentGrid` uses `align-items: stretch`; the previous list fills the column height (`grid-auto-rows: 1fr`) and `tableBlock` is `flex: 1`, so the bottom card aligns with the bottom of the standings table.
+- `npm run build` validated.
