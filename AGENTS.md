@@ -740,3 +740,6 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 - `src/components/CompetitionsContent.tsx`: "Partidas Anteriores" shows 2 cards per page (`PREVIOUS_PAGE_SIZE`) with prev/next buttons beside the title (reusing the `nextMatchNav` styles; shown only when there are more than 2 matches).
 - `src/app/globals.css`: `contentGrid` uses `align-items: stretch`; the previous list fills the column height (`grid-auto-rows: 1fr`) and `tableBlock` is `flex: 1`, so the bottom card aligns with the bottom of the standings table.
 - `npm run build` validated.
+
+## Recent Changes (Game Opponent Image)
+- `src/data/games.ts` now selects `games.opponent_image` (written by the dashboard when an opponent is typed manually via "Outro") and uses it as `GameItem.opponentLogo`, taking precedence over the crest looked up in the competition's classification table (`findOpponentLogo`, still the fallback). Requires the dashboard migration that adds `opponent_image` to have been applied to the database, otherwise the games query fails and `getAllGames()` returns `[]`.

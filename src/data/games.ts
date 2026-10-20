@@ -21,6 +21,7 @@ type CompetitionTeamEntry = {
 type GameRow = {
   id: string;
   opponent: string;
+  opponent_image: string | null;
   result: string;
   date: string;
   time: string | null;
@@ -40,7 +41,9 @@ function mapRow(row: GameRow): GameItem {
   return {
     id: row.id,
     opponent: row.opponent,
-    opponentLogo: findOpponentLogo(row.opponent, row.competition_table),
+    // An image uploaded for a manually typed opponent (dashboard "Outro") takes
+    // precedence over the crest looked up in the classification table.
+    opponentLogo: row.opponent_image || findOpponentLogo(row.opponent, row.competition_table),
     result: row.result,
     date: row.date,
     time: row.time,
@@ -54,7 +57,7 @@ export const getAllGames = cache(async (): Promise<GameItem[]> => {
   try {
     const sql = getDb();
     const rows = (await sql`
-      SELECT g.id, g.opponent, g.result, g.date, g.time, g.location, g.date_to_be_defined, c.title AS competition_title, c."table" AS competition_table
+      SELECT g.id, g.opponent, g.opponent_image, g.result, g.date, g.time, g.location, g.date_to_be_defined, c.title AS competition_title, c."table" AS competition_table
       FROM games g
       LEFT JOIN competitions c ON c.id = g.competition_id
     `) as unknown as GameRow[];
