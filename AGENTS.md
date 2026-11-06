@@ -743,3 +743,11 @@ The project's SSO deployment protection (`vercel project protection`) is set to 
 
 ## Recent Changes (Game Opponent Image)
 - `src/data/games.ts` now selects `games.opponent_image` (written by the dashboard when an opponent is typed manually via "Outro") and uses it as `GameItem.opponentLogo`, taking precedence over the crest looked up in the competition's classification table (`findOpponentLogo`, still the fallback). Requires the dashboard migration that adds `opponent_image` to have been applied to the database, otherwise the games query fails and `getAllGames()` returns `[]`.
+
+## Recent Changes (new `/comunicado` page — pre-season notice)
+- `src/app/comunicado/page.tsx` + `src/components/NoticeContent.tsx`: standalone notice page (no header/footer) from Figma frame `Frame 162881` (1600x1240, title node `3273:18164`). The artwork (background, card, mascot, divider, partner logos, social icons) is `public/comunicado/comunicado.png`; only the texts are live HTML positioned over it with the exact Figma pixel values. Social icons baked in the PNG get transparent link hit areas using `getTeamInfo()` (instagram/facebook/youtube).
+- `src/app/globals.css`: `components-notice-content-*` block. Everything is sized in `--u` (1 Figma px = `0.0625cqw`, container query units), so the whole composition scales proportionally with the viewport width. Desktop-only design: there is no mobile Figma, and the baked-in card/logos prevent restacking, so narrow screens just scale down.
+- `src/app/layout.tsx`: added `Playfair_Display_SC` (900) and `Atkinson_Hyperlegible` (400/700) via `next/font/google` (`--font-playfair-display-sc`, `--font-atkinson-hyperlegible`).
+- `src/components/SponsorFloatButton.tsx`: returns `null` on `/comunicado` so it does not overlay the artwork.
+- Colors: `#f5f5f5` (branco_creme, confirmed via Figma), `#e7e7e7` (branco_cinza, from the layer name; used on "TEMPORADA 2026"), `#b3b3b3` (`--cinza-claro`) on the subtitle and the "Não perca…" text, `--laranja-branco-medio` assumed for the "CARREGANDO..." text (Figma `cor do acf sport/L-03`).
+- `npm run build` validated.
