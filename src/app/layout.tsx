@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Montserrat, News_Cycle, Oleo_Script, Outfit, Poppins, Rampart_One, Roboto, Rubik } from "next/font/google";
+import { Atkinson_Hyperlegible, Montserrat, News_Cycle, Oleo_Script, Outfit, Playfair_Display_SC, Poppins, Rampart_One, Roboto, Rubik } from "next/font/google";
 import { SponsorFloatButton } from "@/components/SponsorFloatButton";
 import "./globals.css";
 
@@ -55,6 +55,18 @@ const oleoScript = Oleo_Script({
   variable: "--font-oleo-script",
 });
 
+const playfairDisplaySc = Playfair_Display_SC({
+  subsets: ["latin"],
+  weight: ["900"],
+  variable: "--font-playfair-display-sc",
+});
+
+const atkinsonHyperlegible = Atkinson_Hyperlegible({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-atkinson-hyperlegible",
+});
+
 export const metadata: Metadata = {
   title: "ACF Sports | Site Oficial",
   description: "Site Oficial do ACF Sports. Acompanhe as notícias, jogos, tabelas, elenco de campo e futsal, planos de patrocínio e história do clube de Cornélio Procópio.",
@@ -76,7 +88,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${montserrat.variable} ${outfit.variable} ${rubik.variable} ${roboto.variable} ${poppins.variable} ${rampartOne.variable} ${newsCycle.variable} ${oleoScript.variable}`}
+      className={`${montserrat.variable} ${outfit.variable} ${rubik.variable} ${roboto.variable} ${poppins.variable} ${rampartOne.variable} ${newsCycle.variable} ${oleoScript.variable} ${playfairDisplaySc.variable} ${atkinsonHyperlegible.variable}`}
     >
       <body>
         {children}

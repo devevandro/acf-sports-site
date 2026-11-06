@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 function SponsorButtonContent() {
   return (
@@ -21,9 +22,12 @@ function SponsorButtonContent() {
 }
 
 export function SponsorFloatButton() {
+  const pathname = usePathname();
   const [hidden, setHidden] = useState(false);
+  const isNoticePage = pathname === "/comunicado";
 
   useEffect(() => {
+    if (isNoticePage) return;
     const footer = document.querySelector("footer");
     if (!footer) return;
 
@@ -46,7 +50,9 @@ export function SponsorFloatButton() {
       window.removeEventListener("scroll", onScrollOrResize);
       window.removeEventListener("resize", onScrollOrResize);
     };
-  }, []);
+  }, [isNoticePage]);
+
+  if (isNoticePage) return null;
 
   return (
     <Link

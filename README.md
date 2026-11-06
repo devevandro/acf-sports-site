@@ -708,3 +708,11 @@ npm run build
 - **Competições: "Partidas Anteriores" paginadas de 2 em 2**: `CompetitionsContent.tsx` mostra 2 cards por vez com botões voltar/avançar ao lado do título (reaproveitam o estilo de `nextMatchNav`; só aparecem com mais de 2 partidas). Em `globals.css`, a grade passou a `align-items: stretch` e a lista de cards preenche a altura da coluna, alinhando o card de baixo com a base da tabela de classificação. Build (`npm run build`) validado.
 
 - **Imagem do adversário digitado manualmente**: o dashboard passou a permitir enviar uma imagem quando o adversário de um jogo é digitado manualmente ("Outro"), salva em `games.opponent_image`. `src/data/games.ts` lê essa coluna e a usa como `opponentLogo`, com prioridade sobre o escudo encontrado na tabela de classificação da competição (que continua como fallback).
+
+## Recent Changes (new `/comunicado` page — pre-season notice)
+- `src/app/comunicado/page.tsx` + `src/components/NoticeContent.tsx`: standalone notice page (no header/footer) from Figma frame `Frame 162881` (1600x1240, title node `3273:18164`). The artwork (background, card, mascot, divider, partner logos, social icons) is `public/comunicado/comunicado.png`; only the texts are live HTML positioned over it with the exact Figma pixel values. Social icons baked in the PNG get transparent link hit areas using `getTeamInfo()` (instagram/facebook/youtube).
+- `src/app/globals.css`: `components-notice-content-*` block. Everything is sized in `--u` (1 Figma px = `0.0625cqw`, container query units), so the whole composition scales proportionally with the viewport width. Desktop-only design: there is no mobile Figma, and the baked-in card/logos prevent restacking, so narrow screens just scale down.
+- `src/app/layout.tsx`: added `Playfair_Display_SC` (900) and `Atkinson_Hyperlegible` (400/700) via `next/font/google` (`--font-playfair-display-sc`, `--font-atkinson-hyperlegible`).
+- `src/components/SponsorFloatButton.tsx`: returns `null` on `/comunicado` so it does not overlay the artwork.
+- Colors: `#f5f5f5` (branco_creme, confirmed via Figma), `#e7e7e7` (branco_cinza, from the layer name; used on "TEMPORADA 2026"), `#b3b3b3` (`--cinza-claro`) on the subtitle and the "Não perca…" text, `--laranja-branco-medio` assumed for the "CARREGANDO..." text (Figma `cor do acf sport/L-03`).
+- `npm run build` validated.

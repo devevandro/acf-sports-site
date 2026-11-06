@@ -29,5 +29,6 @@ Extracted sections:
 | `1480:3362` | `clube / elenco futsal / todas posições` | Converted to `/clube/elenco?modalidade=futsal` |
 | `1480:3465` | `clube / elenco futsal / ver posições` | Converted to `/clube/elenco?modalidade=futsal&posicao=...` |
 | `1032:2801` | `clube / detalhe jogador` | Converted to `/clube/elenco/[slug]` |
+| `3273:18164` | `Frame 162881` (comunicado, title node) | Converted to `/comunicado` |
 
 The Figma MCP returns React/Tailwind snippets. This project converts them to Next.js, TypeScript, and CSS Modules.
