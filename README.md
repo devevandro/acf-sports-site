@@ -722,3 +722,9 @@ npm run build
 - To bring the site back, remove the `redirects()` block (and `NOTICE_HOSTS`) from `next.config.ts`.
 - `www.acfsports.com.br` is not covered; add it to `NOTICE_HOSTS` if that host is used.
 - Verified locally with `curl -H "Host: ..."`; `npm run build` validated.
+
+## Recent Changes (WhatsApp hidden in header + security headers)
+- `src/components/MainMenu.tsx`: removed the mobile WhatsApp icon (and its hardcoded `wa.me` number) from the header.
+- `src/data/sponsorPlans.ts`: `SPONSOR_WHATSAPP_NUMBER` now reads the server-only env var `SPONSOR_WHATSAPP_NUMBER` (documented in `.env.example`; **must be set in Vercel**, otherwise the sponsor/media-kit WhatsApp links have no number).
+- `next.config.ts`: `headers()` adds Content-Security-Policy, X-Frame-Options (DENY), X-Content-Type-Options (nosniff), Strict-Transport-Security, Referrer-Policy and Permissions-Policy on all routes. CSP keeps `unsafe-inline` for scripts/styles (Next inline bootstrap) and allows GA/GTM, Google Fonts, YouTube frames and https images.
+- `npm run build` validated.
