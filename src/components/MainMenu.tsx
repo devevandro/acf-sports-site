@@ -6,7 +6,6 @@ import Link from "next/link";
 import { ChevronDown, Menu, Plus, X } from "lucide-react";
 
 const logoAsset = "/header/symbol.png";
-const whatsappAsset = "/contact/whatsapp.png";
 const instagramAsset = "/contact/insta.png";
 
 type MainMenuProps = {
@@ -60,9 +59,6 @@ export function MainMenu({ active = "home", activeClub, logoSrc = logoAsset }: M
         </Link>
 
         <div className="components-main-menu-mobileActions md:hidden">
-          <a href="https://wa.me/5543991802793" target="_blank" rel="noreferrer" aria-label="WhatsApp">
-            <img src={whatsappAsset} alt="" />
-          </a>
           <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
             <img src={instagramAsset} alt="" />
           </a>

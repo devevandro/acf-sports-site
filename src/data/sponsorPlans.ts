@@ -10,7 +10,8 @@ export type SponsorPlan = {
   featured?: boolean;
 };
 
-export const SPONSOR_WHATSAPP_NUMBER = "5543991802793";
+// Server-only env var (digits with country code, e.g. 5543999999999); never hardcode the number.
+export const SPONSOR_WHATSAPP_NUMBER = process.env.SPONSOR_WHATSAPP_NUMBER ?? "";
 
 export const sponsorPlans: SponsorPlan[] = [
   {
